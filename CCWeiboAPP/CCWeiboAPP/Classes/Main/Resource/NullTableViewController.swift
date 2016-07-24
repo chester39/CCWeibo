@@ -1,12 +1,12 @@
 //
 //	iOS培训
 //		小码哥
-//		Chen Chen @ July 21st, 2016
+//		Chen Chen @ July 24th, 2016
 //
 
 import UIKit
 
-class ProfileTableViewController: UITableViewController {
+class NullTableViewController: UITableViewController {
 
     // MARK: - 系统方法
     
@@ -26,7 +26,6 @@ class ProfileTableViewController: UITableViewController {
         
         super.didReceiveMemoryWarning()
     }
-    
 
     // MARK: - Table view data source
 
