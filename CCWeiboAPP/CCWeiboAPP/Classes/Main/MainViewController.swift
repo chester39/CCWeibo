@@ -14,16 +14,11 @@ class MainViewController: UITabBarController {
      视图已经加载方法
      */
     override func viewDidLoad() {
-        
+
         super.viewDidLoad()
-        
-        let hvc = HomeTableViewController()
-        hvc.tabBarItem.title = "首页"
-        hvc.tabBarItem.image = UIImage(named: "tabbar_home")
-        hvc.tabBarItem.selectedImage = UIImage(named: "tabbar_home_highlighted")
+
         tabBar.tintColor = UIColor.orangeColor()
-        
-       addChildControllerArray()
+        addChildControllerArray()
     }
 
     /**
@@ -40,23 +35,35 @@ class MainViewController: UITabBarController {
      */
     func addChildControllerArray() {
         
-        addChildController(HomeTableViewController(), title: "首页", imageName: "tabbar_home")
-        addChildController(MessageTableViewController(), title: "消息", imageName: "tabbar_message_center")
-        addChildController(DiscoverTableViewController(), title: "发现", imageName: "tabbar_discover")
-        addChildController(ProfileTableViewController(), title: "我的", imageName: "tabbar_profile")
+        addChildController("HomeTableViewController", title: "首页", imageName: "tabbar_home")
+        addChildController("MessageTableViewController", title: "消息", imageName: "tabbar_message_center")
+        addChildController("DiscoverTableViewController", title: "发现", imageName: "tabbar_discover")
+        addChildController("ProfileTableViewController", title: "我的", imageName: "tabbar_profile")
     }
     
     /**
      添加控制器方法
      */
-    func addChildController(childController: UIViewController, title: String, imageName: String) {
+    func addChildController(childControllerName: String, title: String, imageName: String) {
         
+        guard let name = NSBundle.mainBundle().infoDictionary!["CFBundleExecutable"] as? String else {
+            
+            print("获取命名空间失败")
+            return
+        }
+        let myClass: AnyClass? = NSClassFromString(name + "." + childControllerName)
+        guard let typeClass = myClass as? UITableViewController.Type else {
+            
+            print("class不是UITableViewController")
+            return
+        }
+        let childController = typeClass.init()
         childController.title = title
         childController.tabBarItem.image = UIImage(named: imageName)
         childController.tabBarItem.selectedImage = UIImage(named: imageName + "_highlighted")
         
         let nc = UINavigationController(rootViewController: childController)
         addChildViewController(nc)
+        
     }
-    
 }
