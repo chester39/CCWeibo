@@ -8,6 +8,15 @@ import UIKit
 
 class MainViewController: UITabBarController {
 
+    // MARK: - 初始化方法
+    
+    private lazy var composeButton: UIButton = { () -> UIButton in
+        
+        let button = UIButton(imageName: "tabbar_compose_icon_add", backgroundImageName: "tabbar_compose_button")
+        button.addTarget(self, action: #selector(MainViewController.composeButtonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        return button
+    }()
+    
     // MARK: - 系统方法
     
     /**
@@ -19,6 +28,16 @@ class MainViewController: UITabBarController {
 
         tabBar.tintColor = UIColor.orangeColor()
         addChildControllerArray()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        tabBar.addSubview(composeButton)
+        let rect = composeButton.frame
+        let barWidth = tabBar.bounds.width / CGFloat(childViewControllers.count)
+        composeButton.frame = CGRectMake(2 * barWidth, 0, barWidth, rect.height)
     }
 
     /**
@@ -59,6 +78,7 @@ class MainViewController: UITabBarController {
                 
             addChildController("HomeTableViewController", title: "首页", imageName: "tabbar_home")
             addChildController("MessageTableViewController", title: "消息", imageName: "tabbar_message_center")
+            addChildController("NullTableViewController", title: "", imageName: "")
             addChildController("DiscoverTableViewController", title: "发现", imageName: "tabbar_discover")
             addChildController("ProfileTableViewController", title: "我的", imageName: "tabbar_profile")
         }
@@ -88,13 +108,20 @@ class MainViewController: UITabBarController {
         let childController = typeClass.init()
         
         childController.title = title
-        if let imName = imageName {
+        if let imgName = imageName {
             
-            childController.tabBarItem.image = UIImage(named: imName)
-            childController.tabBarItem.selectedImage = UIImage(named: imName + "_highlighted")
+            childController.tabBarItem.image = UIImage(named: imgName)
+            childController.tabBarItem.selectedImage = UIImage(named: imgName + "_highlighted")
         }
         let nc = UINavigationController(rootViewController: childController)
         addChildViewController(nc)
+    }
+    
+    /**
+     编写按钮点击方法
+     */
+    @objc private func composeButtonClicked(button: UIButton) {
         
+        print(button)
     }
 }

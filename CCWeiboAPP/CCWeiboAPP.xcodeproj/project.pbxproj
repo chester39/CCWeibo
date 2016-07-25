@@ -17,6 +17,7 @@
 		86D700561D411C73003C65D7 /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D700551D411C73003C65D7 /* DiscoverTableViewController.swift */; };
 		86D700581D411C7C003C65D7 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D700571D411C7C003C65D7 /* MessageTableViewController.swift */; };
 		86D7005A1D411C85003C65D7 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D700591D411C85003C65D7 /* ProfileTableViewController.swift */; };
+		86E3ABC71D46628C006F63B4 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E3ABC61D46628C006F63B4 /* UIButton+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		86D700551D411C73003C65D7 /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
 		86D700571D411C7C003C65D7 /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 		86D700591D411C85003C65D7 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		86E3ABC61D46628C006F63B4 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 		86D700501D411B79003C65D7 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				86E3ABC61D46628C006F63B4 /* UIButton+Extension.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				86D700541D411C48003C65D7 /* HomeTableViewController.swift in Sources */,
 				868890031D3D26E70038F753 /* AppDelegate.swift in Sources */,
 				86D700581D411C7C003C65D7 /* MessageTableViewController.swift in Sources */,
+				86E3ABC71D46628C006F63B4 /* UIButton+Extension.swift in Sources */,
 				86D700561D411C73003C65D7 /* DiscoverTableViewController.swift in Sources */,
 				86D700521D411C26003C65D7 /* MainViewController.swift in Sources */,
 			);
