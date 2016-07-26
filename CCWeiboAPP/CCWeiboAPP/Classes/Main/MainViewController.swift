@@ -118,7 +118,7 @@ class MainViewController: UITabBarController {
     }
     
     /**
-     编写按钮点击方法
+     发布按钮点击方法
      */
     @objc private func composeButtonClicked(button: UIButton) {
         
