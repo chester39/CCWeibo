@@ -7,32 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		087C7CEE971ADF61B3A72C44B917D6D1 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2E7070AF28963DA05323607693B76B /* Priority.swift */; };
 		0B54A0CD9ACA474A50250CBBD469E22E /* Pods-CCWeiboAPP-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A7771FAA5C6810D8031443DC295AFDA4 /* Pods-CCWeiboAPP-dummy.m */; };
-		11585BB45FD7E08BE6B6EBC5D4BE5B81 /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB21AC3FAE66CC9C3AD6F0B2168B6DBE /* Dimension.swift */; };
-		1295089E98D8A9CFD4C5D09648B9F925 /* Edges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639894FF62CD2BF98FE8808A8D213448 /* Edges.swift */; };
-		1ABE0674341A5D5D2B940D230E100AD7 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = C292B0552BF1ABED3852FE33577CA073 /* Point.swift */; };
-		1D3256AB87BC5295647D336227FC4F67 /* ConstraintGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF04A164C1224082F15C4FC8EF0774 /* ConstraintGroup.swift */; };
-		331D08968651C4F4B3C45A2AF50844B2 /* LayoutProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA151D15CB1C8623521377029D72FC8 /* LayoutProxy.swift */; };
-		3414DE3A2D24F0CA51A30E726D92F324 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22679CD9039BD582A92D276246B7DD03 /* Constraint.swift */; };
-		3F7423D21153EFD26F37CFD0CF5F888C /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B01D8BB812C3EB3423527560912601 /* Layout.swift */; };
-		501376F6C3CEE456ED6F47D7E3371723 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895CC24783A7EF15A0893F72D7B0CB67 /* Expression.swift */; };
-		5E5DA3CAE2082876FF2A4653FC8C5120 /* Align.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D83C69E9BAFBB4D55007618460194 /* Align.swift */; };
-		60F745B356B4749C75DEC8E6F2080A54 /* Distribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF4DB25204D6BB27316A9D873624AF8 /* Distribute.swift */; };
-		6110D4DC1A2C4BC593ABAAE5F7432AAE /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = B375A5AD2E714D71E4BEAABA150621CE /* Context.swift */; };
-		62C4666D3EBC3132BA56F41C4AEEF6B4 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FFD6FE8B5E28C57AC057B8154FECB /* Size.swift */; };
-		7D30F1ECE2B88A096DBE142B5A1FFB12 /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0003B9795A48EE72DEDB393E5F53C38D /* Compound.swift */; };
-		983D86A72C2573D67E4C874A309D1AF2 /* Coefficients.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5127A18E4947C888F84D320B61F6279 /* Coefficients.swift */; };
+		86E15ECE1D47BE070006CCC4 /* Align.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EB81D47BE070006CCC4 /* Align.swift */; };
+		86E15ECF1D47BE070006CCC4 /* Cartography.h in Headers */ = {isa = PBXBuildFile; fileRef = 86E15EB91D47BE070006CCC4 /* Cartography.h */; };
+		86E15ED01D47BE070006CCC4 /* Coefficients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EBA1D47BE070006CCC4 /* Coefficients.swift */; };
+		86E15ED11D47BE070006CCC4 /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EBB1D47BE070006CCC4 /* Compound.swift */; };
+		86E15ED21D47BE070006CCC4 /* Constrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EBC1D47BE070006CCC4 /* Constrain.swift */; };
+		86E15ED31D47BE070006CCC4 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EBD1D47BE070006CCC4 /* Constraint.swift */; };
+		86E15ED41D47BE070006CCC4 /* ConstraintGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EBE1D47BE070006CCC4 /* ConstraintGroup.swift */; };
+		86E15ED51D47BE070006CCC4 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EBF1D47BE070006CCC4 /* Context.swift */; };
+		86E15ED61D47BE070006CCC4 /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EC01D47BE070006CCC4 /* Dimension.swift */; };
+		86E15ED71D47BE070006CCC4 /* Distribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EC11D47BE070006CCC4 /* Distribute.swift */; };
+		86E15ED81D47BE070006CCC4 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EC21D47BE070006CCC4 /* Edge.swift */; };
+		86E15ED91D47BE070006CCC4 /* Edges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EC31D47BE070006CCC4 /* Edges.swift */; };
+		86E15EDA1D47BE070006CCC4 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EC41D47BE070006CCC4 /* Expression.swift */; };
+		86E15EDB1D47BE070006CCC4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EC51D47BE070006CCC4 /* Extensions.swift */; };
+		86E15EDC1D47BE070006CCC4 /* LayoutProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EC71D47BE070006CCC4 /* LayoutProxy.swift */; };
+		86E15EDD1D47BE070006CCC4 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EC81D47BE070006CCC4 /* Point.swift */; };
+		86E15EDE1D47BE070006CCC4 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15EC91D47BE070006CCC4 /* Priority.swift */; };
+		86E15EDF1D47BE070006CCC4 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15ECA1D47BE070006CCC4 /* Property.swift */; };
+		86E15EE01D47BE070006CCC4 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15ECB1D47BE070006CCC4 /* Size.swift */; };
+		86E15EE11D47BE070006CCC4 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15ECC1D47BE070006CCC4 /* View.swift */; };
+		86E15EE21D47BE070006CCC4 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15ECD1D47BE070006CCC4 /* ViewUtils.swift */; };
 		A0C740326080FF3FEFCCB3DE11965AD5 /* Pods-CCWeiboAPP-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EC169EEB2C77C2EC512C0F75DE260BA /* Pods-CCWeiboAPP-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A33E78335A9459EC83327D52001569C9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		A35282DBA04D36CA9F81F25F19395778 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF9983154E4C11B1B6BDF32B91B07E8 /* Edge.swift */; };
 		B90891688A088BC37455234028C2E993 /* Cartography-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 90C54D308C80E435386D2B8490B6BDF4 /* Cartography-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C607723CF8998ED1245F497D2DB7C63F /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96DF613C2D0F33D297444EE30F04308 /* View.swift */; };
-		D21F6F2A53FE6C1FD16B650711D5B77C /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009DC3689E0D9FAF8D5D4D2B81D0A2A9 /* ViewUtils.swift */; };
-		DD2A2D2B73DFBD4BBB38973E6A588481 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01852B4670D9BFDD1FB729579E00F52 /* Property.swift */; };
 		DD4D9E00BB53129A106536303B7F2D9A /* Cartography-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C34EC1F350DF3914886D94285FB17B /* Cartography-dummy.m */; };
 		EBC8D6914B1F28C2B9D6A0791E022CAD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		F8E9BB44853E1B5AA8002B0459471D1B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAE7B14F7BD3EFA0D49F603632F01BB /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,43 +47,45 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0003B9795A48EE72DEDB393E5F53C38D /* Compound.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compound.swift; path = Cartography/Compound.swift; sourceTree = "<group>"; };
-		009DC3689E0D9FAF8D5D4D2B81D0A2A9 /* ViewUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewUtils.swift; path = Cartography/ViewUtils.swift; sourceTree = "<group>"; };
 		07C34EC1F350DF3914886D94285FB17B /* Cartography-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Cartography-dummy.m"; sourceTree = "<group>"; };
 		0B1EA99F3F41AD0847AE051B98A92A56 /* Pods-CCWeiboAPP-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CCWeiboAPP-frameworks.sh"; sourceTree = "<group>"; };
 		17BEA57E361F2415CE0A36EFAFF0D6DA /* Cartography.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Cartography.modulemap; sourceTree = "<group>"; };
-		225D83C69E9BAFBB4D55007618460194 /* Align.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Align.swift; path = Cartography/Align.swift; sourceTree = "<group>"; };
-		22679CD9039BD582A92D276246B7DD03 /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Cartography/Constraint.swift; sourceTree = "<group>"; };
 		28CFB92C3E765C282BDC8056090C082A /* Pods-CCWeiboAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CCWeiboAPP.debug.xcconfig"; sourceTree = "<group>"; };
-		4D2E7070AF28963DA05323607693B76B /* Priority.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Priority.swift; path = Cartography/Priority.swift; sourceTree = "<group>"; };
-		5DF4DB25204D6BB27316A9D873624AF8 /* Distribute.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Distribute.swift; path = Cartography/Distribute.swift; sourceTree = "<group>"; };
-		639894FF62CD2BF98FE8808A8D213448 /* Edges.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Edges.swift; path = Cartography/Edges.swift; sourceTree = "<group>"; };
 		678F86630B4C13EE60B52A6D9C231C99 /* Cartography.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Cartography.xcconfig; sourceTree = "<group>"; };
 		69D8C24BF105B99F5287AEF56E36FC83 /* Cartography.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cartography.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		780ABCF295F2B7632DE73E866CEF0A77 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A68BD1D7BFA480995FB52981550635F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		895CC24783A7EF15A0893F72D7B0CB67 /* Expression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expression.swift; path = Cartography/Expression.swift; sourceTree = "<group>"; };
+		86E15EB81D47BE070006CCC4 /* Align.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Align.swift; sourceTree = "<group>"; };
+		86E15EB91D47BE070006CCC4 /* Cartography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cartography.h; sourceTree = "<group>"; };
+		86E15EBA1D47BE070006CCC4 /* Coefficients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coefficients.swift; sourceTree = "<group>"; };
+		86E15EBB1D47BE070006CCC4 /* Compound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Compound.swift; sourceTree = "<group>"; };
+		86E15EBC1D47BE070006CCC4 /* Constrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constrain.swift; sourceTree = "<group>"; };
+		86E15EBD1D47BE070006CCC4 /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
+		86E15EBE1D47BE070006CCC4 /* ConstraintGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintGroup.swift; sourceTree = "<group>"; };
+		86E15EBF1D47BE070006CCC4 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
+		86E15EC01D47BE070006CCC4 /* Dimension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dimension.swift; sourceTree = "<group>"; };
+		86E15EC11D47BE070006CCC4 /* Distribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Distribute.swift; sourceTree = "<group>"; };
+		86E15EC21D47BE070006CCC4 /* Edge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		86E15EC31D47BE070006CCC4 /* Edges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edges.swift; sourceTree = "<group>"; };
+		86E15EC41D47BE070006CCC4 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
+		86E15EC51D47BE070006CCC4 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		86E15EC61D47BE070006CCC4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86E15EC71D47BE070006CCC4 /* LayoutProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutProxy.swift; sourceTree = "<group>"; };
+		86E15EC81D47BE070006CCC4 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		86E15EC91D47BE070006CCC4 /* Priority.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
+		86E15ECA1D47BE070006CCC4 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		86E15ECB1D47BE070006CCC4 /* Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		86E15ECC1D47BE070006CCC4 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		86E15ECD1D47BE070006CCC4 /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		8AF0447549B4B3613564D68CBABC135C /* Cartography-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Cartography-prefix.pch"; sourceTree = "<group>"; };
 		8EC169EEB2C77C2EC512C0F75DE260BA /* Pods-CCWeiboAPP-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CCWeiboAPP-umbrella.h"; sourceTree = "<group>"; };
 		90C54D308C80E435386D2B8490B6BDF4 /* Cartography-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Cartography-umbrella.h"; sourceTree = "<group>"; };
-		922FFD6FE8B5E28C57AC057B8154FECB /* Size.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Size.swift; path = Cartography/Size.swift; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A01852B4670D9BFDD1FB729579E00F52 /* Property.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Property.swift; path = Cartography/Property.swift; sourceTree = "<group>"; };
 		A7771FAA5C6810D8031443DC295AFDA4 /* Pods-CCWeiboAPP-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CCWeiboAPP-dummy.m"; sourceTree = "<group>"; };
-		A96DF613C2D0F33D297444EE30F04308 /* View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = View.swift; path = Cartography/View.swift; sourceTree = "<group>"; };
 		B1BD456FC108DF8AB4228BB0A3EB1258 /* Pods-CCWeiboAPP-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CCWeiboAPP-acknowledgements.plist"; sourceTree = "<group>"; };
-		B375A5AD2E714D71E4BEAABA150621CE /* Context.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Context.swift; path = Cartography/Context.swift; sourceTree = "<group>"; };
-		BEAE7B14F7BD3EFA0D49F603632F01BB /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Cartography/Extensions.swift; sourceTree = "<group>"; };
 		C11F1FA55FB6EE381336689EC3E7EAA9 /* Pods-CCWeiboAPP-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CCWeiboAPP-resources.sh"; sourceTree = "<group>"; };
-		C292B0552BF1ABED3852FE33577CA073 /* Point.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Point.swift; path = Cartography/Point.swift; sourceTree = "<group>"; };
 		C7AC21D0C975E0BEDC778F3BCF6B27C0 /* Pods-CCWeiboAPP-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CCWeiboAPP-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CCAF04A164C1224082F15C4FC8EF0774 /* ConstraintGroup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintGroup.swift; path = Cartography/ConstraintGroup.swift; sourceTree = "<group>"; };
 		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D5127A18E4947C888F84D320B61F6279 /* Coefficients.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Coefficients.swift; path = Cartography/Coefficients.swift; sourceTree = "<group>"; };
-		D6B01D8BB812C3EB3423527560912601 /* Layout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Layout.swift; path = Cartography/Layout.swift; sourceTree = "<group>"; };
-		DAF9983154E4C11B1B6BDF32B91B07E8 /* Edge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Edge.swift; path = Cartography/Edge.swift; sourceTree = "<group>"; };
-		DB21AC3FAE66CC9C3AD6F0B2168B6DBE /* Dimension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Dimension.swift; path = Cartography/Dimension.swift; sourceTree = "<group>"; };
-		DFA151D15CB1C8623521377029D72FC8 /* LayoutProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutProxy.swift; path = Cartography/LayoutProxy.swift; sourceTree = "<group>"; };
 		F1238483E4ACB846FC6B3623FFC4DF44 /* Pods-CCWeiboAPP.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-CCWeiboAPP.modulemap"; sourceTree = "<group>"; };
 		F28F7C707C90EA38D2F85D2894E1E51C /* Pods-CCWeiboAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CCWeiboAPP.release.xcconfig"; sourceTree = "<group>"; };
 		F8870CA79AC5C3A11CDF64AC8F8341A5 /* Pods_CCWeiboAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCWeiboAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,26 +141,28 @@
 		8770A6BABF6728955C62C8A4AA189D08 /* Cartography */ = {
 			isa = PBXGroup;
 			children = (
-				225D83C69E9BAFBB4D55007618460194 /* Align.swift */,
-				D5127A18E4947C888F84D320B61F6279 /* Coefficients.swift */,
-				0003B9795A48EE72DEDB393E5F53C38D /* Compound.swift */,
-				22679CD9039BD582A92D276246B7DD03 /* Constraint.swift */,
-				CCAF04A164C1224082F15C4FC8EF0774 /* ConstraintGroup.swift */,
-				B375A5AD2E714D71E4BEAABA150621CE /* Context.swift */,
-				DB21AC3FAE66CC9C3AD6F0B2168B6DBE /* Dimension.swift */,
-				5DF4DB25204D6BB27316A9D873624AF8 /* Distribute.swift */,
-				DAF9983154E4C11B1B6BDF32B91B07E8 /* Edge.swift */,
-				639894FF62CD2BF98FE8808A8D213448 /* Edges.swift */,
-				895CC24783A7EF15A0893F72D7B0CB67 /* Expression.swift */,
-				BEAE7B14F7BD3EFA0D49F603632F01BB /* Extensions.swift */,
-				D6B01D8BB812C3EB3423527560912601 /* Layout.swift */,
-				DFA151D15CB1C8623521377029D72FC8 /* LayoutProxy.swift */,
-				C292B0552BF1ABED3852FE33577CA073 /* Point.swift */,
-				4D2E7070AF28963DA05323607693B76B /* Priority.swift */,
-				A01852B4670D9BFDD1FB729579E00F52 /* Property.swift */,
-				922FFD6FE8B5E28C57AC057B8154FECB /* Size.swift */,
-				A96DF613C2D0F33D297444EE30F04308 /* View.swift */,
-				009DC3689E0D9FAF8D5D4D2B81D0A2A9 /* ViewUtils.swift */,
+				86E15EB81D47BE070006CCC4 /* Align.swift */,
+				86E15EB91D47BE070006CCC4 /* Cartography.h */,
+				86E15EBA1D47BE070006CCC4 /* Coefficients.swift */,
+				86E15EBB1D47BE070006CCC4 /* Compound.swift */,
+				86E15EBC1D47BE070006CCC4 /* Constrain.swift */,
+				86E15EBD1D47BE070006CCC4 /* Constraint.swift */,
+				86E15EBE1D47BE070006CCC4 /* ConstraintGroup.swift */,
+				86E15EBF1D47BE070006CCC4 /* Context.swift */,
+				86E15EC01D47BE070006CCC4 /* Dimension.swift */,
+				86E15EC11D47BE070006CCC4 /* Distribute.swift */,
+				86E15EC21D47BE070006CCC4 /* Edge.swift */,
+				86E15EC31D47BE070006CCC4 /* Edges.swift */,
+				86E15EC41D47BE070006CCC4 /* Expression.swift */,
+				86E15EC51D47BE070006CCC4 /* Extensions.swift */,
+				86E15EC61D47BE070006CCC4 /* Info.plist */,
+				86E15EC71D47BE070006CCC4 /* LayoutProxy.swift */,
+				86E15EC81D47BE070006CCC4 /* Point.swift */,
+				86E15EC91D47BE070006CCC4 /* Priority.swift */,
+				86E15ECA1D47BE070006CCC4 /* Property.swift */,
+				86E15ECB1D47BE070006CCC4 /* Size.swift */,
+				86E15ECC1D47BE070006CCC4 /* View.swift */,
+				86E15ECD1D47BE070006CCC4 /* ViewUtils.swift */,
 				BE0E175B7B7227AD6CF22A42A8DAB68A /* Support Files */,
 			);
 			path = Cartography;
@@ -228,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B90891688A088BC37455234028C2E993 /* Cartography-umbrella.h in Headers */,
+				86E15ECF1D47BE070006CCC4 /* Cartography.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,27 +315,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E5DA3CAE2082876FF2A4653FC8C5120 /* Align.swift in Sources */,
+				86E15EDF1D47BE070006CCC4 /* Property.swift in Sources */,
+				86E15EDD1D47BE070006CCC4 /* Point.swift in Sources */,
+				86E15EDA1D47BE070006CCC4 /* Expression.swift in Sources */,
+				86E15ED81D47BE070006CCC4 /* Edge.swift in Sources */,
+				86E15ED71D47BE070006CCC4 /* Distribute.swift in Sources */,
+				86E15ED91D47BE070006CCC4 /* Edges.swift in Sources */,
+				86E15ED31D47BE070006CCC4 /* Constraint.swift in Sources */,
 				DD4D9E00BB53129A106536303B7F2D9A /* Cartography-dummy.m in Sources */,
-				983D86A72C2573D67E4C874A309D1AF2 /* Coefficients.swift in Sources */,
-				7D30F1ECE2B88A096DBE142B5A1FFB12 /* Compound.swift in Sources */,
-				3414DE3A2D24F0CA51A30E726D92F324 /* Constraint.swift in Sources */,
-				1D3256AB87BC5295647D336227FC4F67 /* ConstraintGroup.swift in Sources */,
-				6110D4DC1A2C4BC593ABAAE5F7432AAE /* Context.swift in Sources */,
-				11585BB45FD7E08BE6B6EBC5D4BE5B81 /* Dimension.swift in Sources */,
-				60F745B356B4749C75DEC8E6F2080A54 /* Distribute.swift in Sources */,
-				A35282DBA04D36CA9F81F25F19395778 /* Edge.swift in Sources */,
-				1295089E98D8A9CFD4C5D09648B9F925 /* Edges.swift in Sources */,
-				501376F6C3CEE456ED6F47D7E3371723 /* Expression.swift in Sources */,
-				F8E9BB44853E1B5AA8002B0459471D1B /* Extensions.swift in Sources */,
-				3F7423D21153EFD26F37CFD0CF5F888C /* Layout.swift in Sources */,
-				331D08968651C4F4B3C45A2AF50844B2 /* LayoutProxy.swift in Sources */,
-				1ABE0674341A5D5D2B940D230E100AD7 /* Point.swift in Sources */,
-				087C7CEE971ADF61B3A72C44B917D6D1 /* Priority.swift in Sources */,
-				DD2A2D2B73DFBD4BBB38973E6A588481 /* Property.swift in Sources */,
-				62C4666D3EBC3132BA56F41C4AEEF6B4 /* Size.swift in Sources */,
-				C607723CF8998ED1245F497D2DB7C63F /* View.swift in Sources */,
-				D21F6F2A53FE6C1FD16B650711D5B77C /* ViewUtils.swift in Sources */,
+				86E15ED61D47BE070006CCC4 /* Dimension.swift in Sources */,
+				86E15ED41D47BE070006CCC4 /* ConstraintGroup.swift in Sources */,
+				86E15EE01D47BE070006CCC4 /* Size.swift in Sources */,
+				86E15EDC1D47BE070006CCC4 /* LayoutProxy.swift in Sources */,
+				86E15EE11D47BE070006CCC4 /* View.swift in Sources */,
+				86E15ECE1D47BE070006CCC4 /* Align.swift in Sources */,
+				86E15EE21D47BE070006CCC4 /* ViewUtils.swift in Sources */,
+				86E15ED11D47BE070006CCC4 /* Compound.swift in Sources */,
+				86E15EDE1D47BE070006CCC4 /* Priority.swift in Sources */,
+				86E15ED51D47BE070006CCC4 /* Context.swift in Sources */,
+				86E15ED21D47BE070006CCC4 /* Constrain.swift in Sources */,
+				86E15ED01D47BE070006CCC4 /* Coefficients.swift in Sources */,
+				86E15EDB1D47BE070006CCC4 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +405,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 678F86630B4C13EE60B52A6D9C231C99 /* Cartography.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -462,6 +469,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 678F86630B4C13EE60B52A6D9C231C99 /* Cartography.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;

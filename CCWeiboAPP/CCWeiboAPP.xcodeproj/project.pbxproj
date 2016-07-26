@@ -86,8 +86,8 @@
 		868890011D3D26E70038F753 /* CCWeiboAPP */ = {
 			isa = PBXGroup;
 			children = (
-				868890021D3D26E70038F753 /* AppDelegate.swift */,
 				86D700491D411B79003C65D7 /* Classes */,
+				868890021D3D26E70038F753 /* AppDelegate.swift */,
 				868890091D3D26E70038F753 /* Assets.xcassets */,
 				8688900B1D3D26E70038F753 /* LaunchScreen.storyboard */,
 				8688900E1D3D26E70038F753 /* Info.plist */,
