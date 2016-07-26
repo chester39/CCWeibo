@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25558A12E5EE46A40170EA1B /* Pods_CCWeiboAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F70C364AD593EBEE2DD624DB /* Pods_CCWeiboAPP.framework */; };
 		868890031D3D26E70038F753 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868890021D3D26E70038F753 /* AppDelegate.swift */; };
 		8688900A1D3D26E70038F753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 868890091D3D26E70038F753 /* Assets.xcassets */; };
 		8688900D1D3D26E70038F753 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8688900B1D3D26E70038F753 /* LaunchScreen.storyboard */; };
@@ -17,10 +18,13 @@
 		86D700561D411C73003C65D7 /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D700551D411C73003C65D7 /* DiscoverTableViewController.swift */; };
 		86D700581D411C7C003C65D7 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D700571D411C7C003C65D7 /* MessageTableViewController.swift */; };
 		86D7005A1D411C85003C65D7 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D700591D411C85003C65D7 /* ProfileTableViewController.swift */; };
+		86E15E891D47AE810006CCC4 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15E881D47AE810006CCC4 /* BaseTableViewController.swift */; };
+		86E15E8B1D47AECD0006CCC4 /* VisitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E15E8A1D47AECD0006CCC4 /* VisitorView.swift */; };
 		86E3ABC71D46628C006F63B4 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E3ABC61D46628C006F63B4 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F0B12A120BC1E947C656F13 /* Pods-CCWeiboAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCWeiboAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CCWeiboAPP/Pods-CCWeiboAPP.debug.xcconfig"; sourceTree = "<group>"; };
 		86888FFF1D3D26E70038F753 /* CC微博.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CC微博.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		868890021D3D26E70038F753 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		868890091D3D26E70038F753 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -33,7 +37,11 @@
 		86D700551D411C73003C65D7 /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
 		86D700571D411C7C003C65D7 /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 		86D700591D411C85003C65D7 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		86E15E881D47AE810006CCC4 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		86E15E8A1D47AECD0006CCC4 /* VisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorView.swift; sourceTree = "<group>"; };
 		86E3ABC61D46628C006F63B4 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		ABCB858622B0C382EF7E306D /* Pods-CCWeiboAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCWeiboAPP.release.xcconfig"; path = "Pods/Target Support Files/Pods-CCWeiboAPP/Pods-CCWeiboAPP.release.xcconfig"; sourceTree = "<group>"; };
+		F70C364AD593EBEE2DD624DB /* Pods_CCWeiboAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCWeiboAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,17 +49,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25558A12E5EE46A40170EA1B /* Pods_CCWeiboAPP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		353BCE2E6BA7F77CFC06DB11 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1F0B12A120BC1E947C656F13 /* Pods-CCWeiboAPP.debug.xcconfig */,
+				ABCB858622B0C382EF7E306D /* Pods-CCWeiboAPP.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		86888FF61D3D26E70038F753 = {
 			isa = PBXGroup;
 			children = (
 				868890011D3D26E70038F753 /* CCWeiboAPP */,
 				868890001D3D26E70038F753 /* Products */,
+				353BCE2E6BA7F77CFC06DB11 /* Pods */,
+				B81B6446938BDD478E2EE780 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,8 +86,8 @@
 		868890011D3D26E70038F753 /* CCWeiboAPP */ = {
 			isa = PBXGroup;
 			children = (
-				86D700491D411B79003C65D7 /* Classes */,
 				868890021D3D26E70038F753 /* AppDelegate.swift */,
+				86D700491D411B79003C65D7 /* Classes */,
 				868890091D3D26E70038F753 /* Assets.xcassets */,
 				8688900B1D3D26E70038F753 /* LaunchScreen.storyboard */,
 				8688900E1D3D26E70038F753 /* Info.plist */,
@@ -126,6 +146,8 @@
 			children = (
 				86B5E9921D44FCF100A5D0F0 /* Resource */,
 				86D700511D411C26003C65D7 /* MainViewController.swift */,
+				86E15E881D47AE810006CCC4 /* BaseTableViewController.swift */,
+				86E15E8A1D47AECD0006CCC4 /* VisitorView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -154,6 +176,14 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		B81B6446938BDD478E2EE780 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F70C364AD593EBEE2DD624DB /* Pods_CCWeiboAPP.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -161,9 +191,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 868890111D3D26E70038F753 /* Build configuration list for PBXNativeTarget "CCWeiboAPP" */;
 			buildPhases = (
+				84CE099193AA3E045FF3AFE1 /* [CP] Check Pods Manifest.lock */,
 				86888FFB1D3D26E70038F753 /* Sources */,
 				86888FFC1D3D26E70038F753 /* Frameworks */,
 				86888FFD1D3D26E70038F753 /* Resources */,
+				9F8E02560D4F1BFA5EDA0740 /* [CP] Embed Pods Frameworks */,
+				75992258412E51163B6C8917 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -221,17 +254,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		75992258412E51163B6C8917 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CCWeiboAPP/Pods-CCWeiboAPP-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		84CE099193AA3E045FF3AFE1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9F8E02560D4F1BFA5EDA0740 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CCWeiboAPP/Pods-CCWeiboAPP-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		86888FFB1D3D26E70038F753 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86E15E891D47AE810006CCC4 /* BaseTableViewController.swift in Sources */,
 				86D7005A1D411C85003C65D7 /* ProfileTableViewController.swift in Sources */,
 				86B5E9981D44FD1200A5D0F0 /* NullTableViewController.swift in Sources */,
 				86D700541D411C48003C65D7 /* HomeTableViewController.swift in Sources */,
 				868890031D3D26E70038F753 /* AppDelegate.swift in Sources */,
 				86D700581D411C7C003C65D7 /* MessageTableViewController.swift in Sources */,
 				86E3ABC71D46628C006F63B4 /* Extension.swift in Sources */,
+				86E15E8B1D47AECD0006CCC4 /* VisitorView.swift in Sources */,
 				86D700561D411C73003C65D7 /* DiscoverTableViewController.swift in Sources */,
 				86D700521D411C26003C65D7 /* MainViewController.swift in Sources */,
 			);
@@ -336,6 +419,7 @@
 		};
 		868890121D3D26E70038F753 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F0B12A120BC1E947C656F13 /* Pods-CCWeiboAPP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
@@ -349,6 +433,7 @@
 		};
 		868890131D3D26E70038F753 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ABCB858622B0C382EF7E306D /* Pods-CCWeiboAPP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
