@@ -24,7 +24,8 @@ class BaseTableViewController: UITableViewController {
      */
     override func loadView() {
         
-        isLogin ? super.loadView() : installVisitorView()
+//        isLogin ? super.loadView() : installVisitorView()
+//        self.backgroundColor = UIColor(red: 232.0 / 255.0, green: 232.0 / 255.0, blue: 232.0 / 255.0, alpha: 1.0))
     }
     
     /**
@@ -33,6 +34,7 @@ class BaseTableViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        print("232424")
     }
     
     /**
