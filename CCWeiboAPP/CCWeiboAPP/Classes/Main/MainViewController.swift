@@ -13,7 +13,7 @@ class MainViewController: UITabBarController {
     private lazy var composeButton: UIButton = { () -> UIButton in
         
         let button = UIButton(imageName: "tabbar_compose_icon_add", backgroundImageName: "tabbar_compose_button")
-        button.addTarget(self, action: #selector(MainViewController.composeButtonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(composeButtonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         return button
     }()
     
@@ -37,15 +37,7 @@ class MainViewController: UITabBarController {
         tabBar.addSubview(composeButton)
         let rect = composeButton.frame
         let barWidth = tabBar.bounds.width / CGFloat(childViewControllers.count)
-        composeButton.frame = CGRectMake(2 * barWidth, 0, barWidth, rect.height)
-    }
-
-    /**
-     收到内存警告方法
-     */
-    override func didReceiveMemoryWarning() {
-        
-        super.didReceiveMemoryWarning()
+        composeButton.frame = CGRect(x: 2 * barWidth, y: 0, width: barWidth, height: rect.height)
     }
     
     // MARK: - 控制器方法
