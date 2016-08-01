@@ -16,8 +16,8 @@ class DiscoverTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         if isLogin == false {
-            
             vistorView.setupVisitorInformation("visitordiscover_image_message", title: "登录后，最新、最热微博尽在掌握，不再会与时事潮流擦肩而过")
             return
         }

@@ -39,17 +39,23 @@ class VisitorView: UIView {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
+        
         setupUI()
     }
     
     /**
-     必需初始化方法
+     XIB初始化方法
      */
     required init?(coder aDecoder: NSCoder) {
+        
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - 界面方法
     
+    /**
+     初始化UI方法
+     */
     func setupUI() {
         
         let rotationWidth: CGFloat =  175
@@ -97,6 +103,8 @@ class VisitorView: UIView {
         loginButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         loginButton.setBackgroundImage(UIImage(named: "common_button_white_disable"), forState: UIControlState.Normal)
         addSubview(loginButton)
+        
+        self.backgroundColor = UIColor(red: 232.0 / 255.0, green: 232.0 / 255.0, blue: 232.0 / 255.0, alpha: 1.0)
     }
     
     /**
@@ -106,10 +114,10 @@ class VisitorView: UIView {
         
         titleLabel.text = title
         guard let name = iconName else {
-            
             startAnimation()
             return
         }
+        
         rotationView.hidden = true
         iconView.image = UIImage(named: name)
     }

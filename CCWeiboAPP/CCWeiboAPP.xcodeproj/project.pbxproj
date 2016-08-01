@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		25558A12E5EE46A40170EA1B /* Pods_CCWeiboAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F70C364AD593EBEE2DD624DB /* Pods_CCWeiboAPP.framework */; };
+		25EBADC21D4EE60500E47222 /* TitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EBADC11D4EE60500E47222 /* TitleButton.swift */; };
 		868890031D3D26E70038F753 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868890021D3D26E70038F753 /* AppDelegate.swift */; };
 		8688900A1D3D26E70038F753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 868890091D3D26E70038F753 /* Assets.xcassets */; };
 		8688900D1D3D26E70038F753 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8688900B1D3D26E70038F753 /* LaunchScreen.storyboard */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		1F0B12A120BC1E947C656F13 /* Pods-CCWeiboAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCWeiboAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CCWeiboAPP/Pods-CCWeiboAPP.debug.xcconfig"; sourceTree = "<group>"; };
+		25EBADC11D4EE60500E47222 /* TitleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleButton.swift; sourceTree = "<group>"; };
 		86888FFF1D3D26E70038F753 /* CC微博.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CC微博.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		868890021D3D26E70038F753 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		868890091D3D26E70038F753 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				86D700511D411C26003C65D7 /* MainViewController.swift */,
 				86E15E881D47AE810006CCC4 /* BaseTableViewController.swift */,
 				86E15E8A1D47AECD0006CCC4 /* VisitorView.swift */,
+				25EBADC11D4EE60500E47222 /* TitleButton.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				86D7005A1D411C85003C65D7 /* ProfileTableViewController.swift in Sources */,
 				86B5E9981D44FD1200A5D0F0 /* NullTableViewController.swift in Sources */,
 				86D700541D411C48003C65D7 /* HomeTableViewController.swift in Sources */,
+				25EBADC21D4EE60500E47222 /* TitleButton.swift in Sources */,
 				868890031D3D26E70038F753 /* AppDelegate.swift in Sources */,
 				86D700581D411C7C003C65D7 /* MessageTableViewController.swift in Sources */,
 				86E3ABC71D46628C006F63B4 /* Extension.swift in Sources */,

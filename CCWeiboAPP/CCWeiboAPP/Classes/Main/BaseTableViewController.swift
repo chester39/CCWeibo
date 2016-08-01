@@ -11,7 +11,7 @@ class BaseTableViewController: UITableViewController {
     /**
      用户是否登录
      */
-    var isLogin = false
+    var isLogin = true
     /**
      访客视图
      */
@@ -25,7 +25,6 @@ class BaseTableViewController: UITableViewController {
     override func loadView() {
         
         isLogin ? super.loadView() : setuplVisitorView()
-        self.view.backgroundColor = UIColor(red: 232.0 / 255.0, green: 232.0 / 255.0, blue: 232.0 / 255.0, alpha: 1.0)
     }
     
     /**
@@ -44,11 +43,11 @@ class BaseTableViewController: UITableViewController {
     private func setuplVisitorView() {
         
         view = vistorView
-        vistorView.loginButton.addTarget(self, action: #selector(loginButtonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        vistorView.registerButton.addTarget(self, action: #selector(registerButtonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        vistorView.loginButton.addTarget(self, action: #selector(loginButtonDidClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        vistorView.registerButton.addTarget(self, action: #selector(registerButtonDidClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(registerButtonClicked(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(loginButtonClicked(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(registerButtonDidClicked(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(loginButtonDidClicked(_:)))
     }
     
     // MARK: - 监听方法
@@ -56,7 +55,7 @@ class BaseTableViewController: UITableViewController {
     /**
      登录按钮点击方法
      */
-    @objc private func loginButtonClicked(button: UIButton) {
+    @objc private func loginButtonDidClicked(button: UIButton) {
         
         print(#function)
     }
@@ -64,8 +63,9 @@ class BaseTableViewController: UITableViewController {
     /**
      注册按钮点击方法
      */
-    @objc private func registerButtonClicked(button: UIButton) {
+    @objc private func registerButtonDidClicked(button: UIButton) {
         
         print(#function)
     }
+    
 }
