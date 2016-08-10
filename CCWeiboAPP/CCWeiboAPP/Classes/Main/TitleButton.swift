@@ -49,7 +49,6 @@ class TitleButton: UIButton {
         imageView?.frame.origin.x = titleLabel!.frame.width
     }
     
-    
     // MARK: - 界面方法
     
     /**

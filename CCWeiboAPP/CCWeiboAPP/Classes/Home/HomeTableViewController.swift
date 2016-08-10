@@ -42,7 +42,7 @@ class HomeTableViewController: BaseTableViewController {
     }
     
     
-    // MARK: - 监听方法
+    // MARK: - 按钮方法
     
     /**
      标题按钮点击方法
@@ -50,6 +50,11 @@ class HomeTableViewController: BaseTableViewController {
     @objc private func titleButtonDidClicked(button: TitleButton) {
         
         button.selected = !button.selected
+        
+        let popoverVc = PopoverViewController()
+//        popoverVc.transitioningDelegate = 
+        popoverVc.modalPresentationStyle = UIModalPresentationStyle.Custom
+        presentViewController(popoverVc, animated: true, completion: nil)
     }
     
     /**
@@ -68,4 +73,4 @@ class HomeTableViewController: BaseTableViewController {
         print(#function)
     }
     
- }
+}

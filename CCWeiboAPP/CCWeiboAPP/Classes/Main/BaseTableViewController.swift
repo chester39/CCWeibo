@@ -11,7 +11,7 @@ class BaseTableViewController: UITableViewController {
     /**
      用户是否登录
      */
-    var isLogin = true
+    var isLogin = false
     /**
      访客视图
      */

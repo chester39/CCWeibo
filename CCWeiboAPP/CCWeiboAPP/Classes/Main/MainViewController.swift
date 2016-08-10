@@ -10,6 +10,9 @@ class MainViewController: UITabBarController {
 
     // MARK: - 初始化方法
     
+    /**
+     发布按钮懒加载方法
+     */
     private lazy var composeButton: UIButton = { () -> UIButton in
         
         let button = UIButton(imageName: "tabbar_compose_icon_add", backgroundImageName: "tabbar_compose_button")
@@ -97,6 +100,7 @@ class MainViewController: UITabBarController {
         
         let childController = typeClass.init()
         childController.title = title
+        
         if let imgName = imageName {
             childController.tabBarItem.image = UIImage(named: imgName)
             childController.tabBarItem.selectedImage = UIImage(named: imgName + "_highlighted")
@@ -105,6 +109,8 @@ class MainViewController: UITabBarController {
         let nc = UINavigationController(rootViewController: childController)
         addChildViewController(nc)
     }
+    
+    // MARK: - 按钮方法
     
     /**
      发布按钮点击方法

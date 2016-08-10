@@ -82,6 +82,8 @@ class VisitorView: UIView {
         titleLabel.font = UIFont.systemFontOfSize(17)
         addSubview(titleLabel)
         
+        let buttonImage = UIImage(named: "common_button_white_disable")?.resizableImageWithCapInsets(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), resizingMode: UIImageResizingMode.Stretch)
+        
         let registerWidth: CGFloat = 100
         let registerHeight: CGFloat = 34
         let registerX = titleX
@@ -90,7 +92,7 @@ class VisitorView: UIView {
         registerButton.setTitle("注册", forState: UIControlState.Normal)
         registerButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
         registerButton.titleLabel?.font = UIFont.systemFontOfSize(15)
-        registerButton.setBackgroundImage(UIImage(named: "common_button_white_disable"), forState: UIControlState.Normal)
+        registerButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal)
         addSubview(registerButton)
         
         let loginWidth = registerWidth
@@ -101,7 +103,7 @@ class VisitorView: UIView {
         loginButton.setTitle("登录", forState: UIControlState.Normal)
         loginButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         loginButton.titleLabel?.font = UIFont.systemFontOfSize(15)
-        loginButton.setBackgroundImage(UIImage(named: "common_button_white_disable"), forState: UIControlState.Normal)
+        loginButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal)
         addSubview(loginButton)
         
         self.backgroundColor = UIColor(red: 232.0 / 255.0, green: 232.0 / 255.0, blue: 232.0 / 255.0, alpha: 1.0)
