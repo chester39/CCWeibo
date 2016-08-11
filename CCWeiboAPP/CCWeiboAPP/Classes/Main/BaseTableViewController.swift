@@ -7,11 +7,7 @@
 import UIKit
 
 class BaseTableViewController: UITableViewController {
-
-    /**
-     用户是否登录
-     */
-    var isLogin = false
+    
     /**
      访客视图
      */
@@ -24,7 +20,7 @@ class BaseTableViewController: UITableViewController {
      */
     override func loadView() {
         
-        isLogin ? super.loadView() : setuplVisitorView()
+        kIsUserLogin ? super.loadView() : setuplVisitorView()
     }
     
     /**
@@ -43,8 +39,8 @@ class BaseTableViewController: UITableViewController {
     private func setuplVisitorView() {
         
         view = vistorView
-        vistorView.loginButton.addTarget(self, action: #selector(loginButtonDidClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         vistorView.registerButton.addTarget(self, action: #selector(registerButtonDidClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        vistorView.loginButton.addTarget(self, action: #selector(loginButtonDidClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(registerButtonDidClicked(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(loginButtonDidClicked(_:)))

@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		250621D11D5B29D0000B542B /* PopoverPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250621CF1D5B29D0000B542B /* PopoverPresentationController.swift */; };
 		250621D21D5B29D0000B542B /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250621D01D5B29D0000B542B /* PopoverViewController.swift */; };
-		250621D41D5B369D000B542B /* PopoverPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250621D31D5B369D000B542B /* PopoverPresentationManager.swift */; };
+		250622831D5C0E9C000B542B /* PopoverPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622821D5C0E9C000B542B /* PopoverPresentationManager.swift */; };
+		250622851D5C1F2A000B542B /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622841D5C1F2A000B542B /* Const.swift */; };
 		25558A12E5EE46A40170EA1B /* Pods_CCWeiboAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F70C364AD593EBEE2DD624DB /* Pods_CCWeiboAPP.framework */; };
 		25EBADC21D4EE60500E47222 /* TitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EBADC11D4EE60500E47222 /* TitleButton.swift */; };
 		868890031D3D26E70038F753 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868890021D3D26E70038F753 /* AppDelegate.swift */; };
@@ -31,7 +32,8 @@
 		1F0B12A120BC1E947C656F13 /* Pods-CCWeiboAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCWeiboAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CCWeiboAPP/Pods-CCWeiboAPP.debug.xcconfig"; sourceTree = "<group>"; };
 		250621CF1D5B29D0000B542B /* PopoverPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverPresentationController.swift; path = Popover/PopoverPresentationController.swift; sourceTree = "<group>"; };
 		250621D01D5B29D0000B542B /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverViewController.swift; path = Popover/PopoverViewController.swift; sourceTree = "<group>"; };
-		250621D31D5B369D000B542B /* PopoverPresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverPresentationManager.swift; sourceTree = "<group>"; };
+		250622821D5C0E9C000B542B /* PopoverPresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverPresentationManager.swift; path = Popover/PopoverPresentationManager.swift; sourceTree = "<group>"; };
+		250622841D5C1F2A000B542B /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		25EBADC11D4EE60500E47222 /* TitleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleButton.swift; sourceTree = "<group>"; };
 		86888FFF1D3D26E70038F753 /* CC微博.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CC微博.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		868890021D3D26E70038F753 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				250621CF1D5B29D0000B542B /* PopoverPresentationController.swift */,
-				250621D31D5B369D000B542B /* PopoverPresentationManager.swift */,
+				250622821D5C0E9C000B542B /* PopoverPresentationManager.swift */,
 				250621D01D5B29D0000B542B /* PopoverViewController.swift */,
 			);
 			name = Popover;
@@ -164,10 +166,10 @@
 			isa = PBXGroup;
 			children = (
 				86B5E9921D44FCF100A5D0F0 /* Resource */,
-				86D700511D411C26003C65D7 /* MainViewController.swift */,
 				86E15E881D47AE810006CCC4 /* BaseTableViewController.swift */,
-				86E15E8A1D47AECD0006CCC4 /* VisitorView.swift */,
+				86D700511D411C26003C65D7 /* MainViewController.swift */,
 				25EBADC11D4EE60500E47222 /* TitleButton.swift */,
+				86E15E8A1D47AECD0006CCC4 /* VisitorView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -191,6 +193,7 @@
 		86D700501D411B79003C65D7 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				250622841D5C1F2A000B542B /* Const.swift */,
 				86E3ABC61D46628C006F63B4 /* Extension.swift */,
 			);
 			path = Tools;
@@ -239,7 +242,7 @@
 				TargetAttributes = {
 					86888FFE1D3D26E70038F753 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 72SC2S8T6M;
+						DevelopmentTeam = U4A6RHW364;
 					};
 				};
 			};
@@ -327,7 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				250621D41D5B369D000B542B /* PopoverPresentationManager.swift in Sources */,
+				250622831D5C0E9C000B542B /* PopoverPresentationManager.swift in Sources */,
 				86E15E891D47AE810006CCC4 /* BaseTableViewController.swift in Sources */,
 				86D7005A1D411C85003C65D7 /* ProfileTableViewController.swift in Sources */,
 				250621D21D5B29D0000B542B /* PopoverViewController.swift in Sources */,
@@ -341,6 +344,7 @@
 				86E15E8B1D47AECD0006CCC4 /* VisitorView.swift in Sources */,
 				86D700561D411C73003C65D7 /* DiscoverTableViewController.swift in Sources */,
 				86D700521D411C26003C65D7 /* MainViewController.swift in Sources */,
+				250622851D5C1F2A000B542B /* Const.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +451,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = CCWeiboAPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -461,6 +466,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = CCWeiboAPP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

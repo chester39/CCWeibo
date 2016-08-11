@@ -5,10 +5,17 @@
 //
 
 import UIKit
+import Cartography
 
 class PopoverViewController: UIViewController {
 
+    /**
+     背景图片视图
+     */
     var backgroundView = UIImageView()
+    /**
+     表格视图
+     */
     var tableView = UITableView()
     
     // MARK: - 系统方法
@@ -28,17 +35,18 @@ class PopoverViewController: UIViewController {
      */
     func setupUI() {
         
-        backgroundView.frame = view.frame
         backgroundView.image = UIImage(named: "popover_background")!.resizableImageWithCapInsets(UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0), resizingMode: UIImageResizingMode.Stretch)
         view.addSubview(backgroundView)
         
-        let margin: CGFloat = 20
-        let tableX = margin
-        let tableY = margin
-        let tableWidth = view.frame.size.width - margin * 2
-        let tableHeight = view.frame.size.height - margin * 2
-        tableView.frame = CGRect(x: tableX, y: tableY, width: tableWidth, height: tableHeight)
         view.addSubview(tableView)
+        
+        constrain(backgroundView) { (backgroundView) in
+            backgroundView.edges == inset(backgroundView.superview!.edges, 0)
+        }
+    
+        constrain(tableView) { (tableView) in
+            tableView.edges == inset(tableView.superview!.edges, kViewPadding)
+        }
     }
 
 }

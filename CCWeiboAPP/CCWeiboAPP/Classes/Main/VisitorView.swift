@@ -5,8 +5,7 @@
 //
 
 import UIKit
-
-let kMargin: CGFloat = 10
+import Cartography
 
 class VisitorView: UIView {
     
@@ -58,53 +57,55 @@ class VisitorView: UIView {
      */
     func setupUI() {
         
-        let rotationWidth: CGFloat =  175
-        let rotationHeight: CGFloat =  175
-        let rotationX: CGFloat = (frame.origin.x + frame.size.width - rotationWidth) * 0.5
-        let rotationY: CGFloat = (frame.origin.y + frame.size.height - rotationHeight) * 0.5
-        rotationView.frame = CGRect(x: rotationX, y: rotationY, width: rotationWidth, height: rotationHeight)
         rotationView.image = UIImage(named: "visitordiscover_feed_image_smallicon")
         addSubview(rotationView)
         
-        let iconWidth: CGFloat =  94
-        let iconHeight: CGFloat =  90
-        let iconX: CGFloat = (frame.origin.x + frame.size.width - iconWidth) * 0.5
-        let iconY = rotationY + kMargin * 3
-        iconView.frame = CGRect(x: iconX, y: iconY, width: iconWidth, height: iconHeight)
+        iconView.image = UIImage(named: "visitordiscover_feed_image_house" )
         addSubview(iconView)
-        
-        let titleWidth: CGFloat = 220
-        let titleHeight: CGFloat = 80
-        let titleX: CGFloat = (frame.origin.x + frame.size.width - titleWidth) * 0.5
-        let titleY = iconY
-        titleLabel.frame = CGRect(x: titleX, y: titleY, width: titleWidth, height: titleHeight)
+
         titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont.systemFontOfSize(17)
+        titleLabel.font = UIFont.systemFontOfSize(18)
         addSubview(titleLabel)
         
         let buttonImage = UIImage(named: "common_button_white_disable")?.resizableImageWithCapInsets(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), resizingMode: UIImageResizingMode.Stretch)
         
-        let registerWidth: CGFloat = 100
-        let registerHeight: CGFloat = 34
-        let registerX = titleX
-        let registerY = titleY + titleHeight + kMargin
-        registerButton.frame = CGRect(x: registerX, y: registerY, width: registerWidth, height: registerHeight)
         registerButton.setTitle("注册", forState: UIControlState.Normal)
         registerButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
         registerButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         registerButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal)
         addSubview(registerButton)
         
-        let loginWidth = registerWidth
-        let loginHeight = registerHeight
-        let loginX = registerX + registerWidth + kMargin
-        let loginY = registerY
-        loginButton.frame = CGRect(x: loginX, y: loginY, width: loginWidth, height: loginHeight)
         loginButton.setTitle("登录", forState: UIControlState.Normal)
         loginButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         loginButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         loginButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal)
         addSubview(loginButton)
+        
+        constrain(rotationView) { (rotationView) in
+            rotationView.center == rotationView.superview!.center
+        }
+        
+        constrain(iconView) { (iconView) in
+            iconView.center == iconView.superview!.center
+        }
+        
+        constrain(titleLabel, rotationView) { (titleLabel, rotationView) in
+            titleLabel.width == 220
+            titleLabel.centerX == rotationView.centerX
+            titleLabel.top == rotationView.bottom + kViewMargin
+        }
+        
+        constrain(registerButton, titleLabel) { (registerButton, titleLabel) in
+            registerButton.width == 100
+            registerButton.top == titleLabel.bottom + kViewMargin
+            registerButton.leading == titleLabel.leading
+        }
+        
+        constrain(loginButton, titleLabel) { (loginButton, titleLabel) in
+            loginButton.width == 100
+            loginButton.top == titleLabel.bottom + kViewMargin
+            loginButton.trailing == titleLabel.trailing
+        }
         
         self.backgroundColor = UIColor(red: 232.0 / 255.0, green: 232.0 / 255.0, blue: 232.0 / 255.0, alpha: 1.0)
     }
