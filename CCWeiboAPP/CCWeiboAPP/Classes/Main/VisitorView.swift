@@ -9,25 +9,15 @@ import Cartography
 
 class VisitorView: UIView {
     
-    /**
-     注册按钮
-     */
-    var registerButton = UIButton(type: UIButtonType.Custom)
-    /**
-     登录按钮
-     */
-    var loginButton = UIButton(type: UIButtonType.Custom)
-    /**
-     旋转视图
-     */
+    // 注册按钮
+    var registerButton = UIButton()
+    // 登录按钮
+    var loginButton = UIButton()
+    // 旋转视图
     var rotationView = UIImageView()
-    /**
-     图标按钮
-     */
+    // 图标按钮
     var iconView = UIImageView()
-    /**
-     文字标签
-     */
+    // 文字标签
     var titleLabel = UILabel()
 
     // MARK: - 初始化方法
@@ -65,6 +55,7 @@ class VisitorView: UIView {
 
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont.systemFontOfSize(18)
+        titleLabel.textAlignment = NSTextAlignment.Center
         addSubview(titleLabel)
         
         let buttonImage = UIImage(named: "common_button_white_disable")?.resizableImageWithCapInsets(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), resizingMode: UIImageResizingMode.Stretch)

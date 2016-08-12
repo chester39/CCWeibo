@@ -8,13 +8,9 @@ import UIKit
 
 class PopoverPresentationManager: NSObject {
 
-    /**
-     控制器是否被显示
-     */
+    // 控制器是否被显示
     private var isPresent = false
-    /**
-     弹出框尺寸
-     */
+    // 弹出框尺寸
     var presentFrame = CGRectZero
     
 }

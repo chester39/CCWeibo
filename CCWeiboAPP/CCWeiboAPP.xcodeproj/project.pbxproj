@@ -11,6 +11,7 @@
 		250621D21D5B29D0000B542B /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250621D01D5B29D0000B542B /* PopoverViewController.swift */; };
 		250622831D5C0E9C000B542B /* PopoverPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622821D5C0E9C000B542B /* PopoverPresentationManager.swift */; };
 		250622851D5C1F2A000B542B /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622841D5C1F2A000B542B /* Const.swift */; };
+		250622881D5D6201000B542B /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622871D5D6201000B542B /* QRCodeViewController.swift */; };
 		25558A12E5EE46A40170EA1B /* Pods_CCWeiboAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F70C364AD593EBEE2DD624DB /* Pods_CCWeiboAPP.framework */; };
 		25EBADC21D4EE60500E47222 /* TitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EBADC11D4EE60500E47222 /* TitleButton.swift */; };
 		868890031D3D26E70038F753 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868890021D3D26E70038F753 /* AppDelegate.swift */; };
@@ -34,6 +35,7 @@
 		250621D01D5B29D0000B542B /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverViewController.swift; path = Popover/PopoverViewController.swift; sourceTree = "<group>"; };
 		250622821D5C0E9C000B542B /* PopoverPresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverPresentationManager.swift; path = Popover/PopoverPresentationManager.swift; sourceTree = "<group>"; };
 		250622841D5C1F2A000B542B /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		250622871D5D6201000B542B /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		25EBADC11D4EE60500E47222 /* TitleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleButton.swift; sourceTree = "<group>"; };
 		86888FFF1D3D26E70038F753 /* CC微博.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CC微博.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		868890021D3D26E70038F753 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 				250621D01D5B29D0000B542B /* PopoverViewController.swift */,
 			);
 			name = Popover;
+			sourceTree = "<group>";
+		};
+		250622861D5D61CD000B542B /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				250622871D5D6201000B542B /* QRCodeViewController.swift */,
+			);
+			path = QRCode;
 			sourceTree = "<group>";
 		};
 		353BCE2E6BA7F77CFC06DB11 /* Pods */ = {
@@ -157,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				250621CC1D5B00B1000B542B /* Popover */,
+				250622861D5D61CD000B542B /* QRCode */,
 				86D700531D411C48003C65D7 /* HomeTableViewController.swift */,
 			);
 			path = Home;
@@ -332,6 +343,7 @@
 			files = (
 				250622831D5C0E9C000B542B /* PopoverPresentationManager.swift in Sources */,
 				86E15E891D47AE810006CCC4 /* BaseTableViewController.swift in Sources */,
+				250622881D5D6201000B542B /* QRCodeViewController.swift in Sources */,
 				86D7005A1D411C85003C65D7 /* ProfileTableViewController.swift in Sources */,
 				250621D21D5B29D0000B542B /* PopoverViewController.swift in Sources */,
 				86B5E9981D44FD1200A5D0F0 /* NullTableViewController.swift in Sources */,

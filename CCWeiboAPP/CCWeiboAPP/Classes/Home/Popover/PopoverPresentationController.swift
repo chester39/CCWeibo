@@ -8,9 +8,7 @@ import UIKit
 
 class PopoverPresentationController: UIPresentationController {
     
-    /**
-     弹出框尺寸
-     */
+    // 弹出框尺寸
     var presentFrame = CGRectZero
     
     // MARK: - 初始化方法

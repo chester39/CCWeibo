@@ -70,7 +70,7 @@ class HomeTableViewController: BaseTableViewController {
     private func setupNavigation() {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(imageName: "navigationbar_friendattention", target: self, action: #selector(leftButtonDidClicked))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(rightButtonDidClicked))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(qrcodeButtonDidClicked))
         navigationItem.titleView = titleButton
     }
     
@@ -104,11 +104,14 @@ class HomeTableViewController: BaseTableViewController {
     }
     
     /**
-     右边按钮点击方法
+     二维码按钮点击方法
      */
-    @objc private func rightButtonDidClicked() {
+    @objc private func qrcodeButtonDidClicked() {
         
-        print(#function)
+        let qrcVC = QRCodeViewController()
+        let qrcNC = UINavigationController()
+        qrcNC.addChildViewController(qrcVC)
+        presentViewController(qrcNC, animated: true, completion: nil)
     }
     
 }

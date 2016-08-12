@@ -8,9 +8,7 @@ import UIKit
 
 class BaseTableViewController: UITableViewController {
     
-    /**
-     访客视图
-     */
+    // 访客视图
     var vistorView = VisitorView(frame: UIScreen.mainScreen().bounds)
     
     // MARK: - 系统方法
