@@ -35,6 +35,18 @@ class QRCodeViewController: UIViewController {
     }
     
     /**
+     视图已经显示方法
+     */
+    override func viewDidAppear(animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        startAnimation()
+    }
+    
+    // MARK: - 界面方法
+    
+    /**
      初始化UI方法
      */
     func setupUI() {
@@ -104,6 +116,26 @@ class QRCodeViewController: UIViewController {
     }
     
     /**
+     开始动画方法
+     */
+    private func startAnimation() {
+        
+        let group = ConstraintGroup()
+        constrain(waveView, containerView, replace: group) { (waveView, containerView) in
+            waveView.bottom == containerView.top
+        }
+        view.layoutIfNeeded()
+        
+        UIView.animateWithDuration(1.5) {
+            UIView.setAnimationRepeatCount(MAXFLOAT)
+            constrain(self.waveView, self.containerView, replace: group) { (waveView, containerView) in
+                waveView.bottom == containerView.bottom
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    /**
      关闭按钮点击方法
      */
     func closeButtonDidClicked() {
@@ -116,7 +148,29 @@ class QRCodeViewController: UIViewController {
      */
     func albumButtonDidClicked() {
         
-        print(#function)
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) == false {
+            return
+        }
+        let imagePickerVC = UIImagePickerController()
+        imagePickerVC.delegate = self
+        presentViewController(imagePickerVC, animated: true, completion: nil)
+    }
+}
+
+extension QRCodeViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    /**
+     照片控制器选择多媒体方法
+     */
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            return
+        }
+        guard let ciImage = CIImage(image: image) else {
+            return
+        }
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
@@ -126,18 +180,11 @@ extension QRCodeViewController: UITabBarDelegate {
      点击底部工具栏方法
      */
     func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
-        let group = ConstraintGroup()
-        if item.title == "条形码" {
-            titleLabel.text = "将条形码放入框内, 即可扫描条形码"
-            constrain(containerView, replace: group) { containerView in
-                containerView.height == 100
-            }
-        } else {
-            titleLabel.text = "将二维码放入框内, 即可扫描二维码"
-            constrain(containerView, replace: group) { containerView in
-                containerView.height == 200
-            }
-        }
+        
+        titleLabel.text = (item.title == "条形码") ? "将条形码放入框内, 即可扫描条形码" : "将二维码放入框内, 即可扫描二维码"
         view.layoutIfNeeded()
+        
+        waveView.layer.removeAllAnimations()
+        startAnimation()
     }
 }
