@@ -17,6 +17,7 @@ class MainViewController: UITabBarController {
         
         let button = UIButton(imageName: "tabbar_compose_icon_add", backgroundImageName: "tabbar_compose_button")
         button.addTarget(self, action: #selector(composeButtonDidClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
         return button
     }()
     

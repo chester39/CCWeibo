@@ -21,6 +21,7 @@ class PopoverPresentationController: UIPresentationController {
         let button = UIButton(type: UIButtonType.System)
         button.frame = UIScreen.mainScreen().bounds
         button.backgroundColor = UIColor.clearColor()
+        
         return button
     }()
     

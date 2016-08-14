@@ -18,6 +18,7 @@ class HomeTableViewController: BaseTableViewController {
         let button = TitleButton()
         button.setTitle("CC首页", forState: UIControlState.Normal)
         button.addTarget(self, action: #selector(titleButtonDidClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
         return button
     }()
     
@@ -29,11 +30,11 @@ class HomeTableViewController: BaseTableViewController {
         let manager = PopoverPresentationManager()
         let presentWidth: CGFloat = 200
         let presentHeight: CGFloat = 250
-        let presentX: CGFloat = (kScreenWidth - presentWidth) * 0.5
+        let presentX: CGFloat = (kScreenWidth - presentWidth) / 2
         let presentY: CGFloat = 50
         manager.presentFrame = CGRect(x: presentX, y: presentY, width: presentWidth, height: presentHeight)
-        return manager
         
+        return manager
     }()
     
     // MARK: - 系统方法

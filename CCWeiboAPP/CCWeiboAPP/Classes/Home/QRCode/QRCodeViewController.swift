@@ -5,6 +5,7 @@
 //
 
 import UIKit
+import AVFoundation
 import Cartography
 
 class QRCodeViewController: UIViewController {
@@ -21,6 +22,51 @@ class QRCodeViewController: UIViewController {
     var titleLabel = UILabel()
     // 名片按钮
     var cardButton = UIButton()
+    
+    // MARK: - 初始化方法
+    
+    /**
+     视频流输入懒加载方法
+     */
+    private lazy var input: AVCaptureDeviceInput? = {
+        
+        let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        
+        return try? AVCaptureDeviceInput(device: device)
+    }()
+    
+    /**
+     视频流会话懒加载方法
+     */
+    private lazy var session: AVCaptureSession = AVCaptureSession()
+    
+    /**
+     视频流输出懒加载方法
+     */
+    private lazy var output: AVCaptureMetadataOutput = { () -> AVCaptureMetadataOutput in
+        
+        let out = AVCaptureMetadataOutput()
+        
+        let viewFrame = self.view.frame
+        let containerFrame = self.containerView.frame
+        let x = containerFrame.origin.y / viewFrame.size.height
+        let y = containerFrame.origin.x / viewFrame.size.width
+        let width = containerFrame.size.height / viewFrame.height
+        let height = containerFrame.size.width / viewFrame.width
+        out.rectOfInterest = CGRect(x: x, y: y, width: width, height: height)
+        
+        return out
+    }()
+    
+    /**
+     视频流预览图层懒加载方法
+     */
+    private lazy var previewLayer: AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.session)
+    
+    /**
+     视频流描边图层懒加载方法
+     */
+    private lazy var containerLayer: CALayer = CALayer()
     
     // MARK: - 系统方法
     
@@ -42,6 +88,7 @@ class QRCodeViewController: UIViewController {
         super.viewDidAppear(animated)
         
         startAnimation()
+        scanQRCode()
     }
     
     // MARK: - 界面方法
@@ -136,6 +183,33 @@ class QRCodeViewController: UIViewController {
     }
     
     /**
+     扫描二维码方法
+     */
+    private func scanQRCode() {
+        
+        if session.canAddInput(input) == false {
+            return
+        }
+        
+        if session.canAddOutput(output) == false {
+            return
+        }
+        
+        session.addInput(input)
+        session.addOutput(output)
+        output.metadataObjectTypes = output.availableMetadataObjectTypes
+        output.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
+        
+        view.layer.insertSublayer(previewLayer, atIndex: 0)
+        previewLayer.frame = view.bounds
+        view.layer.addSublayer(containerLayer)
+        containerLayer.frame = view.bounds
+        session.startRunning()
+    }
+    
+    // MARK: - 按钮方法
+    
+    /**
      关闭按钮点击方法
      */
     func closeButtonDidClicked() {
@@ -151,10 +225,12 @@ class QRCodeViewController: UIViewController {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) == false {
             return
         }
+        
         let imagePickerVC = UIImagePickerController()
         imagePickerVC.delegate = self
         presentViewController(imagePickerVC, animated: true, completion: nil)
     }
+    
 }
 
 extension QRCodeViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
@@ -167,11 +243,20 @@ extension QRCodeViewController: UINavigationControllerDelegate, UIImagePickerCon
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             return
         }
+        
         guard let ciImage = CIImage(image: image) else {
             return
         }
+        
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyLow])
+        let resultArray = detector.featuresInImage(ciImage)
+        for result in resultArray {
+            print((result as! CIQRCodeFeature).messageString)
+        }
+        
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
+    
 }
 
 extension QRCodeViewController: UITabBarDelegate {
@@ -187,4 +272,9 @@ extension QRCodeViewController: UITabBarDelegate {
         waveView.layer.removeAllAnimations()
         startAnimation()
     }
+    
+}
+
+extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
+    
 }

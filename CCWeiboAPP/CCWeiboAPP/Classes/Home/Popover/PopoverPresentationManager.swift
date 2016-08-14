@@ -24,6 +24,7 @@ extension PopoverPresentationManager: UIViewControllerTransitioningDelegate {
         
         let ppc = PopoverPresentationController(presentedViewController: presented, presentingViewController: presenting)
         ppc.presentFrame = presentFrame
+        
         return ppc
     }
     
@@ -34,6 +35,7 @@ extension PopoverPresentationManager: UIViewControllerTransitioningDelegate {
         
         isPresent = true
         NSNotificationCenter.defaultCenter().postNotificationName(kPopoverPresentationManagerDidPresented, object: self)
+        
         return self
     }
     
@@ -44,6 +46,7 @@ extension PopoverPresentationManager: UIViewControllerTransitioningDelegate {
         
         isPresent = false
         NSNotificationCenter.defaultCenter().postNotificationName(kPopoverPresentationManagerDidDismissed, object: self)
+        
         return self
     }
     
