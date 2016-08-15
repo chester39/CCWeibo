@@ -7,12 +7,8 @@
 import UIKit
 
 class MainViewController: UITabBarController {
-
-    // MARK: - 初始化方法
     
-    /**
-     发布按钮懒加载方法
-     */
+    // 发布按钮
     private lazy var composeButton: UIButton = { () -> UIButton in
         
         let button = UIButton(imageName: "tabbar_compose_icon_add", backgroundImageName: "tabbar_compose_button")

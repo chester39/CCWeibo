@@ -11,11 +11,7 @@ class PopoverPresentationController: UIPresentationController {
     // 弹出框尺寸
     var presentFrame = CGRectZero
     
-    // MARK: - 初始化方法
-    
-    /**
-     蒙版按钮懒加载方法
-     */
+    // 蒙版按钮
     private lazy var coverButton: UIButton = { () -> UIButton in
         
         let button = UIButton(type: UIButtonType.System)
@@ -24,6 +20,8 @@ class PopoverPresentationController: UIPresentationController {
         
         return button
     }()
+    
+    // MARK: - 初始化方法
     
     /**
      自定义初始化方法

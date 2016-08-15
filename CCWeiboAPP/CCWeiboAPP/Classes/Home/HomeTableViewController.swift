@@ -7,12 +7,8 @@
 import UIKit
 
 class HomeTableViewController: BaseTableViewController {
-
-    // MARK: - 初始化方法
     
-    /**
-     标题按钮懒加载方法
-     */
+    // 标题按钮
     private lazy var titleButton: UIButton = { () -> UIButton in
         
         let button = TitleButton()
@@ -22,9 +18,8 @@ class HomeTableViewController: BaseTableViewController {
         return button
     }()
     
-    /**
-     转场管理器懒加载方法
-     */
+    
+    // 转场管理器
     private lazy var presentationManger: PopoverPresentationManager = { () -> PopoverPresentationManager in
         
         let manager = PopoverPresentationManager()

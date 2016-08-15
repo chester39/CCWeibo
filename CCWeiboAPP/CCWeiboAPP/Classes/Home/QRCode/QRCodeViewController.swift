@@ -23,11 +23,7 @@ class QRCodeViewController: UIViewController {
     // 名片按钮
     var cardButton = UIButton()
     
-    // MARK: - 初始化方法
-    
-    /**
-     视频流输入懒加载方法
-     */
+    // 视频流输入
     private lazy var input: AVCaptureDeviceInput? = {
         
         let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
@@ -35,14 +31,10 @@ class QRCodeViewController: UIViewController {
         return try? AVCaptureDeviceInput(device: device)
     }()
     
-    /**
-     视频流会话懒加载方法
-     */
+    // 视频流会话
     private lazy var session: AVCaptureSession = AVCaptureSession()
     
-    /**
-     视频流输出懒加载方法
-     */
+    // 视频流输出
     private lazy var output: AVCaptureMetadataOutput = { () -> AVCaptureMetadataOutput in
         
         let out = AVCaptureMetadataOutput()
@@ -58,14 +50,10 @@ class QRCodeViewController: UIViewController {
         return out
     }()
     
-    /**
-     视频流预览图层懒加载方法
-     */
+    // 视频流预览图层
     private lazy var previewLayer: AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.session)
     
-    /**
-     视频流描边图层懒加载方法
-     */
+    // 视频流描边图层
     private lazy var containerLayer: CALayer = CALayer()
     
     // MARK: - 系统方法
@@ -276,5 +264,66 @@ extension QRCodeViewController: UITabBarDelegate {
 }
 
 extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
+    
+    /**
+     扫描输出方法
+     */
+    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+        
+        titleLabel.text = metadataObjects.last?.stringValue
+        clearLayerLines()
+        
+        guard let metadata = metadataObjects.last as? AVMetadataObject else {
+            return
+        }
+        
+        let object = previewLayer.transformedMetadataObjectForMetadataObject(metadata)
+        drawLayerLines(object as! AVMetadataMachineReadableCodeObject)
+    }
+    
+    /**
+     绘制描边方法
+     */
+    private func drawLayerLines(object: AVMetadataMachineReadableCodeObject) {
+        
+        guard let array = object.corners else {
+            return
+        }
+        
+        let layer = CAShapeLayer()
+        layer.lineWidth = 2
+        layer.strokeColor = UIColor.greenColor().CGColor
+        layer.fillColor = UIColor.clearColor().CGColor
+        
+        let path = UIBezierPath()
+        let index = 0
+        var point = CGPointZero
+        CGPointMakeWithDictionaryRepresentation((array[index + 1] as! CFDictionary), &point)
+        
+        path.moveToPoint(point)
+        while index < array.count {
+            CGPointMakeWithDictionaryRepresentation((array[index + 1] as! CFDictionary), &point)
+            path.addLineToPoint(point)
+        }
+        
+        path.closePath()
+        layer.path = path.CGPath
+        
+        containerLayer.addSublayer(layer)
+    }
+    
+    /**
+     清空描边方法
+     */
+    private func clearLayerLines() {
+        
+        guard let subLayers = containerLayer.sublayers else {
+            return
+        }
+        
+        for layer in subLayers {
+            layer.removeFromSuperlayer()
+        }
+    }
     
 }
