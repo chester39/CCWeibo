@@ -35,7 +35,7 @@ class QRCodeViewController: UIViewController {
     private lazy var session: AVCaptureSession = AVCaptureSession()
     
     // 视频流输出
-    private lazy var output: AVCaptureMetadataOutput = { () -> AVCaptureMetadataOutput in
+    private lazy var output: AVCaptureMetadataOutput = {
         
         let out = AVCaptureMetadataOutput()
         
@@ -45,7 +45,7 @@ class QRCodeViewController: UIViewController {
         let y = containerFrame.origin.x / viewFrame.size.width
         let width = containerFrame.size.height / viewFrame.height
         let height = containerFrame.size.width / viewFrame.width
-        out.rectOfInterest = CGRect(x: x, y: y, width: width, height: height)
+//        out.rectOfInterest = CGRect(x: x, y: y, width: width, height: height)
         
         return out
     }()
@@ -66,6 +66,7 @@ class QRCodeViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        scanQRCode()
     }
     
     /**
@@ -76,7 +77,6 @@ class QRCodeViewController: UIViewController {
         super.viewDidAppear(animated)
         
         startAnimation()
-        scanQRCode()
     }
     
     // MARK: - 界面方法
@@ -296,19 +296,19 @@ extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         layer.fillColor = UIColor.clearColor().CGColor
         
         let path = UIBezierPath()
-        let index = 0
+        var index = 0
         var point = CGPointZero
-        CGPointMakeWithDictionaryRepresentation((array[index + 1] as! CFDictionary), &point)
-        
+        index += 1
+        CGPointMakeWithDictionaryRepresentation((array[index] as! CFDictionary), &point)
         path.moveToPoint(point)
         while index < array.count {
-            CGPointMakeWithDictionaryRepresentation((array[index + 1] as! CFDictionary), &point)
+            index += 1
+            CGPointMakeWithDictionaryRepresentation((array[index] as! CFDictionary), &point)
             path.addLineToPoint(point)
         }
         
         path.closePath()
         layer.path = path.CGPath
-        
         containerLayer.addSublayer(layer)
     }
     
