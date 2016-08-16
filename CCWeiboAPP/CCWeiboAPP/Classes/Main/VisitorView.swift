@@ -14,11 +14,11 @@ class VisitorView: UIView {
     // 登录按钮
     var loginButton = UIButton()
     // 旋转视图
-    var rotationView = UIImageView()
+    private var rotationView = UIImageView()
     // 图标按钮
-    var iconView = UIImageView()
+    private var iconView = UIImageView()
     // 文字标签
-    var titleLabel = UILabel()
+    private var textLabel = UILabel()
 
     // MARK: - 初始化方法
     
@@ -43,9 +43,9 @@ class VisitorView: UIView {
     // MARK: - 界面方法
     
     /**
-     初始化UI方法
+     初始化界面方法
      */
-    func setupUI() {
+    private func setupUI() {
         
         rotationView.image = UIImage(named: "visitordiscover_feed_image_smallicon")
         addSubview(rotationView)
@@ -53,10 +53,10 @@ class VisitorView: UIView {
         iconView.image = UIImage(named: "visitordiscover_feed_image_house" )
         addSubview(iconView)
 
-        titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont.systemFontOfSize(18)
-        titleLabel.textAlignment = NSTextAlignment.Center
-        addSubview(titleLabel)
+        textLabel.numberOfLines = 0
+        textLabel.font = UIFont.systemFontOfSize(18)
+        textLabel.textAlignment = NSTextAlignment.Center
+        addSubview(textLabel)
         
         let buttonImage = UIImage(named: "common_button_white_disable")?.resizableImageWithCapInsets(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), resizingMode: UIImageResizingMode.Stretch)
         
@@ -80,40 +80,25 @@ class VisitorView: UIView {
             iconView.center == iconView.superview!.center
         }
         
-        constrain(titleLabel, rotationView) { (titleLabel, rotationView) in
-            titleLabel.width == 220
-            titleLabel.centerX == rotationView.centerX
-            titleLabel.top == rotationView.bottom + kViewMargin
+        constrain(textLabel, rotationView) { (textLabel, rotationView) in
+            textLabel.width == 220
+            textLabel.centerX == rotationView.centerX
+            textLabel.top == rotationView.bottom + kViewMargin
         }
         
-        constrain(registerButton, titleLabel) { (registerButton, titleLabel) in
+        constrain(registerButton, textLabel) { (registerButton, textLabel) in
             registerButton.width == 100
-            registerButton.top == titleLabel.bottom + kViewMargin
-            registerButton.leading == titleLabel.leading
+            registerButton.top == textLabel.bottom + kViewMargin
+            registerButton.leading == textLabel.leading
         }
         
-        constrain(loginButton, titleLabel) { (loginButton, titleLabel) in
+        constrain(loginButton, textLabel) { (loginButton, textLabel) in
             loginButton.width == 100
-            loginButton.top == titleLabel.bottom + kViewMargin
-            loginButton.trailing == titleLabel.trailing
+            loginButton.top == textLabel.bottom + kViewMargin
+            loginButton.trailing == textLabel.trailing
         }
         
         self.backgroundColor = UIColor(red: 232.0 / 255.0, green: 232.0 / 255.0, blue: 232.0 / 255.0, alpha: 1.0)
-    }
-    
-    /**
-     设置访客视图信息方法
-     */
-    func setupVisitorInformation(iconName: String?, title: String) {
-        
-        titleLabel.text = title
-        guard let name = iconName else {
-            startAnimation()
-            return
-        }
-        
-        rotationView.hidden = true
-        iconView.image = UIImage(named: name)
     }
     
     /**
@@ -129,5 +114,20 @@ class VisitorView: UIView {
         
         rotationView.layer.addAnimation(animation, forKey: nil)
     }
-
+    
+    /**
+     设置访客视图信息方法
+     */
+    func setupVisitorInformation(iconName: String?, title: String) {
+        
+        textLabel.text = title
+        guard let name = iconName else {
+            startAnimation()
+            return
+        }
+        
+        rotationView.hidden = true
+        iconView.image = UIImage(named: name)
+    }
+    
 }

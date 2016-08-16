@@ -11,11 +11,11 @@ class PopoverPresentationController: UIPresentationController {
     // 弹出框尺寸
     var presentFrame = CGRectZero
     
-    // 蒙版按钮
-    private lazy var coverButton: UIButton = { () -> UIButton in
+    // 蒙版按钮懒加载
+    private lazy var coverButton: UIButton = {
         
         let button = UIButton(type: UIButtonType.System)
-        button.frame = UIScreen.mainScreen().bounds
+        button.frame = kScreenFrame
         button.backgroundColor = UIColor.clearColor()
         
         return button
@@ -38,7 +38,7 @@ class PopoverPresentationController: UIPresentationController {
         
         presentedView()?.frame = presentFrame
         containerView?.insertSubview(coverButton, atIndex: 0)
-        coverButton.addTarget(self, action: #selector(coverButtonDidClicked), forControlEvents: UIControlEvents.TouchUpInside)
+        coverButton.addTarget(self, action: #selector(coverButtonDidClick), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     // MARK: - 按钮方法
@@ -46,7 +46,7 @@ class PopoverPresentationController: UIPresentationController {
     /**
      蒙版按钮点击方法
      */
-    @objc private func coverButtonDidClicked() {
+    @objc private func coverButtonDidClick() {
         
         presentedViewController.dismissViewControllerAnimated(true, completion: nil)
     }

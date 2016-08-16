@@ -52,7 +52,7 @@ class TitleButton: UIButton {
     // MARK: - 界面方法
     
     /**
-     初始化UI方法
+     初始化界面方法
      */
     private func setupUI() {
         

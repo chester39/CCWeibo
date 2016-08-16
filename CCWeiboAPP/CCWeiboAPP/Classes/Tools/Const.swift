@@ -13,17 +13,19 @@ var kIsUserLogin = true
 let kViewMargin: CGFloat = 20
 // 视图内边距
 let kViewPadding: CGFloat = 10
+// 屏幕尺寸
+let kScreenFrame: CGRect = UIScreen.mainScreen().bounds
 // 屏幕宽度
-let kScreenWidth : CGFloat = UIScreen.mainScreen().bounds.size.width
+let kScreenWidth: CGFloat = UIScreen.mainScreen().bounds.size.width
 // 屏幕高度
-let kScreenHeight : CGFloat = UIScreen.mainScreen().bounds.size.height
+let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.size.height
 // 状态栏高度
-let kStatusBarHeight : CGFloat = 20
+let kStatusBarHeight: CGFloat = 20
 // 导航栏高度
-let kNavigationBarHeight : CGFloat = 44
+let kNavigationBarHeight: CGFloat = 44
 // 可用高度
-let kAvailableHeight : CGFloat = (kStatusBarHeight + kNavigationBarHeight)
+let kAvailableHeight: CGFloat = (kStatusBarHeight + kNavigationBarHeight)
 // 弹出框已经显示
-let kPopoverPresentationManagerDidPresented = "PopoverPresentationManagerDidPresented"
+let kPopoverPresentationManagerDidPresented: String = "PopoverPresentationManagerDidPresented"
 // 弹出框已经消失
-let kPopoverPresentationManagerDidDismissed = "PopoverPresentationManagerDidDismissed"
+let kPopoverPresentationManagerDidDismissed: String = "PopoverPresentationManagerDidDismissed"

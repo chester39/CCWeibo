@@ -9,7 +9,7 @@ import UIKit
 class BaseTableViewController: UITableViewController {
     
     // 访客视图
-    var vistorView = VisitorView(frame: UIScreen.mainScreen().bounds)
+    var vistorView = VisitorView(frame: kScreenFrame)
     
     // MARK: - 系统方法
     
@@ -37,11 +37,11 @@ class BaseTableViewController: UITableViewController {
     private func setuplVisitorView() {
         
         view = vistorView
-        vistorView.registerButton.addTarget(self, action: #selector(registerButtonDidClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        vistorView.loginButton.addTarget(self, action: #selector(loginButtonDidClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        vistorView.registerButton.addTarget(self, action: #selector(registerButtonDidClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        vistorView.loginButton.addTarget(self, action: #selector(loginButtonDidClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(registerButtonDidClicked(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(loginButtonDidClicked(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(registerButtonDidClick(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(loginButtonDidClick(_:)))
     }
     
     // MARK: - 监听方法
@@ -49,7 +49,7 @@ class BaseTableViewController: UITableViewController {
     /**
      登录按钮点击方法
      */
-    @objc private func loginButtonDidClicked(button: UIButton) {
+    @objc private func loginButtonDidClick(button: UIButton) {
         
         print(#function)
     }
@@ -57,7 +57,7 @@ class BaseTableViewController: UITableViewController {
     /**
      注册按钮点击方法
      */
-    @objc private func registerButtonDidClicked(button: UIButton) {
+    @objc private func registerButtonDidClick(button: UIButton) {
         
         print(#function)
     }

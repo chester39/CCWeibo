@@ -8,19 +8,18 @@ import UIKit
 
 class HomeTableViewController: BaseTableViewController {
     
-    // 标题按钮
-    private lazy var titleButton: UIButton = { () -> UIButton in
+    // 标题按钮懒加载
+    private lazy var titleButton: UIButton = {
         
         let button = TitleButton()
         button.setTitle("CC首页", forState: UIControlState.Normal)
-        button.addTarget(self, action: #selector(titleButtonDidClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(titleButtonDidClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         return button
     }()
     
-    
-    // 转场管理器
-    private lazy var presentationManger: PopoverPresentationManager = { () -> PopoverPresentationManager in
+    // 转场管理器懒加载
+    private lazy var presentationManger: PopoverPresentationManager = {
         
         let manager = PopoverPresentationManager()
         let presentWidth: CGFloat = 200
@@ -47,8 +46,8 @@ class HomeTableViewController: BaseTableViewController {
         }
         
         setupNavigation()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChanged), name: kPopoverPresentationManagerDidPresented, object: presentationManger)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChanged), name: kPopoverPresentationManagerDidDismissed, object: presentationManger)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidPresented, object: presentationManger)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidDismissed, object: presentationManger)
     }
     
     /**
@@ -65,8 +64,8 @@ class HomeTableViewController: BaseTableViewController {
      */
     private func setupNavigation() {
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(imageName: "navigationbar_friendattention", target: self, action: #selector(leftButtonDidClicked))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(qrcodeButtonDidClicked))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(imageName: "navigationbar_friendattention", target: self, action: #selector(friendButtonDidClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(qrcodeButtonDidClick))
         navigationItem.titleView = titleButton
     }
     
@@ -75,7 +74,7 @@ class HomeTableViewController: BaseTableViewController {
     /**
      标题按钮改变方法
      */
-    @objc private func titleButtonDidChanged() {
+    @objc private func titleButtonDidChange() {
         
         titleButton.selected = !titleButton.selected
     }
@@ -83,7 +82,7 @@ class HomeTableViewController: BaseTableViewController {
     /**
      标题按钮点击方法
      */
-    @objc private func titleButtonDidClicked(button: TitleButton) {
+    @objc private func titleButtonDidClick(button: TitleButton) {
         
         let popoverVC = PopoverViewController()
         popoverVC.transitioningDelegate = presentationManger
@@ -94,7 +93,7 @@ class HomeTableViewController: BaseTableViewController {
     /**
      左边按钮点击方法
      */
-    @objc private func leftButtonDidClicked() {
+    @objc private func friendButtonDidClick() {
         
         print(#function)
     }
@@ -102,7 +101,7 @@ class HomeTableViewController: BaseTableViewController {
     /**
      二维码按钮点击方法
      */
-    @objc private func qrcodeButtonDidClicked() {
+    @objc private func qrcodeButtonDidClick() {
         
         let qrcVC = QRCodeViewController()
         let qrcNC = UINavigationController()

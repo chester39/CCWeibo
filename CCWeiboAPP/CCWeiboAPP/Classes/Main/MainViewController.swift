@@ -8,11 +8,11 @@ import UIKit
 
 class MainViewController: UITabBarController {
     
-    // 发布按钮
-    private lazy var composeButton: UIButton = { () -> UIButton in
+    // 发布按钮懒加载
+    private lazy var composeButton: UIButton = {
         
         let button = UIButton(imageName: "tabbar_compose_icon_add", backgroundImageName: "tabbar_compose_button")
-        button.addTarget(self, action: #selector(composeButtonDidClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(composeButtonDidClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         return button
     }()
@@ -112,7 +112,7 @@ class MainViewController: UITabBarController {
     /**
      发布按钮点击方法
      */
-    @objc private func composeButtonDidClicked(button: UIButton) {
+    @objc private func composeButtonDidClick(button: UIButton) {
         
         print(button)
     }

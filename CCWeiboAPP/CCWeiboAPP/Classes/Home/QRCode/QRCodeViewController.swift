@@ -10,20 +10,10 @@ import Cartography
 
 class QRCodeViewController: UIViewController {
     
-    // 底部标签栏
-    var tabBar = UITabBar()
-    // 容器视图
-    var containerView = UIView()
-    // 边框图片
-    var edgeView = UIImageView()
-    // 波纹图片
-    var waveView = UIImageView()
-    // 文字标签
-    var titleLabel = UILabel()
-    // 名片按钮
-    var cardButton = UIButton()
+    // 二维码视图
+    var qrCodeView = QRCodeView(frame: kScreenFrame)
     
-    // 视频流输入
+    // 视频流输入懒加载
     private lazy var input: AVCaptureDeviceInput? = {
         
         let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
@@ -31,29 +21,28 @@ class QRCodeViewController: UIViewController {
         return try? AVCaptureDeviceInput(device: device)
     }()
     
-    // 视频流会话
+    // 视频流会话懒加载
     private lazy var session: AVCaptureSession = AVCaptureSession()
     
-    // 视频流输出
+    // 视频流输出懒加载
     private lazy var output: AVCaptureMetadataOutput = {
         
         let out = AVCaptureMetadataOutput()
         
         let viewFrame = self.view.frame
-        let containerFrame = self.containerView.frame
+        let containerFrame = self.qrCodeView.containerView.frame
         let x = containerFrame.origin.y / viewFrame.size.height
         let y = containerFrame.origin.x / viewFrame.size.width
         let width = containerFrame.size.height / viewFrame.height
         let height = containerFrame.size.width / viewFrame.width
-//        out.rectOfInterest = CGRect(x: x, y: y, width: width, height: height)
         
         return out
     }()
     
-    // 视频流预览图层
+    // 视频流预览图层懒加载
     private lazy var previewLayer: AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.session)
     
-    // 视频流描边图层
+    // 视频流描边图层懒加载
     private lazy var containerLayer: CALayer = CALayer()
     
     // MARK: - 系统方法
@@ -65,7 +54,17 @@ class QRCodeViewController: UIViewController {
         
         super.viewDidLoad()
         
-        setupUI()
+        view = qrCodeView
+        
+        navigationController?.navigationBar.barTintColor = UIColor.blackColor()
+        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(19), NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationItem.title = "扫一扫"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(closeButtonDidClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "相册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(albumButtonDidClick))
+        
+        qrCodeView.tabBar.delegate = self
+        qrCodeView.cardButton.addTarget(self, action: #selector(cardButtonDidClick), forControlEvents: UIControlEvents.TouchUpInside)
+        
         scanQRCode()
     }
     
@@ -76,99 +75,10 @@ class QRCodeViewController: UIViewController {
         
         super.viewDidAppear(animated)
         
-        startAnimation()
+        qrCodeView.startAnimation()
     }
     
     // MARK: - 界面方法
-    
-    /**
-     初始化UI方法
-     */
-    func setupUI() {
-        
-        navigationController?.navigationBar.barTintColor = UIColor.blackColor()
-        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(19), NSForegroundColorAttributeName: UIColor.whiteColor()]
-        navigationItem.title = "扫一扫"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(closeButtonDidClicked))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "相册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(albumButtonDidClicked))
-        
-        let qrcodeItem = UITabBarItem(title: "二维码", image: UIImage(named: "qrcode_tabbar_icon_qrcode"), selectedImage: UIImage(named: "qrcode_tabbar_icon_qrcode_highlighted"))
-        let barcodeItem = UITabBarItem(title: "条形码", image: UIImage(named: "qrcode_tabbar_icon_barcode"), selectedImage: UIImage(named: "qrcode_tabbar_icon_barcode_highlighted"))
-        tabBar.items = [qrcodeItem, barcodeItem]
-        tabBar.selectedItem = qrcodeItem
-        tabBar.barTintColor = UIColor.blackColor()
-        tabBar.delegate = self
-        view.addSubview(tabBar)
-        
-        containerView.backgroundColor = UIColor.clearColor()
-        view.addSubview(containerView)
-        
-        edgeView.image = UIImage(named: "qrcode_border")?.resizableImageWithCapInsets(UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 25), resizingMode: UIImageResizingMode.Tile)
-        containerView.addSubview(edgeView)
-        
-        waveView.image = UIImage(named: "qrcode_scanline_qrcode")
-        containerView.addSubview(waveView)
-        
-        titleLabel.font = UIFont.systemFontOfSize(17)
-        titleLabel.textAlignment = NSTextAlignment.Center
-        titleLabel.text = "将二维码放入框内, 即可扫描二维码"
-        titleLabel.numberOfLines = 0
-        view.addSubview(titleLabel)
-        
-        cardButton.setTitle("我的名片", forState: UIControlState.Normal)
-        cardButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        view.addSubview(cardButton)
-        
-        constrain(tabBar) { (tabBar) in
-            tabBar.leading == tabBar.superview!.leading
-            tabBar.trailing == tabBar.superview!.trailing
-            tabBar.bottom == tabBar.superview!.bottom
-            tabBar.height == 49
-        }
-        
-        constrain(containerView) { (containerView) in
-            containerView.centerX == containerView.superview!.centerX
-            containerView.centerY == containerView.superview!.centerY - 100
-            containerView.width == 200
-            containerView.height == 200
-        }
-        
-        constrain(edgeView, waveView) { (edgeView, waveView) in
-            edgeView.edges == inset(edgeView.superview!.edges, 0)
-            waveView.edges == inset(edgeView.edges, 0)
-        }
-        
-        constrain(titleLabel, containerView) { (titleLabel, containerView) in
-            titleLabel.leading == containerView.leading
-            titleLabel.trailing == containerView.trailing
-            titleLabel.top == containerView.bottom + 20
-        }
-        
-        constrain(cardButton, titleLabel) { (cardButton, titleLabel) in
-            cardButton.centerX == cardButton.superview!.centerX
-            cardButton.top == titleLabel.bottom + 20
-        }
-    }
-    
-    /**
-     开始动画方法
-     */
-    private func startAnimation() {
-        
-        let group = ConstraintGroup()
-        constrain(waveView, containerView, replace: group) { (waveView, containerView) in
-            waveView.bottom == containerView.top
-        }
-        view.layoutIfNeeded()
-        
-        UIView.animateWithDuration(1.5) {
-            UIView.setAnimationRepeatCount(MAXFLOAT)
-            constrain(self.waveView, self.containerView, replace: group) { (waveView, containerView) in
-                waveView.bottom == containerView.bottom
-            }
-            self.view.layoutIfNeeded()
-        }
-    }
     
     /**
      扫描二维码方法
@@ -200,7 +110,7 @@ class QRCodeViewController: UIViewController {
     /**
      关闭按钮点击方法
      */
-    func closeButtonDidClicked() {
+    func closeButtonDidClick() {
         
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -208,7 +118,7 @@ class QRCodeViewController: UIViewController {
     /**
      相册按钮点击方法
      */
-    func albumButtonDidClicked() {
+    func albumButtonDidClick() {
         
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) == false {
             return
@@ -217,6 +127,15 @@ class QRCodeViewController: UIViewController {
         let imagePickerVC = UIImagePickerController()
         imagePickerVC.delegate = self
         presentViewController(imagePickerVC, animated: true, completion: nil)
+    }
+    
+    /**
+     名片按钮点击方法
+     */
+    func cardButtonDidClick() {
+        
+        let qrccVC = QRCodeCreateViewController()
+        navigationController?.pushViewController(qrccVC, animated: true)
     }
     
 }
@@ -254,11 +173,11 @@ extension QRCodeViewController: UITabBarDelegate {
      */
     func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
         
-        titleLabel.text = (item.title == "条形码") ? "将条形码放入框内, 即可扫描条形码" : "将二维码放入框内, 即可扫描二维码"
+        qrCodeView.textLabel.text = (item.title == "条形码") ? "将条形码放入框内, 即可扫描条形码" : "将二维码放入框内, 即可扫描二维码"
         view.layoutIfNeeded()
         
-        waveView.layer.removeAllAnimations()
-        startAnimation()
+        qrCodeView.waveView.layer.removeAllAnimations()
+        qrCodeView.startAnimation()
     }
     
 }
@@ -270,7 +189,7 @@ extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
      */
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
         
-        titleLabel.text = metadataObjects.last?.stringValue
+        qrCodeView.textLabel.text = metadataObjects.last?.stringValue
         clearLayerLines()
         
         guard let metadata = metadataObjects.last as? AVMetadataObject else {
@@ -298,12 +217,12 @@ extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         let path = UIBezierPath()
         var index = 0
         var point = CGPointZero
-        index += 1
         CGPointMakeWithDictionaryRepresentation((array[index] as! CFDictionary), &point)
+        index += 1
         path.moveToPoint(point)
         while index < array.count {
-            index += 1
             CGPointMakeWithDictionaryRepresentation((array[index] as! CFDictionary), &point)
+            index += 1
             path.addLineToPoint(point)
         }
         

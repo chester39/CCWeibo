@@ -10,7 +10,7 @@ import UIKit
 extension UIButton {
     
     /**
-     便利初始化方法
+     图片和背景图片便利初始化方法
      */
     convenience init(imageName: String, backgroundImageName: String) {
         
@@ -29,7 +29,7 @@ extension UIButton {
 extension UIBarButtonItem {
     
     /**
-     便利初始化方法
+     指定图片便利初始化方法
      */
     convenience init(imageName: String, target: AnyObject?, action: Selector) {
         
@@ -42,4 +42,23 @@ extension UIBarButtonItem {
         self.init(customView: button)
     }
     
+}
+
+extension UIColor {
+    
+    /**
+     十六进制颜色便利初始化方法
+     */
+    convenience init(hex: Int) {
+        
+        self.init(hex: hex, alpha: 1.0)
+    }
+    
+    /**
+     十六进制透明度颜色便利初始化方法
+     */
+    convenience init(hex: Int, alpha: CGFloat) {
+        
+        self.init(red: (CGFloat)((hex & 0xFF0000) >> 16) / 255.0, green: (CGFloat)((hex & 0x00FF00) >> 8) / 255.0, blue: (CGFloat)((hex & 0x0000FF) >> 0) / 255.0, alpha: alpha)
+    }
 }
