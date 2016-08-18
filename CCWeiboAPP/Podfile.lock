@@ -1,12 +1,23 @@
 PODS:
+  - Alamofire (3.4.1)
   - Cartography (0.5.0)
+  - MBProgressHUD (1.0.0)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
 
 DEPENDENCIES:
+  - Alamofire (~> 3.4)
   - Cartography (~> 0.5.0)
+  - MBProgressHUD (~> 1.0.0)
+  - SDWebImage (~> 3.8)
 
 SPEC CHECKSUMS:
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   Cartography: 774e5cc446f5a6bca5d4345c5aa6af9a1fe74dc6
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
 
-PODFILE CHECKSUM: 640872dbd50a8de014f90339bf2fb3b2c6829e48
+PODFILE CHECKSUM: ce5d4bb0577a25dd74e880399c894f8e1143b873
 
 COCOAPODS: 1.0.1

@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 
 // 用户是否登录
-var kIsUserLogin = true
+var kIsUserLogin = false
 // 视图外间距
 let kViewMargin: CGFloat = 20
 // 视图内边距
