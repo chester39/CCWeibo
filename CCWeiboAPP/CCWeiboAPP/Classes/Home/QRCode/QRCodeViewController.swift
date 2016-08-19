@@ -6,12 +6,10 @@
 
 import UIKit
 import AVFoundation
-import WebKit
 import Cartography
 
 class QRCodeViewController: UIViewController {
     
-//    var webView = WKWebView(frame: kScreenFrame)
     
     // 二维码视图
     var qrCodeView = QRCodeView(frame: kScreenFrame)

@@ -9,6 +9,7 @@ import UIKit
 
 // 用户是否登录
 var kIsUserLogin = false
+
 // 视图外间距
 let kViewMargin: CGFloat = 20
 // 视图内边距
@@ -25,7 +26,13 @@ let kStatusBarHeight: CGFloat = 20
 let kNavigationBarHeight: CGFloat = 44
 // 可用高度
 let kAvailableHeight: CGFloat = (kStatusBarHeight + kNavigationBarHeight)
+
 // 弹出框已经显示
 let kPopoverPresentationManagerDidPresented: String = "PopoverPresentationManagerDidPresented"
 // 弹出框已经消失
 let kPopoverPresentationManagerDidDismissed: String = "PopoverPresentationManagerDidDismissed"
+
+// 微博开放平台URL
+let kWeiboURL = "https://api.weibo.com/"
+// 令牌授权回调URL
+let kTokenURL = "https://github.com/chester39"
