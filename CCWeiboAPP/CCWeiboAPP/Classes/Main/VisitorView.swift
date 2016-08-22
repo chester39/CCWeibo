@@ -5,6 +5,7 @@
 //
 
 import UIKit
+
 import Cartography
 
 class VisitorView: UIView {
@@ -33,7 +34,7 @@ class VisitorView: UIView {
     }
     
     /**
-     XIB初始化方法
+     数据解码XIB初始化方法
      */
     required init?(coder aDecoder: NSCoder) {
         

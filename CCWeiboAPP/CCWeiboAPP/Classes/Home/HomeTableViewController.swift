@@ -40,7 +40,7 @@ class HomeTableViewController: BaseTableViewController {
         
         super.viewDidLoad()
         
-        if kIsUserLogin == false {
+        if isUserLogin == false {
             vistorView.setupVisitorInformation(nil, title: "关注一些人后，再回到这里看看有什么惊喜")
             return
         }

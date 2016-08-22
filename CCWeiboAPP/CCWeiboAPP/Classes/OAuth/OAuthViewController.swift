@@ -6,12 +6,17 @@
 
 import UIKit
 import WebKit
+
 import Alamofire
 import Cartography
+import MBProgressHUD
 
 class OAuthViewController: UIViewController {
     
+    // 授权网页视图
     var oauthView = WKWebView(frame: kScreenFrame)
+    // 透明指示层
+    var hud = MBProgressHUD()
     
     // MARK: - 系统方法
     
@@ -24,8 +29,8 @@ class OAuthViewController: UIViewController {
         
         oauthView.navigationDelegate = self
         view.addSubview(oauthView)
-        loadRequestToken()
         
+        loadRequestToken()
     }
 
     // MARK: - 令牌方法
@@ -34,8 +39,8 @@ class OAuthViewController: UIViewController {
      获取请求令牌方法
      */
     private func loadRequestToken() {
-        
-        let urlString = kWeiboURL + "oauth2/authorize?client_id=2576232033&redirect_uri=" + kTokenURL
+
+        let urlString = "\(kWeiboURL)oauth2/authorize?client_id=\(kWeiboAppKey)&redirect_uri=\(kWeiboRedirectUri)"
         guard let url = NSURL(string: urlString) else {
             return
         }
@@ -44,6 +49,9 @@ class OAuthViewController: UIViewController {
         oauthView.loadRequest(request)
     }
     
+    /**
+     获取使用令牌方法
+     */
     private func loadAccessToken(codeString: String?) {
         
         guard let code = codeString else {
@@ -51,11 +59,16 @@ class OAuthViewController: UIViewController {
         }
         
         let path = "oauth2/access_token"
-        let parameters = ["client_id": "2576232033", "client_secret": "3839ebe10107d44f1d8064fbc397b696", "grant_type": "authorization_code", "code": code, "redirect_uri": kTokenURL]
+        let parameters = ["client_id": kWeiboAppKey, "client_secret": kWeiboAppSecret, "grant_type": "authorization_code", "code": code, "redirect_uri": kWeiboRedirectUri]
         Alamofire.request(Method.POST, kWeiboURL + path, parameters: parameters).responseJSON { response in
             if let json = response.result.value {
                 print("\(json)")
             }
+            
+            let account = UserAccount(dict: response.result.value as! [String: AnyObject])
+            account.loadUserInfo({ (account) in
+                account?.saveUserAccount()
+            })
         }
     }
     
@@ -64,42 +77,45 @@ class OAuthViewController: UIViewController {
 extension OAuthViewController: WKNavigationDelegate {
 
     /**
+     网页开始加载方法
+     */
+    func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        
+        hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.label.text = "正在加载中......"
+    }
+    
+    /**
+     网页结束加载方法
+     */
+    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+        
+        hud.hideAnimated(true)
+    }
+    
+    /**
      收到响应后跳转与否方法
      */
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         
+        hud.hideAnimated(true)
         print(navigationAction.request)
         guard let urlString = navigationAction.request.URL?.absoluteString else {
             return
         }
         
-        if urlString.hasPrefix(kTokenURL) == false {
-            print("不是授权回调页面")
+        if urlString.hasPrefix(kWeiboRedirectUri) == false {
             decisionHandler(WKNavigationActionPolicy.Allow)
         }
         
-        print("是授权回调页面")
         let key = "code="
         if urlString.containsString(key) {
             let code = navigationAction.request.URL?.query?.substringFromIndex(key.endIndex)
-            print(code)
             loadAccessToken(code)
             decisionHandler(WKNavigationActionPolicy.Cancel)
         }
         
-        print("授权失败")
         decisionHandler(WKNavigationActionPolicy.Cancel)
     }
     
 }
-
-/*
- 
- {
- "access_token" = "2.00fgeIPBZdb2oCd3a1151c37_zYi6B";
- "expires_in" = 157679999;
- "remind_in" = 157679999;
- uid = 1139840901;
- }
- 
- */

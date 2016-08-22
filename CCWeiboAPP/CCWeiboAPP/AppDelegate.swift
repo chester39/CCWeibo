@@ -9,6 +9,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // 应用窗口
     var window: UIWindow?
 
     // MARK: - 系统代理方法
@@ -20,10 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: kScreenFrame)
         window?.backgroundColor = UIColor.whiteColor()
-        window?.rootViewController = MainViewController()
+//        window?.rootViewController = MainViewController()
+        window?.rootViewController = WelcomeViewController()
         window?.makeKeyAndVisible()
         
         UINavigationBar.appearance().tintColor = UIColor.orangeColor()
+        UITabBar.appearance().tintColor = UIColor.orangeColor()
         
         return true
     }

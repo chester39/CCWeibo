@@ -8,5 +8,6 @@
 #define CCWeiboAPP_Bridging_Header_h
 
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #endif /* CCWeiboAPP_Bridging_Header_h */

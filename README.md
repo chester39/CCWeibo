@@ -1,4 +1,4 @@
-# CCWeibo iOS APP
+# CCWeibo iOS App
 ## By Chester Chen
-## Weibo iOS APP by Chester Chen, learning from the videos of Seemygo Inc.
-## July 18th, 2016 - August 15th, 2016
+## Weibo iOS App by Chester Chen, learning from the videos of Seemygo Inc.
+## July 18th, 2016 - August 22nd, 2016

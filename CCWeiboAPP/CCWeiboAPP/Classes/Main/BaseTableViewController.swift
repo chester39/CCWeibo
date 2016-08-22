@@ -5,10 +5,13 @@
 //
 
 import UIKit
+
 import Alamofire
 
 class BaseTableViewController: UITableViewController {
     
+    // 用户是否登录
+    var isUserLogin = UserAccount.isUserLogin()
     // 访客视图
     var vistorView = VisitorView(frame: kScreenFrame)
     
@@ -19,7 +22,7 @@ class BaseTableViewController: UITableViewController {
      */
     override func loadView() {
         
-        kIsUserLogin ? super.loadView() : setuplVisitorView()
+        isUserLogin ? super.loadView() : setuplVisitorView()
     }
     
     /**
@@ -52,7 +55,6 @@ class BaseTableViewController: UITableViewController {
      */
     @objc private func loginButtonDidClick(button: UIButton) {
         
-        print(#function)
         let oaVC = OAuthViewController()
         presentViewController(oaVC, animated: true, completion: nil)
     }
@@ -62,7 +64,6 @@ class BaseTableViewController: UITableViewController {
      */
     @objc private func registerButtonDidClick(button: UIButton) {
         
-        print(#function)
         Alamofire.request(Method.GET, "https://api.500px.com/v1/photos").responseJSON() {
             reponse in
             guard let json = reponse.result.value else {
