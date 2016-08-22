@@ -27,6 +27,11 @@ class OAuthViewController: UIViewController {
         
         super.viewDidLoad()
         
+        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(19), NSForegroundColorAttributeName: UIColor.orangeColor()]
+        navigationItem.title = "授权页面"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(closeButtonDidClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "填充", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(fillButtonDidClick))
+        
         oauthView.navigationDelegate = self
         view.addSubview(oauthView)
         
@@ -70,6 +75,25 @@ class OAuthViewController: UIViewController {
                 account?.saveUserAccount()
             })
         }
+    }
+    
+    // MARK: - 按钮方法
+    
+    /**
+     关闭按钮点击方法
+     */
+    func closeButtonDidClick() {
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    /**
+     填充按钮点击方法
+     */
+    func fillButtonDidClick() {
+        
+        let jsString = "document.getElementById('userId').value = 'c910309c@sina.com';"
+        oauthView.evaluateJavaScript(jsString, completionHandler: nil)
     }
     
 }

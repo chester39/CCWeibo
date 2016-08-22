@@ -56,7 +56,9 @@ class BaseTableViewController: UITableViewController {
     @objc private func loginButtonDidClick(button: UIButton) {
         
         let oaVC = OAuthViewController()
-        presentViewController(oaVC, animated: true, completion: nil)
+        let oaNC = UINavigationController()
+        oaNC.addChildViewController(oaVC)
+        presentViewController(oaNC, animated: true, completion: nil)
     }
     
     /**

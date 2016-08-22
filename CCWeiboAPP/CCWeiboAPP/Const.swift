@@ -58,4 +58,6 @@ let kPopoverPresentationManagerDidPresented: String = "PopoverPresentationManage
 // 弹出框已经消失
 let kPopoverPresentationManagerDidDismissed: String = "PopoverPresentationManagerDidDismissed"
 // 切换到根控制器
-let kSwitchRootViewController: String = "SwitchingRootViewController"
+let kChangeRootViewController: String = "ChangeRootViewController"
+// 应用版本
+let kAppVersion: String = "AppVersion"

@@ -76,7 +76,7 @@ class NewfeatureCell: UICollectionViewCell {
      */
     @objc private func startButtonDidClick() {
     
-        NSNotificationCenter.defaultCenter().postNotificationName(kSwitchRootViewController, object: true)
+        NSNotificationCenter.defaultCenter().postNotificationName(kChangeRootViewController, object: true)
     }
     
     /**

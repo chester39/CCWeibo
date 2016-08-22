@@ -49,7 +49,7 @@ class WelcomeViewController: UIViewController {
                 UIView.animateWithDuration(1.0, animations: {
                     self.welcomeView.textLabel.alpha = 1.0
                     }, completion: { (true) in
-                        NSNotificationCenter.defaultCenter().postNotificationName(kSwitchRootViewController, object: true)
+                        NSNotificationCenter.defaultCenter().postNotificationName(kChangeRootViewController, object: true)
                 })
         }
     }
