@@ -6,6 +6,8 @@
 
 import UIKit
 
+import Alamofire
+
 class HomeTableViewController: BaseTableViewController {
     
     // 标题按钮懒加载
@@ -49,6 +51,8 @@ class HomeTableViewController: BaseTableViewController {
         setupNavigation()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidPresented, object: presentationManger)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidDismissed, object: presentationManger)
+        
+        loadWeiboData()
     }
     
     /**
@@ -109,6 +113,41 @@ class HomeTableViewController: BaseTableViewController {
         let qrcNC = UINavigationController()
         qrcNC.addChildViewController(qrcVC)
         presentViewController(qrcNC, animated: true, completion: nil)
+    }
+    
+    // MARK: - 数据方法
+    
+    /**
+     读取微博数据方法
+     */
+    private func loadWeiboData() {
+        
+        loadWeiboStatuses { (array, error) in
+            
+            
+        }
+    }
+    
+    /**
+     读取微博接口
+     */
+    func loadWeiboStatuses(finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
+        
+        assert(UserAccount.loadUserAccount() != nil, "必须授权之后才能获取微博数据")
+        
+        let path = "2/statuses/home_timeline.json"
+        let parameters = ["access_token": UserAccount.loadUserAccount()!.accessToken!]
+        Alamofire.request(Method.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
+            if let json = response.result.value {
+                print("\(json)")
+            }
+            
+            guard let array = (response.result.value as! [String: AnyObject])["statuses"] as? [[String: AnyObject]] else {
+                finished(array: nil, error: NSError(domain: "com.github.chester", code: 1000, userInfo: ["message": "获取数据失败"]))
+                return
+            }
+            finished(array: array, error: nil)
+        }
     }
     
 }

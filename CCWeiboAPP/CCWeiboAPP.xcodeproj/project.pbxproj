@@ -24,6 +24,8 @@
 		25BE300B1D6A98D100947C4B /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BE300A1D6A98D100947C4B /* UserAccount.swift */; };
 		25D360071D655BF8004A45AA /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D360061D655BF8004A45AA /* OAuthViewController.swift */; };
 		25EBADC21D4EE60500E47222 /* TitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EBADC11D4EE60500E47222 /* TitleButton.swift */; };
+		860386961D6C9A9A003D31F0 /* StatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860386951D6C9A9A003D31F0 /* StatusModel.swift */; };
+		860386981D6C9AD5003D31F0 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860386971D6C9AD5003D31F0 /* UserModel.swift */; };
 		868890031D3D26E70038F753 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868890021D3D26E70038F753 /* AppDelegate.swift */; };
 		8688900A1D3D26E70038F753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 868890091D3D26E70038F753 /* Assets.xcassets */; };
 		8688900D1D3D26E70038F753 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8688900B1D3D26E70038F753 /* LaunchScreen.storyboard */; };
@@ -57,6 +59,8 @@
 		25D360061D655BF8004A45AA /* OAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 		25D360091D66A6EB004A45AA /* CCWeiboAPP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CCWeiboAPP-Bridging-Header.h"; sourceTree = "<group>"; };
 		25EBADC11D4EE60500E47222 /* TitleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleButton.swift; sourceTree = "<group>"; };
+		860386951D6C9A9A003D31F0 /* StatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusModel.swift; sourceTree = "<group>"; };
+		860386971D6C9AD5003D31F0 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		86888FFF1D3D26E70038F753 /* CC微博.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CC微博.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		868890021D3D26E70038F753 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		868890091D3D26E70038F753 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -137,6 +141,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		860386941D6C9A80003D31F0 /* WeiboModel */ = {
+			isa = PBXGroup;
+			children = (
+				860386951D6C9A9A003D31F0 /* StatusModel.swift */,
+				860386971D6C9AD5003D31F0 /* UserModel.swift */,
+			);
+			path = WeiboModel;
+			sourceTree = "<group>";
+		};
 		86888FF61D3D26E70038F753 = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +227,7 @@
 			children = (
 				250621CC1D5B00B1000B542B /* Popover */,
 				250622861D5D61CD000B542B /* QRCode */,
+				860386941D6C9A80003D31F0 /* WeiboModel */,
 				86D700531D411C48003C65D7 /* HomeTableViewController.swift */,
 			);
 			path = Home;
@@ -379,6 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				250622831D5C0E9C000B542B /* PopoverPresentationManager.swift in Sources */,
+				860386961D6C9A9A003D31F0 /* StatusModel.swift in Sources */,
 				86E15E891D47AE810006CCC4 /* BaseTableViewController.swift in Sources */,
 				259C62DE1D6AF0BE00884257 /* NewfeatureViewController.swift in Sources */,
 				25115FDA1D62EBC800EAE3F9 /* QRCodeCreateViewController.swift in Sources */,
@@ -393,6 +408,7 @@
 				86D700541D411C48003C65D7 /* HomeTableViewController.swift in Sources */,
 				25EBADC21D4EE60500E47222 /* TitleButton.swift in Sources */,
 				250621D11D5B29D0000B542B /* PopoverPresentationController.swift in Sources */,
+				860386981D6C9AD5003D31F0 /* UserModel.swift in Sources */,
 				868890031D3D26E70038F753 /* AppDelegate.swift in Sources */,
 				86D700581D411C7C003C65D7 /* MessageTableViewController.swift in Sources */,
 				252EEB021D66E9F100AC064D /* Extension.swift in Sources */,

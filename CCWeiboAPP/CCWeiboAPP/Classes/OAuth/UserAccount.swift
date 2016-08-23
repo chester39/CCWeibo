@@ -70,7 +70,6 @@ class UserAccount: NSObject {
         default:
             break
         }
-        
     }
     
     // MARK: - NSCoding协议方法

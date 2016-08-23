@@ -47,9 +47,19 @@ let kUID: String = "uid"
 // 授权过期具体时间
 let kExpiresDate: String = "expires_date"
 // 用户昵称
-var kScreenName: String = "screen_name"
+let kScreenName: String = "screen_name"
 // 用户头像地址
-var kAvatarLarge: String = "avatar_large"
+let kAvatarLarge: String = "avatar_large"
+// 微博ID
+let kWeiboID: String = "id"
+// 用户认证类型
+let kVerifiedType: String = "verified_type"
+// 微博创建时间
+let kCreatedAt: String = "created_at"
+// 微博信息内容
+let kWeiboText: String = "text"
+// 微博来源
+let kWeiboSource: String = "source"
 
 // MARK: - 通知常数
 
