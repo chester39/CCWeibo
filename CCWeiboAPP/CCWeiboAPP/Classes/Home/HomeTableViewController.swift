@@ -55,6 +55,7 @@ class HomeTableViewController: BaseTableViewController {
      反初始化方法
      */
     deinit {
+        
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     

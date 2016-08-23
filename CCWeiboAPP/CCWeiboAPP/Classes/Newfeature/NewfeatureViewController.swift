@@ -92,7 +92,7 @@ class NewfeatureLayout: UICollectionViewFlowLayout {
     override func prepareLayout() {
         
         itemSize = kScreenFrame.size
-        minimumInteritemSpacing = 0
+        minimumInteritemSpacing = 0 
         minimumLineSpacing = 0
         
         scrollDirection = UICollectionViewScrollDirection.Horizontal

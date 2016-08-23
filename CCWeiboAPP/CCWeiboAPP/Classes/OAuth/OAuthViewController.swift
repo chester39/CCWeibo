@@ -45,7 +45,7 @@ class OAuthViewController: UIViewController {
      */
     private func loadRequestToken() {
 
-        let urlString = "\(kWeiboURL)oauth2/authorize?client_id=\(kWeiboAppKey)&redirect_uri=\(kWeiboRedirectUri)"
+        let urlString = "\(kWeiboBaseURL)oauth2/authorize?client_id=\(kWeiboAppKey)&redirect_uri=\(kWeiboRedirectUri)"
         guard let url = NSURL(string: urlString) else {
             return
         }
@@ -65,7 +65,7 @@ class OAuthViewController: UIViewController {
         
         let path = "oauth2/access_token"
         let parameters = ["client_id": kWeiboAppKey, "client_secret": kWeiboAppSecret, "grant_type": "authorization_code", "code": code, "redirect_uri": kWeiboRedirectUri]
-        Alamofire.request(Method.POST, kWeiboURL + path, parameters: parameters).responseJSON { response in
+        Alamofire.request(Method.POST, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
             if let json = response.result.value {
                 print("\(json)")
             }
@@ -84,7 +84,7 @@ class OAuthViewController: UIViewController {
      */
     func closeButtonDidClick() {
         
-        dismissViewControllerAnimated(true, completion: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(kSwitchRootViewController, object: true)
     }
     
     /**

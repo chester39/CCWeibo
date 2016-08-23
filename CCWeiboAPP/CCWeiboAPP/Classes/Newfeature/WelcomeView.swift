@@ -65,6 +65,7 @@ class WelcomeView: UIView {
             return
         }
         textLabel.text = "欢迎回来, \(userName)"
+        textLabel.font = UIFont.systemFontOfSize(18)
         textLabel.numberOfLines = 0
         textLabel.alpha = 0.0
         addSubview(textLabel)

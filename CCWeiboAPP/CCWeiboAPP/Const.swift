@@ -29,7 +29,7 @@ let kAvailableHeight: CGFloat = (kStatusBarHeight + kNavigationBarHeight)
 // MARK: - 微博API常数
 
 // 微博开放平台URL
-let kWeiboURL: String  = "https://api.weibo.com/"
+let kWeiboBaseURL: String  = "https://api.weibo.com/"
 // 微博OAuth授权Key
 let kWeiboAppKey: String = "2576232033"
 // 微博OAuth授权Secret
@@ -58,6 +58,6 @@ let kPopoverPresentationManagerDidPresented: String = "PopoverPresentationManage
 // 弹出框已经消失
 let kPopoverPresentationManagerDidDismissed: String = "PopoverPresentationManagerDidDismissed"
 // 切换到根控制器
-let kChangeRootViewController: String = "ChangeRootViewController"
+let kSwitchRootViewController: String = "SwitchRootViewController"
 // 应用版本
 let kAppVersion: String = "AppVersion"

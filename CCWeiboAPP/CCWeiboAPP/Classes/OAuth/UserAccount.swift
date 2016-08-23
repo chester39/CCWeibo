@@ -154,7 +154,7 @@ class UserAccount: NSObject {
         
         let path = "2/users/show.json"
         let parameters = ["access_token": accessToken!, "uid": uid!]
-        Alamofire.request(Method.GET, kWeiboURL + path, parameters: parameters).responseJSON { response in
+        Alamofire.request(Method.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
             if let json = response.result.value {
                 print("\(json)")
             }
