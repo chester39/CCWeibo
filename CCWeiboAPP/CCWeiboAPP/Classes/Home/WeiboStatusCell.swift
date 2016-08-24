@@ -60,8 +60,18 @@ class WeiboStatusCell: UITableViewCell {
                 }
             }
             
-            timeLabel.text = status?.createdAt
-            sourceLabel.text = status?.source
+            if let timeString = status?.createdAt {
+                let date = NSDate.convertStringToDate(timeString, formatterString: "EE MM dd HH:mm:ss Z yyyy")
+                timeLabel.text = NSDate.formatDateToString(date)
+            }
+            
+            if let sourceString: NSString = status?.source where sourceString != "" {
+                let startIndex = sourceString.rangeOfString(">").location + 1
+                let length = sourceString.rangeOfString("<", options: NSStringCompareOptions.BackwardsSearch).location - startIndex
+                let restString = sourceString.substringWithRange(NSMakeRange(startIndex, length))
+                sourceLabel.text = "来自: " + restString
+            }
+            
             contentLabel.text = status?.text
         }
     }
@@ -119,7 +129,7 @@ class WeiboStatusCell: UITableViewCell {
         contentView.addSubview(sourceLabel)
         
         contentLabel.numberOfLines = 0
-        contentLabel.preferredMaxLayoutWidth = kScreenWidth - 2 * kViewPadding
+        contentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewMargin
         contentView.addSubview(contentLabel)
         
         constrain(iconView, verifiedView) { (iconView, verifiedView) in
