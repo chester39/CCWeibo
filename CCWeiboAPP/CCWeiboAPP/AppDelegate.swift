@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func defaultViewController() -> UIViewController {
         
         if UserAccount.isUserLogin() {
-            return isNewVersion() ? NewfeatureViewController() : WelcomeViewController()
+            return isNewVersion() ? NewFeatureViewController() : WelcomeViewController()
         }
         
         return MainViewController()

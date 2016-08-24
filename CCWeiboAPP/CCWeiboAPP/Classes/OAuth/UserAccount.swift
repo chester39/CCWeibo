@@ -41,6 +41,7 @@ class UserAccount: NSObject {
     init(dict: [String: AnyObject]) {
         
         super.init()
+        
         setValuesForKeysWithDictionary(dict)
     }
     
@@ -56,7 +57,7 @@ class UserAccount: NSObject {
     }
     
     /**
-     发现未定义值KVC方法
+     存在未定义值KVC方法
      */
     override func setValue(value: AnyObject?, forUndefinedKey key: String) {
         

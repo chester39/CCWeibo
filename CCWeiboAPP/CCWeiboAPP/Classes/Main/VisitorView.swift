@@ -90,13 +90,13 @@ class VisitorView: UIView {
         constrain(registerButton, textLabel) { (registerButton, textLabel) in
             registerButton.width == 100
             registerButton.top == textLabel.bottom + kViewMargin
-            registerButton.leading == textLabel.leading
+            registerButton.left == textLabel.left
         }
         
         constrain(loginButton, textLabel) { (loginButton, textLabel) in
             loginButton.width == 100
             loginButton.top == textLabel.bottom + kViewMargin
-            loginButton.trailing == textLabel.trailing
+            loginButton.right == textLabel.right
         }
         
         self.backgroundColor = UIColor(red: 232.0 / 255.0, green: 232.0 / 255.0, blue: 232.0 / 255.0, alpha: 1.0)

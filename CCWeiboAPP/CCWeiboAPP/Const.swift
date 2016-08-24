@@ -13,6 +13,8 @@ import UIKit
 let kViewMargin: CGFloat = 20
 // 视图内边距
 let kViewPadding: CGFloat = 10
+// 视图移动距离
+let kViewDistance: CGFloat = 160
 // 屏幕尺寸
 let kScreenFrame: CGRect = UIScreen.mainScreen().bounds
 // 屏幕宽度
@@ -54,6 +56,8 @@ let kAvatarLarge: String = "avatar_large"
 let kWeiboID: String = "id"
 // 用户认证类型
 let kVerifiedType: String = "verified_type"
+// 用户会员等级
+let kMbRank: String = "mbrank"
 // 微博创建时间
 let kCreatedAt: String = "created_at"
 // 微博信息内容

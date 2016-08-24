@@ -27,6 +27,7 @@ class StatusModel: NSObject {
     init(dict: [String: AnyObject]) {
         
         super.init()
+        
         setValuesForKeysWithDictionary(dict)
     }
     
@@ -46,18 +47,22 @@ class StatusModel: NSObject {
      */
     override func setValue(value: AnyObject?, forKey key: String) {
         
-        switch key {
-        case kCreatedAt:
-            createdAt = value as? String
-            return
-        case "user":
+        if key == "user" {
             user = UserModel(dict: value as! [String: AnyObject])
             return
-        default:
-            break
         }
         
         super.setValue(value, forKey: key)
+    }
+    
+    /**
+     存在未定义值KVC方法
+     */
+    override func setValue(value: AnyObject?, forUndefinedKey key: String) {
+        
+        if key == kCreatedAt {
+            createdAt = value as? String
+        }
     }
     
 }

@@ -6,14 +6,14 @@
 
 import UIKit
 
-class NewfeatureViewController: UIViewController {
+class NewFeatureViewController: UIViewController {
 
     // 最大新特性界面数
     private var maxCount = 4
     // Cell重用标识符
-    private let reuseIdentifier = "NewfeatureCell"
+    private let reuseIdentifier = "NewFeatureCell"
     // 新特性视图
-    var newfeatureView = UICollectionView(frame: kScreenFrame, collectionViewLayout: NewfeatureLayout())
+    var newFeatureView = UICollectionView(frame: kScreenFrame, collectionViewLayout: NewFeatureLayout())
     
     // MARK: - 系统方法
     
@@ -27,20 +27,22 @@ class NewfeatureViewController: UIViewController {
         setupUI()
     }
     
+    // MARK: - 界面方法
+    
     /**
      初始化界面方法
      */
     private func setupUI() {
         
-        newfeatureView.dataSource = self
-        newfeatureView.delegate = self
-        newfeatureView.registerClass(NewfeatureCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        view.addSubview(newfeatureView)
+        newFeatureView.dataSource = self
+        newFeatureView.delegate = self
+        newFeatureView.registerClass(NewFeatureCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        view.addSubview(newFeatureView)
     }
 
 }
 
-extension NewfeatureViewController: UICollectionViewDataSource {
+extension NewFeatureViewController: UICollectionViewDataSource {
     
     /**
      共有组数方法
@@ -63,13 +65,13 @@ extension NewfeatureViewController: UICollectionViewDataSource {
      */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! NewfeatureCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! NewFeatureCell
         cell.index = indexPath.item
         return cell
     }
 }
 
-extension NewfeatureViewController: UICollectionViewDelegate {
+extension NewFeatureViewController: UICollectionViewDelegate {
     
     /**
      指定行已经消失方法
@@ -77,14 +79,14 @@ extension NewfeatureViewController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         
         let index = collectionView.indexPathsForVisibleItems().last!
-        let currentCell = collectionView.cellForItemAtIndexPath(index) as! NewfeatureCell
+        let currentCell = collectionView.cellForItemAtIndexPath(index) as! NewFeatureCell
         if index.item == (maxCount - 1) {
             currentCell.startAnimation()
         }
     }
 }
 
-class NewfeatureLayout: UICollectionViewFlowLayout {
+class NewFeatureLayout: UICollectionViewFlowLayout {
     
     /**
      准备布局方法

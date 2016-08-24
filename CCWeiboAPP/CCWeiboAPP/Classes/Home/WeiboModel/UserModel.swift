@@ -16,6 +16,8 @@ class UserModel: NSObject {
     var avatarLarge: String?
     // 用户认证类型
     var verifiedType: Int = -1
+    // 用户会员等级
+    var memberRank: Int = -1
     
     // MARK: - 初始化方法
     
@@ -25,10 +27,12 @@ class UserModel: NSObject {
     init(dict: [String: AnyObject]) {
         
         super.init()
+        
         weiboID = dict[kWeiboID] as! Int
         screenName = dict[kScreenName] as? String
         avatarLarge = dict[kAvatarLarge] as? String
         verifiedType = dict[kVerifiedType] as! Int
+        memberRank = dict[kMbRank] as! Int
     }
     
     /**

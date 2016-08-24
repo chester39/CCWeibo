@@ -8,7 +8,7 @@ import UIKit
 
 import Cartography
 
-class NewfeatureCell: UICollectionViewCell {
+class NewFeatureCell: UICollectionViewCell {
     
     // 图片下标
     var index: Int = 0 {
@@ -39,6 +39,7 @@ class NewfeatureCell: UICollectionViewCell {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
+        
         setupUI()
     }
     
@@ -46,8 +47,11 @@ class NewfeatureCell: UICollectionViewCell {
      数据解码XIB初始化方法
      */
     required init?(coder aDecoder: NSCoder) {
+        
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - 界面方法
     
     /**
      初始化界面方法
@@ -64,12 +68,10 @@ class NewfeatureCell: UICollectionViewCell {
             startButton.width == 200
             startButton.height == 50
             startButton.centerX == startButton.superview!.centerX
-            startButton.bottom == startButton.superview!.bottom - 160
+            startButton.bottom == startButton.superview!.bottom - kViewDistance
             
         }
     }
-    
-    // MARK: - 界面方法
     
     /**
      开始按钮点击方法

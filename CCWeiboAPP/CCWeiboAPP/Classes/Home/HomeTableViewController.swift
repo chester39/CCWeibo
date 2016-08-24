@@ -7,8 +7,19 @@
 import UIKit
 
 import Alamofire
+import MBProgressHUD
 
 class HomeTableViewController: BaseTableViewController {
+    
+    // 微博数组
+    var statusArray: [StatusModel]? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    // Cell重用标识符
+    private let reuseIdentifier = "WeiboStatusCell"
     
     // 标题按钮懒加载
     private lazy var titleButton: UIButton = {
@@ -49,10 +60,10 @@ class HomeTableViewController: BaseTableViewController {
         }
         
         setupNavigation()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidPresented, object: presentationManger)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidDismissed, object: presentationManger)
-        
         loadWeiboData()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 80.0
+        tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
     
     /**
@@ -73,6 +84,9 @@ class HomeTableViewController: BaseTableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(imageName: "navigationbar_friendattention", target: self, action: #selector(friendButtonDidClick))
         navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(qrcodeButtonDidClick))
         navigationItem.titleView = titleButton
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidPresented, object: presentationManger)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidDismissed, object: presentationManger)
     }
     
     // MARK: - 按钮方法
@@ -122,32 +136,75 @@ class HomeTableViewController: BaseTableViewController {
      */
     private func loadWeiboData() {
         
-        loadWeiboStatuses { (array, error) in
+        loadWeiboStatuses { (array, error) -> () in
             
+            if error != nil {
+                let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                hud.label.text = "获取微博数据失败"
+                hud.hideAnimated(true, afterDelay: 2.0)
+            }
             
+            guard let weiboArray = array else {
+                return
+            }
+            
+            var modelArray = [StatusModel]()
+            for dict in weiboArray {
+                let status = StatusModel(dict: dict)
+                modelArray.append(status)
+            }
+            
+            self.statusArray = modelArray
         }
     }
     
     /**
      读取微博接口
      */
-    func loadWeiboStatuses(finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
+    private func loadWeiboStatuses(finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
         
         assert(UserAccount.loadUserAccount() != nil, "必须授权之后才能获取微博数据")
         
         let path = "2/statuses/home_timeline.json"
         let parameters = ["access_token": UserAccount.loadUserAccount()!.accessToken!]
         Alamofire.request(Method.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
-            if let json = response.result.value {
-                print("\(json)")
-            }
-            
             guard let array = (response.result.value as! [String: AnyObject])["statuses"] as? [[String: AnyObject]] else {
                 finished(array: nil, error: NSError(domain: "com.github.chester", code: 1000, userInfo: ["message": "获取数据失败"]))
                 return
             }
+            
             finished(array: array, error: nil)
         }
+    }
+    
+}
+
+extension HomeTableViewController {
+    
+    /**
+     共有组数方法
+     */
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    
+    /**
+     每组行数方法
+     */
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return statusArray?.count ?? 0
+    }
+    
+    /**
+     每行内容方法
+     */
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
+        cell.status = statusArray![indexPath.row]
+        return cell
     }
     
 }

@@ -78,31 +78,31 @@ class QRCodeView: UIView {
         addSubview(cardButton)
         
         constrain(tabBar) { (tabBar) in
-            tabBar.leading == tabBar.superview!.leading
-            tabBar.trailing == tabBar.superview!.trailing
-            tabBar.bottom == tabBar.superview!.bottom
             tabBar.height == 49
+            tabBar.left == tabBar.superview!.left
+            tabBar.bottom == tabBar.superview!.bottom
+            tabBar.right == tabBar.superview!.right
         }
         
         constrain(containerView, edgeView, waveView) { (containerView, edgeView, waveView) in
-            containerView.centerX == containerView.superview!.centerX
-            containerView.centerY == containerView.superview!.centerY - 100
             containerView.width == 200
             containerView.height == 200
+            containerView.centerX == containerView.superview!.centerX
+            containerView.centerY == containerView.superview!.centerY - kViewDistance
             
             edgeView.edges == inset(containerView.edges, 0)
             waveView.edges == inset(edgeView.edges, 0)
         }
         
         constrain(textLabel, containerView) { (textLabel, containerView) in
-            textLabel.leading == containerView.leading
-            textLabel.trailing == containerView.trailing
-            textLabel.top == containerView.bottom + 20
+            textLabel.top == containerView.bottom + kViewMargin
+            textLabel.left == containerView.left
+            textLabel.right == containerView.right
         }
         
         constrain(cardButton, textLabel) { (cardButton, textLabel) in
             cardButton.centerX == cardButton.superview!.centerX
-            cardButton.top == textLabel.bottom + 20
+            cardButton.top == textLabel.bottom + kViewMargin
         }
     }
     

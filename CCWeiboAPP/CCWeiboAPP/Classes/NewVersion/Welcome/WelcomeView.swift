@@ -77,9 +77,9 @@ class WelcomeView: UIView {
         constrain(avatarView, textLabel) { (avatarView, textLabel) in
             avatarView.width == 90
             avatarView.height == 90
-            avatarView.bottom == avatarView.superview!.bottom - 180
+            avatarView.bottom == avatarView.superview!.bottom - kViewDistance
             
-            textLabel.top == avatarView.bottom + 20
+            textLabel.top == avatarView.bottom + kViewMargin
             
             align(centerX: avatarView.superview!, avatarView, textLabel)
         }
