@@ -16,6 +16,7 @@
 		252EEB011D66E9F100AC064D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EEAFF1D66E9F100AC064D /* Const.swift */; };
 		252EEB021D66E9F100AC064D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EEB001D66E9F100AC064D /* Extension.swift */; };
 		25558A12E5EE46A40170EA1B /* Pods_CCWeiboAPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F70C364AD593EBEE2DD624DB /* Pods_CCWeiboAPP.framework */; };
+		255CF01B1D6ED19D00411FEE /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255CF01A1D6ED19D00411FEE /* StatusViewModel.swift */; };
 		259C62E81D6D74C200884257 /* WeiboStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C62E71D6D74C200884257 /* WeiboStatusCell.swift */; };
 		259C62EA1D6D7A3F00884257 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C62E91D6D7A3F00884257 /* PopoverView.swift */; };
 		259C62F21D6D7BE100884257 /* NewFeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C62ED1D6D7BE100884257 /* NewFeatureCell.swift */; };
@@ -51,6 +52,7 @@
 		25115FD91D62EBC800EAE3F9 /* QRCodeCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeCreateViewController.swift; sourceTree = "<group>"; };
 		252EEAFF1D66E9F100AC064D /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		252EEB001D66E9F100AC064D /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		255CF01A1D6ED19D00411FEE /* StatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
 		259C62E71D6D74C200884257 /* WeiboStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiboStatusCell.swift; sourceTree = "<group>"; };
 		259C62E91D6D7A3F00884257 /* PopoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverView.swift; path = Popover/PopoverView.swift; sourceTree = "<group>"; };
 		259C62ED1D6D7BE100884257 /* NewFeatureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFeatureCell.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				860386951D6C9A9A003D31F0 /* StatusModel.swift */,
+				255CF01A1D6ED19D00411FEE /* StatusViewModel.swift */,
 				860386971D6C9AD5003D31F0 /* UserModel.swift */,
 			);
 			path = WeiboModel;
@@ -415,6 +418,7 @@
 				860386961D6C9A9A003D31F0 /* StatusModel.swift in Sources */,
 				86E15E891D47AE810006CCC4 /* BaseTableViewController.swift in Sources */,
 				259C62E81D6D74C200884257 /* WeiboStatusCell.swift in Sources */,
+				255CF01B1D6ED19D00411FEE /* StatusViewModel.swift in Sources */,
 				259C62F41D6D7BE100884257 /* WelcomeView.swift in Sources */,
 				259C62F31D6D7BE100884257 /* NewFeatureViewController.swift in Sources */,
 				25115FDA1D62EBC800EAE3F9 /* QRCodeCreateViewController.swift in Sources */,

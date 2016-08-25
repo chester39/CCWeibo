@@ -32,8 +32,6 @@ extension NSDate {
         var dateString = ""
         
         switch time {
-        case -65535..<0:
-            break
         case 0...60:
             dateString = "刚刚"
         case 61...(60 * 60):

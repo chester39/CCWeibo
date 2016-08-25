@@ -12,7 +12,7 @@ import MBProgressHUD
 class HomeTableViewController: BaseTableViewController {
     
     // 微博数组
-    var statusArray: [StatusModel]? {
+    var statusArray: [StatusViewModel]? {
         didSet {
             tableView.reloadData()
         }
@@ -61,6 +61,8 @@ class HomeTableViewController: BaseTableViewController {
         
         setupNavigation()
         loadWeiboData()
+        
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 80.0
         tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: reuseIdentifier)
@@ -148,10 +150,11 @@ class HomeTableViewController: BaseTableViewController {
                 return
             }
             
-            var modelArray = [StatusModel]()
+            var modelArray = [StatusViewModel]()
             for dict in weiboArray {
                 let status = StatusModel(dict: dict)
-                modelArray.append(status)
+                let viewModel = StatusViewModel(status: status)
+                modelArray.append(viewModel)
             }
             
             self.statusArray = modelArray
@@ -203,7 +206,7 @@ extension HomeTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
-        cell.status = statusArray![indexPath.row]
+        cell.viewModel = statusArray![indexPath.row]
         return cell
     }
     

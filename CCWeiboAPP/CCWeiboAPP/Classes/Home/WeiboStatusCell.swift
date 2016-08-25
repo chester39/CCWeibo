@@ -25,54 +25,32 @@ class WeiboStatusCell: UITableViewCell {
     var sourceLabel = UILabel()
     // 内容标签
     var contentLabel = UILabel()
+    // 底部视图
+    var bottomBarView = UIView()
+    // 转发按钮
+    var forwardButton = UIButton()
+    // 评论按钮
+    var commentButton = UIButton()
+    // 点赞按钮
+    var likeButton = UIButton()
+    
     // 微博模型
-    var status: StatusModel? {
+    var viewModel: StatusViewModel? {
         didSet {
-            if let urlString = status?.user?.avatarLarge {
-                let url = NSURL(string: urlString)
-                iconView.sd_setImageWithURL(url)
+            iconView.sd_setImageWithURL(viewModel?.iconImageURL)
+            verifiedView.image = viewModel?.verifiedImage
+            nameLabel.text = viewModel?.status.user?.screenName
+            
+            vipView.image = nil
+            nameLabel.textColor = UIColor.blackColor()
+            if let image = viewModel?.memberRankImage {
+                vipView.image = image
+                nameLabel.textColor = UIColor.orangeColor()
             }
             
-            if let type = status?.user?.verifiedType {
-                var name = ""
-                switch type {
-                case 0:
-                    name = "avatar_vip"
-                case 2, 3, 5:
-                    name = "avatar_enterprise_vip"
-                case 220:
-                    name = "avatar_grassroot"
-                default:
-                    name = ""
-                }
-                verifiedView.image = UIImage(named: name)
-            }
-            
-            nameLabel.text = status?.user?.screenName
-            
-            if let rank = status?.user?.memberRank {
-                if rank >= 1 && rank <= 6 {
-                    vipView.image = UIImage(named: "common_icon_membership_level\(rank)")
-                    nameLabel.textColor = UIColor.orangeColor()
-                } else {
-                    vipView.image = nil
-                    nameLabel.textColor = UIColor.blackColor()
-                }
-            }
-            
-            if let timeString = status?.createdAt {
-                let date = NSDate.convertStringToDate(timeString, formatterString: "EE MM dd HH:mm:ss Z yyyy")
-                timeLabel.text = NSDate.formatDateToString(date)
-            }
-            
-            if let sourceString: NSString = status?.source where sourceString != "" {
-                let startIndex = sourceString.rangeOfString(">").location + 1
-                let length = sourceString.rangeOfString("<", options: NSStringCompareOptions.BackwardsSearch).location - startIndex
-                let restString = sourceString.substringWithRange(NSMakeRange(startIndex, length))
-                sourceLabel.text = "来自: " + restString
-            }
-            
-            contentLabel.text = status?.text
+            timeLabel.text = viewModel?.creatTimeText
+            sourceLabel.text = viewModel?.sourceText
+            contentLabel.text = viewModel?.status.text
         }
     }
     
@@ -111,30 +89,56 @@ class WeiboStatusCell: UITableViewCell {
      */
     private func setupUI() {
         
-        iconView.layer.cornerRadius = 30
+        iconView.layer.cornerRadius = 25
         iconView.clipsToBounds = true
         contentView.addSubview(iconView)
         
         verifiedView.image = UIImage(named: "avatar_vip")
         contentView.addSubview(verifiedView)
         
+        nameLabel.font = UIFont.systemFontOfSize(15)
         contentView.addSubview(nameLabel)
         
         vipView.image = UIImage(named: "common_icon_membership")
         contentView.addSubview(vipView)
         
         timeLabel.tintColor = UIColor.orangeColor()
+        timeLabel.font = UIFont.systemFontOfSize(15)
         contentView.addSubview(timeLabel)
         
+        sourceLabel.font = UIFont.systemFontOfSize(15)
         contentView.addSubview(sourceLabel)
         
         contentLabel.numberOfLines = 0
         contentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewMargin
         contentView.addSubview(contentLabel)
         
+        contentView.addSubview(bottomBarView)
+
+        forwardButton = UIButton(imageName: "timeline_icon_retweet", backgroundImageName: "timeline_card_bottom_background")
+        forwardButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        forwardButton.setTitle("转发", forState: UIControlState.Normal)
+        forwardButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+        forwardButton.titleLabel?.font = UIFont.systemFontOfSize(15)
+        bottomBarView.addSubview(forwardButton)
+        
+        commentButton = UIButton(imageName: "timeline_icon_comment", backgroundImageName: "timeline_card_bottom_background")
+        commentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        commentButton.setTitle("评论", forState: UIControlState.Normal)
+        commentButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+        commentButton.titleLabel?.font = UIFont.systemFontOfSize(15)
+        bottomBarView.addSubview(commentButton)
+        
+        likeButton = UIButton(imageName: "timeline_icon_unlike", backgroundImageName: "timeline_card_bottom_background")
+        likeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        likeButton.setTitle("赞", forState: UIControlState.Normal)
+        likeButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+        likeButton.titleLabel?.font = UIFont.systemFontOfSize(15)
+        bottomBarView.addSubview(likeButton)
+        
         constrain(iconView, verifiedView) { (iconView, verifiedView) in
-            iconView.width == 60
-            iconView.height == 60
+            iconView.width == 50
+            iconView.height == 50
             iconView.top == iconView.superview!.top + kViewPadding
             iconView.left == iconView.superview!.left + kViewPadding
             
@@ -165,7 +169,29 @@ class WeiboStatusCell: UITableViewCell {
         constrain(contentLabel, iconView) { (contentLabel, iconView) in
             contentLabel.top == iconView.bottom + kViewPadding
             contentLabel.left == iconView.left
-            contentLabel.bottom == contentLabel.superview!.bottom - kViewMargin
+        }
+        
+        constrain(bottomBarView, contentLabel) { (bottomBarView, contentLabel) in
+            bottomBarView.height == 44
+            bottomBarView.top == contentLabel.bottom + kViewPadding
+            bottomBarView.left == bottomBarView.superview!.left
+            bottomBarView.bottom == bottomBarView.superview!.bottom
+            bottomBarView.right == bottomBarView.superview!.right
+        }
+        
+        constrain(forwardButton, commentButton, likeButton) { (forwardButton, commentButton, likeButton) in
+            forwardButton.left == forwardButton.superview!.left
+
+            likeButton.right == likeButton.superview!.right
+            forwardButton.width == commentButton.width
+            commentButton.width == likeButton.width
+            
+            
+            
+            distribute(by: 0, leftToRight: forwardButton, commentButton, likeButton)
+            
+            align(top: forwardButton, commentButton, likeButton, forwardButton.superview!)
+            align(bottom: forwardButton, commentButton, likeButton, forwardButton.superview!)
         }
     }
     
