@@ -11,28 +11,33 @@ import SDWebImage
 
 class WeiboStatusCell: UITableViewCell {
 
+    // Cell重用标识符
+    private let pictureReuseIdentifier = "PictureCell"
+    
     // 头像图片视图
-    var iconView = UIImageView()
+    private var iconView = UIImageView()
     // 认证图片视图
-    var verifiedView = UIImageView()
+    private var verifiedView = UIImageView()
     // 昵称标签
-    var nameLabel = UILabel()
+    private var nameLabel = UILabel()
     // 会员图片视图
-    var vipView = UIImageView()
+    private var vipView = UIImageView()
     // 时间标签
-    var timeLabel = UILabel()
+    private var timeLabel = UILabel()
     // 来源标签
-    var sourceLabel = UILabel()
+    private var sourceLabel = UILabel()
     // 内容标签
-    var contentLabel = UILabel()
+    private var contentLabel = UILabel()
     // 底部视图
-    var bottomBarView = UIView()
+    private var footerView = UIView()
     // 转发按钮
-    var forwardButton = UIButton()
+    private var forwardButton = UIButton(imageName: "timeline_icon_retweet", backgroundImageName: "timeline_card_bottom_background")
     // 评论按钮
-    var commentButton = UIButton()
+    private var commentButton = UIButton(imageName: "timeline_icon_comment", backgroundImageName: "timeline_card_bottom_background")
     // 点赞按钮
-    var likeButton = UIButton()
+    private var likeButton = UIButton(imageName: "timeline_icon_unlike", backgroundImageName: "timeline_card_bottom_background")
+    // 照片集合视图
+    private var pictureCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: PictureLayout())
     
     // 微博模型
     var viewModel: StatusViewModel? {
@@ -51,6 +56,9 @@ class WeiboStatusCell: UITableViewCell {
             timeLabel.text = viewModel?.creatTimeText
             sourceLabel.text = viewModel?.sourceText
             contentLabel.text = viewModel?.status.text
+            
+            pictureCollectionView.registerClass(PictureCell.self, forCellWithReuseIdentifier: pictureReuseIdentifier)
+            pictureCollectionView.dataSource = self
         }
     }
     
@@ -112,29 +120,29 @@ class WeiboStatusCell: UITableViewCell {
         contentLabel.numberOfLines = 0
         contentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewMargin
         contentView.addSubview(contentLabel)
-        
-        contentView.addSubview(bottomBarView)
 
-        forwardButton = UIButton(imageName: "timeline_icon_retweet", backgroundImageName: "timeline_card_bottom_background")
+        pictureCollectionView.backgroundColor = UIColor.clearColor()
+        contentView.addSubview(pictureCollectionView)
+        
+        contentView.addSubview(footerView)
+
         forwardButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
         forwardButton.setTitle("转发", forState: UIControlState.Normal)
         forwardButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         forwardButton.titleLabel?.font = UIFont.systemFontOfSize(15)
-        bottomBarView.addSubview(forwardButton)
+        footerView.addSubview(forwardButton)
         
-        commentButton = UIButton(imageName: "timeline_icon_comment", backgroundImageName: "timeline_card_bottom_background")
         commentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
         commentButton.setTitle("评论", forState: UIControlState.Normal)
         commentButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         commentButton.titleLabel?.font = UIFont.systemFontOfSize(15)
-        bottomBarView.addSubview(commentButton)
-        
-        likeButton = UIButton(imageName: "timeline_icon_unlike", backgroundImageName: "timeline_card_bottom_background")
+        footerView.addSubview(commentButton)
+
         likeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
         likeButton.setTitle("赞", forState: UIControlState.Normal)
         likeButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         likeButton.titleLabel?.font = UIFont.systemFontOfSize(15)
-        bottomBarView.addSubview(likeButton)
+        footerView.addSubview(likeButton)
         
         constrain(iconView, verifiedView) { (iconView, verifiedView) in
             iconView.width == 50
@@ -171,28 +179,114 @@ class WeiboStatusCell: UITableViewCell {
             contentLabel.left == iconView.left
         }
         
-        constrain(bottomBarView, contentLabel) { (bottomBarView, contentLabel) in
-            bottomBarView.height == 44
-            bottomBarView.top == contentLabel.bottom + kViewPadding
-            bottomBarView.left == bottomBarView.superview!.left
-            bottomBarView.bottom == bottomBarView.superview!.bottom
-            bottomBarView.right == bottomBarView.superview!.right
+        constrain(pictureCollectionView, contentLabel) { (pictureCollectionView, contentLabel) in
+            pictureCollectionView.top == contentLabel.bottom + kViewPadding
+            pictureCollectionView.left == contentLabel.left
+            pictureCollectionView.right == contentLabel.right
+            
+            pictureCollectionView.height == 100
+        }
+        
+        constrain(footerView, pictureCollectionView) { (footerView, pictureCollectionView) in
+            footerView.height == 44
+            footerView.top == pictureCollectionView.bottom + kViewPadding
+            footerView.left == footerView.superview!.left
+            footerView.bottom == footerView.superview!.bottom
+            footerView.right == footerView.superview!.right
         }
         
         constrain(forwardButton, commentButton, likeButton) { (forwardButton, commentButton, likeButton) in
             forwardButton.left == forwardButton.superview!.left
-
             likeButton.right == likeButton.superview!.right
+            
             forwardButton.width == commentButton.width
             commentButton.width == likeButton.width
             
-            
-            
-            distribute(by: 0, leftToRight: forwardButton, commentButton, likeButton)
-            
             align(top: forwardButton, commentButton, likeButton, forwardButton.superview!)
             align(bottom: forwardButton, commentButton, likeButton, forwardButton.superview!)
+            distribute(by: 0, leftToRight: forwardButton, commentButton, likeButton)
         }
     }
     
+}
+
+extension WeiboStatusCell: UICollectionViewDataSource {
+    
+    /**
+     共有组数方法
+     */
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        
+        return 1
+    }
+    
+    /**
+     每组集数方法
+     */
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return viewModel?.thumbnailPicture?.count ?? 0
+    }
+    
+    /**
+     每集内容方法
+     */
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(pictureReuseIdentifier, forIndexPath: indexPath) as! PictureCell
+        cell.imageCellWithURL(viewModel?.thumbnailPicture?[indexPath.item])
+        return cell
+    }
+}
+
+private class PictureCell: UICollectionViewCell {
+    
+    // 照片视图
+    var imageView = UIImageView()
+    
+    // MARK: - 初始化方法
+    
+    /**
+     自定义初始化方法
+     */
+    override init(frame: CGRect) {
+        
+        super.init(frame: frame)
+        
+        contentView.addSubview(imageView)
+        constrain(imageView) { (imageView) in
+            imageView.edges == inset(imageView.superview!.edges, 0)
+        }
+    }
+    
+    /**
+     数据解码XIB初始化方法
+     */
+    required init?(coder aDecoder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func imageCellWithURL(url: NSURL?) {
+        
+        imageView.sd_setImageWithURL(url)
+    }
+}
+
+private class PictureLayout: UICollectionViewFlowLayout {
+    
+    /**
+     准备布局方法
+     */
+    override func prepareLayout() {
+        
+        let imageWidth: CGFloat = 90
+        let imageHeight = imageWidth
+        itemSize = CGSize(width: imageWidth, height: imageHeight)
+        minimumInteritemSpacing = kViewPadding
+        minimumLineSpacing = kViewMargin
+
+        collectionView?.showsHorizontalScrollIndicator = false
+        collectionView?.showsVerticalScrollIndicator = false
+    }
 }

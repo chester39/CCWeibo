@@ -18,7 +18,8 @@ class StatusViewModel: NSObject {
     var creatTimeText: String = ""
     // 微博来源
     var sourceText: String = ""
-    
+    // 微博配图URL数组
+    var thumbnailPicture: [NSURL]?
     // 微博模型
     var status: StatusModel
     
@@ -56,6 +57,18 @@ class StatusViewModel: NSObject {
             let length = sourceString.rangeOfString("<", options: NSStringCompareOptions.BackwardsSearch).location - startIndex
             let restString = sourceString.substringWithRange(NSMakeRange(startIndex, length))
             sourceText = "来自: " + restString
+        }
+        
+        if let pictureArray = status.pictureURLArray {
+            thumbnailPicture = [NSURL]()
+            for dict in pictureArray {
+                guard let urlString = dict[kThumbnailPicture] as? String else {
+                    return
+                }
+                
+                let url = NSURL(string: urlString)!
+                thumbnailPicture?.append(url)
+            }
         }
     }
 

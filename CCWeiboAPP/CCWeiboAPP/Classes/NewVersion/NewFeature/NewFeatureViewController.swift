@@ -12,7 +12,7 @@ class NewFeatureViewController: UIViewController {
     private var maxCount = 4
     // Cell重用标识符
     private let reuseIdentifier = "NewFeatureCell"
-    // 新特性视图
+    // 新特性集合视图
     var newFeatureView = UICollectionView(frame: kScreenFrame, collectionViewLayout: NewFeatureLayout())
     
     // MARK: - 系统方法
@@ -86,7 +86,7 @@ extension NewFeatureViewController: UICollectionViewDelegate {
     }
 }
 
-class NewFeatureLayout: UICollectionViewFlowLayout {
+private class NewFeatureLayout: UICollectionViewFlowLayout {
     
     /**
      准备布局方法

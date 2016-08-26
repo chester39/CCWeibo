@@ -16,6 +16,8 @@ class StatusModel: NSObject {
     var text: String?
     // 微博来源
     var source: String?
+    // 微博配图数组
+    var pictureURLArray: [[String: AnyObject]]?
     // 微博用户
     var user: UserModel?
     
@@ -60,8 +62,13 @@ class StatusModel: NSObject {
      */
     override func setValue(value: AnyObject?, forUndefinedKey key: String) {
         
-        if key == kCreatedAt {
+        switch key {
+        case kCreatedAt:
             createdAt = value as? String
+        case kPictureURLArray:
+            pictureURLArray = value as? [[String: AnyObject]]
+        default:
+            break
         }
     }
     

@@ -171,6 +171,7 @@ class HomeTableViewController: BaseTableViewController {
         let path = "2/statuses/home_timeline.json"
         let parameters = ["access_token": UserAccount.loadUserAccount()!.accessToken!]
         Alamofire.request(Method.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
+            print(response.result.value)
             guard let array = (response.result.value as! [String: AnyObject])["statuses"] as? [[String: AnyObject]] else {
                 finished(array: nil, error: NSError(domain: "com.github.chester", code: 1000, userInfo: ["message": "获取数据失败"]))
                 return
