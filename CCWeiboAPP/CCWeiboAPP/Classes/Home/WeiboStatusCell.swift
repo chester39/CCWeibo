@@ -59,6 +59,7 @@ class WeiboStatusCell: UITableViewCell {
             
             pictureCollectionView.registerClass(PictureCell.self, forCellWithReuseIdentifier: pictureReuseIdentifier)
             pictureCollectionView.dataSource = self
+            pictureCollectionView.reloadData()
         }
     }
     
@@ -184,7 +185,7 @@ class WeiboStatusCell: UITableViewCell {
             pictureCollectionView.left == contentLabel.left
             pictureCollectionView.right == contentLabel.right
             
-            pictureCollectionView.height == 100
+            pictureCollectionView.height == 300
         }
         
         constrain(footerView, pictureCollectionView) { (footerView, pictureCollectionView) in
