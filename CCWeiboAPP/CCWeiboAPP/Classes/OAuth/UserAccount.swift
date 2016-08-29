@@ -64,10 +64,13 @@ class UserAccount: NSObject {
         switch key {
         case kAccessToken:
             accessToken = value as? String
+            
         case kExpiresIn:
             expiresIn = value as! Int
+            
         case kExpiresDate:
             expiresDate = value as? NSDate
+            
         default:
             break
         }
@@ -155,10 +158,6 @@ class UserAccount: NSObject {
         let path = "2/users/show.json"
         let parameters = ["access_token": accessToken!, "uid": uid!]
         Alamofire.request(Method.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
-            if let json = response.result.value {
-                print("\(json)")
-            }
-            
             let dict = response.result.value as! [String: AnyObject]
             self.avatarLarge = dict[kAvatarLarge] as? String
             self.screenName = dict[kScreenName] as? String

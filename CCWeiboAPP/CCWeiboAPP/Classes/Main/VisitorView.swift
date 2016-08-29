@@ -47,6 +47,8 @@ class VisitorView: UIView {
      初始化界面方法
      */
     private func setupUI() {
+    
+        self.backgroundColor = UIColor(red: 232.0 / 255.0, green: 232.0 / 255.0, blue: 232.0 / 255.0, alpha: 1.0)
         
         rotationView.image = UIImage(named: "visitordiscover_feed_image_smallicon")
         addSubview(rotationView)
@@ -98,8 +100,6 @@ class VisitorView: UIView {
             loginButton.top == textLabel.bottom + kViewMargin
             loginButton.right == textLabel.right
         }
-        
-        self.backgroundColor = UIColor(red: 232.0 / 255.0, green: 232.0 / 255.0, blue: 232.0 / 255.0, alpha: 1.0)
     }
     
     /**

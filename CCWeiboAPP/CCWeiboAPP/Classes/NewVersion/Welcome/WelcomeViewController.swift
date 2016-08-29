@@ -6,9 +6,6 @@
 
 import UIKit
 
-import Cartography
-import SDWebImage
-
 class WelcomeViewController: UIViewController {
 
     // 欢迎视图
@@ -33,25 +30,7 @@ class WelcomeViewController: UIViewController {
         
         super.viewDidAppear(animated)
         
-        let group = ConstraintGroup()
-        constrain(welcomeView.avatarView, replace: group) { (avatarView) in
-            avatarView.bottom == avatarView.superview!.bottom - kViewDistance
-        }
-        
-        constrain(welcomeView.avatarView, replace: group) { (avatarView) in
-            
-            avatarView.bottom == avatarView.superview!.top + kViewDistance
-        }
-        
-        UIView.animateWithDuration(1.5, animations: {
-            self.view.layoutIfNeeded()
-            }) { (true) in
-                UIView.animateWithDuration(1.5, animations: {
-                    self.welcomeView.textLabel.alpha = 1.0
-                    }, completion: { (true) in
-                        NSNotificationCenter.defaultCenter().postNotificationName(kSwitchRootViewController, object: true)
-                })
-        }
+        welcomeView.startAnimation()
     }
 
 }

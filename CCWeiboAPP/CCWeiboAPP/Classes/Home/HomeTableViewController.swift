@@ -8,8 +8,14 @@ import UIKit
 
 import Alamofire
 import MBProgressHUD
+import SDWebImage
 
 class HomeTableViewController: BaseTableViewController {
+    
+    // Cell重用标识符
+    private let reuseIdentifier = "WeiboStatusCell"
+    // Cell行高缓存
+    private var rowHeightCaches = [Int: CGFloat]()
     
     // 微博数组
     var statusArray: [StatusViewModel]? {
@@ -17,9 +23,6 @@ class HomeTableViewController: BaseTableViewController {
             tableView.reloadData()
         }
     }
-    
-    // Cell重用标识符
-    private let reuseIdentifier = "WeiboStatusCell"
     
     // 标题按钮懒加载
     private lazy var titleButton: UIButton = {
@@ -63,9 +66,18 @@ class HomeTableViewController: BaseTableViewController {
         loadWeiboData()
         
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 80.0
+        tableView.estimatedRowHeight = 200
         tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: reuseIdentifier)
+    }
+    
+    /**
+     收到内存警告方法
+     */
+    override func didReceiveMemoryWarning() {
+        
+        super.didReceiveMemoryWarning()
+        
+        rowHeightCaches.removeAll()
     }
     
     /**
@@ -139,7 +151,6 @@ class HomeTableViewController: BaseTableViewController {
     private func loadWeiboData() {
         
         loadWeiboStatuses { (array, error) -> () in
-            
             if error != nil {
                 let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
                 hud.label.text = "获取微博数据失败"
@@ -157,7 +168,7 @@ class HomeTableViewController: BaseTableViewController {
                 modelArray.append(viewModel)
             }
             
-            self.statusArray = modelArray
+            self.acquireImageCaches(modelArray)
         }
     }
     
@@ -181,9 +192,35 @@ class HomeTableViewController: BaseTableViewController {
         }
     }
     
+    /**
+     获取微博图片缓存方法
+     */
+    private func acquireImageCaches(viewModelArray: [StatusViewModel]) {
+        
+        let group = dispatch_group_create()
+        for viewModel in viewModelArray {
+            guard let pictureArray = viewModel.thumbnailPictureArray else {
+                continue
+            }
+            
+            for url in pictureArray {
+                dispatch_group_enter(group)
+                SDWebImageManager.sharedManager().downloadImageWithURL(url, options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, _, _, _) in
+                    dispatch_group_leave(group)
+                })
+            }
+        }
+        
+        dispatch_group_notify(group, dispatch_get_main_queue()) {
+            self.statusArray = viewModelArray
+        }
+    }
+    
 }
 
 extension HomeTableViewController {
+
+    // MARK: - UITableViewDataSource数据源方法
     
     /**
      共有组数方法
@@ -211,4 +248,22 @@ extension HomeTableViewController {
         return cell
     }
     
+    // MARK: - UITableViewDataSource代理方法
+    
+    /**
+     每行高度方法
+     */
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        let viewModel = statusArray![indexPath.row]
+        guard let height = rowHeightCaches[viewModel.status.weiboID ?? -1] else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as! WeiboStatusCell
+            let temp = cell.acquireRowHeight(viewModel)
+            rowHeightCaches[viewModel.status.weiboID ?? -1] = temp
+            
+            return temp
+        }
+        
+        return height
+    }
 }

@@ -13,7 +13,8 @@ class WeiboStatusCell: UITableViewCell {
 
     // Cell重用标识符
     private let pictureReuseIdentifier = "PictureCell"
-    
+    // 变化约束组
+    private var group = ConstraintGroup()
     // 头像图片视图
     private var iconView = UIImageView()
     // 认证图片视图
@@ -36,8 +37,8 @@ class WeiboStatusCell: UITableViewCell {
     private var commentButton = UIButton(imageName: "timeline_icon_comment", backgroundImageName: "timeline_card_bottom_background")
     // 点赞按钮
     private var likeButton = UIButton(imageName: "timeline_icon_unlike", backgroundImageName: "timeline_card_bottom_background")
-    // 照片集合视图
-    private var pictureCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: PictureLayout())
+    // 图片集合视图
+    private var pictureCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
     
     // 微博模型
     var viewModel: StatusViewModel? {
@@ -59,7 +60,24 @@ class WeiboStatusCell: UITableViewCell {
             
             pictureCollectionView.registerClass(PictureCell.self, forCellWithReuseIdentifier: pictureReuseIdentifier)
             pictureCollectionView.dataSource = self
+            pictureCollectionView.showsVerticalScrollIndicator = false
+            pictureCollectionView.showsHorizontalScrollIndicator = false
             pictureCollectionView.reloadData()
+            
+            let (itemSize, collectionSize) = setupPictureCollectionView()
+            if itemSize != CGSizeZero {
+                let flowLayout = UICollectionViewFlowLayout()
+                flowLayout.itemSize = itemSize
+                pictureCollectionView.setCollectionViewLayout(flowLayout, animated: true)
+            }
+            
+            constrain(clear: group)
+            
+            constrain(pictureCollectionView, replace: group) { (pictureCollectionView) in
+                pictureCollectionView.width == collectionSize.width
+                pictureCollectionView.height == collectionSize.height
+            }
+            
         }
     }
     
@@ -183,9 +201,11 @@ class WeiboStatusCell: UITableViewCell {
         constrain(pictureCollectionView, contentLabel) { (pictureCollectionView, contentLabel) in
             pictureCollectionView.top == contentLabel.bottom + kViewPadding
             pictureCollectionView.left == contentLabel.left
-            pictureCollectionView.right == contentLabel.right
-            
-            pictureCollectionView.height == 300
+        }
+        
+        constrain(pictureCollectionView, replace: group) { (pictureCollectionView) in
+            pictureCollectionView.width == 290
+            pictureCollectionView.height == 90
         }
         
         constrain(footerView, pictureCollectionView) { (footerView, pictureCollectionView) in
@@ -209,6 +229,52 @@ class WeiboStatusCell: UITableViewCell {
         }
     }
     
+    /**
+     初始化图片集合视图方法
+     */
+    private func setupPictureCollectionView() -> (cellSize: CGSize, collectionSize: CGSize) {
+        
+        let count = viewModel?.thumbnailPictureArray?.count ?? 0
+        let imageWidth: CGFloat = 90
+        let imageHeight: CGFloat = 90
+        
+        switch count {
+        case 0:
+            return (cellSize: CGSizeZero, collectionSize:CGSizeZero)
+            
+        case 1:
+            let key = viewModel!.thumbnailPictureArray!.first!.absoluteString
+            let image = SDWebImageManager.sharedManager().imageCache.imageFromDiskCacheForKey(key)
+            return (cellSize: image.size, collectionSize: image.size)
+            
+        case 4:
+            let column = 2
+            let row = column
+            let width = imageWidth * CGFloat(column) + kViewPadding * CGFloat(column - 1)
+            let height = imageHeight * CGFloat(row) + kViewPadding * CGFloat(row - 1)
+            return (cellSize: CGSize(width: imageWidth, height: imageHeight), collectionSize: CGSize(width: width, height: height))
+            
+        default:
+            let column = 3
+            let row = (count - 1) / 3 + 1
+            let width = imageWidth * CGFloat(column) + kViewPadding * CGFloat(column - 1)
+            let height = imageHeight * CGFloat(row) + kViewPadding * CGFloat(row - 1)
+            return (cellSize: CGSize(width: imageWidth, height: imageHeight), collectionSize: CGSize(width: width, height: height))
+        }
+    }
+    
+    /**
+     获取行高方法
+     */
+    func acquireRowHeight(viewModel: StatusViewModel) -> CGFloat {
+        
+        self.viewModel = viewModel
+        layoutIfNeeded()
+        
+//        return CGRectGetMaxY(footerView.frame)
+        return 400
+    }
+    
 }
 
 extension WeiboStatusCell: UICollectionViewDataSource {
@@ -226,7 +292,7 @@ extension WeiboStatusCell: UICollectionViewDataSource {
      */
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return viewModel?.thumbnailPicture?.count ?? 0
+        return viewModel?.thumbnailPictureArray?.count ?? 0
     }
     
     /**
@@ -235,15 +301,23 @@ extension WeiboStatusCell: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(pictureReuseIdentifier, forIndexPath: indexPath) as! PictureCell
-        cell.imageCellWithURL(viewModel?.thumbnailPicture?[indexPath.item])
+        cell.url = viewModel!.thumbnailPictureArray![indexPath.item]
+        
         return cell
     }
 }
 
 private class PictureCell: UICollectionViewCell {
     
-    // 照片视图
+    // 图片视图
     var imageView = UIImageView()
+    
+    // 图片URL
+    var url: NSURL? {
+        didSet {
+            imageView.sd_setImageWithURL(url)
+        }
+    }
     
     // MARK: - 初始化方法
     
@@ -268,26 +342,4 @@ private class PictureCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func imageCellWithURL(url: NSURL?) {
-        
-        imageView.sd_setImageWithURL(url)
-    }
-}
-
-private class PictureLayout: UICollectionViewFlowLayout {
-    
-    /**
-     准备布局方法
-     */
-    override func prepareLayout() {
-        
-        let imageWidth: CGFloat = 90
-        let imageHeight = imageWidth
-        itemSize = CGSize(width: imageWidth, height: imageHeight)
-        minimumInteritemSpacing = kViewPadding
-        minimumLineSpacing = kViewMargin
-
-        collectionView?.showsHorizontalScrollIndicator = false
-        collectionView?.showsVerticalScrollIndicator = false
-    }
 }

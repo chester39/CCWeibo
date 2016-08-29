@@ -69,7 +69,6 @@ let kPictureURLArray: String = "pic_urls"
 // 微博配图URL
 let kThumbnailPicture: String = "thumbnail_pic"
 
-
 // MARK: - 通知常数
 
 // 弹出框已经显示

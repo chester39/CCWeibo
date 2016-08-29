@@ -34,9 +34,11 @@ extension NSDate {
         switch time {
         case 0...60:
             dateString = "刚刚"
+            
         case 61...(60 * 60):
             let minute = (Int)(time / 60)
             dateString = "\(minute)分钟前"
+            
         case (60 * 60)...(60 * 60 * 24):
             dateFormatter.dateFormat = "yyyy/MM/dd"
             let dateDayString = dateFormatter.stringFromDate(date)
@@ -48,6 +50,7 @@ extension NSDate {
             } else {
                 dateString = "昨天\(dateFormatter.stringFromDate(date))"
             }
+            
         default:
             dateFormatter.dateFormat = "yyyy"
             let dateYearString = dateFormatter.stringFromDate(date)

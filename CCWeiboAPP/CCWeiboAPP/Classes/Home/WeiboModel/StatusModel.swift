@@ -65,8 +65,10 @@ class StatusModel: NSObject {
         switch key {
         case kCreatedAt:
             createdAt = value as? String
+            
         case kPictureURLArray:
             pictureURLArray = value as? [[String: AnyObject]]
+            
         default:
             break
         }

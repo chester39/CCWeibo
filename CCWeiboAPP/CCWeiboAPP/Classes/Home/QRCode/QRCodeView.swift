@@ -115,6 +115,7 @@ class QRCodeView: UIView {
         constrain(waveView, containerView, replace: group) { (waveView, containerView) in
             waveView.bottom == containerView.top
         }
+        
         layoutIfNeeded()
         
         UIView.animateWithDuration(1.5) {
@@ -122,6 +123,7 @@ class QRCodeView: UIView {
             constrain(self.waveView, self.containerView, replace: group) { (waveView, containerView) in
                 waveView.bottom == containerView.bottom
             }
+            
             self.layoutIfNeeded()
         }
     }

@@ -19,7 +19,7 @@ class StatusViewModel: NSObject {
     // 微博来源
     var sourceText: String = ""
     // 微博配图URL数组
-    var thumbnailPicture: [NSURL]?
+    var thumbnailPictureArray: [NSURL]?
     // 微博模型
     var status: StatusModel
     
@@ -35,10 +35,13 @@ class StatusViewModel: NSObject {
         switch status.user?.verifiedType ?? -1 {
         case 0:
             verifiedImage = UIImage(named: "avatar_vip")
+            
         case 2, 3, 5:
             verifiedImage = UIImage(named:"avatar_enterprise_vip")
+            
         case 220:
             verifiedImage = UIImage(named:"avatar_grassroot")
+            
         default:
             verifiedImage = nil
         }
@@ -60,14 +63,14 @@ class StatusViewModel: NSObject {
         }
         
         if let pictureArray = status.pictureURLArray {
-            thumbnailPicture = [NSURL]()
+            thumbnailPictureArray = [NSURL]()
             for dict in pictureArray {
                 guard let urlString = dict[kThumbnailPicture] as? String else {
-                    return
+                    continue
                 }
                 
                 let url = NSURL(string: urlString)!
-                thumbnailPicture?.append(url)
+                thumbnailPictureArray?.append(url)
             }
         }
     }

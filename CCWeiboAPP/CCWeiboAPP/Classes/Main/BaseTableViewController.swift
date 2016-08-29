@@ -66,13 +66,7 @@ class BaseTableViewController: UITableViewController {
      */
     @objc private func registerButtonDidClick(button: UIButton) {
         
-        Alamofire.request(Method.GET, "https://api.500px.com/v1/photos").responseJSON() {
-            reponse in
-            guard let json = reponse.result.value else {
-                return
-            }
-            print("\(json)")
-        }
+        print(#function)
     }
     
 }

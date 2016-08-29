@@ -16,6 +16,8 @@ class WelcomeView: UIView {
     var avatarView = UIImageView()
     // 标题标签
     var textLabel = UILabel()
+    // 变化约束组
+    private var group = ConstraintGroup()
     
     // MARK: - 初始化方法
     
@@ -77,13 +79,35 @@ class WelcomeView: UIView {
         constrain(avatarView, textLabel) { (avatarView, textLabel) in
             avatarView.width == 90
             avatarView.height == 90
-            avatarView.bottom == avatarView.superview!.bottom - kViewDistance
             
             textLabel.top == avatarView.bottom + kViewMargin
             
             align(centerX: avatarView.superview!, avatarView, textLabel)
         }
         
+        constrain(avatarView, replace: group) { (avatarView) in
+            avatarView.bottom == avatarView.superview!.bottom - kViewDistance
+        }
+    }
+    
+    /**
+     开始动画方法
+     */
+    func startAnimation() {
+        
+        constrain(avatarView, replace: group) { (avatarView) in
+            avatarView.bottom == avatarView.superview!.top + kViewDistance
+        }
+        
+        UIView.animateWithDuration(1.5, animations: {
+            self.layoutIfNeeded()
+        }) { (true) in
+            UIView.animateWithDuration(1.0, animations: {
+                self.textLabel.alpha = 1.0
+                }, completion: { (true) in
+                    NSNotificationCenter.defaultCenter().postNotificationName(kSwitchRootViewController, object: true)
+            })
+        }
     }
 
 }
