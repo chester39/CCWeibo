@@ -20,25 +20,43 @@ class WeiboStatusCell: UITableViewCell {
     // 认证图片视图
     private var verifiedView = UIImageView()
     // 昵称标签
-    private var nameLabel = UILabel()
+    var nameLabel = UILabel(text: "", fontSize: 16, lines: 1)
     // 会员图片视图
     private var vipView = UIImageView()
     // 时间标签
-    private var timeLabel = UILabel()
+    private var timeLabel = UILabel(text: "", fontSize: 16, lines: 1)
     // 来源标签
-    private var sourceLabel = UILabel()
+    private var sourceLabel = UILabel(text: "", fontSize: 16, lines: 1)
     // 内容标签
-    private var contentLabel = UILabel()
+    private var contentLabel = UILabel(text: "", fontSize: 15, lines: 0)
+    // 转发视图
+    private var retweetView = UIView()
+    // 转发标签
+    private var retweetLabel = UILabel(text: "", fontSize: 15, lines: 0)
     // 底部视图
     private var footerView = UIView()
     // 转发按钮
-    private var forwardButton = UIButton(imageName: "timeline_icon_retweet", backgroundImageName: "timeline_card_bottom_background")
+    private var retweetButton = UIButton(imageName: "timeline_icon_retweet", backgroundImageName: "timeline_card_bottom_background")
     // 评论按钮
     private var commentButton = UIButton(imageName: "timeline_icon_comment", backgroundImageName: "timeline_card_bottom_background")
     // 点赞按钮
     private var likeButton = UIButton(imageName: "timeline_icon_unlike", backgroundImageName: "timeline_card_bottom_background")
-    // 图片集合视图
-    private var pictureCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
+    
+    // 集合布局懒加载
+    private lazy var flowLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = kViewPadding
+        layout.minimumInteritemSpacing = kViewPadding
+        
+        return layout
+    }()
+    
+    // 图片集合视图懒加载
+    private lazy var pictureCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: self.flowLayout)
+        
+        return collectionView
+    }()
     
     // 微博模型
     var viewModel: StatusViewModel? {
@@ -57,6 +75,7 @@ class WeiboStatusCell: UITableViewCell {
             timeLabel.text = viewModel?.creatTimeText
             sourceLabel.text = viewModel?.sourceText
             contentLabel.text = viewModel?.status.text
+            retweetLabel.text = viewModel?.retweetText
             
             pictureCollectionView.registerClass(PictureCell.self, forCellWithReuseIdentifier: pictureReuseIdentifier)
             pictureCollectionView.dataSource = self
@@ -64,11 +83,9 @@ class WeiboStatusCell: UITableViewCell {
             pictureCollectionView.showsHorizontalScrollIndicator = false
             pictureCollectionView.reloadData()
             
-            let (itemSize, collectionSize) = setupPictureCollectionView()
-            if itemSize != CGSizeZero {
-                let flowLayout = UICollectionViewFlowLayout()
-                flowLayout.itemSize = itemSize
-                pictureCollectionView.setCollectionViewLayout(flowLayout, animated: true)
+            let (cellSize, collectionSize) = setupPictureCollectionView()
+            if cellSize != CGSizeZero {
+                flowLayout.itemSize = cellSize
             }
             
             constrain(clear: group)
@@ -78,6 +95,7 @@ class WeiboStatusCell: UITableViewCell {
                 pictureCollectionView.height == collectionSize.height
             }
             
+            self.layoutIfNeeded()
         }
     }
     
@@ -100,14 +118,6 @@ class WeiboStatusCell: UITableViewCell {
         
         fatalError("init(coder:) has not been implemented")
     }
-
-    /**
-     cell选中方法
-     */
-    override func setSelected(selected: Bool, animated: Bool) {
-        
-        super.setSelected(selected, animated: animated)
-    }
     
     // MARK: - 界面方法
     
@@ -123,33 +133,44 @@ class WeiboStatusCell: UITableViewCell {
         verifiedView.image = UIImage(named: "avatar_vip")
         contentView.addSubview(verifiedView)
         
-        nameLabel.font = UIFont.systemFontOfSize(15)
         contentView.addSubview(nameLabel)
         
         vipView.image = UIImage(named: "common_icon_membership")
         contentView.addSubview(vipView)
         
         timeLabel.tintColor = UIColor.orangeColor()
-        timeLabel.font = UIFont.systemFontOfSize(15)
         contentView.addSubview(timeLabel)
         
-        sourceLabel.font = UIFont.systemFontOfSize(15)
         contentView.addSubview(sourceLabel)
         
-        contentLabel.numberOfLines = 0
         contentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewMargin
         contentView.addSubview(contentLabel)
 
         pictureCollectionView.backgroundColor = UIColor.clearColor()
-        contentView.addSubview(pictureCollectionView)
+        
+        if viewModel?.status.retweetedStatus?.text != "" {
+            retweetView.clipsToBounds = true
+            retweetView.layer.cornerRadius = 5.0
+            retweetView.layer.borderWidth = 1.0
+            retweetView.layer.borderColor = UIColor(hex: 0xF2F2F4).CGColor
+            retweetView.backgroundColor = UIColor(hex: 0xF2F2F4)
+            contentView.addSubview(retweetView)
+            
+            retweetLabel.preferredMaxLayoutWidth = kScreenWidth - kViewMargin
+            retweetView.addSubview(retweetLabel)
+            retweetView.addSubview(pictureCollectionView)
+            
+        } else {
+            contentView.addSubview(pictureCollectionView)
+        }
         
         contentView.addSubview(footerView)
 
-        forwardButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
-        forwardButton.setTitle("转发", forState: UIControlState.Normal)
-        forwardButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
-        forwardButton.titleLabel?.font = UIFont.systemFontOfSize(15)
-        footerView.addSubview(forwardButton)
+        retweetButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        retweetButton.setTitle("转发", forState: UIControlState.Normal)
+        retweetButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+        retweetButton.titleLabel?.font = UIFont.systemFontOfSize(15)
+        footerView.addSubview(retweetButton)
         
         commentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
         commentButton.setTitle("评论", forState: UIControlState.Normal)
@@ -198,9 +219,27 @@ class WeiboStatusCell: UITableViewCell {
             contentLabel.left == iconView.left
         }
         
-        constrain(pictureCollectionView, contentLabel) { (pictureCollectionView, contentLabel) in
-            pictureCollectionView.top == contentLabel.bottom + kViewPadding
-            pictureCollectionView.left == contentLabel.left
+        if viewModel?.status.retweetedStatus?.text != "" {
+            constrain(retweetView, contentLabel, footerView) { (retweetView, contentLabel, footerView) in
+                retweetView.top == contentLabel.bottom + kViewPadding
+                retweetView.left == retweetView.superview!.left
+                retweetView.bottom == footerView.top - kViewPadding
+                retweetView.right == retweetView.superview!.right
+            }
+            
+            constrain(retweetLabel, pictureCollectionView) { (retweetLabel, pictureCollectionView) in
+                retweetLabel.top == retweetLabel.superview!.top
+                retweetLabel.left == retweetLabel.superview!.left + kViewPadding
+                
+                pictureCollectionView.top == retweetLabel.bottom + kViewPadding
+                pictureCollectionView.left == retweetLabel.left
+            }
+            
+        } else {
+            constrain(pictureCollectionView, contentLabel) { (pictureCollectionView, contentLabel) in
+                pictureCollectionView.top == contentLabel.bottom + kViewPadding
+                pictureCollectionView.left == contentLabel.left
+            }
         }
         
         constrain(pictureCollectionView, replace: group) { (pictureCollectionView) in
@@ -216,16 +255,16 @@ class WeiboStatusCell: UITableViewCell {
             footerView.right == footerView.superview!.right
         }
         
-        constrain(forwardButton, commentButton, likeButton) { (forwardButton, commentButton, likeButton) in
-            forwardButton.left == forwardButton.superview!.left
+        constrain(retweetButton, commentButton, likeButton) { (retweetButton, commentButton, likeButton) in
+            retweetButton.left == retweetButton.superview!.left
             likeButton.right == likeButton.superview!.right
             
-            forwardButton.width == commentButton.width
+            retweetButton.width == commentButton.width
             commentButton.width == likeButton.width
             
-            align(top: forwardButton, commentButton, likeButton, forwardButton.superview!)
-            align(bottom: forwardButton, commentButton, likeButton, forwardButton.superview!)
-            distribute(by: 0, leftToRight: forwardButton, commentButton, likeButton)
+            align(top: retweetButton, commentButton, likeButton, retweetButton.superview!)
+            align(bottom: retweetButton, commentButton, likeButton, retweetButton.superview!)
+            distribute(by: 0, leftToRight: retweetButton, commentButton, likeButton)
         }
     }
     
@@ -263,18 +302,6 @@ class WeiboStatusCell: UITableViewCell {
         }
     }
     
-    /**
-     获取行高方法
-     */
-    func acquireRowHeight(viewModel: StatusViewModel) -> CGFloat {
-        
-        self.viewModel = viewModel
-        layoutIfNeeded()
-        
-//        return CGRectGetMaxY(footerView.frame)
-        return 400
-    }
-    
 }
 
 extension WeiboStatusCell: UICollectionViewDataSource {
@@ -307,7 +334,7 @@ extension WeiboStatusCell: UICollectionViewDataSource {
     }
 }
 
-private class PictureCell: UICollectionViewCell {
+class PictureCell: UICollectionViewCell {
     
     // 图片视图
     var imageView = UIImageView()

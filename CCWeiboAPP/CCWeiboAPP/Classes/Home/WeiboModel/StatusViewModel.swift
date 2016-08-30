@@ -20,6 +20,8 @@ class StatusViewModel: NSObject {
     var sourceText: String = ""
     // 微博配图URL数组
     var thumbnailPictureArray: [NSURL]?
+    // 转发微博正文
+    var retweetText: String?
     // 微博模型
     var status: StatusModel
     
@@ -62,7 +64,7 @@ class StatusViewModel: NSObject {
             sourceText = "来自: " + restString
         }
         
-        if let pictureArray = status.pictureURLArray {
+        if let pictureArray = (status.retweetedStatus != nil) ? status.retweetedStatus?.pictureURLArray : status.pictureURLArray {
             thumbnailPictureArray = [NSURL]()
             for dict in pictureArray {
                 guard let urlString = dict[kThumbnailPicture] as? String else {
@@ -72,6 +74,11 @@ class StatusViewModel: NSObject {
                 let url = NSURL(string: urlString)!
                 thumbnailPictureArray?.append(url)
             }
+        }
+        
+        if let text = status.retweetedStatus?.text {
+            let name = status.retweetedStatus?.user?.screenName ?? ""
+            retweetText = "@" + name + ": " + text
         }
     }
 

@@ -11,15 +11,15 @@ import Cartography
 class VisitorView: UIView {
     
     // 注册按钮
-    var registerButton = UIButton()
+    var registerButton = UIButton(type: UIButtonType.System)
     // 登录按钮
-    var loginButton = UIButton()
+    var loginButton = UIButton(type: UIButtonType.System)
     // 旋转视图
     private var rotationView = UIImageView()
     // 图标按钮
     private var iconView = UIImageView()
     // 文字标签
-    private var textLabel = UILabel()
+    private var textLabel = UILabel(text: "", fontSize: 18, lines: 0)
 
     // MARK: - 初始化方法
     
@@ -56,8 +56,6 @@ class VisitorView: UIView {
         iconView.image = UIImage(named: "visitordiscover_feed_image_house" )
         addSubview(iconView)
 
-        textLabel.numberOfLines = 0
-        textLabel.font = UIFont.systemFontOfSize(18)
         textLabel.textAlignment = NSTextAlignment.Center
         addSubview(textLabel)
         

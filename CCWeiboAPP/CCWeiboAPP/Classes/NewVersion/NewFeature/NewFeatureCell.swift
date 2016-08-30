@@ -24,7 +24,6 @@ class NewFeatureCell: UICollectionViewCell {
     
     // 开始按钮懒加载
     private lazy var startButton: UIButton = {
-        
         let button = UIButton(imageName: nil, backgroundImageName: "new_feature_button")
         button.addTarget(self, action: #selector(startButtonDidClick), forControlEvents: UIControlEvents.TouchUpInside)
         

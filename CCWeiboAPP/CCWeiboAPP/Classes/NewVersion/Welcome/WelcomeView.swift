@@ -15,7 +15,7 @@ class WelcomeView: UIView {
     // 头像图片视图
     var avatarView = UIImageView()
     // 标题标签
-    var textLabel = UILabel()
+    var textLabel = UILabel(text: "", fontSize: 20, lines: 0)
     // 变化约束组
     private var group = ConstraintGroup()
     
@@ -60,15 +60,12 @@ class WelcomeView: UIView {
         avatarView.sd_setImageWithURL(url)
         addSubview(avatarView)
         
-        textLabel.font = UIFont.systemFontOfSize(15)
-        textLabel.textAlignment = NSTextAlignment.Center
-        
         guard let userName = UserAccount.loadUserAccount()!.screenName else {
             return
         }
+        
         textLabel.text = "欢迎回来, \(userName)"
-        textLabel.font = UIFont.systemFontOfSize(20)
-        textLabel.numberOfLines = 0
+        textLabel.textAlignment = NSTextAlignment.Center
         textLabel.alpha = 0.0
         addSubview(textLabel)
         

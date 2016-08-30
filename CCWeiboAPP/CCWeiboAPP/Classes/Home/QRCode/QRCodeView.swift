@@ -19,9 +19,9 @@ class QRCodeView: UIView {
     // 波纹图片视图
     var waveView = UIImageView()
     // 文字标签
-    var textLabel = UILabel()
+    var textLabel = UILabel(text: "将二维码放入框内, 即可扫描二维码", fontSize: 17, lines: 0)
     // 名片按钮
-    var cardButton = UIButton()
+    var cardButton = UIButton(type: UIButtonType.System)
     
     // MARK: - 初始化方法
     
@@ -66,10 +66,7 @@ class QRCodeView: UIView {
         waveView.image = UIImage(named: "qrcode_scanline_qrcode")
         containerView.addSubview(waveView)
         
-        textLabel.font = UIFont.systemFontOfSize(17)
         textLabel.textAlignment = NSTextAlignment.Center
-        textLabel.text = "将二维码放入框内, 即可扫描二维码"
-        textLabel.numberOfLines = 0
         addSubview(textLabel)
         
         cardButton.setTitle("我的名片", forState: UIControlState.Normal)

@@ -137,7 +137,7 @@ extension UIButton {
 extension UIBarButtonItem {
     
     /**
-     指定图片便利初始化方法
+     指定图片和目标便利初始化方法
      */
     convenience init(imageName: String, target: AnyObject?, action: Selector) {
         
@@ -170,4 +170,19 @@ extension UIColor {
         self.init(red: (CGFloat)((hex & 0xFF0000) >> 16) / 255.0, green: (CGFloat)((hex & 0x00FF00) >> 8) / 255.0, blue: (CGFloat)((hex & 0x0000FF) >> 0) / 255.0, alpha: alpha)
     }
     
+}
+
+extension UILabel {
+    
+    /**
+     文字和字号和行数便利初始化方法
+     */
+    convenience init(text: String, fontSize: CGFloat, lines: Int) {
+        
+        self.init()
+        
+        self.text = text
+        self.font = UIFont.systemFontOfSize(fontSize)
+        self.numberOfLines = lines
+    }
 }

@@ -16,7 +16,6 @@ class QRCodeViewController: UIViewController {
     
     // 视频流输入懒加载
     private lazy var input: AVCaptureDeviceInput? = {
-        
         let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         
         return try? AVCaptureDeviceInput(device: device)
@@ -27,7 +26,6 @@ class QRCodeViewController: UIViewController {
     
     // 视频流输出懒加载
     private lazy var output: AVCaptureMetadataOutput = {
-        
         let out = AVCaptureMetadataOutput()
         
         let viewFrame = self.view.frame

@@ -18,6 +18,8 @@ class StatusModel: NSObject {
     var source: String?
     // 微博配图数组
     var pictureURLArray: [[String: AnyObject]]?
+    // 转发微博
+    var retweetedStatus: StatusModel?
     // 微博用户
     var user: UserModel?
     
@@ -68,6 +70,9 @@ class StatusModel: NSObject {
             
         case kPictureURLArray:
             pictureURLArray = value as? [[String: AnyObject]]
+            
+        case kRetweetedStatus:
+            retweetedStatus = StatusModel(dict: value as! [String: AnyObject])
             
         default:
             break

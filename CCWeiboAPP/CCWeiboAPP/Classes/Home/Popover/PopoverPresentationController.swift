@@ -13,7 +13,6 @@ class PopoverPresentationController: UIPresentationController {
     
     // 蒙版按钮懒加载
     private lazy var coverButton: UIButton = {
-        
         let button = UIButton(type: UIButtonType.System)
         button.frame = kScreenFrame
         button.backgroundColor = UIColor.clearColor()

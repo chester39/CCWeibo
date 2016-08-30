@@ -26,7 +26,6 @@ class HomeTableViewController: BaseTableViewController {
     
     // 标题按钮懒加载
     private lazy var titleButton: UIButton = {
-        
         let button = TitleButton()
         let title = UserAccount.loadUserAccount()?.screenName
         button.setTitle(title, forState: UIControlState.Normal)
@@ -37,7 +36,6 @@ class HomeTableViewController: BaseTableViewController {
     
     // 转场管理器懒加载
     private lazy var presentationManger: PopoverPresentationManager = {
-        
         let manager = PopoverPresentationManager()
         let presentWidth: CGFloat = 200
         let presentHeight: CGFloat = 250
@@ -67,6 +65,7 @@ class HomeTableViewController: BaseTableViewController {
         
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.estimatedRowHeight = 200
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
     
@@ -219,8 +218,6 @@ class HomeTableViewController: BaseTableViewController {
 }
 
 extension HomeTableViewController {
-
-    // MARK: - UITableViewDataSource数据源方法
     
     /**
      共有组数方法
@@ -248,22 +245,4 @@ extension HomeTableViewController {
         return cell
     }
     
-    // MARK: - UITableViewDataSource代理方法
-    
-    /**
-     每行高度方法
-     */
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
-        let viewModel = statusArray![indexPath.row]
-        guard let height = rowHeightCaches[viewModel.status.weiboID ?? -1] else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as! WeiboStatusCell
-            let temp = cell.acquireRowHeight(viewModel)
-            rowHeightCaches[viewModel.status.weiboID ?? -1] = temp
-            
-            return temp
-        }
-        
-        return height
-    }
 }

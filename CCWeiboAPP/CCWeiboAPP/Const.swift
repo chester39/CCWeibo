@@ -68,6 +68,8 @@ let kWeiboSource: String = "source"
 let kPictureURLArray: String = "pic_urls"
 // 微博配图URL
 let kThumbnailPicture: String = "thumbnail_pic"
+// 转发微博
+let kRetweetedStatus: String = "retweeted_status"
 
 // MARK: - 通知常数
 
