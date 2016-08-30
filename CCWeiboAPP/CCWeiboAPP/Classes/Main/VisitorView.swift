@@ -31,6 +31,7 @@ class VisitorView: UIView {
         super.init(frame: frame)
         
         setupUI()
+        setupConstraints()
     }
     
     /**
@@ -72,6 +73,12 @@ class VisitorView: UIView {
         loginButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         loginButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal)
         addSubview(loginButton)
+    }
+    
+    /**
+     初始化约束方法
+     */
+    private func setupConstraints() {
         
         constrain(rotationView) { (rotationView) in
             rotationView.center == rotationView.superview!.center

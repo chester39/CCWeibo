@@ -23,6 +23,7 @@ class QRCodeCreateViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        setupConstraints()
         filterImage()
     }
 
@@ -34,6 +35,13 @@ class QRCodeCreateViewController: UIViewController {
     private func setupUI() {
         
         view.addSubview(customImageView)
+    }
+    
+    /**
+     初始化约束方法
+     */
+    private func setupConstraints() {
+        
         constrain(customImageView) { (customImageView) in
             customImageView.width == 300
             customImageView.height == 300

@@ -29,6 +29,7 @@ class WelcomeView: UIView {
         super.init(frame: frame)
         
         setupUI()
+        setupConstraints()
     }
     
     /**
@@ -68,6 +69,12 @@ class WelcomeView: UIView {
         textLabel.textAlignment = NSTextAlignment.Center
         textLabel.alpha = 0.0
         addSubview(textLabel)
+    }
+    
+    /**
+     初始化约束方法
+     */
+    private func setupConstraints() {
         
         constrain(backgroundView) { (backgroundView) in
             backgroundView.edges == inset(backgroundView.superview!.edges, 0)

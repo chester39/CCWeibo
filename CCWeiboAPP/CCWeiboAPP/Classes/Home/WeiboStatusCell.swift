@@ -109,6 +109,7 @@ class WeiboStatusCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupUI()
+        setupConstraints()
     }
     
     /**
@@ -183,6 +184,12 @@ class WeiboStatusCell: UITableViewCell {
         likeButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         likeButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         footerView.addSubview(likeButton)
+    }
+    
+    /**
+     初始化约束方法
+     */
+    private func setupConstraints() {
         
         constrain(iconView, verifiedView) { (iconView, verifiedView) in
             iconView.width == 50

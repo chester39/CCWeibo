@@ -40,6 +40,7 @@ class NewFeatureCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupUI()
+        setupConstraints()
     }
     
     /**
@@ -59,6 +60,12 @@ class NewFeatureCell: UICollectionViewCell {
        
         contentView.addSubview(imageView)
         contentView.addSubview(startButton)
+    }
+    
+    /**
+     初始化约束方法
+     */
+    private func setupConstraints() {
         
         constrain(imageView, startButton) { (imageView, startButton) in
             
@@ -68,7 +75,6 @@ class NewFeatureCell: UICollectionViewCell {
             startButton.height == 50
             startButton.centerX == startButton.superview!.centerX
             startButton.bottom == startButton.superview!.bottom - kViewDistance
-            
         }
     }
     

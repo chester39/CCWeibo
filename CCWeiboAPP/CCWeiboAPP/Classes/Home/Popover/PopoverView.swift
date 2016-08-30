@@ -25,6 +25,7 @@ class PopoverView: UIView {
         super.init(frame: frame)
         
         setupUI()
+        setupConstraints()
     }
     
     /**
@@ -47,6 +48,12 @@ class PopoverView: UIView {
         
         tableView.backgroundColor = UIColor(hex: 0xff6c45)
         addSubview(tableView)
+    }
+    
+    /**
+     初始化约束方法
+     */
+    private func setupConstraints() {
         
         constrain(backgroundView, tableView) { (backgroundView, tableView) in
             backgroundView.edges == inset(backgroundView.superview!.edges, 0)

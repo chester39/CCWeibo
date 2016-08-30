@@ -12,6 +12,7 @@ class UserAccount: NSObject {
     
     // 授权使用令牌
     var accessToken: String?
+    
     // 授权生命周期
     var expiresIn: Int = 0 {
         didSet {

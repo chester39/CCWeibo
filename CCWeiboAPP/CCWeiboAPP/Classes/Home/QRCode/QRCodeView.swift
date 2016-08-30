@@ -33,6 +33,7 @@ class QRCodeView: UIView {
         super.init(frame: frame)
         
         setupUI()
+        setupConstraints()
     }
     
     /**
@@ -73,6 +74,12 @@ class QRCodeView: UIView {
         cardButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         cardButton.backgroundColor = UIColor.orangeColor()
         addSubview(cardButton)
+    }
+    
+    /**
+     初始化约束方法
+     */
+    private func setupConstraints() {
         
         constrain(tabBar) { (tabBar) in
             tabBar.height == 49
