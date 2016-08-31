@@ -66,11 +66,11 @@ class MainViewController: UITabBarController {
             }
             
         } catch {
-            addChildController("HomeTableViewController", title: "首页", imageName: "tabbar_home")
-            addChildController("MessageTableViewController", title: "消息", imageName: "tabbar_message_center")
-            addChildController("NullTableViewController", title: "", imageName: "")
-            addChildController("DiscoverTableViewController", title: "发现", imageName: "tabbar_discover")
-            addChildController("ProfileTableViewController", title: "我的", imageName: "tabbar_profile")
+            addChildController("HomeViewController", title: "首页", imageName: "tabbar_home")
+            addChildController("MessageViewController", title: "消息", imageName: "tabbar_message_center")
+            addChildController("NullViewController", title: "", imageName: "")
+            addChildController("DiscoverViewController", title: "发现", imageName: "tabbar_discover")
+            addChildController("ProfileViewController", title: "我的", imageName: "tabbar_profile")
         }
     }
     

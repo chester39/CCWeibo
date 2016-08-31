@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ProfileTableViewController: BaseTableViewController {
+class ProfileViewController: BaseViewController {
 
     // MARK: - 系统方法
     

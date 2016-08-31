@@ -60,7 +60,7 @@ let kVerifiedType: String = "verified_type"
 let kMbRank: String = "mbrank"
 // 微博创建时间
 let kCreatedAt: String = "created_at"
-// 微博信息内容
+// 微博正文
 let kWeiboText: String = "text"
 // 微博来源
 let kWeiboSource: String = "source"

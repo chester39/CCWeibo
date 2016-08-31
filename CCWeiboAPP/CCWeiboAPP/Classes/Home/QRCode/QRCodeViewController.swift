@@ -133,7 +133,7 @@ class QRCodeViewController: UIViewController {
      */
     func cardButtonDidClick() {
         
-        let qrccVC = QRCodeCreateViewController()
+        let qrccVC = QRCodeCreateController()
         navigationController?.pushViewController(qrccVC, animated: true)
     }
     

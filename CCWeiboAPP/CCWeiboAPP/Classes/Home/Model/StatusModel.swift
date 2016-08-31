@@ -12,7 +12,7 @@ class StatusModel: NSObject {
     var createdAt: String?
     // 微博ID
     var weiboID: Int = 0
-    // 微博信息内容
+    // 微博正文
     var text: String?
     // 微博来源
     var source: String?

@@ -7,7 +7,6 @@
 import UIKit
 import WebKit
 
-import Alamofire
 import Cartography
 import MBProgressHUD
 
@@ -35,46 +34,7 @@ class OAuthViewController: UIViewController {
         oauthView.navigationDelegate = self
         view.addSubview(oauthView)
         
-        loadRequestToken()
-    }
-
-    // MARK: - 令牌方法
-    
-    /**
-     获取请求令牌方法
-     */
-    private func loadRequestToken() {
-
-        let urlString = "\(kWeiboBaseURL)oauth2/authorize?client_id=\(kWeiboAppKey)&redirect_uri=\(kWeiboRedirectUri)"
-        guard let url = NSURL(string: urlString) else {
-            return
-        }
-        
-        let request = NSURLRequest(URL: url)
-        oauthView.loadRequest(request)
-    }
-    
-    /**
-     获取使用令牌方法
-     */
-    private func loadAccessToken(codeString: String?) {
-        
-        guard let code = codeString else {
-            return
-        }
-        
-        let path = "oauth2/access_token"
-        let parameters = ["client_id": kWeiboAppKey, "client_secret": kWeiboAppSecret, "grant_type": "authorization_code", "code": code, "redirect_uri": kWeiboRedirectUri]
-        Alamofire.request(Method.POST, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
-            if let json = response.result.value {
-                print("\(json)")
-            }
-            
-            let account = UserAccount(dict: response.result.value as! [String: AnyObject])
-            account.loadUserInfo({ (account) in
-                account?.saveUserAccount()
-            })
-        }
+        NetworkUtil.sharedInstance.loadRequestToken(oauthView)
     }
     
     // MARK: - 按钮方法
@@ -135,7 +95,7 @@ extension OAuthViewController: WKNavigationDelegate {
         let key = "code="
         if urlString.containsString(key) {
             let code = navigationAction.request.URL?.query?.substringFromIndex(key.endIndex)
-            loadAccessToken(code)
+            NetworkUtil.sharedInstance.loadAccessToken(code)
             decisionHandler(WKNavigationActionPolicy.Cancel)
         }
         

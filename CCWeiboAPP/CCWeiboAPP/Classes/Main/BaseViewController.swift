@@ -6,9 +6,7 @@
 
 import UIKit
 
-import Alamofire
-
-class BaseTableViewController: UITableViewController {
+class BaseViewController: UITableViewController {
     
     // 用户是否登录
     var isUserLogin = UserAccount.isUserLogin()

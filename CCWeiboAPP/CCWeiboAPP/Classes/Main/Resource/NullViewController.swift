@@ -6,7 +6,7 @@
 
 import UIKit
 
-class NullTableViewController: UITableViewController {
+class NullViewController: UITableViewController {
 
     // MARK: - 系统方法
     

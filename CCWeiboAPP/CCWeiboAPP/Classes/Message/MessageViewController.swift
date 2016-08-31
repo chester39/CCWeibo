@@ -6,7 +6,7 @@
 
 import UIKit
 
-class MessageTableViewController: BaseTableViewController {
+class MessageViewController: BaseViewController {
 
     // MARK: - 系统方法
     

@@ -8,7 +8,7 @@ import UIKit
 
 import Cartography
 
-class QRCodeCreateViewController: UIViewController {
+class QRCodeCreateController: UIViewController {
 
     // 用户图片视图
     var customImageView = UIImageView()

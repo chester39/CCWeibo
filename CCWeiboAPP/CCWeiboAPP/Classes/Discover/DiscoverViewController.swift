@@ -6,7 +6,7 @@
 
 import UIKit
 
-class DiscoverTableViewController: BaseTableViewController {
+class DiscoverViewController: BaseViewController {
 
     // MARK: - 系统方法
     

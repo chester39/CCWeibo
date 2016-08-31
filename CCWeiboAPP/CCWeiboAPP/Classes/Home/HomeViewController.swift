@@ -6,14 +6,15 @@
 
 import UIKit
 
-import Alamofire
 import MBProgressHUD
 import SDWebImage
 
-class HomeTableViewController: BaseTableViewController {
+class HomeViewController: BaseViewController {
     
-    // Cell重用标识符
-    private let reuseIdentifier = "WeiboStatusCell"
+    // WeiboStatusCell重用标识符
+    private var weiboReuseIdentifier = "WeiboStatusCell"
+    // RetweetStatusCell重用标识符
+    private var retweetReuseIdentifier = "RetweetStatusCell"
     // Cell行高缓存
     private var rowHeightCaches = [Int: CGFloat]()
     
@@ -61,12 +62,8 @@ class HomeTableViewController: BaseTableViewController {
         }
         
         setupNavigation()
-        loadWeiboData()
-        
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        tableView.estimatedRowHeight = 200
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: reuseIdentifier)
+        setupTableView()
+        loadWeiboStatus()
     }
     
     /**
@@ -87,7 +84,7 @@ class HomeTableViewController: BaseTableViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    // MARK: - 导航栏方法
+    // MARK: - 界面方法
     
     /**
      初始化导航栏方法
@@ -100,6 +97,18 @@ class HomeTableViewController: BaseTableViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidPresented, object: presentationManger)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidDismissed, object: presentationManger)
+    }
+    
+    /**
+     初始化表格视图方法
+     */
+    private func setupTableView() {
+        
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.estimatedRowHeight = 200
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: weiboReuseIdentifier)
+        tableView.registerClass(RetweetStatusCell.self, forCellReuseIdentifier: retweetReuseIdentifier)
     }
     
     // MARK: - 按钮方法
@@ -147,9 +156,9 @@ class HomeTableViewController: BaseTableViewController {
     /**
      读取微博数据方法
      */
-    private func loadWeiboData() {
+    private func loadWeiboStatus() {
         
-        loadWeiboStatuses { (array, error) -> () in
+        NetworkUtil.sharedInstance.loadWeiboStatuses { (array, error) -> () in
             if error != nil {
                 let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
                 hud.label.text = "获取微博数据失败"
@@ -168,26 +177,6 @@ class HomeTableViewController: BaseTableViewController {
             }
             
             self.acquireImageCaches(modelArray)
-        }
-    }
-    
-    /**
-     读取微博接口
-     */
-    private func loadWeiboStatuses(finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
-        
-        assert(UserAccount.loadUserAccount() != nil, "必须授权之后才能获取微博数据")
-        
-        let path = "2/statuses/home_timeline.json"
-        let parameters = ["access_token": UserAccount.loadUserAccount()!.accessToken!]
-        Alamofire.request(Method.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
-            print(response.result.value)
-            guard let array = (response.result.value as! [String: AnyObject])["statuses"] as? [[String: AnyObject]] else {
-                finished(array: nil, error: NSError(domain: "com.github.chester", code: 1000, userInfo: ["message": "获取数据失败"]))
-                return
-            }
-            
-            finished(array: array, error: nil)
         }
     }
     
@@ -217,7 +206,7 @@ class HomeTableViewController: BaseTableViewController {
     
 }
 
-extension HomeTableViewController {
+extension HomeViewController {
     
     /**
      共有组数方法
@@ -240,9 +229,16 @@ extension HomeTableViewController {
      */
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
-        cell.viewModel = statusArray![indexPath.row]
-        return cell
+        let viewModel = statusArray![indexPath.row]
+        if viewModel.status.retweetedStatus != nil {
+            let cell = tableView.dequeueReusableCellWithIdentifier(retweetReuseIdentifier, forIndexPath: indexPath) as! RetweetStatusCell
+            cell.viewModel = statusArray![indexPath.row]
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(weiboReuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
+            cell.viewModel = statusArray![indexPath.row]
+            return cell
+        }
     }
     
 }
