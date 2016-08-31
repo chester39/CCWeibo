@@ -55,6 +55,108 @@ class BaseWeiboCell: UITableViewCell {
     // 微博模型
     var viewModel: StatusViewModel?
     
+    // MARK: - 界面方法
+    
+    /**
+     初始化基本界面方法
+     */
+    func setupBaseUI() {
+        
+        iconView.layer.cornerRadius = 20
+        iconView.clipsToBounds = true
+        contentView.addSubview(iconView)
+        
+        verifiedView.image = UIImage(named: "avatar_vip")
+        contentView.addSubview(verifiedView)
+        
+        contentView.addSubview(nameLabel)
+        
+        vipView.image = UIImage(named: "common_icon_membership")
+        contentView.addSubview(vipView)
+        
+        timeLabel.textColor = UIColor(hex: 0xa5a5a5)
+        contentView.addSubview(timeLabel)
+        
+        sourceLabel.textColor = UIColor(hex: 0xa5a5a5)
+        contentView.addSubview(sourceLabel)
+        
+        contentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewMargin
+        contentView.addSubview(contentLabel)
+        
+        contentView.addSubview(footerView)
+        
+        retweetButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        retweetButton.setTitle("转发", forState: UIControlState.Normal)
+        retweetButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+        retweetButton.titleLabel?.font = UIFont.systemFontOfSize(15)
+        footerView.addSubview(retweetButton)
+        
+        commentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        commentButton.setTitle("评论", forState: UIControlState.Normal)
+        commentButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+        commentButton.titleLabel?.font = UIFont.systemFontOfSize(15)
+        footerView.addSubview(commentButton)
+        
+        likeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        likeButton.setTitle("赞", forState: UIControlState.Normal)
+        likeButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+        likeButton.titleLabel?.font = UIFont.systemFontOfSize(15)
+        footerView.addSubview(likeButton)
+    }
+    
+    /**
+     初始化基本约束方法
+     */
+    func setupBaseConstraints() {
+        
+        constrain(iconView, verifiedView) { (iconView, verifiedView) in
+            iconView.width == 40
+            iconView.height == 40
+            iconView.top == iconView.superview!.top + kViewPadding
+            iconView.left == iconView.superview!.left + kViewPadding
+            
+            verifiedView.width == 17
+            verifiedView.height == 17
+            verifiedView.right == iconView.right
+            verifiedView.bottom == iconView.bottom
+        }
+        
+        constrain(nameLabel, vipView, iconView) { (nameLabel, vipView, iconView) in
+            nameLabel.top == iconView.top
+            nameLabel.left == iconView.right + kViewPadding
+            
+            vipView.width == 14
+            vipView.height == 14
+            vipView.centerY == nameLabel.centerY
+            vipView.left ==  nameLabel.right + kViewPadding
+        }
+        
+        constrain(timeLabel, sourceLabel, iconView) { (timeLabel, sourceLabel, iconView) in
+            timeLabel.left == iconView.right + kViewPadding
+            timeLabel.bottom == iconView.bottom
+            
+            sourceLabel.top == timeLabel.top
+            sourceLabel.left == timeLabel.right + kViewPadding
+        }
+        
+        constrain(contentLabel, iconView) { (contentLabel, iconView) in
+            contentLabel.top == iconView.bottom + kViewPadding
+            contentLabel.left == iconView.left
+        }
+        
+        constrain(retweetButton, commentButton, likeButton) { (retweetButton, commentButton, likeButton) in
+            retweetButton.left == retweetButton.superview!.left
+            likeButton.right == likeButton.superview!.right
+            
+            retweetButton.width == commentButton.width
+            commentButton.width == likeButton.width
+            
+            align(top: retweetButton, commentButton, likeButton, retweetButton.superview!)
+            align(bottom: retweetButton, commentButton, likeButton, retweetButton.superview!)
+            distribute(by: 0, leftToRight: retweetButton, commentButton, likeButton)
+        }
+    }
+    
     /**
      初始化图片集合视图方法
      */
