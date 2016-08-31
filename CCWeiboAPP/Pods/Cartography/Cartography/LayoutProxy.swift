@@ -92,12 +92,7 @@ public struct LayoutProxy {
         return Edge(context, view, .Baseline)
     }
 
-    /// The last baseline of the view.
-    public var lastBaseline: Edge {
-        return Edge(context, view, .LastBaseline)
-    }
-    
-    #if os(iOS) || os(tvOS)
+    #if os(iOS)
     /// The first baseline of the view. iOS exclusive.
     @available(iOS, introduced=8.0)
     public var firstBaseline: Edge {

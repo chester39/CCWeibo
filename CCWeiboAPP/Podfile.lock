@@ -1,23 +1,29 @@
 PODS:
-  - Alamofire (3.4.1)
-  - Cartography (0.5.0)
+  - Alamofire (3.4.2)
+  - Cartography (0.6.0)
   - MBProgressHUD (1.0.0)
+  - MJRefresh (3.1.12)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
+  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.4)
-  - Cartography (~> 0.5.0)
+  - Alamofire (~> 3.4.1)
+  - Cartography (~> 0.6.0)
   - MBProgressHUD (~> 1.0.0)
-  - SDWebImage (~> 3.8)
+  - MJRefresh (~> 3.1.12)
+  - SDWebImage (~> 3.8.1)
+  - SwiftyJSON (~> 2.3.2)
 
 SPEC CHECKSUMS:
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  Cartography: 774e5cc446f5a6bca5d4345c5aa6af9a1fe74dc6
+  Alamofire: 6aa33201d20d069e1598891cf928883ff1888c7a
+  Cartography: 70af183a248547694a8cfaa6b989cb7e04589985
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: ce5d4bb0577a25dd74e880399c894f8e1143b873
+PODFILE CHECKSUM: 64ab78e7d01ab06f21ae8fcf6bd906668c41139e
 
 COCOAPODS: 1.0.1
