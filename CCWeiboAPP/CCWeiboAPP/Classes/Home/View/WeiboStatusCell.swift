@@ -31,22 +31,30 @@ class WeiboStatusCell: BaseWeiboCell {
             sourceLabel.text = viewModel?.sourceText
             contentLabel.text = viewModel?.status.text
             
-            pictureCollectionView.registerClass(PictureCell.self, forCellWithReuseIdentifier: pictureReuseIdentifier)
-            pictureCollectionView.dataSource = self
-            pictureCollectionView.showsVerticalScrollIndicator = false
-            pictureCollectionView.showsHorizontalScrollIndicator = false
-            pictureCollectionView.reloadData()
+            if viewModel?.status.repostsCount != 0 {
+                retweetButton.setTitle("\(viewModel!.status.repostsCount)", forState: UIControlState.Normal)
+            }
             
-            let (cellSize, collectionSize) = super.setupPictureCollectionView()
+            if viewModel?.status.commentsCount != 0 {
+                commentButton.setTitle("\(viewModel!.status.commentsCount)", forState: UIControlState.Normal)
+            }
+            
+            if viewModel?.status.attitudesCount != 0 {
+                likeButton.setTitle("\(viewModel!.status.attitudesCount)", forState: UIControlState.Normal)
+            }
+            
+            pictureView.viewModel = viewModel
+            
+            let (cellSize, collectionSize) = pictureView.acquireLayoutSize()
             if cellSize != CGSizeZero {
                 flowLayout.itemSize = cellSize
             }
             
             constrain(clear: group)
             
-            constrain(pictureCollectionView, replace: group) { (pictureCollectionView) in
-                pictureCollectionView.width == collectionSize.width
-                pictureCollectionView.height == collectionSize.height
+            constrain(pictureView, replace: group) { (pictureView) in
+                pictureView.width == collectionSize.width
+                pictureView.height == collectionSize.height
             }
             
             self.layoutIfNeeded()
@@ -83,8 +91,7 @@ class WeiboStatusCell: BaseWeiboCell {
      */
     private func setupUI() {
 
-        pictureCollectionView.backgroundColor = UIColor.clearColor()
-        contentView.addSubview(pictureCollectionView)
+        contentView.addSubview(pictureView)
     }
     
     /**
@@ -92,21 +99,21 @@ class WeiboStatusCell: BaseWeiboCell {
      */
     private func setupConstraints() {
         
-        constrain(pictureCollectionView, contentLabel) { (pictureCollectionView, contentLabel) in
-            pictureCollectionView.top == contentLabel.bottom + kViewPadding
-            pictureCollectionView.left == contentLabel.left
+        constrain(pictureView, contentLabel) { (pictureView, contentLabel) in
+            pictureView.top == contentLabel.bottom + kViewPadding
+            pictureView.left == contentLabel.left
         }
         
-        constrain(pictureCollectionView, replace: group) { (pictureCollectionView) in
-            pictureCollectionView.width == 290
-            pictureCollectionView.height == 90
+        constrain(pictureView, replace: group) { (pictureView) in
+            pictureView.width == 290
+            pictureView.height == 90
         }
         
-        constrain(footerView, pictureCollectionView) { (footerView, pictureCollectionView) in
-            footerView.height == 44
-            footerView.top == pictureCollectionView.bottom + kViewPadding
+        constrain(footerView, pictureView) { (footerView, pictureView) in
+            footerView.height == kNavigationBarHeight
+            footerView.top == pictureView.bottom + kViewPadding
             footerView.left == footerView.superview!.left
-            footerView.bottom == footerView.superview!.bottom
+            footerView.bottom == footerView.superview!.bottom - kViewPadding
             footerView.right == footerView.superview!.right
         }
     }

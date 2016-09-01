@@ -97,7 +97,7 @@ class NewFeatureCell: UICollectionViewCell {
         
         UIView.animateWithDuration(2.0, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 10, options: UIViewAnimationOptions(rawValue: 0), animations: { 
             self.startButton.transform = CGAffineTransformIdentity
-            }) { (true) in
+            }) { (_) in
                 self.startButton.userInteractionEnabled = true
         }
     }

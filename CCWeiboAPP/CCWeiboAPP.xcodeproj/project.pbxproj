@@ -21,7 +21,7 @@
 		259C62F31D6D7BE100884257 /* NewFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C62EE1D6D7BE100884257 /* NewFeatureViewController.swift */; };
 		259C62F41D6D7BE100884257 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C62F01D6D7BE100884257 /* WelcomeView.swift */; };
 		259C62F51D6D7BE100884257 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C62F11D6D7BE100884257 /* WelcomeViewController.swift */; };
-		25A0333E1D76DB9300152FE5 /* NetworkUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A0333D1D76DB9300152FE5 /* NetworkUtil.swift */; };
+		25A0333E1D76DB9300152FE5 /* NetworkingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A0333D1D76DB9300152FE5 /* NetworkingUtil.swift */; };
 		25A033471D76DD8F00152FE5 /* StatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A033401D76DD8F00152FE5 /* StatusModel.swift */; };
 		25A033481D76DD8F00152FE5 /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A033411D76DD8F00152FE5 /* StatusViewModel.swift */; };
 		25A033491D76DD8F00152FE5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A033421D76DD8F00152FE5 /* UserModel.swift */; };
@@ -31,6 +31,7 @@
 		25A033501D76DDCA00152FE5 /* TitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A0334E1D76DDCA00152FE5 /* TitleButton.swift */; };
 		25A033511D76DDCA00152FE5 /* VisitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A0334F1D76DDCA00152FE5 /* VisitorView.swift */; };
 		25BE300B1D6A98D100947C4B /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BE300A1D6A98D100947C4B /* UserAccount.swift */; };
+		25C670251D782E6200337AE0 /* PictureCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C670241D782E6200337AE0 /* PictureCollectionView.swift */; };
 		25D360071D655BF8004A45AA /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D360061D655BF8004A45AA /* OAuthViewController.swift */; };
 		868890031D3D26E70038F753 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868890021D3D26E70038F753 /* AppDelegate.swift */; };
 		8688900A1D3D26E70038F753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 868890091D3D26E70038F753 /* Assets.xcassets */; };
@@ -60,7 +61,7 @@
 		259C62EE1D6D7BE100884257 /* NewFeatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFeatureViewController.swift; sourceTree = "<group>"; };
 		259C62F01D6D7BE100884257 /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		259C62F11D6D7BE100884257 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		25A0333D1D76DB9300152FE5 /* NetworkUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkUtil.swift; sourceTree = "<group>"; };
+		25A0333D1D76DB9300152FE5 /* NetworkingUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingUtil.swift; sourceTree = "<group>"; };
 		25A033401D76DD8F00152FE5 /* StatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusModel.swift; sourceTree = "<group>"; };
 		25A033411D76DD8F00152FE5 /* StatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
 		25A033421D76DD8F00152FE5 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -70,6 +71,7 @@
 		25A0334E1D76DDCA00152FE5 /* TitleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleButton.swift; sourceTree = "<group>"; };
 		25A0334F1D76DDCA00152FE5 /* VisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorView.swift; sourceTree = "<group>"; };
 		25BE300A1D6A98D100947C4B /* UserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
+		25C670241D782E6200337AE0 /* PictureCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureCollectionView.swift; sourceTree = "<group>"; };
 		25D360061D655BF8004A45AA /* OAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 		25D360091D66A6EB004A45AA /* CCWeiboAPP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CCWeiboAPP-Bridging-Header.h"; sourceTree = "<group>"; };
 		86888FFF1D3D26E70038F753 /* CC微博.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CC微博.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				25A033441D76DD8F00152FE5 /* BaseWeiboCell.swift */,
+				25C670241D782E6200337AE0 /* PictureCollectionView.swift */,
 				25A033451D76DD8F00152FE5 /* RetweetStatusCell.swift */,
 				25A033461D76DD8F00152FE5 /* WeiboStatusCell.swift */,
 			);
@@ -221,7 +224,7 @@
 				25D360091D66A6EB004A45AA /* CCWeiboAPP-Bridging-Header.h */,
 				252EEAFF1D66E9F100AC064D /* Const.swift */,
 				252EEB001D66E9F100AC064D /* Extension.swift */,
-				25A0333D1D76DB9300152FE5 /* NetworkUtil.swift */,
+				25A0333D1D76DB9300152FE5 /* NetworkingUtil.swift */,
 				86D700491D411B79003C65D7 /* Classes */,
 				868890091D3D26E70038F753 /* Assets.xcassets */,
 				8688900B1D3D26E70038F753 /* LaunchScreen.storyboard */,
@@ -461,7 +464,7 @@
 				25A033471D76DD8F00152FE5 /* StatusModel.swift in Sources */,
 				25A033511D76DDCA00152FE5 /* VisitorView.swift in Sources */,
 				868890031D3D26E70038F753 /* AppDelegate.swift in Sources */,
-				25A0333E1D76DB9300152FE5 /* NetworkUtil.swift in Sources */,
+				25A0333E1D76DB9300152FE5 /* NetworkingUtil.swift in Sources */,
 				259C62F21D6D7BE100884257 /* NewFeatureCell.swift in Sources */,
 				86D700581D411C7C003C65D7 /* MessageViewController.swift in Sources */,
 				252EEB021D66E9F100AC064D /* Extension.swift in Sources */,
@@ -470,6 +473,7 @@
 				86D700561D411C73003C65D7 /* DiscoverViewController.swift in Sources */,
 				86D700521D411C26003C65D7 /* MainViewController.swift in Sources */,
 				252EEB011D66E9F100AC064D /* Const.swift in Sources */,
+				25C670251D782E6200337AE0 /* PictureCollectionView.swift in Sources */,
 				25BE300B1D6A98D100947C4B /* UserAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,6 +19,11 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>Pods-CCWeiboAPP.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -29,9 +34,29 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>203EEC8CDA940AB87CCDAF204C41B7A1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>29DD99664D189A7CA206368F493B1E0B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>405A9EFDE6CED74C1C135D0B8CAAAACF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>722622576416C83751583AE37C4F3DFA</key>
 		<dict>
 			<key>primary</key>
@@ -53,6 +78,11 @@
 			<true/>
 		</dict>
 		<key>DBA6001481CEA0EBA031CC5C94508FAA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EBF40563244B390F409698C433231E67</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -7,23 +7,31 @@
 import UIKit
 
 import MBProgressHUD
+import MJRefresh
 import SDWebImage
 
 class HomeViewController: BaseViewController {
     
-    // WeiboStatusCell重用标识符
-    private var weiboReuseIdentifier = "WeiboStatusCell"
-    // RetweetStatusCell重用标识符
-    private var retweetReuseIdentifier = "RetweetStatusCell"
+    // 最后一条微博与否
+    private var isLastStatus = false
+    
+    // 刷新提醒标签
+    private var tipLabel: UILabel = {
+        let label = UILabel(text: "没有更多数据", fontSize: 15, lines: 1)
+        label.backgroundColor = UIColor.orangeColor()
+        label.textColor = UIColor.whiteColor()
+        label.textAlignment = NSTextAlignment.Center
+        label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kNavigationBarHeight)
+        label.hidden = true
+        
+        return label
+    }()
+    
     // Cell行高缓存
     private var rowHeightCaches = [Int: CGFloat]()
     
     // 微博数组
-    var statusArray: [StatusViewModel]? {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var statusArray: [StatusViewModel]?
     
     // 标题按钮懒加载
     private lazy var titleButton: UIButton = {
@@ -97,6 +105,8 @@ class HomeViewController: BaseViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidPresented, object: presentationManger)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidDismissed, object: presentationManger)
+        
+        navigationController?.navigationBar.insertSubview(tipLabel, atIndex: 0)
     }
     
     /**
@@ -107,8 +117,14 @@ class HomeViewController: BaseViewController {
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: weiboReuseIdentifier)
-        tableView.registerClass(RetweetStatusCell.self, forCellReuseIdentifier: retweetReuseIdentifier)
+        tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: kWeiboStatusReuseIdentifier)
+        tableView.registerClass(RetweetStatusCell.self, forCellReuseIdentifier: kRetweetStatusReuseIdentifier)
+        
+        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadWeiboStatus))
+        tableView.mj_header.automaticallyChangeAlpha = true
+
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadWeiboStatus))
+        tableView.mj_footer.automaticallyChangeAlpha = true
     }
     
     // MARK: - 按钮方法
@@ -156,9 +172,16 @@ class HomeViewController: BaseViewController {
     /**
      读取微博数据方法
      */
-    private func loadWeiboStatus() {
+    @objc private func loadWeiboStatus() {
         
-        NetworkUtil.sharedInstance.loadWeiboStatuses { (array, error) -> () in
+        var sinceID = statusArray?.first?.status.weiboID ?? 0
+        var maxID = 0
+        if isLastStatus {
+            sinceID = 0
+            maxID = statusArray?.last?.status.weiboID ?? 0
+        }
+        
+        NetworkingUtil.sharedInstance.loadWeiboStatuses(sinceID, maxID: maxID) { (array, error) -> () in
             if error != nil {
                 let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
                 hud.label.text = "获取微博数据失败"
@@ -176,7 +199,20 @@ class HomeViewController: BaseViewController {
                 modelArray.append(viewModel)
             }
             
+            if sinceID != 0 {
+                self.statusArray = modelArray + self.statusArray!
+                
+            } else if maxID != 0 {
+                self.statusArray = self.statusArray! + modelArray
+                
+            } else {
+                self.statusArray = modelArray
+            }
+            
             self.acquireImageCaches(modelArray)
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
+            self.showRefreshStatus(modelArray.count)
         }
     }
     
@@ -200,7 +236,26 @@ class HomeViewController: BaseViewController {
         }
         
         dispatch_group_notify(group, dispatch_get_main_queue()) {
-            self.statusArray = viewModelArray
+            self.tableView.reloadData()
+        }
+    }
+    
+    /**
+     显示刷新提醒方法
+     */
+    private func showRefreshStatus(count: Int) {
+        
+        tipLabel.text = (count == 0) ? "没有更多数据" : "刷新到\(count)条数据"
+        tipLabel.hidden = false
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.tipLabel.transform = CGAffineTransformMakeTranslation(0, kNavigationBarHeight)
+            }) { (_) in
+                UIView.animateWithDuration(1.0, delay: 1.0, options: UIViewAnimationOptions(rawValue: 0), animations: {
+                    self.tipLabel.transform = CGAffineTransformIdentity
+                }) { (_) in
+                    self.tipLabel.hidden = true
+                }
         }
     }
     
@@ -231,12 +286,22 @@ extension HomeViewController {
         
         let viewModel = statusArray![indexPath.row]
         if viewModel.status.retweetedStatus != nil {
-            let cell = tableView.dequeueReusableCellWithIdentifier(retweetReuseIdentifier, forIndexPath: indexPath) as! RetweetStatusCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(kRetweetStatusReuseIdentifier, forIndexPath: indexPath) as! RetweetStatusCell
             cell.viewModel = statusArray![indexPath.row]
+            if indexPath.row == (statusArray!.count - 1) {
+                isLastStatus = true
+                loadWeiboStatus()
+            }
+            
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(weiboReuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(kWeiboStatusReuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
             cell.viewModel = statusArray![indexPath.row]
+            if indexPath.row == (statusArray!.count - 1) {
+                isLastStatus = true
+                loadWeiboStatus()
+            }
+            
             return cell
         }
     }

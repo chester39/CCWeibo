@@ -9,10 +9,10 @@ import WebKit
 
 import Alamofire
 
-class NetworkUtil {
+class NetworkingUtil {
     
     // 单例初始化方法
-    static let sharedInstance = NetworkUtil()
+    static let sharedInstance = NetworkingUtil()
     
     /**
      私有初始化方法
@@ -65,14 +65,14 @@ class NetworkUtil {
     /**
      读取微博内容方法
      */
-    func loadWeiboStatuses(finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
+    func loadWeiboStatuses(sinceID: Int, maxID: Int, finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
         
         assert(UserAccount.loadUserAccount() != nil, "必须授权之后才能获取微博数据")
         
         let path = "2/statuses/home_timeline.json"
-        let parameters = ["access_token": UserAccount.loadUserAccount()!.accessToken!]
+        let temp = (maxID != 0) ? maxID - 1 : maxID
+        let parameters = ["access_token": UserAccount.loadUserAccount()!.accessToken!, "since_id": String(sinceID), "max_id": String(temp)]
         Alamofire.request(Method.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
-            print(response.result.value)
             guard let array = (response.result.value as! [String: AnyObject])["statuses"] as? [[String: AnyObject]] else {
                 finished(array: nil, error: NSError(domain: "com.github.chester", code: 1000, userInfo: ["message": "获取数据失败"]))
                 return

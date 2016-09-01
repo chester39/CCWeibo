@@ -10,8 +10,6 @@ class NewFeatureViewController: UIViewController {
 
     // 最大新特性界面数
     private var maxCount = 4
-    // Cell重用标识符
-    private let reuseIdentifier = "NewFeatureCell"
     // 新特性集合视图
     var newFeatureView = UICollectionView(frame: kScreenFrame, collectionViewLayout: NewFeatureLayout())
     
@@ -36,7 +34,7 @@ class NewFeatureViewController: UIViewController {
         
         newFeatureView.dataSource = self
         newFeatureView.delegate = self
-        newFeatureView.registerClass(NewFeatureCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        newFeatureView.registerClass(NewFeatureCell.self, forCellWithReuseIdentifier: kNewFeatureReuseIdentifier)
         view.addSubview(newFeatureView)
     }
 
@@ -65,7 +63,7 @@ extension NewFeatureViewController: UICollectionViewDataSource {
      */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! NewFeatureCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kNewFeatureReuseIdentifier, forIndexPath: indexPath) as! NewFeatureCell
         cell.index = indexPath.item
         return cell
     }

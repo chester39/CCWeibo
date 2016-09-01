@@ -69,7 +69,7 @@ class StatusViewModel: NSObject {
             let startIndex = sourceString.rangeOfString(">").location + 1
             let length = sourceString.rangeOfString("<", options: NSStringCompareOptions.BackwardsSearch).location - startIndex
             let restString = sourceString.substringWithRange(NSMakeRange(startIndex, length))
-            sourceText = "来自: " + restString
+            sourceText = "来自" + restString
         }
         
         if let pictureArray = (status.retweetedStatus != nil) ? status.retweetedStatus?.pictureURLArray : status.pictureURLArray {
@@ -116,7 +116,7 @@ class StatusViewModel: NSObject {
                 let startIndex = sourceString.rangeOfString(">").location + 1
                 let length = sourceString.rangeOfString("<", options: NSStringCompareOptions.BackwardsSearch).location - startIndex
                 let restString = sourceString.substringWithRange(NSMakeRange(startIndex, length))
-                retweetSourceText = "来自: " + restString
+                retweetSourceText = "来自" + restString
             }
         }
     }

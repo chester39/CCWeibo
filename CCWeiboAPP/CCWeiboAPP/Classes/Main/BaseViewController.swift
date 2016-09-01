@@ -8,7 +8,7 @@ import UIKit
 
 class BaseViewController: UITableViewController {
     
-    // 用户是否登录
+    // 用户登录与否
     var isUserLogin = UserAccount.isUserLogin()
     // 访客视图
     var vistorView = VisitorView(frame: kScreenFrame)

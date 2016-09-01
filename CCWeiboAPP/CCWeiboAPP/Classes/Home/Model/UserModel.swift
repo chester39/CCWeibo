@@ -8,8 +8,8 @@ import UIKit
 
 class UserModel: NSObject {
     
-    // 微博ID
-    var weiboID: Int = 0
+    // 用户ID
+    var userID: Int = 0
     // 用户昵称
     var screenName: String?
     // 用户头像地址
@@ -28,7 +28,7 @@ class UserModel: NSObject {
         
         super.init()
         
-        weiboID = dict[kWeiboID] as! Int
+        userID = dict[kWeiboID] as! Int
         screenName = dict[kScreenName] as? String
         avatarLarge = dict[kAvatarLarge] as? String
         verifiedType = dict[kVerifiedType] as! Int

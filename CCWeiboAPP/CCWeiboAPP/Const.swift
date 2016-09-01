@@ -52,7 +52,7 @@ let kExpiresDate: String = "expires_date"
 let kScreenName: String = "screen_name"
 // 用户头像地址
 let kAvatarLarge: String = "avatar_large"
-// 微博ID
+// 微博通用ID
 let kWeiboID: String = "id"
 // 用户认证类型
 let kVerifiedType: String = "verified_type"
@@ -60,7 +60,7 @@ let kVerifiedType: String = "verified_type"
 let kMbRank: String = "mbrank"
 // 微博创建时间
 let kCreatedAt: String = "created_at"
-// 微博正文
+// 微博信息内容
 let kWeiboText: String = "text"
 // 微博来源
 let kWeiboSource: String = "source"
@@ -68,6 +68,12 @@ let kWeiboSource: String = "source"
 let kPictureURLArray: String = "pic_urls"
 // 微博配图URL
 let kThumbnailPicture: String = "thumbnail_pic"
+// 转发数
+let kRepostsCount: String = "reposts_count"
+// 评论数
+let kCommentsCount: String = "comments_count"
+// 表态数
+let kAttitudesCount: String = "attitudes_count"
 // 转发微博
 let kRetweetedStatus: String = "retweeted_status"
 
@@ -81,3 +87,14 @@ let kPopoverPresentationManagerDidDismissed: String = "PopoverPresentationManage
 let kSwitchRootViewController: String = "SwitchRootViewController"
 // 应用版本
 let kAppVersion: String = "AppVersion"
+
+// MARK: - Cell重用标识符
+
+// 图片Cell重用标识符
+let kPictureReuseIdentifier: String = "PictureCell"
+// 微博Cell重用标识符
+let kWeiboStatusReuseIdentifier: String = "WeiboStatusCell"
+// 转发微博Cell重用标识符
+let kRetweetStatusReuseIdentifier: String = "RetweetStatusCell"
+// 新特性Cell重用标识符
+let kNewFeatureReuseIdentifier: String = "NewFeatureCell"

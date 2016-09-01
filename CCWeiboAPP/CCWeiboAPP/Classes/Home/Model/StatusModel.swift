@@ -12,12 +12,18 @@ class StatusModel: NSObject {
     var createdAt: String?
     // 微博ID
     var weiboID: Int = 0
-    // 微博正文
+    // 微博信息内容
     var text: String?
     // 微博来源
     var source: String?
     // 微博配图数组
     var pictureURLArray: [[String: AnyObject]]?
+    // 转发数
+    var repostsCount: Int = 0
+    // 评论数
+    var commentsCount: Int = 0
+    // 表态数
+    var attitudesCount: Int = 0
     // 转发微博
     var retweetedStatus: StatusModel?
     // 微博用户
@@ -65,11 +71,23 @@ class StatusModel: NSObject {
     override func setValue(value: AnyObject?, forUndefinedKey key: String) {
         
         switch key {
+        case kWeiboID:
+            weiboID = value as! Int
+            
         case kCreatedAt:
             createdAt = value as? String
             
         case kPictureURLArray:
             pictureURLArray = value as? [[String: AnyObject]]
+            
+        case kRepostsCount:
+            repostsCount = value as! Int
+            
+        case kCommentsCount:
+            commentsCount = value as! Int
+            
+        case kAttitudesCount:
+            attitudesCount = value as! Int
             
         case kRetweetedStatus:
             retweetedStatus = StatusModel(dict: value as! [String: AnyObject])

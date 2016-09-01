@@ -21,7 +21,7 @@ class RetweetStatusCell: BaseWeiboCell {
     private var retweetVerifiedView = UIImageView()
     // 转发微博会员图片视图
     private var retweetVipView = UIImageView()
-    // 转发微博内容标签
+    // 转发微博信息内容标签
     private var retweetContentLabel = UILabel(text: "", fontSize: 13, lines: 0)
     // 转发微博时间标签
     private var retweetTimeLabel = UILabel(text: "", fontSize: 12, lines: 1)
@@ -45,6 +45,18 @@ class RetweetStatusCell: BaseWeiboCell {
             sourceLabel.text = viewModel?.sourceText
             contentLabel.text = viewModel?.status.text
             
+            if viewModel?.status.repostsCount != 0 {
+                retweetButton.setTitle("\(viewModel!.status.repostsCount)", forState: UIControlState.Normal)
+            }
+            
+            if viewModel?.status.commentsCount != 0 {
+                commentButton.setTitle("\(viewModel!.status.commentsCount)", forState: UIControlState.Normal)
+            }
+            
+            if viewModel?.status.attitudesCount != 0 {
+                likeButton.setTitle("\(viewModel!.status.attitudesCount)", forState: UIControlState.Normal)
+            }
+            
             retweetNameLabel.text = viewModel?.retweetScreenNameText
             retweetVerifiedView.image = viewModel?.retweetVerifiedImage
             retweetVipView.image = nil
@@ -56,21 +68,17 @@ class RetweetStatusCell: BaseWeiboCell {
             retweetTimeLabel.text = viewModel?.retweetCreatTimeText
             retweetSourceLabel.text = viewModel?.retweetSourceText
             
-            pictureCollectionView.registerClass(PictureCell.self, forCellWithReuseIdentifier: pictureReuseIdentifier)
-            pictureCollectionView.dataSource = self
-            pictureCollectionView.showsVerticalScrollIndicator = false
-            pictureCollectionView.showsHorizontalScrollIndicator = false
-            pictureCollectionView.reloadData()
+            pictureView.viewModel = viewModel
             
-            let (cellSize, collectionSize) = super.setupPictureCollectionView()
+            let (cellSize, collectionSize) = pictureView.acquireLayoutSize()
             if cellSize != CGSizeZero {
                 flowLayout.itemSize = cellSize
             }
             
             constrain(clear: group)
-            constrain(pictureCollectionView, replace: group) { (pictureCollectionView) in
-                pictureCollectionView.width == collectionSize.width
-                pictureCollectionView.height == collectionSize.height
+            constrain(pictureView, replace: group) { (pictureView) in
+                pictureView.width == collectionSize.width
+                pictureView.height == collectionSize.height
             }
             
             self.layoutIfNeeded()
@@ -125,8 +133,7 @@ class RetweetStatusCell: BaseWeiboCell {
         retweetContentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewMargin
         retweetView.addSubview(retweetContentLabel)
         
-        pictureCollectionView.backgroundColor = UIColor.clearColor()
-        retweetView.addSubview(pictureCollectionView)
+        retweetView.addSubview(pictureView)
         
         retweetTimeLabel.textColor = UIColor(hex: 0xa5a5a5)
         retweetView.addSubview(retweetTimeLabel)
@@ -161,29 +168,29 @@ class RetweetStatusCell: BaseWeiboCell {
             distribute(by: 0, leftToRight: retweetNameLabel, retweetVerifiedView, retweetVipView)
         }
         
-        constrain(retweetContentLabel, pictureCollectionView, retweetNameLabel) { (retweetContentLabel, pictureCollectionView, retweetNameLabel) in
-            align(left: retweetNameLabel, retweetContentLabel, pictureCollectionView)
-            distribute(by: kViewPadding, vertically: retweetNameLabel, retweetContentLabel, pictureCollectionView)
+        constrain(retweetContentLabel, pictureView, retweetNameLabel) { (retweetContentLabel, pictureView, retweetNameLabel) in
+            align(left: retweetNameLabel, retweetContentLabel, pictureView)
+            distribute(by: kViewPadding, vertically: retweetNameLabel, retweetContentLabel, pictureView)
         }
         
-        constrain(pictureCollectionView, replace: group) { (pictureCollectionView) in
-            pictureCollectionView.width == 290
-            pictureCollectionView.height == 90
+        constrain(pictureView, replace: group) { (pictureView) in
+            pictureView.width == 290
+            pictureView.height == 90
         }
         
-        constrain(retweetTimeLabel, retweetSourceLabel, pictureCollectionView) { (retweetTimeLabel, retweetSourceLabel, pictureCollectionView) in
-            retweetTimeLabel.top == pictureCollectionView.bottom + kViewPadding
-            retweetTimeLabel.left == pictureCollectionView.left
+        constrain(retweetTimeLabel, retweetSourceLabel, pictureView) { (retweetTimeLabel, retweetSourceLabel, pictureView) in
+            retweetTimeLabel.top == pictureView.bottom + kViewPadding
+            retweetTimeLabel.left == pictureView.left
             
             retweetSourceLabel.top == retweetTimeLabel.top
             retweetSourceLabel.left == retweetTimeLabel.right + kViewPadding
         }
         
         constrain(footerView, retweetTimeLabel) { (footerView, retweetTimeLabel) in
-            footerView.height == 44
+            footerView.height == kNavigationBarHeight
             footerView.top == retweetTimeLabel.bottom + kViewPadding
             footerView.left == footerView.superview!.left
-            footerView.bottom == footerView.superview!.bottom
+            footerView.bottom == footerView.superview!.bottom - kViewPadding
             footerView.right == footerView.superview!.right
         }
     }

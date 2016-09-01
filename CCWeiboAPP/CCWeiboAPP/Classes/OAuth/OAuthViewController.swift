@@ -34,7 +34,7 @@ class OAuthViewController: UIViewController {
         oauthView.navigationDelegate = self
         view.addSubview(oauthView)
         
-        NetworkUtil.sharedInstance.loadRequestToken(oauthView)
+        NetworkingUtil.sharedInstance.loadRequestToken(oauthView)
     }
     
     // MARK: - 按钮方法
@@ -95,7 +95,7 @@ extension OAuthViewController: WKNavigationDelegate {
         let key = "code="
         if urlString.containsString(key) {
             let code = navigationAction.request.URL?.query?.substringFromIndex(key.endIndex)
-            NetworkUtil.sharedInstance.loadAccessToken(code)
+            NetworkingUtil.sharedInstance.loadAccessToken(code)
             decisionHandler(WKNavigationActionPolicy.Cancel)
         }
         

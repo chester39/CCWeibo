@@ -105,7 +105,7 @@ class WelcomeView: UIView {
         
         UIView.animateWithDuration(1.5, animations: {
             self.layoutIfNeeded()
-        }) { (true) in
+        }) { (_) in
             UIView.animateWithDuration(1.0, animations: {
                 self.textLabel.alpha = 1.0
                 }, completion: { (true) in

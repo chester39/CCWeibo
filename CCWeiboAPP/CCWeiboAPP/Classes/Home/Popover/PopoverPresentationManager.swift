@@ -88,9 +88,9 @@ extension PopoverPresentationManager: UIViewControllerAnimatedTransitioning {
         transitionContext.containerView()?.addSubview(toView)
         toView.transform = CGAffineTransformMakeScale(1.0, 0.0)
         toView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.0)
-        UIView.animateWithDuration(transitionDuration(transitionContext), animations: { () -> Void in
+        UIView.animateWithDuration(transitionDuration(transitionContext), animations: {
             toView.transform = CGAffineTransformIdentity
-            }) { (_) -> Void in
+            }) { (_) in
                 transitionContext.completeTransition(true)
         }
     }
@@ -105,9 +105,9 @@ extension PopoverPresentationManager: UIViewControllerAnimatedTransitioning {
             return
         }
         
-        UIView.animateWithDuration(transitionDuration(transitionContext), animations: { () -> Void in
+        UIView.animateWithDuration(transitionDuration(transitionContext), animations: {
             fromView.transform = CGAffineTransformMakeScale(1.0, 0.00001)
-            }) { (_) -> Void in
+            }) { (_) in
                 transitionContext.completeTransition(true)
         }
     }
