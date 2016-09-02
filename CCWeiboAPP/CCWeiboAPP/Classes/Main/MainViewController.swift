@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	MainViewController.swift
+//		CCWeiboAPP
 //		Chen Chen @ July 21st, 2016
 //
 
@@ -8,7 +8,7 @@ import UIKit
 
 class MainViewController: UITabBarController {
     
-    // 发布按钮懒加载
+    // 发布按钮
     private lazy var composeButton: UIButton = { 
         let button = UIButton(imageName: "tabbar_compose_icon_add", backgroundImageName: "tabbar_compose_button")
         button.addTarget(self, action: #selector(composeButtonDidClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)

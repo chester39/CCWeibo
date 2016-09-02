@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	DiscoverViewController.swift
+//		CCWeiboAPP
 //		Chen Chen @ July 21st, 2016
 //
 

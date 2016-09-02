@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	PopoverPresentationManager.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 10th, 2016
 //
 

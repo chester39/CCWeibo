@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	OAuthViewController.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 18th, 2016
 //
 
@@ -44,7 +44,7 @@ class OAuthViewController: UIViewController {
      */
     func closeButtonDidClick() {
         
-        NSNotificationCenter.defaultCenter().postNotificationName(kSwitchRootViewController, object: true)
+        NSNotificationCenter.defaultCenter().postNotificationName(kRootViewControllerSwitched, object: true)
     }
     
     /**

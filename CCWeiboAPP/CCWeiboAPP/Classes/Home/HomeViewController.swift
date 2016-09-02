@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	HomeViewController.swift
+//		CCWeiboAPP
 //		Chen Chen @ July 21st, 2016
 //
 
@@ -17,7 +17,7 @@ class HomeViewController: BaseViewController {
     
     // 刷新提醒标签
     private var tipLabel: UILabel = {
-        let label = UILabel(text: "没有更多数据", fontSize: 15, lines: 1)
+        let label = UILabel(text: "没有更多微博", fontSize: 15, lines: 1)
         label.backgroundColor = UIColor.orangeColor()
         label.textColor = UIColor.whiteColor()
         label.textAlignment = NSTextAlignment.Center
@@ -33,7 +33,7 @@ class HomeViewController: BaseViewController {
     // 微博数组
     var statusArray: [StatusViewModel]?
     
-    // 标题按钮懒加载
+    // 标题按钮
     private lazy var titleButton: UIButton = {
         let button = TitleButton()
         let title = UserAccount.loadUserAccount()?.screenName
@@ -43,7 +43,7 @@ class HomeViewController: BaseViewController {
         return button
     }()
     
-    // 转场管理器懒加载
+    // 转场管理器
     private lazy var presentationManger: PopoverPresentationManager = {
         let manager = PopoverPresentationManager()
         let presentWidth: CGFloat = 200
@@ -105,6 +105,7 @@ class HomeViewController: BaseViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidPresented, object: presentationManger)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidDismissed, object: presentationManger)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(pictureCellDidClick(_:)), name: kPictureBrowserControllerShowed, object: nil)
         
         navigationController?.navigationBar.insertSubview(tipLabel, atIndex: 0)
     }
@@ -167,6 +168,31 @@ class HomeViewController: BaseViewController {
         presentViewController(qrcNC, animated: true, completion: nil)
     }
     
+    /**
+     图片Cell点击方法
+     */
+    @objc private func pictureCellDidClick(notice: NSNotification) {
+        
+        guard let array = notice.userInfo!["middlePicture"] as? [NSURL] else {
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.label.text = "获取图片失败"
+            hud.hideAnimated(true, afterDelay: 2.0)
+            
+            return
+        }
+        
+        guard let index = notice.userInfo!["indexPath"] as? NSIndexPath else {
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.label.text = "获取索引失败"
+            hud.hideAnimated(true, afterDelay: 2.0)
+            
+            return
+        }
+        
+        let pbc = PictureBrowserController(urlArray: array, indexPath: index)
+        presentViewController(pbc, animated: true, completion: nil)
+    }
+    
     // MARK: - 数据方法
     
     /**
@@ -209,9 +235,9 @@ class HomeViewController: BaseViewController {
                 self.statusArray = modelArray
             }
             
-            self.acquireImageCaches(modelArray)
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
+            self.acquireImageCaches(modelArray)
             self.showRefreshStatus(modelArray.count)
         }
     }
@@ -245,7 +271,7 @@ class HomeViewController: BaseViewController {
      */
     private func showRefreshStatus(count: Int) {
         
-        tipLabel.text = (count == 0) ? "没有更多数据" : "刷新到\(count)条数据"
+        tipLabel.text = (count == 0) ? "没有更多微博" : "\(count) 条微博"
         tipLabel.hidden = false
         
         UIView.animateWithDuration(0.5, animations: {

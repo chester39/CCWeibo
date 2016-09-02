@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	UserModel.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 23rd, 2016
 //
 

@@ -1,12 +1,11 @@
 //
-//	iOS培训
-//		小码哥
+//	PictureCollectionView.swift
+//		CCWeiboAPP
 //		Chen Chen @ September 1st, 2016
 //
 
 import UIKit
 
-import Cartography
 import SDWebImage
 
 class PictureCollectionView: UICollectionView {
@@ -32,6 +31,7 @@ class PictureCollectionView: UICollectionView {
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         dataSource = self
+        delegate = self
     }
     
     /**
@@ -48,8 +48,8 @@ class PictureCollectionView: UICollectionView {
     func acquireLayoutSize() -> (cellSize: CGSize, collectionSize: CGSize) {
         
         let count = viewModel?.thumbnailPictureArray?.count ?? 0
-        let imageWidth: CGFloat = 90
-        let imageHeight: CGFloat = 90
+        let imageWidth: CGFloat = 95
+        let imageHeight: CGFloat = 95
         
         switch count {
         case 0:
@@ -106,41 +106,17 @@ extension PictureCollectionView: UICollectionViewDataSource {
         
         return cell
     }
+    
 }
 
-class PictureCell: UICollectionViewCell {
-    
-    // 图片视图
-    var imageView = UIImageView()
-    
-    // 图片URL
-    var url: NSURL? {
-        didSet {
-            imageView.sd_setImageWithURL(url)
-        }
-    }
-    
-    // MARK: - 初始化方法
+extension PictureCollectionView: UICollectionViewDelegate {
     
     /**
-     自定义初始化方法
+     选中集合方法
      */
-    override init(frame: CGRect) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        super.init(frame: frame)
-        
-        contentView.addSubview(imageView)
-        constrain(imageView) { (imageView) in
-            imageView.edges == inset(imageView.superview!.edges, 0)
-        }
+        let userInfo = ["middlePicture": viewModel!.middlePictureArray!, "indexPath": indexPath]
+        NSNotificationCenter.defaultCenter().postNotificationName(kPictureBrowserControllerShowed, object: self, userInfo: userInfo)
     }
-    
-    /**
-     数据解码XIB初始化方法
-     */
-    required init?(coder aDecoder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }

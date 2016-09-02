@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	CCWeiboAPP-Bridging-Header.h
+//		CCWeiboAPP
 //		Chen Chen @ August 19th, 2016
 //
 

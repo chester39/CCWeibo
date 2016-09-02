@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	NetworkingUtil.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 31st, 2016
 //
 
@@ -8,6 +8,7 @@ import UIKit
 import WebKit
 
 import Alamofire
+import SwiftyJSON
 
 class NetworkingUtil {
     
@@ -73,6 +74,15 @@ class NetworkingUtil {
         let temp = (maxID != 0) ? maxID - 1 : maxID
         let parameters = ["access_token": UserAccount.loadUserAccount()!.accessToken!, "since_id": String(sinceID), "max_id": String(temp)]
         Alamofire.request(Method.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
+//        
+//            if let value = response.result.value {
+//                
+//                let json = JSON(value)
+//                let array = json[0]["statuses"].dictionary
+//                print(json.dictionary)
+//                print(json)
+//            }
+            
             guard let array = (response.result.value as! [String: AnyObject])["statuses"] as? [[String: AnyObject]] else {
                 finished(array: nil, error: NSError(domain: "com.github.chester", code: 1000, userInfo: ["message": "获取数据失败"]))
                 return

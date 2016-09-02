@@ -1,17 +1,17 @@
 //
-//	iOS培训
-//		小码哥
+//	NewFeatureController.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 22nd, 2016
 //
 
 import UIKit
 
-class NewFeatureViewController: UIViewController {
+class NewFeatureController: UIViewController {
 
     // 最大新特性界面数
     private var maxCount = 4
     // 新特性集合视图
-    var newFeatureView = UICollectionView(frame: kScreenFrame, collectionViewLayout: NewFeatureLayout())
+    var newFeatureView = UICollectionView(frame: kScreenFrame, collectionViewLayout: PictureLayout())
     
     // MARK: - 系统方法
     
@@ -40,7 +40,7 @@ class NewFeatureViewController: UIViewController {
 
 }
 
-extension NewFeatureViewController: UICollectionViewDataSource {
+extension NewFeatureController: UICollectionViewDataSource {
     
     /**
      共有组数方法
@@ -67,9 +67,10 @@ extension NewFeatureViewController: UICollectionViewDataSource {
         cell.index = indexPath.item
         return cell
     }
+    
 }
 
-extension NewFeatureViewController: UICollectionViewDelegate {
+extension NewFeatureController: UICollectionViewDelegate {
     
     /**
      指定行已经消失方法
@@ -82,9 +83,10 @@ extension NewFeatureViewController: UICollectionViewDelegate {
             currentCell.startAnimation()
         }
     }
+    
 }
 
-private class NewFeatureLayout: UICollectionViewFlowLayout {
+class PictureLayout: UICollectionViewFlowLayout {
     
     /**
      准备布局方法
@@ -101,4 +103,5 @@ private class NewFeatureLayout: UICollectionViewFlowLayout {
         collectionView?.showsHorizontalScrollIndicator = false
         collectionView?.showsVerticalScrollIndicator = false
     }
+    
 }

@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	Extension.swift
+//		CCWeiboAPP
 //		Chen Chen @ July 25th, 2016
 //
 

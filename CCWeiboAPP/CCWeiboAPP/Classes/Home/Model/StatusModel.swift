@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	StatusModel.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 23rd, 2016
 //
 

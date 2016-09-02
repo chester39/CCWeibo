@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	WeiboStatusCell.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 24th, 2016
 //
 
@@ -100,20 +100,20 @@ class WeiboStatusCell: BaseWeiboCell {
     private func setupConstraints() {
         
         constrain(pictureView, contentLabel) { (pictureView, contentLabel) in
-            pictureView.top == contentLabel.bottom + kViewPadding
+            pictureView.top == contentLabel.bottom + kViewBorder
             pictureView.left == contentLabel.left
         }
         
         constrain(pictureView, replace: group) { (pictureView) in
-            pictureView.width == 290
-            pictureView.height == 90
+            pictureView.width == 300
+            pictureView.height == 100
         }
         
         constrain(footerView, pictureView) { (footerView, pictureView) in
             footerView.height == kNavigationBarHeight
-            footerView.top == pictureView.bottom + kViewPadding
+            footerView.top == pictureView.bottom + kViewBorder
             footerView.left == footerView.superview!.left
-            footerView.bottom == footerView.superview!.bottom - kViewPadding
+            footerView.bottom == footerView.superview!.bottom - kViewBorder
             footerView.right == footerView.superview!.right
         }
     }

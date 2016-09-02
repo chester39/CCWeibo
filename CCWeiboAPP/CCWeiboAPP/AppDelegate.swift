@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	AppDelegate.swift
+//      CCWeiboAPP
 //		Chen Chen @ July 18th, 2016
 //
 
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.orangeColor()
         UITabBar.appearance().tintColor = UIColor.orangeColor()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(changeRootViewController(_:)), name: kSwitchRootViewController, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(changeRootViewController(_:)), name: kRootViewControllerSwitched, object: nil)
         
         return true
     }
@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func defaultViewController() -> UIViewController {
         
         if UserAccount.isUserLogin() {
-            return isNewVersion() ? NewFeatureViewController() : WelcomeViewController()
+            return isNewVersion() ? NewFeatureController() : WelcomeViewController()
         }
         
         return MainViewController()

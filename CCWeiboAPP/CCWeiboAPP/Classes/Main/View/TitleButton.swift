@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	TitleButton.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 1st, 2016
 //
 

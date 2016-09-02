@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	NewFeatureCell.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 22nd, 2016
 //
 
@@ -19,10 +19,10 @@ class NewFeatureCell: UICollectionViewCell {
         }
     }
     
-    // 图片视图懒加载
+    // 图片视图
     private lazy var imageView = UIImageView()
     
-    // 开始按钮懒加载
+    // 开始按钮
     private lazy var startButton: UIButton = {
         let button = UIButton(imageName: nil, backgroundImageName: "new_feature_button")
         button.addTarget(self, action: #selector(startButtonDidClick), forControlEvents: UIControlEvents.TouchUpInside)
@@ -83,7 +83,7 @@ class NewFeatureCell: UICollectionViewCell {
      */
     @objc private func startButtonDidClick() {
     
-        NSNotificationCenter.defaultCenter().postNotificationName(kSwitchRootViewController, object: true)
+        NSNotificationCenter.defaultCenter().postNotificationName(kRootViewControllerSwitched, object: true)
     }
     
     /**

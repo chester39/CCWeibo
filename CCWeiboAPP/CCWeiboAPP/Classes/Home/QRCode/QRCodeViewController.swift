@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	QRCodeViewController.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 12th, 2016
 //
 
@@ -14,17 +14,17 @@ class QRCodeViewController: UIViewController {
     // 二维码视图
     var qrCodeView = QRCodeView(frame: kScreenFrame)
     
-    // 视频流输入懒加载
+    // 视频流输入
     private lazy var input: AVCaptureDeviceInput? = {
         let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         
         return try? AVCaptureDeviceInput(device: device)
     }()
     
-    // 视频流会话懒加载
+    // 视频流会话
     private lazy var session: AVCaptureSession = AVCaptureSession()
     
-    // 视频流输出懒加载
+    // 视频流输出
     private lazy var output: AVCaptureMetadataOutput = {
         let out = AVCaptureMetadataOutput()
         
@@ -38,10 +38,10 @@ class QRCodeViewController: UIViewController {
         return out
     }()
     
-    // 视频流预览图层懒加载
+    // 视频流预览图层
     private lazy var previewLayer: AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.session)
     
-    // 视频流描边图层懒加载
+    // 视频流描边图层
     private lazy var containerLayer: CALayer = CALayer()
     
     // MARK: - 系统方法

@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	StatusViewModel.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 25th, 2016
 //
 
@@ -20,16 +20,10 @@ class StatusViewModel: NSObject {
     var sourceText: String = ""
     // 微博配图URL数组
     var thumbnailPictureArray: [NSURL]?
-    // 转发微博用户昵称
-    var retweetScreenNameText: String?
-    // 转发微博用户认证图片
-    var retweetVerifiedImage: UIImage?
-    // 转发微博用户会员等级图片
-    var retweetMemberRankImage: UIImage?
-    // 转发微博创建时间
-    var retweetCreatTimeText: String = ""
-    // 转发微博来源
-    var retweetSourceText: String = ""
+    // 微博配图大图URL数组
+    var middlePictureArray: [NSURL]?
+    // 转发微博信息内容
+    var retweetText: NSMutableAttributedString?
     // 微博模型
     var status: StatusModel
     
@@ -74,50 +68,26 @@ class StatusViewModel: NSObject {
         
         if let pictureArray = (status.retweetedStatus != nil) ? status.retweetedStatus?.pictureURLArray : status.pictureURLArray {
             thumbnailPictureArray = [NSURL]()
+            middlePictureArray = [NSURL]()
             for dict in pictureArray {
-                guard let urlString = dict[kThumbnailPicture] as? String else {
+                guard var urlString = dict[kThumbnailPicture] as? String else {
                     continue
                 }
                 
-                let url = NSURL(string: urlString)!
+                var url = NSURL(string: urlString)!
                 thumbnailPictureArray?.append(url)
+                
+                urlString = urlString.stringByReplacingOccurrencesOfString("thumbnail", withString: "bmiddle")
+                url = NSURL(string: urlString)!
+                middlePictureArray?.append(url)
             }
         }
         
-        if status.retweetedStatus?.text != "" {
-            if let name = status.retweetedStatus?.user?.screenName {
-                retweetScreenNameText = "@" + name
-            }
-            
-            switch status.retweetedStatus?.user?.verifiedType ?? -1 {
-            case 0:
-                retweetVerifiedImage = UIImage(named: "avatar_vip")
-                
-            case 2, 3, 5:
-                retweetVerifiedImage = UIImage(named:"avatar_enterprise_vip")
-                
-            case 220:
-                retweetVerifiedImage = UIImage(named:"avatar_grassroot")
-                
-            default:
-                retweetVerifiedImage = nil
-            }
-            
-            if status.retweetedStatus?.user?.memberRank >= 1 && status.retweetedStatus?.user?.memberRank <= 6 {
-                retweetMemberRankImage = UIImage(named: "common_icon_membership_level\(status.retweetedStatus!.user!.memberRank)")
-            }
-            
-            if let timeString = status.retweetedStatus?.createdAt where timeString != "" {
-                let date = NSDate.convertStringToDate(timeString, formatterString: "EE MM dd HH:mm:ss Z yyyy")
-                retweetCreatTimeText = NSDate.formatDateToString(date)
-            }
-            
-            if let sourceString: NSString = status.retweetedStatus?.source where sourceString != "" {
-                let startIndex = sourceString.rangeOfString(">").location + 1
-                let length = sourceString.rangeOfString("<", options: NSStringCompareOptions.BackwardsSearch).location - startIndex
-                let restString = sourceString.substringWithRange(NSMakeRange(startIndex, length))
-                retweetSourceText = "来自" + restString
-            }
+        if let text = status.retweetedStatus?.text {
+            let name = status.retweetedStatus?.user?.screenName ?? ""
+            let length = name.characters.count + 1
+            retweetText = NSMutableAttributedString(string: "@" + name + ": " + text)
+            retweetText?.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: 0x3F6380), range: NSMakeRange(0, length))
         }
     }
 }

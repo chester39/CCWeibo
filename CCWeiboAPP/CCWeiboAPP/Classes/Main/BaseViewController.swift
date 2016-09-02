@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	BaseViewController.swift
+//		CCWeiboAPP
 //		Chen Chen @ July 26th, 2016
 //
 
@@ -46,7 +46,7 @@ class BaseViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(loginButtonDidClick(_:)))
     }
     
-    // MARK: - 监听方法
+    // MARK: - 按钮方法
     
     /**
      登录按钮点击方法

@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	Const.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 11th, 2016
 //
 
@@ -9,10 +9,12 @@ import UIKit
 
 // MARK: - 界面常数
 
+// 视图内边距
+let kViewPadding: CGFloat = 5
+// 视图边缘
+let kViewBorder: CGFloat = 10
 // 视图外间距
 let kViewMargin: CGFloat = 20
-// 视图内边距
-let kViewPadding: CGFloat = 10
 // 视图移动距离
 let kViewDistance: CGFloat = 160
 // 屏幕尺寸
@@ -83,10 +85,12 @@ let kRetweetedStatus: String = "retweeted_status"
 let kPopoverPresentationManagerDidPresented: String = "PopoverPresentationManagerDidPresented"
 // 弹出框已经消失
 let kPopoverPresentationManagerDidDismissed: String = "PopoverPresentationManagerDidDismissed"
-// 切换到根控制器
-let kSwitchRootViewController: String = "SwitchRootViewController"
+// 根控制器切换
+let kRootViewControllerSwitched: String = "RootViewControllerSwitched"
 // 应用版本
 let kAppVersion: String = "AppVersion"
+// 图片浏览器展示
+let kPictureBrowserControllerShowed: String = "PictureBrowserControllerShowed"
 
 // MARK: - Cell重用标识符
 
@@ -98,3 +102,5 @@ let kWeiboStatusReuseIdentifier: String = "WeiboStatusCell"
 let kRetweetStatusReuseIdentifier: String = "RetweetStatusCell"
 // 新特性Cell重用标识符
 let kNewFeatureReuseIdentifier: String = "NewFeatureCell"
+// 图片浏览Cell重用标识符
+let kPictureBrowserReuseIdentifier: String = "PictureBrowserCell"

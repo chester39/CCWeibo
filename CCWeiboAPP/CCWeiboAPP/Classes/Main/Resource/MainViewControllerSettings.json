@@ -1,4 +1,4 @@
- [
+[
   {
   "vcName": "HomeViewController",
   "title": "首页",
@@ -24,4 +24,4 @@
   "title": "我的",
   "imageName": "tabbar_profile"
   }
-  ]
+]

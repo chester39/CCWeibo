@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	BaseWeiboCell.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 31st, 2016
 //
 
@@ -24,7 +24,7 @@ class BaseWeiboCell: UITableViewCell {
     // 来源标签
     var sourceLabel = UILabel(text: "", fontSize: 12, lines: 1)
     // 信息内容标签
-    var contentLabel = UILabel(text: "", fontSize: 14, lines: 0)
+    var contentLabel = UILabel(text: "", fontSize: 15, lines: 0)
     // 底部视图
     var footerView = UIView()
     // 转发按钮
@@ -34,7 +34,7 @@ class BaseWeiboCell: UITableViewCell {
     // 点赞按钮
     var likeButton = UIButton(imageName: "timeline_icon_unlike", backgroundImageName: "timeline_card_bottom_background")
 
-    // 集合布局懒加载
+    // 集合布局
     lazy var flowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = kViewPadding
@@ -43,7 +43,7 @@ class BaseWeiboCell: UITableViewCell {
         return layout
     }()
     
-    // 图片集合视图懒加载
+    // 图片集合视图
     lazy var pictureView: PictureCollectionView = {
         let pictureView = PictureCollectionView(frame: CGRectZero, collectionViewLayout: self.flowLayout)
         
@@ -72,10 +72,10 @@ class BaseWeiboCell: UITableViewCell {
         vipView.image = UIImage(named: "common_icon_membership")
         contentView.addSubview(vipView)
         
-        timeLabel.textColor = UIColor(hex: 0xa5a5a5)
+        timeLabel.textColor = UIColor(hex: 0xA5A5A5)
         contentView.addSubview(timeLabel)
         
-        sourceLabel.textColor = UIColor(hex: 0xa5a5a5)
+        sourceLabel.textColor = UIColor(hex: 0xA5A5A5)
         contentView.addSubview(sourceLabel)
         
         contentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewMargin
@@ -83,19 +83,19 @@ class BaseWeiboCell: UITableViewCell {
         
         contentView.addSubview(footerView)
         
-        retweetButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        retweetButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewBorder)
         retweetButton.setTitle("转发", forState: UIControlState.Normal)
         retweetButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         retweetButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         footerView.addSubview(retweetButton)
         
-        commentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        commentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewBorder)
         commentButton.setTitle("评论", forState: UIControlState.Normal)
         commentButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         commentButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         footerView.addSubview(commentButton)
         
-        likeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        likeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewBorder)
         likeButton.setTitle("赞", forState: UIControlState.Normal)
         likeButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
         likeButton.titleLabel?.font = UIFont.systemFontOfSize(15)
@@ -110,8 +110,8 @@ class BaseWeiboCell: UITableViewCell {
         constrain(iconView, verifiedView) { (iconView, verifiedView) in
             iconView.width == 40
             iconView.height == 40
-            iconView.top == iconView.superview!.top + kViewPadding
-            iconView.left == iconView.superview!.left + kViewPadding
+            iconView.top == iconView.superview!.top + kViewBorder
+            iconView.left == iconView.superview!.left + kViewBorder
             
             verifiedView.width == 17
             verifiedView.height == 17
@@ -121,24 +121,24 @@ class BaseWeiboCell: UITableViewCell {
         
         constrain(nameLabel, vipView, iconView) { (nameLabel, vipView, iconView) in
             nameLabel.top == iconView.top
-            nameLabel.left == iconView.right + kViewPadding
+            nameLabel.left == iconView.right + kViewBorder
             
             vipView.width == 14
             vipView.height == 14
             vipView.centerY == nameLabel.centerY
-            vipView.left ==  nameLabel.right + kViewPadding
+            vipView.left == nameLabel.right + kViewBorder
         }
         
         constrain(timeLabel, sourceLabel, iconView) { (timeLabel, sourceLabel, iconView) in
-            timeLabel.left == iconView.right + kViewPadding
+            timeLabel.left == iconView.right + kViewBorder
             timeLabel.bottom == iconView.bottom
             
             sourceLabel.top == timeLabel.top
-            sourceLabel.left == timeLabel.right + kViewPadding
+            sourceLabel.left == timeLabel.right + kViewBorder
         }
         
         constrain(contentLabel, iconView) { (contentLabel, iconView) in
-            contentLabel.top == iconView.bottom + kViewPadding
+            contentLabel.top == iconView.bottom + kViewBorder
             contentLabel.left == iconView.left
         }
         

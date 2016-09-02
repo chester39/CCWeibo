@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	NullViewController.swift
+//		CCWeiboAPP
 //		Chen Chen @ July 24th, 2016
 //
 

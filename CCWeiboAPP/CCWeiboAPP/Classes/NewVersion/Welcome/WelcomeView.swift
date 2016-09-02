@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	WelcomeView.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 22nd, 2016
 //
 
@@ -109,7 +109,7 @@ class WelcomeView: UIView {
             UIView.animateWithDuration(1.0, animations: {
                 self.textLabel.alpha = 1.0
                 }, completion: { (true) in
-                    NSNotificationCenter.defaultCenter().postNotificationName(kSwitchRootViewController, object: true)
+                    NSNotificationCenter.defaultCenter().postNotificationName(kRootViewControllerSwitched, object: true)
             })
         }
     }

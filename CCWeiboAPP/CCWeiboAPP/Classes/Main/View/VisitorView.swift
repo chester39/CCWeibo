@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	VisitorView.swift
+//		CCWeiboAPP
 //		Chen Chen @ July 26th, 2016
 //
 

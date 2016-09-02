@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	PopoverPresentationController.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 10th, 2016
 //
 
@@ -11,7 +11,7 @@ class PopoverPresentationController: UIPresentationController {
     // 弹出框尺寸
     var presentFrame = CGRectZero
     
-    // 蒙版按钮懒加载
+    // 蒙版按钮
     private lazy var coverButton: UIButton = {
         let button = UIButton(type: UIButtonType.System)
         button.frame = kScreenFrame

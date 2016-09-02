@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	QRCodeView.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 16th, 2016
 //
 

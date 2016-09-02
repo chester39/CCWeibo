@@ -1,6 +1,6 @@
 //
-//	iOS培训
-//		小码哥
+//	PopoverView.swift
+//		CCWeiboAPP
 //		Chen Chen @ August 16th, 2016
 //
 
@@ -57,7 +57,7 @@ class PopoverView: UIView {
         
         constrain(backgroundView, tableView) { (backgroundView, tableView) in
             backgroundView.edges == inset(backgroundView.superview!.edges, 0)
-            tableView.edges == inset(backgroundView.edges, kViewPadding)
+            tableView.edges == inset(backgroundView.edges, kViewBorder)
         }
     }
 
