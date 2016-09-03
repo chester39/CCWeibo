@@ -7,6 +7,7 @@
 import UIKit
 
 import Alamofire
+import SwiftyJSON
 
 class UserAccount: NSObject {
     
@@ -152,18 +153,23 @@ class UserAccount: NSObject {
     /**
      读取用户信息方法
      */
-    func loadUserInfo(finished: (account: UserAccount?) -> ()) {
+    func loadUserInfo(finished: (account: UserAccount?, error: NSError?) -> ()) {
         
         assert(accessToken != nil, "使用该方法必须首先进行授权")
         
         let path = "2/users/show.json"
         let parameters = ["access_token": accessToken!, "uid": uid!]
         Alamofire.request(Method.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
-            let dict = response.result.value as! [String: AnyObject]
-            self.avatarLarge = dict[kAvatarLarge] as? String
-            self.screenName = dict[kScreenName] as? String
+            guard let data = response.data else {
+                finished(account: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
+                return
+            }
             
-            finished(account: self)
+            let json = JSON(data: data)
+            self.avatarLarge = json[kAvatarLarge].string
+            self.screenName = json[kScreenName].string
+            
+            finished(account: self, error: nil)
         }
     }
 
