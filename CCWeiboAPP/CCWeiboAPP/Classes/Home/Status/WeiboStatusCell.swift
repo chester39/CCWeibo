@@ -9,7 +9,7 @@ import UIKit
 import Cartography
 import SDWebImage
 
-class WeiboStatusCell: BaseWeiboCell {
+class WeiboStatusCell: BaseStatusCell {
 
     // 变化约束组
     private var group = ConstraintGroup()

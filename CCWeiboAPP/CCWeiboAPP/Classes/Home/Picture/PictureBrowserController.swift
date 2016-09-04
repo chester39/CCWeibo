@@ -29,7 +29,11 @@ class PictureBrowserController: UIViewController {
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.setTitle("关闭", forState: UIControlState.Normal)
-        button.backgroundColor = UIColor(white: 0.2, alpha: 0.3)
+//        button.backgroundColor = UIColor(white: 0.2, alpha: 0.3)
+        button.layer.cornerRadius = 5.0
+        button.layer.masksToBounds = true
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor.whiteColor().CGColor
         button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         button.addTarget(self, action: #selector(closeButtonDidClick), forControlEvents: UIControlEvents.TouchUpInside)
         
@@ -40,7 +44,11 @@ class PictureBrowserController: UIViewController {
     private lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("保存", forState: UIControlState.Normal)
-        button.backgroundColor = UIColor(white: 0.2, alpha: 0.3)
+//        button.backgroundColor = UIColor(white: 0.2, alpha: 0.3)
+        button.layer.cornerRadius = 5.0
+        button.layer.masksToBounds = true
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor.whiteColor().CGColor
         button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         button.addTarget(self, action: #selector(saveButtonDidClick), forControlEvents: UIControlEvents.TouchUpInside)
         
@@ -76,6 +84,7 @@ class PictureBrowserController: UIViewController {
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
+        
         browserView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Left, animated: false)
     }
     

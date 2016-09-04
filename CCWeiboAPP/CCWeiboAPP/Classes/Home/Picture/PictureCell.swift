@@ -11,7 +11,7 @@ import Cartography
 class PictureCell: UICollectionViewCell {
     
     // 图片视图
-    var imageView = UIImageView()
+    var imageView = ProgressImageView()
     
     // 图片URL
     var url: NSURL? {
@@ -28,11 +28,8 @@ class PictureCell: UICollectionViewCell {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-        
+
         contentView.addSubview(imageView)
-        constrain(imageView) { (imageView) in
-            imageView.edges == inset(imageView.superview!.edges, 0)
-        }
     }
     
     /**
@@ -41,5 +38,15 @@ class PictureCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    /**
+     视图已经布局子视图方法
+     */
+    override func layoutSubviews() {
+        
+        super.layoutSubviews()
+        
+        imageView.frame = bounds
     }
 }

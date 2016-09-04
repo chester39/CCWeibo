@@ -1,5 +1,5 @@
 //
-//	BaseWeiboCell.swift
+//	BaseStatusCell.swift
 //		CCWeiboAPP
 //		Chen Chen @ August 31st, 2016
 //
@@ -9,7 +9,7 @@ import UIKit
 import Cartography
 import SDWebImage
 
-class BaseWeiboCell: UITableViewCell {
+class BaseStatusCell: UITableViewCell {
 
     // 头像图片视图
     var iconView = UIImageView()
@@ -60,7 +60,7 @@ class BaseWeiboCell: UITableViewCell {
      */
     func setupBaseUI() {
         
-        iconView.layer.cornerRadius = 20
+        iconView.layer.cornerRadius = 20.0
         iconView.clipsToBounds = true
         contentView.addSubview(iconView)
         

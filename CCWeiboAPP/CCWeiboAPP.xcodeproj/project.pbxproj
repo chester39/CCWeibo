@@ -25,9 +25,6 @@
 		25A033471D76DD8F00152FE5 /* StatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A033401D76DD8F00152FE5 /* StatusModel.swift */; };
 		25A033481D76DD8F00152FE5 /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A033411D76DD8F00152FE5 /* StatusViewModel.swift */; };
 		25A033491D76DD8F00152FE5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A033421D76DD8F00152FE5 /* UserModel.swift */; };
-		25A0334A1D76DD8F00152FE5 /* BaseWeiboCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A033441D76DD8F00152FE5 /* BaseWeiboCell.swift */; };
-		25A0334B1D76DD8F00152FE5 /* RetweetStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A033451D76DD8F00152FE5 /* RetweetStatusCell.swift */; };
-		25A0334C1D76DD8F00152FE5 /* WeiboStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A033461D76DD8F00152FE5 /* WeiboStatusCell.swift */; };
 		25A033501D76DDCA00152FE5 /* TitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A0334E1D76DDCA00152FE5 /* TitleButton.swift */; };
 		25A033511D76DDCA00152FE5 /* VisitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A0334F1D76DDCA00152FE5 /* VisitorView.swift */; };
 		25BE300B1D6A98D100947C4B /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BE300A1D6A98D100947C4B /* UserAccount.swift */; };
@@ -41,6 +38,11 @@
 		8688900D1D3D26E70038F753 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8688900B1D3D26E70038F753 /* LaunchScreen.storyboard */; };
 		86B5E9951D44FCF100A5D0F0 /* MainViewControllerSettings.json in Resources */ = {isa = PBXBuildFile; fileRef = 86B5E9931D44FCF100A5D0F0 /* MainViewControllerSettings.json */; };
 		86B5E9981D44FD1200A5D0F0 /* NullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5E9971D44FD1200A5D0F0 /* NullViewController.swift */; };
+		86C6568F1D7C187600BEDB17 /* BaseStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6568B1D7C187600BEDB17 /* BaseStatusCell.swift */; };
+		86C656911D7C187600BEDB17 /* RetweetStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6568D1D7C187600BEDB17 /* RetweetStatusCell.swift */; };
+		86C656921D7C187600BEDB17 /* WeiboStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6568E1D7C187600BEDB17 /* WeiboStatusCell.swift */; };
+		86C656951D7C193100BEDB17 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C656941D7C193100BEDB17 /* ProgressView.swift */; };
+		86C656971D7C195A00BEDB17 /* ProgressImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C656961D7C195A00BEDB17 /* ProgressImageView.swift */; };
 		86D700521D411C26003C65D7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D700511D411C26003C65D7 /* MainViewController.swift */; };
 		86D700541D411C48003C65D7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D700531D411C48003C65D7 /* HomeViewController.swift */; };
 		86D700561D411C73003C65D7 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D700551D411C73003C65D7 /* DiscoverViewController.swift */; };
@@ -68,9 +70,6 @@
 		25A033401D76DD8F00152FE5 /* StatusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusModel.swift; sourceTree = "<group>"; };
 		25A033411D76DD8F00152FE5 /* StatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
 		25A033421D76DD8F00152FE5 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		25A033441D76DD8F00152FE5 /* BaseWeiboCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWeiboCell.swift; sourceTree = "<group>"; };
-		25A033451D76DD8F00152FE5 /* RetweetStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweetStatusCell.swift; sourceTree = "<group>"; };
-		25A033461D76DD8F00152FE5 /* WeiboStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiboStatusCell.swift; sourceTree = "<group>"; };
 		25A0334E1D76DDCA00152FE5 /* TitleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleButton.swift; sourceTree = "<group>"; };
 		25A0334F1D76DDCA00152FE5 /* VisitorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorView.swift; sourceTree = "<group>"; };
 		25BE300A1D6A98D100947C4B /* UserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
@@ -87,6 +86,11 @@
 		8688900E1D3D26E70038F753 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86B5E9931D44FCF100A5D0F0 /* MainViewControllerSettings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MainViewControllerSettings.json; sourceTree = "<group>"; };
 		86B5E9971D44FD1200A5D0F0 /* NullViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullViewController.swift; sourceTree = "<group>"; };
+		86C6568B1D7C187600BEDB17 /* BaseStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseStatusCell.swift; sourceTree = "<group>"; };
+		86C6568D1D7C187600BEDB17 /* RetweetStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweetStatusCell.swift; sourceTree = "<group>"; };
+		86C6568E1D7C187600BEDB17 /* WeiboStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiboStatusCell.swift; sourceTree = "<group>"; };
+		86C656941D7C193100BEDB17 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		86C656961D7C195A00BEDB17 /* ProgressImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressImageView.swift; sourceTree = "<group>"; };
 		86D700511D411C26003C65D7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		86D700531D411C48003C65D7 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		86D700551D411C73003C65D7 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
@@ -165,16 +169,6 @@
 				25A033421D76DD8F00152FE5 /* UserModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		25A033431D76DD8F00152FE5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				25A033441D76DD8F00152FE5 /* BaseWeiboCell.swift */,
-				25A033451D76DD8F00152FE5 /* RetweetStatusCell.swift */,
-				25A033461D76DD8F00152FE5 /* WeiboStatusCell.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		25A0334D1D76DDCA00152FE5 /* View */ = {
@@ -258,6 +252,25 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		86C6568A1D7C187600BEDB17 /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				86C6568B1D7C187600BEDB17 /* BaseStatusCell.swift */,
+				86C6568D1D7C187600BEDB17 /* RetweetStatusCell.swift */,
+				86C6568E1D7C187600BEDB17 /* WeiboStatusCell.swift */,
+			);
+			path = Status;
+			sourceTree = "<group>";
+		};
+		86C656931D7C193100BEDB17 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				86C656961D7C195A00BEDB17 /* ProgressImageView.swift */,
+				86C656941D7C193100BEDB17 /* ProgressView.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
 		86D700491D411B79003C65D7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,8 +308,9 @@
 				25A0333F1D76DD8F00152FE5 /* Model */,
 				25FF791B1D79524E0098F064 /* Picture */,
 				250621CC1D5B00B1000B542B /* Popover */,
+				86C656931D7C193100BEDB17 /* Progress */,
 				250622861D5D61CD000B542B /* QRCode */,
-				25A033431D76DD8F00152FE5 /* View */,
+				86C6568A1D7C187600BEDB17 /* Status */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -460,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				250622831D5C0E9C000B542B /* PopoverPresentationManager.swift in Sources */,
+				86C656921D7C187600BEDB17 /* WeiboStatusCell.swift in Sources */,
 				86E15E891D47AE810006CCC4 /* BaseViewController.swift in Sources */,
 				259C62F41D6D7BE100884257 /* WelcomeView.swift in Sources */,
 				25A033491D76DD8F00152FE5 /* UserModel.swift in Sources */,
@@ -470,15 +485,14 @@
 				250622881D5D6201000B542B /* QRCodeViewController.swift in Sources */,
 				25D360071D655BF8004A45AA /* OAuthViewController.swift in Sources */,
 				25A033481D76DD8F00152FE5 /* StatusViewModel.swift in Sources */,
-				25A0334C1D76DD8F00152FE5 /* WeiboStatusCell.swift in Sources */,
 				86D7005A1D411C85003C65D7 /* ProfileViewController.swift in Sources */,
-				25A0334B1D76DD8F00152FE5 /* RetweetStatusCell.swift in Sources */,
 				250621D21D5B29D0000B542B /* PopoverViewController.swift in Sources */,
 				25FF79211D7963210098F064 /* PictureBrowserCell.swift in Sources */,
 				86B5E9981D44FD1200A5D0F0 /* NullViewController.swift in Sources */,
 				259C62F51D6D7BE100884257 /* WelcomeViewController.swift in Sources */,
 				25FF791F1D7952B30098F064 /* PictureBrowserController.swift in Sources */,
 				86D700541D411C48003C65D7 /* HomeViewController.swift in Sources */,
+				86C6568F1D7C187600BEDB17 /* BaseStatusCell.swift in Sources */,
 				250621D11D5B29D0000B542B /* PopoverPresentationController.swift in Sources */,
 				25A033471D76DD8F00152FE5 /* StatusModel.swift in Sources */,
 				25A033511D76DDCA00152FE5 /* VisitorView.swift in Sources */,
@@ -487,13 +501,15 @@
 				259C62F21D6D7BE100884257 /* NewFeatureCell.swift in Sources */,
 				86D700581D411C7C003C65D7 /* MessageViewController.swift in Sources */,
 				25FF791D1D79524E0098F064 /* PictureCollectionView.swift in Sources */,
+				86C656911D7C187600BEDB17 /* RetweetStatusCell.swift in Sources */,
 				252EEB021D66E9F100AC064D /* Extension.swift in Sources */,
 				25115FD61D62BB9800EAE3F9 /* QRCodeView.swift in Sources */,
-				25A0334A1D76DD8F00152FE5 /* BaseWeiboCell.swift in Sources */,
+				86C656971D7C195A00BEDB17 /* ProgressImageView.swift in Sources */,
 				86D700561D411C73003C65D7 /* DiscoverViewController.swift in Sources */,
 				25FF79231D7977F20098F064 /* PictureCell.swift in Sources */,
 				86D700521D411C26003C65D7 /* MainViewController.swift in Sources */,
 				252EEB011D66E9F100AC064D /* Const.swift in Sources */,
+				86C656951D7C193100BEDB17 /* ProgressView.swift in Sources */,
 				25BE300B1D6A98D100947C4B /* UserAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

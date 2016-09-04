@@ -116,7 +116,14 @@ extension PictureCollectionView: UICollectionViewDelegate {
      */
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let userInfo = ["middlePicture": viewModel!.middlePictureArray!, "indexPath": indexPath]
-        NSNotificationCenter.defaultCenter().postNotificationName(kPictureBrowserControllerShowed, object: self, userInfo: userInfo)
+        let url = viewModel!.middlePictureArray![indexPath.item]
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PictureCell
+        SDWebImageManager.sharedManager().downloadImageWithURL(url, options: SDWebImageOptions(rawValue: 0), progress: { (current, total) in
+            cell.imageView.progress = CGFloat(current) / CGFloat(total)
+            }) { (_, _, _, _, _) in
+                let userInfo = ["middlePicture": self.viewModel!.middlePictureArray!, "indexPath": indexPath]
+                NSNotificationCenter.defaultCenter().postNotificationName(kPictureBrowserControllerShowed, object: self, userInfo: userInfo)
+        }
     }
+    
 }

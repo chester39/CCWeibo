@@ -1,13 +1,23 @@
 //
-//	TitleButton.swift
+//  ProgressImageView.swift
 //		CCWeiboAPP
-//		Chen Chen @ August 1st, 2016
+//		Chen Chen @ September 4th, 2016
 //
 
 import UIKit
 
-class TitleButton: UIButton {
+class ProgressImageView: UIImageView {
 
+    // 进度条视图
+    private lazy var progressView: ProgressView = ProgressView()
+    
+    // 当前进度
+    var progress: CGFloat = 0.0 {
+        didSet {
+            progressView.progress = progress
+        }
+    }
+    
     // MARK: - 初始化方法
     
     /**
@@ -28,14 +38,12 @@ class TitleButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - 覆盖方法
-    
     /**
-     设置标题方法
+     无参数便利初始化方法
      */
-    override func setTitle(title: String?, forState state: UIControlState) {
+    convenience init() {
         
-        super.setTitle((title ?? "") + "  ", forState: state)
+        self.init(frame: CGRectZero)
     }
     
     /**
@@ -45,8 +53,7 @@ class TitleButton: UIButton {
         
         super.layoutSubviews()
         
-        titleLabel?.frame.origin.x = 0
-        imageView?.frame.origin.x = titleLabel!.frame.width
+        progressView.frame = bounds
     }
     
     // MARK: - 界面方法
@@ -56,11 +63,8 @@ class TitleButton: UIButton {
      */
     private func setupUI() {
         
-        setImage(UIImage(named: "navigationbar_arrow_down"), forState: UIControlState.Normal)
-        setImage(UIImage(named: "navigationbar_arrow_up"), forState: UIControlState.Selected)
-        
-        setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
-        sizeToFit()
+        addSubview(progressView)
+        progressView.backgroundColor = UIColor.clearColor()
     }
     
 }
