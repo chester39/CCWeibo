@@ -57,7 +57,7 @@ class PopoverView: UIView {
         
         constrain(backgroundView, tableView) { (backgroundView, tableView) in
             backgroundView.edges == inset(backgroundView.superview!.edges, 0)
-            tableView.edges == inset(backgroundView.edges, kViewBorder)
+            tableView.edges == inset(backgroundView.edges, kViewPadding)
         }
     }
 

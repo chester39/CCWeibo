@@ -36,15 +36,15 @@ class RetweetStatusCell: BaseStatusCell {
             contentLabel.text = viewModel?.status.text
             
             if viewModel?.status.repostsCount != 0 {
-                retweetButton.setTitle("\(viewModel!.status.repostsCount)", forState: UIControlState.Normal)
+                retweetButton.setTitle("\(viewModel!.status.repostsCount)", forState: .Normal)
             }
             
             if viewModel?.status.commentsCount != 0 {
-                commentButton.setTitle("\(viewModel!.status.commentsCount)", forState: UIControlState.Normal)
+                commentButton.setTitle("\(viewModel!.status.commentsCount)", forState: .Normal)
             }
             
             if viewModel?.status.attitudesCount != 0 {
-                likeButton.setTitle("\(viewModel!.status.attitudesCount)", forState: UIControlState.Normal)
+                likeButton.setTitle("\(viewModel!.status.attitudesCount)", forState: .Normal)
             }
             
             retweetLabel.attributedText = viewModel?.retweetText
@@ -102,7 +102,7 @@ class RetweetStatusCell: BaseStatusCell {
         retweetView.backgroundColor = UIColor(hex: 0xE5E5E5)
         contentView.addSubview(retweetView)
         
-        retweetLabel.preferredMaxLayoutWidth = kScreenWidth - kViewMargin
+        retweetLabel.preferredMaxLayoutWidth = kScreenWidth - kViewBorder
         retweetView.addSubview(retweetLabel)
         retweetView.addSubview(pictureView)
     }
@@ -113,30 +113,30 @@ class RetweetStatusCell: BaseStatusCell {
     private func setupConstraints() {
         
         constrain(retweetView, contentLabel, footerView) { (retweetView, contentLabel, footerView) in
-            retweetView.top == contentLabel.bottom + kViewBorder
+            retweetView.top == contentLabel.bottom + kViewPadding
             retweetView.left == retweetView.superview!.left
             retweetView.bottom == footerView.top
             retweetView.right == retweetView.superview!.right
         }
         
         constrain(retweetLabel, pictureView) { (retweetLabel, pictureView) in
-            retweetLabel.top == retweetLabel.superview!.top + kViewBorder
-            retweetLabel.left == retweetLabel.superview!.left + kViewBorder
+            retweetLabel.top == retweetLabel.superview!.top + kViewPadding
+            retweetLabel.left == retweetLabel.superview!.left + kViewPadding
             
-            pictureView.top == retweetLabel.bottom + kViewBorder
+            pictureView.top == retweetLabel.bottom + kViewPadding
             pictureView.left == retweetLabel.left
         }
         
         constrain(pictureView, replace: group) { (pictureView) in
             pictureView.width == 300
-            pictureView.height == 100
+            pictureView.height == kViewStandard
         }
         
         constrain(footerView, pictureView) { (footerView, pictureView) in
             footerView.height == kNavigationBarHeight
-            footerView.top == pictureView.bottom + kViewBorder
+            footerView.top == pictureView.bottom + kViewPadding
             footerView.left == footerView.superview!.left
-            footerView.bottom == footerView.superview!.bottom - kViewBorder
+            footerView.bottom == footerView.superview!.bottom - kViewPadding
             footerView.right == footerView.superview!.right
         }
     }

@@ -120,13 +120,13 @@ extension UIButton {
         self.init()
         
         if let name = imageName {
-            setImage(UIImage(named: name), forState: UIControlState.Normal)
-            setImage(UIImage(named: name + "_highlighted"), forState: UIControlState.Highlighted)
+            setImage(UIImage(named: name), forState: .Normal)
+            setImage(UIImage(named: name + "_highlighted"), forState: .Highlighted)
         }
         
         if let backgroundName = backgroundImageName {
-            setBackgroundImage(UIImage(named: backgroundName), forState: UIControlState.Normal)
-            setBackgroundImage(UIImage(named: backgroundName + "_highlighted"), forState: UIControlState.Highlighted)
+            setBackgroundImage(UIImage(named: backgroundName), forState: .Normal)
+            setBackgroundImage(UIImage(named: backgroundName + "_highlighted"), forState: .Highlighted)
         }
         
         sizeToFit()
@@ -142,10 +142,10 @@ extension UIBarButtonItem {
     convenience init(imageName: String, target: AnyObject?, action: Selector) {
         
         let button = UIButton()
-        button.setImage(UIImage(named: imageName), forState: UIControlState.Normal)
-        button.setImage(UIImage(named: imageName + "_highlighted"), forState: UIControlState.Highlighted)
+        button.setImage(UIImage(named: imageName), forState: .Normal)
+        button.setImage(UIImage(named: imageName + "_highlighted"), forState: .Highlighted)
         button.sizeToFit()
-        button.addTarget(target, action: action, forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(target, action: action, forControlEvents: .TouchUpInside)
         
         self.init(customView: button)
     }

@@ -37,8 +37,8 @@ class HomeViewController: BaseViewController {
     private lazy var titleButton: UIButton = {
         let button = TitleButton()
         let title = UserAccount.loadUserAccount()?.screenName
-        button.setTitle(title, forState: UIControlState.Normal)
-        button.addTarget(self, action: #selector(titleButtonDidClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        button.setTitle(title, forState: .Normal)
+        button.addTarget(self, action: #selector(titleButtonDidClick(_:)), forControlEvents: .TouchUpInside)
         
         return button
     }()
@@ -46,10 +46,10 @@ class HomeViewController: BaseViewController {
     // 转场管理器
     private lazy var presentationManger: PopoverPresentationManager = {
         let manager = PopoverPresentationManager()
-        let presentWidth: CGFloat = 200
+        let presentWidth: CGFloat = kViewDistance
         let presentHeight: CGFloat = 250
         let presentX: CGFloat = (kScreenWidth - presentWidth) / 2
-        let presentY: CGFloat = 50
+        let presentY: CGFloat = kViewAdapter
         manager.presentFrame = CGRect(x: presentX, y: presentY, width: presentWidth, height: presentHeight)
         
         return manager
@@ -256,7 +256,7 @@ class HomeViewController: BaseViewController {
             
             for url in pictureArray {
                 dispatch_group_enter(group)
-                SDWebImageManager.sharedManager().downloadImageWithURL(url, options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { (image, error, _, _, _) in
+                SDWebImageManager.sharedManager().downloadImageWithURL(url, options: .RetryFailed, progress: nil, completed: { (image, error, _, _, _) in
                     dispatch_group_leave(group)
                 })
             }

@@ -21,7 +21,7 @@ class QRCodeView: UIView {
     // 文字标签
     var textLabel = UILabel(text: "将二维码放入框内, 即可扫描二维码", fontSize: 17, lines: 0)
     // 名片按钮
-    var cardButton = UIButton(type: UIButtonType.System)
+    var cardButton = UIButton(type: .System)
     
     // MARK: - 初始化方法
     
@@ -70,8 +70,8 @@ class QRCodeView: UIView {
         textLabel.textAlignment = NSTextAlignment.Center
         addSubview(textLabel)
         
-        cardButton.setTitle("我的名片", forState: UIControlState.Normal)
-        cardButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        cardButton.setTitle("我的名片", forState: .Normal)
+        cardButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         cardButton.backgroundColor = UIColor.orangeColor()
         addSubview(cardButton)
     }
@@ -89,8 +89,8 @@ class QRCodeView: UIView {
         }
         
         constrain(containerView, edgeView, waveView) { (containerView, edgeView, waveView) in
-            containerView.width == 200
-            containerView.height == 200
+            containerView.width == kViewDistance
+            containerView.height == kViewDistance
             containerView.centerX == containerView.superview!.centerX
             containerView.centerY == containerView.superview!.centerY - kViewDistance
             
@@ -99,14 +99,14 @@ class QRCodeView: UIView {
         }
         
         constrain(textLabel, containerView) { (textLabel, containerView) in
-            textLabel.top == containerView.bottom + kViewMargin
+            textLabel.top == containerView.bottom + kViewBorder
             textLabel.left == containerView.left
             textLabel.right == containerView.right
         }
         
         constrain(cardButton, textLabel) { (cardButton, textLabel) in
             cardButton.centerX == cardButton.superview!.centerX
-            cardButton.top == textLabel.bottom + kViewMargin
+            cardButton.top == textLabel.bottom + kViewBorder
         }
     }
     

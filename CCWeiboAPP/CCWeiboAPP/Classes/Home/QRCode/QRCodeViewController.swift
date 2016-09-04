@@ -62,7 +62,7 @@ class QRCodeViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "相册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(albumButtonDidClick))
         
         qrCodeView.tabBar.delegate = self
-        qrCodeView.cardButton.addTarget(self, action: #selector(cardButtonDidClick), forControlEvents: UIControlEvents.TouchUpInside)
+        qrCodeView.cardButton.addTarget(self, action: #selector(cardButtonDidClick), forControlEvents: .TouchUpInside)
         
         scanQRCode()
     }

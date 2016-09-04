@@ -37,8 +37,8 @@ class BaseStatusCell: UITableViewCell {
     // 集合布局
     lazy var flowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = kViewPadding
-        layout.minimumInteritemSpacing = kViewPadding
+        layout.minimumLineSpacing = kViewEdge
+        layout.minimumInteritemSpacing = kViewEdge
         
         return layout
     }()
@@ -78,26 +78,26 @@ class BaseStatusCell: UITableViewCell {
         sourceLabel.textColor = UIColor(hex: 0xA5A5A5)
         contentView.addSubview(sourceLabel)
         
-        contentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewMargin
+        contentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewBorder
         contentView.addSubview(contentLabel)
         
         contentView.addSubview(footerView)
         
-        retweetButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewBorder)
-        retweetButton.setTitle("转发", forState: UIControlState.Normal)
-        retweetButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+        retweetButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        retweetButton.setTitle("转发", forState: .Normal)
+        retweetButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
         retweetButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         footerView.addSubview(retweetButton)
         
-        commentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewBorder)
-        commentButton.setTitle("评论", forState: UIControlState.Normal)
-        commentButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+        commentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        commentButton.setTitle("评论", forState: .Normal)
+        commentButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
         commentButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         footerView.addSubview(commentButton)
         
-        likeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewBorder)
-        likeButton.setTitle("赞", forState: UIControlState.Normal)
-        likeButton.setTitleColor(UIColor.darkGrayColor(), forState: UIControlState.Normal)
+        likeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
+        likeButton.setTitle("赞", forState: .Normal)
+        likeButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
         likeButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         footerView.addSubview(likeButton)
     }
@@ -110,8 +110,8 @@ class BaseStatusCell: UITableViewCell {
         constrain(iconView, verifiedView) { (iconView, verifiedView) in
             iconView.width == 40
             iconView.height == 40
-            iconView.top == iconView.superview!.top + kViewBorder
-            iconView.left == iconView.superview!.left + kViewBorder
+            iconView.top == iconView.superview!.top + kViewPadding
+            iconView.left == iconView.superview!.left + kViewPadding
             
             verifiedView.width == 17
             verifiedView.height == 17
@@ -121,24 +121,24 @@ class BaseStatusCell: UITableViewCell {
         
         constrain(nameLabel, vipView, iconView) { (nameLabel, vipView, iconView) in
             nameLabel.top == iconView.top
-            nameLabel.left == iconView.right + kViewBorder
+            nameLabel.left == iconView.right + kViewPadding
             
             vipView.width == 14
             vipView.height == 14
             vipView.centerY == nameLabel.centerY
-            vipView.left == nameLabel.right + kViewBorder
+            vipView.left == nameLabel.right + kViewPadding
         }
         
         constrain(timeLabel, sourceLabel, iconView) { (timeLabel, sourceLabel, iconView) in
-            timeLabel.left == iconView.right + kViewBorder
+            timeLabel.left == iconView.right + kViewPadding
             timeLabel.bottom == iconView.bottom
             
             sourceLabel.top == timeLabel.top
-            sourceLabel.left == timeLabel.right + kViewBorder
+            sourceLabel.left == timeLabel.right + kViewPadding
         }
         
         constrain(contentLabel, iconView) { (contentLabel, iconView) in
-            contentLabel.top == iconView.bottom + kViewBorder
+            contentLabel.top == iconView.bottom + kViewPadding
             contentLabel.left == iconView.left
         }
         

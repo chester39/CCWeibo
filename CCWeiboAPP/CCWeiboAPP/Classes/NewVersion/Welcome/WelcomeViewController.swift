@@ -9,7 +9,7 @@ import UIKit
 class WelcomeViewController: UIViewController {
 
     // 欢迎视图
-    var welcomeView = WelcomeView(frame: kScreenFrame)
+    private var welcomeView = WelcomeView(frame: kScreenFrame)
     
     // MARK: - 系统方法
     

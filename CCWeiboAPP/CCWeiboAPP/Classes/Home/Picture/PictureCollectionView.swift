@@ -26,12 +26,13 @@ class PictureCollectionView: UICollectionView {
         
         super.init(frame: frame, collectionViewLayout: layout)
         
-        backgroundColor = UIColor.clearColor()
         registerClass(PictureCell.self, forCellWithReuseIdentifier: kPictureReuseIdentifier)
-        showsVerticalScrollIndicator = false
-        showsHorizontalScrollIndicator = false
         dataSource = self
         delegate = self
+        
+        backgroundColor = UIColor.clearColor()
+        showsVerticalScrollIndicator = false
+        showsHorizontalScrollIndicator = false
     }
     
     /**
@@ -56,22 +57,29 @@ class PictureCollectionView: UICollectionView {
             return (cellSize: CGSizeZero, collectionSize:CGSizeZero)
             
         case 1:
-            let key = viewModel!.thumbnailPictureArray!.first!.absoluteString
-            let image = SDWebImageManager.sharedManager().imageCache.imageFromDiskCacheForKey(key)
-            return (cellSize: image.size, collectionSize: image.size)
-            
+            let key = viewModel!.thumbnailPictureArray!.first!
+            var image = SDWebImageManager.sharedManager().imageCache.imageFromDiskCacheForKey(key.absoluteString)
+            if image != nil {
+                return (cellSize: image.size, collectionSize: image.size)
+                
+            } else {
+                let data = NSData(contentsOfURL: key)
+                image = UIImage(data: data!)
+                return (cellSize: image.size, collectionSize: image.size)
+            }
+        
         case 4:
             let column = 2
             let row = column
-            let width = imageWidth * CGFloat(column) + kViewPadding * CGFloat(column - 1)
-            let height = imageHeight * CGFloat(row) + kViewPadding * CGFloat(row - 1)
+            let width = imageWidth * CGFloat(column) + kViewEdge * CGFloat(column - 1)
+            let height = imageHeight * CGFloat(row) + kViewEdge * CGFloat(row - 1)
             return (cellSize: CGSize(width: imageWidth, height: imageHeight), collectionSize: CGSize(width: width, height: height))
             
         default:
             let column = 3
             let row = (count - 1) / 3 + 1
-            let width = imageWidth * CGFloat(column) + kViewPadding * CGFloat(column - 1)
-            let height = imageHeight * CGFloat(row) + kViewPadding * CGFloat(row - 1)
+            let width = imageWidth * CGFloat(column) + kViewEdge * CGFloat(column - 1)
+            let height = imageHeight * CGFloat(row) + kViewEdge * CGFloat(row - 1)
             return (cellSize: CGSize(width: imageWidth, height: imageHeight), collectionSize: CGSize(width: width, height: height))
         }
     }
@@ -118,7 +126,7 @@ extension PictureCollectionView: UICollectionViewDelegate {
         
         let url = viewModel!.middlePictureArray![indexPath.item]
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PictureCell
-        SDWebImageManager.sharedManager().downloadImageWithURL(url, options: SDWebImageOptions(rawValue: 0), progress: { (current, total) in
+        SDWebImageManager.sharedManager().downloadImageWithURL(url, options: .RetryFailed, progress: { (current, total) in
             cell.imageView.progress = CGFloat(current) / CGFloat(total)
             }) { (_, _, _, _, _) in
                 let userInfo = ["middlePicture": self.viewModel!.middlePictureArray!, "indexPath": indexPath]

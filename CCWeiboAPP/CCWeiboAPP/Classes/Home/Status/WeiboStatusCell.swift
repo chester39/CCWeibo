@@ -32,15 +32,15 @@ class WeiboStatusCell: BaseStatusCell {
             contentLabel.text = viewModel?.status.text
             
             if viewModel?.status.repostsCount != 0 {
-                retweetButton.setTitle("\(viewModel!.status.repostsCount)", forState: UIControlState.Normal)
+                retweetButton.setTitle("\(viewModel!.status.repostsCount)", forState: .Normal)
             }
             
             if viewModel?.status.commentsCount != 0 {
-                commentButton.setTitle("\(viewModel!.status.commentsCount)", forState: UIControlState.Normal)
+                commentButton.setTitle("\(viewModel!.status.commentsCount)", forState: .Normal)
             }
             
             if viewModel?.status.attitudesCount != 0 {
-                likeButton.setTitle("\(viewModel!.status.attitudesCount)", forState: UIControlState.Normal)
+                likeButton.setTitle("\(viewModel!.status.attitudesCount)", forState: .Normal)
             }
             
             pictureView.viewModel = viewModel
@@ -100,20 +100,20 @@ class WeiboStatusCell: BaseStatusCell {
     private func setupConstraints() {
         
         constrain(pictureView, contentLabel) { (pictureView, contentLabel) in
-            pictureView.top == contentLabel.bottom + kViewBorder
+            pictureView.top == contentLabel.bottom + kViewPadding
             pictureView.left == contentLabel.left
         }
         
         constrain(pictureView, replace: group) { (pictureView) in
             pictureView.width == 300
-            pictureView.height == 100
+            pictureView.height == kViewStandard
         }
         
         constrain(footerView, pictureView) { (footerView, pictureView) in
             footerView.height == kNavigationBarHeight
-            footerView.top == pictureView.bottom + kViewBorder
+            footerView.top == pictureView.bottom + kViewPadding
             footerView.left == footerView.superview!.left
-            footerView.bottom == footerView.superview!.bottom - kViewBorder
+            footerView.bottom == footerView.superview!.bottom - kViewPadding
             footerView.right == footerView.superview!.right
         }
     }

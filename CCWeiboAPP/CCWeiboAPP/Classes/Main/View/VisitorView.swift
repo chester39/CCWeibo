@@ -11,9 +11,9 @@ import Cartography
 class VisitorView: UIView {
     
     // 注册按钮
-    var registerButton = UIButton(type: UIButtonType.System)
+    var registerButton = UIButton(type: .System)
     // 登录按钮
-    var loginButton = UIButton(type: UIButtonType.System)
+    var loginButton = UIButton(type: .System)
     // 旋转视图
     private var rotationView = UIImageView()
     // 图标按钮
@@ -62,16 +62,16 @@ class VisitorView: UIView {
         
         let buttonImage = UIImage(named: "common_button_white_disable")?.resizableImageWithCapInsets(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), resizingMode: UIImageResizingMode.Stretch)
         
-        registerButton.setTitle("注册", forState: UIControlState.Normal)
-        registerButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+        registerButton.setTitle("注册", forState: .Normal)
+        registerButton.setTitleColor(UIColor.orangeColor(), forState: .Normal)
         registerButton.titleLabel?.font = UIFont.systemFontOfSize(15)
-        registerButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal)
+        registerButton.setBackgroundImage(buttonImage, forState: .Normal)
         addSubview(registerButton)
         
-        loginButton.setTitle("登录", forState: UIControlState.Normal)
-        loginButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        loginButton.setTitle("登录", forState: .Normal)
+        loginButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         loginButton.titleLabel?.font = UIFont.systemFontOfSize(15)
-        loginButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal)
+        loginButton.setBackgroundImage(buttonImage, forState: .Normal)
         addSubview(loginButton)
     }
     
@@ -91,18 +91,18 @@ class VisitorView: UIView {
         constrain(textLabel, rotationView) { (textLabel, rotationView) in
             textLabel.width == 220
             textLabel.centerX == rotationView.centerX
-            textLabel.top == rotationView.bottom + kViewMargin
+            textLabel.top == rotationView.bottom + kViewBorder
         }
         
         constrain(registerButton, textLabel) { (registerButton, textLabel) in
-            registerButton.width == 100
-            registerButton.top == textLabel.bottom + kViewMargin
+            registerButton.width == kViewStandard
+            registerButton.top == textLabel.bottom + kViewBorder
             registerButton.left == textLabel.left
         }
         
         constrain(loginButton, textLabel) { (loginButton, textLabel) in
-            loginButton.width == 100
-            loginButton.top == textLabel.bottom + kViewMargin
+            loginButton.width == kViewStandard
+            loginButton.top == textLabel.bottom + kViewBorder
             loginButton.right == textLabel.right
         }
     }

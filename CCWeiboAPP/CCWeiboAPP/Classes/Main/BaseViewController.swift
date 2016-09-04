@@ -39,8 +39,8 @@ class BaseViewController: UITableViewController {
     private func setuplVisitorView() {
         
         view = vistorView
-        vistorView.registerButton.addTarget(self, action: #selector(registerButtonDidClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        vistorView.loginButton.addTarget(self, action: #selector(loginButtonDidClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        vistorView.registerButton.addTarget(self, action: #selector(registerButtonDidClick(_:)), forControlEvents: .TouchUpInside)
+        vistorView.loginButton.addTarget(self, action: #selector(loginButtonDidClick(_:)), forControlEvents: .TouchUpInside)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(registerButtonDidClick(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(loginButtonDidClick(_:)))

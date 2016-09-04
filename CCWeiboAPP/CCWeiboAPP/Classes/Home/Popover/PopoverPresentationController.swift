@@ -13,7 +13,7 @@ class PopoverPresentationController: UIPresentationController {
     
     // 蒙版按钮
     private lazy var coverButton: UIButton = {
-        let button = UIButton(type: UIButtonType.System)
+        let button = UIButton(type: .System)
         button.frame = kScreenFrame
         button.backgroundColor = UIColor.clearColor()
         
@@ -37,7 +37,7 @@ class PopoverPresentationController: UIPresentationController {
         
         presentedView()?.frame = presentFrame
         containerView?.insertSubview(coverButton, atIndex: 0)
-        coverButton.addTarget(self, action: #selector(coverButtonDidClick), forControlEvents: UIControlEvents.TouchUpInside)
+        coverButton.addTarget(self, action: #selector(coverButtonDidClick), forControlEvents: .TouchUpInside)
     }
     
     // MARK: - 按钮方法

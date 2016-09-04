@@ -25,7 +25,7 @@ class NewFeatureCell: UICollectionViewCell {
     // 开始按钮
     private lazy var startButton: UIButton = {
         let button = UIButton(imageName: nil, backgroundImageName: "new_feature_button")
-        button.addTarget(self, action: #selector(startButtonDidClick), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(startButtonDidClick), forControlEvents: .TouchUpInside)
         
         return button
     }()
@@ -71,8 +71,8 @@ class NewFeatureCell: UICollectionViewCell {
             
             imageView.edges == inset(imageView.superview!.edges, 0)
             
-            startButton.width == 200
-            startButton.height == 50
+            startButton.width == kViewDistance
+            startButton.height == kViewAdapter
             startButton.centerX == startButton.superview!.centerX
             startButton.bottom == startButton.superview!.bottom - kViewDistance
         }

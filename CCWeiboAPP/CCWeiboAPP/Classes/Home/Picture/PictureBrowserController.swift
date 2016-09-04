@@ -28,14 +28,13 @@ class PictureBrowserController: UIViewController {
     // 关闭按钮
     private lazy var closeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("关闭", forState: UIControlState.Normal)
-//        button.backgroundColor = UIColor(white: 0.2, alpha: 0.3)
+        button.setTitle("关闭", forState: .Normal)
         button.layer.cornerRadius = 5.0
         button.layer.masksToBounds = true
         button.layer.borderWidth = 1.0
         button.layer.borderColor = UIColor.whiteColor().CGColor
-        button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        button.addTarget(self, action: #selector(closeButtonDidClick), forControlEvents: UIControlEvents.TouchUpInside)
+        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        button.addTarget(self, action: #selector(closeButtonDidClick), forControlEvents: .TouchUpInside)
         
         return button
     }()
@@ -43,14 +42,13 @@ class PictureBrowserController: UIViewController {
     // 保存按钮
     private lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("保存", forState: UIControlState.Normal)
-//        button.backgroundColor = UIColor(white: 0.2, alpha: 0.3)
+        button.setTitle("保存", forState: .Normal)
         button.layer.cornerRadius = 5.0
         button.layer.masksToBounds = true
         button.layer.borderWidth = 1.0
         button.layer.borderColor = UIColor.whiteColor().CGColor
-        button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        button.addTarget(self, action: #selector(saveButtonDidClick), forControlEvents: UIControlEvents.TouchUpInside)
+        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        button.addTarget(self, action: #selector(saveButtonDidClick), forControlEvents: .TouchUpInside)
         
         return button
     }()
@@ -115,15 +113,15 @@ class PictureBrowserController: UIViewController {
         }
         
         constrain(closeButton, saveButton) { (closeButton, saveButton) in
-            closeButton.width == 100
-            closeButton.height == 40
-            closeButton.bottom == closeButton.superview!.bottom - kViewMargin
-            closeButton.left == closeButton.superview!.left + kViewMargin
+            closeButton.width == kViewStandard
+            closeButton.height == kViewMargin
+            closeButton.bottom == closeButton.superview!.bottom - kViewBorder
+            closeButton.left == closeButton.superview!.left + kViewBorder
             
-            saveButton.width == 100
-            saveButton.height == 40
+            saveButton.width == kViewStandard
+            saveButton.height == kViewMargin
             saveButton.bottom == closeButton.bottom
-            saveButton.right == saveButton.superview!.right - kViewMargin
+            saveButton.right == saveButton.superview!.right - kViewBorder
         }
     }
     

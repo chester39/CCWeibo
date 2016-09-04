@@ -11,7 +11,7 @@ class MainViewController: UITabBarController {
     // 发布按钮
     private lazy var composeButton: UIButton = { 
         let button = UIButton(imageName: "tabbar_compose_icon_add", backgroundImageName: "tabbar_compose_button")
-        button.addTarget(self, action: #selector(composeButtonDidClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(composeButtonDidClick(_:)), forControlEvents: .TouchUpInside)
         
         return button
     }()
