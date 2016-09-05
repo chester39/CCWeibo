@@ -7,6 +7,8 @@
 import Foundation
 import UIKit
 
+import MBProgressHUD
+
 extension NSDate {
     
     /**
@@ -184,5 +186,19 @@ extension UILabel {
         self.text = text
         self.font = UIFont.systemFontOfSize(fontSize)
         self.numberOfLines = lines
+    }
+}
+
+extension MBProgressHUD {
+    
+    /**
+     显示消息和持续时间方法
+     */
+    class func showMessage(text: String, delay: NSTimeInterval) {
+        
+        let mainWindow = UIApplication.sharedApplication().keyWindow ?? UIApplication.sharedApplication().windows.first!
+        let hud = MBProgressHUD.showHUDAddedTo(mainWindow, animated: true)
+        hud.label.text = text
+        hud.hideAnimated(true, afterDelay: delay)
     }
 }

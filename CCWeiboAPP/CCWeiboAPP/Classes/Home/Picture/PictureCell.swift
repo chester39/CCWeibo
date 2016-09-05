@@ -7,16 +7,22 @@
 import UIKit
 
 import Cartography
+import SDWebImage
 
 class PictureCell: UICollectionViewCell {
     
     // 图片视图
     var imageView = ProgressImageView()
+    // GIF按钮
+    var gifView = UIImageView()
     
     // 图片URL
     var url: NSURL? {
         didSet {
             imageView.sd_setImageWithURL(url)
+            if let flag = url?.absoluteString.lowercaseString.hasSuffix("gif") {
+                gifView.hidden = !flag
+            }
         }
     }
     
@@ -30,6 +36,9 @@ class PictureCell: UICollectionViewCell {
         super.init(frame: frame)
 
         contentView.addSubview(imageView)
+        
+        gifView.image = UIImage(named: "gif")
+        contentView.addSubview(gifView)
     }
     
     /**
@@ -48,5 +57,12 @@ class PictureCell: UICollectionViewCell {
         super.layoutSubviews()
         
         imageView.frame = bounds
+        
+        constrain(gifView) { (gifView) in
+            gifView.width == kViewBorder
+            gifView.height == kViewPadding
+            gifView.bottom == gifView.superview!.bottom
+            gifView.right == gifView.superview!.right
+        }
     }
 }

@@ -9,7 +9,7 @@ PODS:
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.4.1)
+  - Alamofire (~> 3.4.2)
   - Cartography (~> 0.6.0)
   - MBProgressHUD (~> 1.0.0)
   - MJRefresh (~> 3.1.12)
@@ -24,6 +24,6 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 64ab78e7d01ab06f21ae8fcf6bd906668c41139e
+PODFILE CHECKSUM: 3dd422e12db01944e8e660ef58d1d7d2f7289d0d
 
 COCOAPODS: 1.0.1

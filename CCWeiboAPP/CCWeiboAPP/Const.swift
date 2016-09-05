@@ -96,7 +96,7 @@ let kRootViewControllerSwitched: String = "RootViewControllerSwitched"
 // 应用版本
 let kAppVersion: String = "AppVersion"
 // 图片浏览器展示
-let kPictureBrowserControllerShowed: String = "PictureBrowserControllerShowed"
+let kBrowserViewControllerShowed: String = "BrowserViewControllerShowed"
 
 // MARK: - Cell重用标识符
 
@@ -109,4 +109,4 @@ let kRetweetStatusReuseIdentifier: String = "RetweetStatusCell"
 // 新特性Cell重用标识符
 let kNewFeatureReuseIdentifier: String = "NewFeatureCell"
 // 图片浏览Cell重用标识符
-let kPictureBrowserReuseIdentifier: String = "PictureBrowserCell"
+let kBrowserReuseIdentifier: String = "BrowserCell"

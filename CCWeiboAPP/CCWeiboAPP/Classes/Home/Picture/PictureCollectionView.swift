@@ -130,8 +130,54 @@ extension PictureCollectionView: UICollectionViewDelegate {
             cell.imageView.progress = CGFloat(current) / CGFloat(total)
             }) { (_, _, _, _, _) in
                 let userInfo = ["middlePicture": self.viewModel!.middlePictureArray!, "indexPath": indexPath]
-                NSNotificationCenter.defaultCenter().postNotificationName(kPictureBrowserControllerShowed, object: self, userInfo: userInfo)
+                NSNotificationCenter.defaultCenter().postNotificationName(kBrowserViewControllerShowed, object: self, userInfo: userInfo)
         }
+    }
+    
+}
+
+extension PictureCollectionView: BrowserPresentationDelegate {
+
+    /**
+     浏览图片视图创建方法
+     */
+    func browerPresentationWillShowImageView(browserPresentationController: BrowserPresentationController, indexPath: NSIndexPath) -> UIImageView {
+        
+        let imageView = UIImageView()
+        let cell = cellForItemAtIndexPath(indexPath) as! PictureCell
+        imageView.image = cell.imageView.image
+        imageView.sizeToFit()
+        
+        return imageView
+    }
+    
+    /**
+     浏览图片相对尺寸方法
+     */
+    func browerPresentationWillFromFrame(browserPresentationController: BrowserPresentationController, indexPath: NSIndexPath) -> CGRect {
+        
+        let cell = cellForItemAtIndexPath(indexPath) as! PictureCell
+        let frame = convertRect(cell.frame, toCoordinateSpace: UIApplication.sharedApplication().keyWindow!)
+        
+        return frame
+    }
+    
+    /**
+     浏览图片绝对尺寸方法
+     */
+    func browerPresentationWillToFrame(browserPresentationController: BrowserPresentationController, indexPath: NSIndexPath) -> CGRect {
+        
+        let cell = cellForItemAtIndexPath(indexPath) as! PictureCell
+        let image = cell.imageView.image!
+        let scale = image.size.width / image.size.height
+        let imageHeight = kScreenHeight / scale
+        
+        var offsetY: CGFloat = 0
+        if imageHeight < kScreenHeight {
+            offsetY = (kScreenHeight - imageHeight) / 2
+        }
+        
+        return CGRect(x: 0, y: offsetY, width: kScreenWidth, height: imageHeight)
     }
     
 }

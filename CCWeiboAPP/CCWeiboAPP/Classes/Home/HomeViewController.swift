@@ -12,8 +12,14 @@ import SDWebImage
 
 class HomeViewController: BaseViewController {
     
+    // 微博数组
+    var statusArray: [StatusViewModel]?
+    // Cell行高缓存
+    private var rowHeightCaches = [Int: CGFloat]()
     // 最后一条微博与否
     private var isLastStatus = false
+    // 浏览视图转场管理器
+    private lazy var browerPresentationManager: BrowserPresentationController = BrowserPresentationController()
     
     // 刷新提醒标签
     private var tipLabel: UILabel = {
@@ -27,12 +33,6 @@ class HomeViewController: BaseViewController {
         return label
     }()
     
-    // Cell行高缓存
-    private var rowHeightCaches = [Int: CGFloat]()
-    
-    // 微博数组
-    var statusArray: [StatusViewModel]?
-    
     // 标题按钮
     private lazy var titleButton: UIButton = {
         let button = TitleButton()
@@ -43,8 +43,8 @@ class HomeViewController: BaseViewController {
         return button
     }()
     
-    // 转场管理器
-    private lazy var presentationManger: PopoverPresentationManager = {
+    // 标题按钮转场管理器
+    private lazy var popoverPresentationManager: PopoverPresentationManager = {
         let manager = PopoverPresentationManager()
         let presentWidth: CGFloat = kViewDistance
         let presentHeight: CGFloat = 250
@@ -103,9 +103,9 @@ class HomeViewController: BaseViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(qrcodeButtonDidClick))
         navigationItem.titleView = titleButton
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidPresented, object: presentationManger)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidDismissed, object: presentationManger)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(pictureCellDidClick(_:)), name: kPictureBrowserControllerShowed, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidPresented, object: popoverPresentationManager)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidDismissed, object: popoverPresentationManager)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(pictureCellDidClick(_:)), name: kBrowserViewControllerShowed, object: nil)
         
         navigationController?.navigationBar.insertSubview(tipLabel, atIndex: 0)
     }
@@ -144,8 +144,8 @@ class HomeViewController: BaseViewController {
     @objc private func titleButtonDidClick(button: TitleButton) {
         
         let popoverVC = PopoverViewController()
-        popoverVC.transitioningDelegate = presentationManger
-        popoverVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+        popoverVC.transitioningDelegate = popoverPresentationManager
+        popoverVC.modalPresentationStyle = .Custom
         presentViewController(popoverVC, animated: true, completion: nil)
     }
     
@@ -174,22 +174,27 @@ class HomeViewController: BaseViewController {
     @objc private func pictureCellDidClick(notice: NSNotification) {
         
         guard let array = notice.userInfo!["middlePicture"] as? [NSURL] else {
-            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-            hud.label.text = "获取图片失败"
-            hud.hideAnimated(true, afterDelay: 2.0)
+            MBProgressHUD.showMessage("图片获取失败", delay: 1.0)
             
             return
         }
         
         guard let index = notice.userInfo!["indexPath"] as? NSIndexPath else {
-            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-            hud.label.text = "获取索引失败"
-            hud.hideAnimated(true, afterDelay: 2.0)
+            MBProgressHUD.showMessage("索引获取失败", delay: 1.0)
             
             return
         }
         
-        let pbc = PictureBrowserController(urlArray: array, indexPath: index)
+        guard let pictureCollectionView = notice.object as? PictureCollectionView else {
+            MBProgressHUD.showMessage("图片视图获取失败", delay: 1.0)
+            
+            return
+        }
+        
+        let pbc = BrowserViewController(urlArray: array, indexPath: index)
+        pbc.transitioningDelegate = browerPresentationManager
+        pbc.modalPresentationStyle = .Custom
+        browerPresentationManager.acquireDefaultData(index, browserDelegate: pictureCollectionView)
         presentViewController(pbc, animated: true, completion: nil)
     }
     
@@ -209,9 +214,7 @@ class HomeViewController: BaseViewController {
         
         NetworkingUtil.sharedInstance.loadWeiboStatuses(sinceID, maxID: maxID) { (array, error) -> () in
             if error != nil {
-                let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-                hud.label.text = "获取微博数据失败"
-                hud.hideAnimated(true, afterDelay: 2.0)
+                MBProgressHUD.showMessage("微博数据获取失败", delay: 1.0)
             }
             
             guard let weiboArray = array else {

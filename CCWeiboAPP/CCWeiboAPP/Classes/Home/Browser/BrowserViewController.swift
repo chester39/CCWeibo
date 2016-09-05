@@ -1,5 +1,5 @@
 //
-//	PictureBrowserController.swift
+//	BrowserViewController.swift
 //		CCWeiboAPP
 //		Chen Chen @ September 2nd, 2016
 //
@@ -7,8 +7,9 @@
 import UIKit
 
 import Cartography
+import MBProgressHUD
 
-class PictureBrowserController: UIViewController {
+class BrowserViewController: UIViewController {
 
     // 微博配图中图URL数组
     var pictureURLArray: [NSURL]
@@ -20,7 +21,7 @@ class PictureBrowserController: UIViewController {
         
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: PictureLayout())
         collectionView.dataSource = self
-        collectionView.registerClass(PictureBrowserCell.self, forCellWithReuseIdentifier: kPictureBrowserReuseIdentifier)
+        collectionView.registerClass(BrowserCell.self, forCellWithReuseIdentifier: kBrowserReuseIdentifier)
         
         return collectionView
     }()
@@ -140,12 +141,29 @@ class PictureBrowserController: UIViewController {
      */
     @objc private func saveButtonDidClick() {
         
-        print(#function)
+        let indexPath = browserView.indexPathsForVisibleItems().last!
+        let cell = browserView.cellForItemAtIndexPath(indexPath) as! BrowserCell
+        let image = cell.imageView.image!
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(BrowserViewController.image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    /**
+     图片保存方法
+     */
+    func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo: AnyObject?) {
+        
+        if error != nil {
+            MBProgressHUD.showMessage("图片保存失败", delay: 1.0)
+            
+            return
+        }
+        
+        MBProgressHUD.showMessage("图片保存成功", delay: 1.0)
     }
     
 }
 
-extension PictureBrowserController: UICollectionViewDataSource {
+extension BrowserViewController: UICollectionViewDataSource {
     
     /**
      共有组数方法
@@ -168,7 +186,7 @@ extension PictureBrowserController: UICollectionViewDataSource {
      */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kPictureBrowserReuseIdentifier, forIndexPath: indexPath) as! PictureBrowserCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kBrowserReuseIdentifier, forIndexPath: indexPath) as! BrowserCell
         cell.imageURL = pictureURLArray[indexPath.item]
         
         return cell

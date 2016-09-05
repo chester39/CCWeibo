@@ -9,7 +9,7 @@ import UIKit
 class PopoverPresentationManager: NSObject {
 
     // 控制器是否被显示
-    private var isPresent = false
+    private var isPresented = false
     // 弹出框尺寸
     var presentFrame = CGRectZero
     
@@ -33,7 +33,7 @@ extension PopoverPresentationManager: UIViewControllerTransitioningDelegate {
      */
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        isPresent = true
+        isPresented = true
         NSNotificationCenter.defaultCenter().postNotificationName(kPopoverPresentationManagerDidPresented, object: self)
         
         return self
@@ -44,7 +44,7 @@ extension PopoverPresentationManager: UIViewControllerTransitioningDelegate {
      */
     func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        isPresent = false
+        isPresented = false
         NSNotificationCenter.defaultCenter().postNotificationName(kPopoverPresentationManagerDidDismissed, object: self)
         
         return self
@@ -67,7 +67,7 @@ extension PopoverPresentationManager: UIViewControllerAnimatedTransitioning {
      */
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         
-        if isPresent {
+        if isPresented {
             willPresentedController(transitionContext)
         
         } else {

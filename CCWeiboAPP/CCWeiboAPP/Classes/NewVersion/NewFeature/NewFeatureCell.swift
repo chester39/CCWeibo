@@ -19,9 +19,6 @@ class NewFeatureCell: UICollectionViewCell {
         }
     }
     
-    // 图片视图
-    private lazy var imageView = UIImageView()
-    
     // 开始按钮
     private lazy var startButton: UIButton = {
         let button = UIButton(imageName: nil, backgroundImageName: "new_feature_button")
@@ -29,6 +26,9 @@ class NewFeatureCell: UICollectionViewCell {
         
         return button
     }()
+    
+    // 图片视图
+    private lazy var imageView = UIImageView()
     
     // MARK: - 初始化方法
     

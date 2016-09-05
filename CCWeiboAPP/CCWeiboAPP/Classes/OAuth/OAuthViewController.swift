@@ -84,6 +84,7 @@ extension OAuthViewController: WKNavigationDelegate {
         
         hud.hideAnimated(true)
         print(navigationAction.request)
+        
         guard let urlString = navigationAction.request.URL?.absoluteString else {
             return
         }

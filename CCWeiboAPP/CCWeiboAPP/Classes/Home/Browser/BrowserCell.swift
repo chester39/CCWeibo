@@ -1,5 +1,5 @@
 //
-//	PictureBrowserCell.swift
+//	BrowserCell.swift
 //		CCWeiboAPP
 //		Chen Chen @ September 2nd, 2016
 //
@@ -8,13 +8,16 @@ import UIKit
 
 import SDWebImage
 
-class PictureBrowserCell: UICollectionViewCell {
+class BrowserCell: UICollectionViewCell {
 
     // 图标URL
     var imageURL: NSURL? {
         didSet {
+            indicatorView.startAnimating()
             resetView()
+            
             imageView.sd_setImageWithURL(imageURL, placeholderImage: nil) { (image, error, _, url) in
+                self.indicatorView.stopAnimating()
                 let scale = image.size.width / image.size.height
                 let imageHeight = kScreenWidth / scale
                 self.imageView.frame = CGRect(origin: CGPointZero, size: CGSize(width: kScreenWidth, height: imageHeight))
@@ -42,7 +45,9 @@ class PictureBrowserCell: UICollectionViewCell {
     }()
     
     // 图片视图
-    private lazy var imageView: UIImageView = UIImageView()
+    lazy var imageView: UIImageView = UIImageView()
+    // 提示视图
+    private lazy var indicatorView: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
     
     // MARK: - 初始化方法
     
@@ -76,6 +81,9 @@ class PictureBrowserCell: UICollectionViewCell {
         contentView.addSubview(baseView)
         
         baseView.addSubview(imageView)
+        
+        indicatorView.center = contentView.center
+        contentView.addSubview(indicatorView)
     }
     
     /**
@@ -92,7 +100,7 @@ class PictureBrowserCell: UICollectionViewCell {
     
 }
 
-extension PictureBrowserCell: UIScrollViewDelegate {
+extension BrowserCell: UIScrollViewDelegate {
     
     /**
      获取缩放视图方法

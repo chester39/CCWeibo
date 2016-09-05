@@ -21,9 +21,6 @@ class QRCodeViewController: UIViewController {
         return try? AVCaptureDeviceInput(device: device)
     }()
     
-    // 视频流会话
-    private lazy var session: AVCaptureSession = AVCaptureSession()
-    
     // 视频流输出
     private lazy var output: AVCaptureMetadataOutput = {
         let out = AVCaptureMetadataOutput()
@@ -38,9 +35,10 @@ class QRCodeViewController: UIViewController {
         return out
     }()
     
+    // 视频流会话
+    private lazy var session: AVCaptureSession = AVCaptureSession()
     // 视频流预览图层
     private lazy var previewLayer: AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.session)
-    
     // 视频流描边图层
     private lazy var containerLayer: CALayer = CALayer()
     
