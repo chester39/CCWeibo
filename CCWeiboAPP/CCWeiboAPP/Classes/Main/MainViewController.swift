@@ -113,7 +113,10 @@ class MainViewController: UITabBarController {
      */
     @objc private func composeButtonDidClick(button: UIButton) {
         
-        print(button)
+        let cvc = ComposeViewController()
+        let nc = UINavigationController()
+        nc.addChildViewController(cvc)
+        presentViewController(nc, animated: false, completion: nil)
     }
     
 }

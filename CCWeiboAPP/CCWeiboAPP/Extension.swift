@@ -198,6 +198,7 @@ extension MBProgressHUD {
         
         let mainWindow = UIApplication.sharedApplication().keyWindow ?? UIApplication.sharedApplication().windows.first!
         let hud = MBProgressHUD.showHUDAddedTo(mainWindow, animated: true)
+        hud.mode = .Text
         hud.label.text = text
         hud.hideAnimated(true, afterDelay: delay)
     }

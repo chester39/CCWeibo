@@ -31,7 +31,7 @@ class BaseViewController: UITableViewController {
         super.viewDidLoad()
     }
     
-    // MARK: - 自定义方法
+    // MARK: - 界面方法
     
     /**
      设置访客视图方法
