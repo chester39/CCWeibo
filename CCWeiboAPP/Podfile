@@ -6,7 +6,8 @@ target 'CCWeiboAPP' do
 	pod 'Cartography', '~> 0.6.0'
 	pod 'Alamofire', '~> 3.4.2'
 	pod 'MBProgressHUD', '~> 1.0.0'
-	pod 'SDWebImage', '~>3.8.1'
+	pod 'SDWebImage', '~> 3.8.2'
 	pod 'MJRefresh', '~> 3.1.12'
     pod 'SwiftyJSON', '~> 2.3.2'
+    pod 'TZImagePickerController', '~> 1.6.4'
 end
