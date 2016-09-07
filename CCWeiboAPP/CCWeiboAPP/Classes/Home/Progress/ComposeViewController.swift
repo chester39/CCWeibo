@@ -7,6 +7,7 @@
 import UIKit
 
 import Cartography
+import MBProgressHUD
 
 class ComposeViewController: UIViewController {
 
@@ -89,7 +90,15 @@ class ComposeViewController: UIViewController {
      */
     @objc private func composeButtonDidClick() {
         
-        print(#function)
+        let text = textView.text
+        NetworkingUtil.sharedInstance.sendWeiboStatuses(text) { (object, error) in
+            if error != nil {
+                MBProgressHUD.showMessage("微博发送失败", delay: 2.0)
+            }
+            
+            MBProgressHUD.showMessage("微博发送成功", delay: 2.0)
+            self.closeButtonDidClick()
+        }
     }
 
 }

@@ -49,7 +49,7 @@ class NetworkingUtil {
         
         let path = "oauth2/access_token"
         let parameters = ["client_id": kWeiboAppKey, "client_secret": kWeiboAppSecret, "grant_type": "authorization_code", "code": code, "redirect_uri": kWeiboRedirectUri]
-        Alamofire.request(Method.POST, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
+        Alamofire.request(.POST, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
             guard let data = response.data else {
                 return
             }
@@ -74,8 +74,8 @@ class NetworkingUtil {
         
         let path = "2/statuses/home_timeline.json"
         let temp = (maxID != 0) ? maxID - 1 : maxID
-        let parameters = ["access_token": UserAccount.loadUserAccount()!.accessToken!, "since_id": String(sinceID), "max_id": String(temp)]
-        Alamofire.request(Method.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
+        let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!, "since_id": String(sinceID), "max_id": String(temp)]
+        Alamofire.request(.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
             guard let data = response.data else {
                 finished(array: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
                 return
@@ -89,6 +89,25 @@ class NetworkingUtil {
             }
             
             finished(array: array, error: nil)
+        }
+    }
+    
+    /**
+     发送微博内容方法
+     */
+    func sendWeiboStatuses(status: String, finished: (object: AnyObject?, error: NSError?) -> ()) {
+        
+        let path = "2/statuses/update.json"
+        let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!, "status": status]
+        Alamofire.request(.POST, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
+            guard let data = response.data else {
+                finished(object: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "发送微博失败"]))
+                return
+            }
+            
+            let json = JSON(data: data)
+            let dict = json.dictionaryObject
+            finished(object: dict, error: nil)
         }
     }
 
