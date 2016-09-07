@@ -28,7 +28,7 @@ class RetweetStatusCell: BaseStatusCell {
             vipView.image = nil
             if let image = viewModel?.memberRankImage {
                 vipView.image = image
-                nameLabel.textColor = UIColor.orangeColor()
+                nameLabel.textColor = MainColor
             }
             
             timeLabel.text = viewModel?.creatTimeText
@@ -98,8 +98,8 @@ class RetweetStatusCell: BaseStatusCell {
         retweetView.clipsToBounds = true
         retweetView.layer.cornerRadius = 5.0
         retweetView.layer.borderWidth = 1.0
-        retweetView.layer.borderColor = UIColor(hex: 0xE5E5E5).CGColor
-        retweetView.backgroundColor = UIColor(hex: 0xE5E5E5)
+        retweetView.layer.borderColor = RetweetStatusBackgroundColor.CGColor
+        retweetView.backgroundColor = RetweetStatusBackgroundColor
         contentView.addSubview(retweetView)
         
         retweetLabel.preferredMaxLayoutWidth = kScreenWidth - kViewBorder

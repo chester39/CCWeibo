@@ -87,7 +87,7 @@ class StatusViewModel: NSObject {
             let name = status.retweetedStatus?.user?.screenName ?? ""
             let length = name.characters.count + 1
             retweetText = NSMutableAttributedString(string: "@" + name + ": " + text)
-            retweetText?.addAttribute(NSForegroundColorAttributeName, value: UIColor(hex: 0x3F6380), range: NSMakeRange(0, length))
+            retweetText?.addAttribute(NSForegroundColorAttributeName, value: RetweetUserTextColor, range: NSMakeRange(0, length))
         }
     }
 }

@@ -49,7 +49,7 @@ class VisitorView: UIView {
      */
     private func setupUI() {
     
-        self.backgroundColor = UIColor(red: 232.0 / 255.0, green: 232.0 / 255.0, blue: 232.0 / 255.0, alpha: 1.0)
+        self.backgroundColor = VistorBackgroundColor
         
         rotationView.image = UIImage(named: "visitordiscover_feed_image_smallicon")
         addSubview(rotationView)
@@ -57,19 +57,19 @@ class VisitorView: UIView {
         iconView.image = UIImage(named: "visitordiscover_feed_image_house" )
         addSubview(iconView)
 
-        textLabel.textAlignment = NSTextAlignment.Center
+        textLabel.textAlignment = .Center
         addSubview(textLabel)
         
         let buttonImage = UIImage(named: "common_button_white_disable")?.resizableImageWithCapInsets(UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), resizingMode: UIImageResizingMode.Stretch)
         
         registerButton.setTitle("注册", forState: .Normal)
-        registerButton.setTitleColor(UIColor.orangeColor(), forState: .Normal)
+        registerButton.setTitleColor(MainColor, forState: .Normal)
         registerButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         registerButton.setBackgroundImage(buttonImage, forState: .Normal)
         addSubview(registerButton)
         
         loginButton.setTitle("登录", forState: .Normal)
-        loginButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        loginButton.setTitleColor(CommonDarkColor, forState: .Normal)
         loginButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         loginButton.setBackgroundImage(buttonImage, forState: .Normal)
         addSubview(loginButton)

@@ -46,7 +46,7 @@ class PopoverView: UIView {
         backgroundView.image = UIImage(named: "popover_background")!.resizableImageWithCapInsets(UIEdgeInsets(top: 25, left: 0, bottom: 25, right: 0), resizingMode: UIImageResizingMode.Stretch)
         addSubview(backgroundView)
         
-        tableView.backgroundColor = UIColor(hex: 0xff6c45)
+        tableView.backgroundColor = MainColor
         addSubview(tableView)
     }
     

@@ -53,11 +53,11 @@ class QRCodeViewController: UIViewController {
         
         view = qrCodeView
         
-        navigationController?.navigationBar.barTintColor = UIColor.blackColor()
-        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(19), NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController?.navigationBar.barTintColor = CommonDarkColor
+        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(19), NSForegroundColorAttributeName: CommonLightColor]
         navigationItem.title = "扫一扫"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(closeButtonDidClick))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "相册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(albumButtonDidClick))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "相册", style: .Plain, target: self, action: #selector(albumButtonDidClick))
         
         qrCodeView.tabBar.delegate = self
         qrCodeView.cardButton.addTarget(self, action: #selector(cardButtonDidClick), forControlEvents: .TouchUpInside)
@@ -109,7 +109,7 @@ class QRCodeViewController: UIViewController {
      */
     func closeButtonDidClick() {
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(false, completion: nil)
     }
 
     /**
@@ -132,7 +132,7 @@ class QRCodeViewController: UIViewController {
     func cardButtonDidClick() {
         
         let qrccVC = QRCodeCreateController()
-        navigationController?.pushViewController(qrccVC, animated: true)
+        navigationController?.pushViewController(qrccVC, animated: false)
     }
     
 }
@@ -208,8 +208,8 @@ extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         
         let layer = CAShapeLayer()
         layer.lineWidth = 2
-        layer.strokeColor = UIColor.greenColor().CGColor
-        layer.fillColor = UIColor.clearColor().CGColor
+        layer.strokeColor = QRCodeBorderColor.CGColor
+        layer.fillColor = ClearColor.CGColor
         
         let path = UIBezierPath()
         var index = 0

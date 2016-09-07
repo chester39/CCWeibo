@@ -72,10 +72,10 @@ class BaseStatusCell: UITableViewCell {
         vipView.image = UIImage(named: "common_icon_membership")
         contentView.addSubview(vipView)
         
-        timeLabel.textColor = UIColor(hex: 0xA5A5A5)
+        timeLabel.textColor = AuxiliaryTextColor
         contentView.addSubview(timeLabel)
         
-        sourceLabel.textColor = UIColor(hex: 0xA5A5A5)
+        sourceLabel.textColor = AuxiliaryTextColor
         contentView.addSubview(sourceLabel)
         
         contentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewBorder
@@ -85,19 +85,19 @@ class BaseStatusCell: UITableViewCell {
         
         retweetButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
         retweetButton.setTitle("转发", forState: .Normal)
-        retweetButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        retweetButton.setTitleColor(StatusTabBarTextColor, forState: .Normal)
         retweetButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         footerView.addSubview(retweetButton)
         
         commentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
         commentButton.setTitle("评论", forState: .Normal)
-        commentButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        commentButton.setTitleColor(StatusTabBarTextColor, forState: .Normal)
         commentButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         footerView.addSubview(commentButton)
         
         likeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
         likeButton.setTitle("赞", forState: .Normal)
-        likeButton.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        likeButton.setTitleColor(StatusTabBarTextColor, forState: .Normal)
         likeButton.titleLabel?.font = UIFont.systemFontOfSize(15)
         footerView.addSubview(likeButton)
     }

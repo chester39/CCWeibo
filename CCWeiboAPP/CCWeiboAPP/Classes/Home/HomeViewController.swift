@@ -24,9 +24,9 @@ class HomeViewController: BaseViewController {
     // 刷新提醒标签
     private var tipLabel: UILabel = {
         let label = UILabel(text: "没有更多微博", fontSize: 15, lines: 1)
-        label.backgroundColor = UIColor.orangeColor()
-        label.textColor = UIColor.whiteColor()
-        label.textAlignment = NSTextAlignment.Center
+        label.backgroundColor = MainColor
+        label.textColor = CommonLightColor
+        label.textAlignment = .Center
         label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kNavigationBarHeight)
         label.hidden = true
         
@@ -150,7 +150,7 @@ class HomeViewController: BaseViewController {
     }
     
     /**
-     左边按钮点击方法
+     好友按钮点击方法
      */
     @objc private func friendButtonDidClick() {
         
@@ -165,7 +165,7 @@ class HomeViewController: BaseViewController {
         let qrcVC = QRCodeViewController()
         let qrcNC = UINavigationController()
         qrcNC.addChildViewController(qrcVC)
-        presentViewController(qrcNC, animated: true, completion: nil)
+        presentViewController(qrcNC, animated: false, completion: nil)
     }
     
     /**

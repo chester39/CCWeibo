@@ -77,7 +77,7 @@ class BrowserCell: UICollectionViewCell {
     private func setupUI() {
         
         baseView.frame = kScreenFrame
-        baseView.backgroundColor = UIColor.blackColor()
+        baseView.backgroundColor = CommonDarkColor
         contentView.addSubview(baseView)
         
         baseView.addSubview(imageView)

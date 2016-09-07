@@ -66,7 +66,7 @@ class WelcomeView: UIView {
         }
         
         textLabel.text = "欢迎回来, \(userName)"
-        textLabel.textAlignment = NSTextAlignment.Center
+        textLabel.textAlignment = .Center
         textLabel.alpha = 0.0
         addSubview(textLabel)
     }

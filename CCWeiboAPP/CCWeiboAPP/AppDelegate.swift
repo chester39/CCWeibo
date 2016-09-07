@@ -20,12 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         window = UIWindow(frame: kScreenFrame)
-        window?.backgroundColor = UIColor.whiteColor()
+        window?.backgroundColor = CommonLightColor
         window?.rootViewController = defaultViewController()
         window?.makeKeyAndVisible()
         
-        UINavigationBar.appearance().tintColor = UIColor.orangeColor()
-        UITabBar.appearance().tintColor = UIColor.orangeColor()
+        UINavigationBar.appearance().tintColor = MainColor
+        UITabBar.appearance().tintColor = MainColor
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(changeRootViewController(_:)), name: kRootViewControllerSwitched, object: nil)
         

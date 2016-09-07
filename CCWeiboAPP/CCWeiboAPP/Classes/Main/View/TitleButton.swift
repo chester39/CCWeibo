@@ -59,7 +59,7 @@ class TitleButton: UIButton {
         setImage(UIImage(named: "navigationbar_arrow_down"), forState: .Normal)
         setImage(UIImage(named: "navigationbar_arrow_up"), forState: .Selected)
         
-        setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        setTitleColor(StatusTabBarTextColor, forState: .Normal)
         sizeToFit()
     }
     

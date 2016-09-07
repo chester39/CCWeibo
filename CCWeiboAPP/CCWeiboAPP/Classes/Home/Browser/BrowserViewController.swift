@@ -33,8 +33,8 @@ class BrowserViewController: UIViewController {
         button.layer.cornerRadius = 5.0
         button.layer.masksToBounds = true
         button.layer.borderWidth = 1.0
-        button.layer.borderColor = UIColor.whiteColor().CGColor
-        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        button.layer.borderColor = CommonLightColor.CGColor
+        button.setTitleColor(CommonLightColor, forState: .Normal)
         button.addTarget(self, action: #selector(closeButtonDidClick), forControlEvents: .TouchUpInside)
         
         return button
@@ -47,8 +47,8 @@ class BrowserViewController: UIViewController {
         button.layer.cornerRadius = 5.0
         button.layer.masksToBounds = true
         button.layer.borderWidth = 1.0
-        button.layer.borderColor = UIColor.whiteColor().CGColor
-        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        button.layer.borderColor = CommonLightColor.CGColor
+        button.setTitleColor(CommonLightColor, forState: .Normal)
         button.addTarget(self, action: #selector(saveButtonDidClick), forControlEvents: .TouchUpInside)
         
         return button

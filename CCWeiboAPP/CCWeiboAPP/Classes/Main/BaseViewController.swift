@@ -42,8 +42,8 @@ class BaseViewController: UITableViewController {
         vistorView.registerButton.addTarget(self, action: #selector(registerButtonDidClick(_:)), forControlEvents: .TouchUpInside)
         vistorView.loginButton.addTarget(self, action: #selector(loginButtonDidClick(_:)), forControlEvents: .TouchUpInside)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(registerButtonDidClick(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(loginButtonDidClick(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: .Plain, target: self, action: #selector(registerButtonDidClick(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: .Plain, target: self, action: #selector(loginButtonDidClick(_:)))
     }
     
     // MARK: - 按钮方法

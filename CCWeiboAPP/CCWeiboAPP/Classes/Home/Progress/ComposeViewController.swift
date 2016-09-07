@@ -6,8 +6,26 @@
 
 import UIKit
 
+import Cartography
+
 class ComposeViewController: UIViewController {
 
+    // 标题视图
+    private var titleView = TitleView(frame: CGRect(x: 0, y: 0, width: kViewStandard, height: kNavigationBarHeight))
+    // 占位符文本视图
+    private var textView = PlaceholderTextView()
+    
+    // 发送按钮
+    private lazy var composeItem: UIBarButtonItem = {
+       let button = UIBarButtonItem()
+        button.title = "发送"
+        button.target = self
+        button.action = #selector(composeButtonDidClick)
+        button.enabled = false
+        
+        return button
+    }()
+    
     // MARK: - 系统方法
     
     /**
@@ -18,15 +36,42 @@ class ComposeViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        setupConstraints()
     }
     
     /**
-     设置访客视图方法
+     反初始化方法
+     */
+    deinit {
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    // MARK: - 按钮方法
+    
+    /**
+     初始化界面方法
      */
     private func setupUI() {
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(closeButtonDidClick))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "发送", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(composeButtonDidClick))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
+        navigationItem.rightBarButtonItem = composeItem
+        navigationItem.titleView = titleView
+        
+        textView.font = UIFont.systemFontOfSize(18)
+        textView.alwaysBounceVertical = true
+        textView.delegate = self
+        view.addSubview(textView)
+    }
+    
+    /**
+     初始化约束方法
+     */
+    private func setupConstraints() {
+        
+        constrain(textView) { (textView) in
+            textView.edges == inset(textView.superview!.edges, 0)
+        }
     }
     
     // MARK: - 按钮方法
@@ -47,4 +92,15 @@ class ComposeViewController: UIViewController {
         print(#function)
     }
 
+}
+
+extension ComposeViewController: UITextViewDelegate {
+    
+    /**
+     文本视图已经改变方法
+     */
+    func textViewDidChange(textView: UITextView) {
+        
+        composeItem.enabled = textView.hasText()
+    }
 }

@@ -56,7 +56,11 @@ class QRCodeCreateController: UIViewController {
         
         let filter = CIFilter(name: "CIQRCodeGenerator")
         filter?.setDefaults()
-        filter?.setValue("阇梨".dataUsingEncoding(NSUTF8StringEncoding), forKeyPath: "InputMessage")
+        guard let userName = UserAccount.loadUserAccount()!.screenName else {
+            return
+        }
+        
+        filter?.setValue(userName.dataUsingEncoding(NSUTF8StringEncoding), forKeyPath: "InputMessage")
         guard let ciImage = filter?.outputImage else {
             return
         }
