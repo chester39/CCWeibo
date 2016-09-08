@@ -110,6 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         print("没有新版本")
+        
         return false
     }
     

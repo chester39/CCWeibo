@@ -278,7 +278,7 @@ class HomeViewController: BaseViewController {
         tipLabel.text = (count == 0) ? "没有更多微博" : "\(count) 条微博"
         tipLabel.hidden = false
         
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animateWithDuration(1.0, animations: {
             self.tipLabel.transform = CGAffineTransformMakeTranslation(0, kNavigationBarHeight)
             }) { (_) in
                 UIView.animateWithDuration(1.0, delay: 1.0, options: UIViewAnimationOptions(rawValue: 0), animations: {
