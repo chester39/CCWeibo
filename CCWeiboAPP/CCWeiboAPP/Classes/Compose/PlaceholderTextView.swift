@@ -50,6 +50,8 @@ class PlaceholderTextView: UITextView {
         
         addSubview(placeholderLabel)
         
+        font = UIFont.systemFontOfSize(18)
+        alwaysBounceVertical = true
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(textDidChange), name: UITextViewTextDidChangeNotification, object: self)
     }
     

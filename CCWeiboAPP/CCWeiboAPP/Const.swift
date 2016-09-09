@@ -35,6 +35,8 @@ let kStatusBarHeight: CGFloat = 20
 let kNavigationBarHeight: CGFloat = 44
 // 可用高度
 let kAvailableHeight: CGFloat = (kStatusBarHeight + kNavigationBarHeight)
+// 键盘高度
+let kKeyboardHeight: CGFloat = 238
 
 // MARK: - 微博API常数
 
