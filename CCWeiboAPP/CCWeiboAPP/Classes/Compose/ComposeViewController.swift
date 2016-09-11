@@ -93,7 +93,7 @@ class ComposeViewController: UIViewController {
         }
 
         toolBar.pictureButton.action = #selector(pictureButtonDidClick)
-        toolBar.emojiButton.action = #selector(emojiButtonDidClick)
+        toolBar.emoticonButton.action = #selector(emoticonButtonDidClick)
         view.addSubview(toolBar)
     }
     
@@ -153,9 +153,9 @@ class ComposeViewController: UIViewController {
     /**
      表情按钮点击方法
      */
-    @objc private func emojiButtonDidClick() {
+    @objc private func emoticonButtonDidClick() {
         
-        toolBar.emojiButton.tintColor = (toolBar.emojiButton.tintColor == MainColor) ? AuxiliaryTextColor : MainColor
+        toolBar.emoticonButton.tintColor = (toolBar.emoticonButton.tintColor == MainColor) ? AuxiliaryTextColor : MainColor
         textView.resignFirstResponder()
         if textView.inputView != nil {
             textView.inputView = nil

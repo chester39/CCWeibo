@@ -36,7 +36,7 @@ class KeyboardToolbar: UIToolbar {
     }()
     
     // 表情按钮
-    lazy var emojiButton: UIBarButtonItem = {
+    lazy var emoticonButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.image = UIImage(named: "compose_emoticonbutton_background")
         button.style = .Plain
@@ -82,7 +82,7 @@ class KeyboardToolbar: UIToolbar {
         
         let flexibleButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
         
-        items = [pictureButton, flexibleButton, mentionButton, flexibleButton, trendButton, flexibleButton, emojiButton, flexibleButton, moreButton]
+        items = [pictureButton, flexibleButton, mentionButton, flexibleButton, trendButton, flexibleButton, emoticonButton, flexibleButton, moreButton]
         tintColor = AuxiliaryTextColor
     }
     
