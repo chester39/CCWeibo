@@ -93,11 +93,13 @@ class PictureLayout: UICollectionViewFlowLayout {
      */
     override func prepareLayout() {
         
+        super.prepareLayout()
+        
         itemSize = kScreenFrame.size
         minimumInteritemSpacing = 0 
         minimumLineSpacing = 0
         
-        scrollDirection = UICollectionViewScrollDirection.Horizontal
+        scrollDirection = .Horizontal
         collectionView?.pagingEnabled = true
         collectionView?.bounces = false
         collectionView?.showsHorizontalScrollIndicator = false

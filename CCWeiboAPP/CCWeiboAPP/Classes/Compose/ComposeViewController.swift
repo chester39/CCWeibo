@@ -17,6 +17,8 @@ class ComposeViewController: UIViewController {
     private var textView = PlaceholderTextView()
     // 键盘工具条
     private var toolBar = KeyboardToolbar()
+    // 表情键盘
+    private var emoticonKeyboard = EmoticonKeyboardController()
     // 变化约束组
     private var group = ConstraintGroup()
     
@@ -44,6 +46,7 @@ class ComposeViewController: UIViewController {
         setupConstraints()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
+        addChildViewController(emoticonKeyboard)
     }
     
     /**
@@ -161,7 +164,7 @@ class ComposeViewController: UIViewController {
             textView.inputView = nil
             
         } else {
-            textView.inputView = UISwitch()
+            textView.inputView = emoticonKeyboard.view
         }
         
         textView.becomeFirstResponder()

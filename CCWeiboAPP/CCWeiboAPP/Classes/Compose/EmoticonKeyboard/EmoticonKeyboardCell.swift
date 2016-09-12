@@ -9,13 +9,29 @@ import UIKit
 class EmoticonKeyboardCell: UICollectionViewCell {
     
     // 表情按钮
-    private lazy var emojiButton: UIButton = {
+    private lazy var emoticonButton: UIButton = {
         let button = UIButton(type: .Custom)
         button.userInteractionEnabled = false
         button.titleLabel?.font = UIFont.systemFontOfSize(30)
        
         return button
     }()
+    
+    // 表情模型
+    var emoticon: EmoticonModel? {
+        didSet {
+            emoticonButton.setTitle(emoticon?.emoticonString ?? "", forState: .Normal)
+            emoticonButton.setImage(nil, forState: .Normal)
+            if emoticon?.chs != nil {
+                emoticonButton.setImage(UIImage(contentsOfFile: emoticon!.pngPath!), forState: .Normal)
+            }
+            
+            if emoticon!.isRemoveButton {
+                emoticonButton.setImage(UIImage(named: "compose_emotion_delete"), forState: .Normal)
+                emoticonButton.setImage(UIImage(named: "compose_emotion_delete_highlighted"), forState: .Highlighted)
+            }
+        }
+    }
     
     // MARK: - 初始化方法
     
@@ -44,8 +60,7 @@ class EmoticonKeyboardCell: UICollectionViewCell {
      */
     private func setupUI() {
         
-        emojiButton.backgroundColor = CommonLightColor
-        emojiButton.frame = CGRectInset(bounds, kViewEdge, kViewEdge)
-        contentView.addSubview(emojiButton)
+        emoticonButton.frame = CGRectInset(bounds, kViewEdge, kViewEdge)
+        contentView.addSubview(emoticonButton)
     }
 }

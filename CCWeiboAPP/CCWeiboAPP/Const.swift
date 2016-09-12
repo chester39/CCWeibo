@@ -112,3 +112,5 @@ let kRetweetStatusReuseIdentifier: String = "RetweetStatusCell"
 let kNewFeatureReuseIdentifier: String = "NewFeatureCell"
 // 图片浏览Cell重用标识符
 let kBrowserReuseIdentifier: String = "BrowserCell"
+// 表情键盘Cell重用标识符
+let kEmoticonKeyboardReuseIdentifier: String = "EmoticonKeyboardCell"
