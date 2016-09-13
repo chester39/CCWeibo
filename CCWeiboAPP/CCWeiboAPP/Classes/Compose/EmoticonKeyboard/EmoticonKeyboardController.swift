@@ -47,6 +47,15 @@ class EmoticonKeyboardController: UIViewController {
         return collectionView
     }()
     
+    // 页码指示器
+    private lazy var pageControl: UIPageControl = {
+        let page = UIPageControl()
+        page.pageIndicatorTintColor = CommonLightColor
+        page.currentPageIndicatorTintColor = AuxiliaryTextColor
+        
+        return page
+    }()
+    
     // MARK: - 系统方法
     
     /**
@@ -69,6 +78,7 @@ class EmoticonKeyboardController: UIViewController {
         
         view.addSubview(emoticonView)
         view.addSubview(emoticonBar)
+        view.addSubview(pageControl)
     }
     
     /**
@@ -85,6 +95,11 @@ class EmoticonKeyboardController: UIViewController {
             
             align(left: emoticonView.superview!, emoticonView, emoticonBar)
             align(right: emoticonView.superview!, emoticonView, emoticonBar)
+        }
+        
+        constrain(pageControl) { (pageControl) in
+            pageControl.centerX == pageControl.superview!.centerX
+            pageControl.bottom == pageControl.superview!.bottom - kViewMargin
         }
     }
     

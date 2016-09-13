@@ -14,9 +14,17 @@ let maxCount = 4
 class NewFeatureController: UIViewController {
 
     // 新特性集合视图
-    private var newFeatureView = UICollectionView(frame: kScreenFrame, collectionViewLayout: PictureLayout())
+    private lazy var newFeatureView: UICollectionView = {
+        let collectionView = UICollectionView(frame: kScreenFrame, collectionViewLayout: PictureLayout())
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.registerClass(NewFeatureCell.self, forCellWithReuseIdentifier: kNewFeatureReuseIdentifier)
+        
+        return collectionView
+    }()
+    
     // 页码指示器
-    private var pageControl: UIPageControl = {
+    private lazy var pageControl: UIPageControl = {
         let page = UIPageControl()
         page.numberOfPages = maxCount
         page.pageIndicatorTintColor = CommonLightColor
@@ -44,12 +52,8 @@ class NewFeatureController: UIViewController {
      初始化界面方法
      */
     private func setupUI() {
-        
-        newFeatureView.dataSource = self
-        newFeatureView.delegate = self
-        newFeatureView.registerClass(NewFeatureCell.self, forCellWithReuseIdentifier: kNewFeatureReuseIdentifier)
+
         view.addSubview(newFeatureView)
-        
         view.addSubview(pageControl)
     }
     
