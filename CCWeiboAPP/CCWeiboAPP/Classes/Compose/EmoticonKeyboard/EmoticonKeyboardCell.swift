@@ -12,7 +12,7 @@ class EmoticonKeyboardCell: UICollectionViewCell {
     private lazy var emoticonButton: UIButton = {
         let button = UIButton(type: .Custom)
         button.userInteractionEnabled = false
-        button.titleLabel?.font = UIFont.systemFontOfSize(30)
+        button.titleLabel?.font = UIFont.systemFontOfSize(32)
        
         return button
     }()

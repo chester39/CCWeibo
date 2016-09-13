@@ -81,8 +81,14 @@ class KeyboardToolbar: UIToolbar {
     private func setupUI() {
         
         let flexibleButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+        var itemArray = [UIBarButtonItem]()
+        for button in [pictureButton, mentionButton, trendButton, emoticonButton, moreButton] {
+            itemArray.append(button)
+            itemArray.append(flexibleButton)
+        }
         
-        items = [pictureButton, flexibleButton, mentionButton, flexibleButton, trendButton, flexibleButton, emoticonButton, flexibleButton, moreButton]
+        itemArray.removeLast()
+        items = itemArray
         tintColor = AuxiliaryTextColor
     }
     

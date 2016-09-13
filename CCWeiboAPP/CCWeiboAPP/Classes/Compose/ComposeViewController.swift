@@ -184,7 +184,9 @@ class ComposeViewController: UIViewController {
             toolBar.bottom == toolBar.superview!.bottom - offsetY
         }
         
+        let curve = notice.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
         UIView.animateWithDuration(0.2) {
+            UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: curve.integerValue)!)
             self.view.layoutIfNeeded()
         }
     }

@@ -18,7 +18,6 @@ class BrowserViewController: UIViewController {
     
     // 照片浏览视图
     private lazy var browserView: UICollectionView = {
-        
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: PictureLayout())
         collectionView.dataSource = self
         collectionView.registerClass(BrowserCell.self, forCellWithReuseIdentifier: kBrowserReuseIdentifier)
@@ -54,6 +53,8 @@ class BrowserViewController: UIViewController {
         return button
     }()
     
+    // MARK: - 初始化方法
+    
     /**
      图片数组和索引初始化方法
      */
@@ -84,7 +85,7 @@ class BrowserViewController: UIViewController {
         
         super.viewDidLayoutSubviews()
         
-        browserView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Left, animated: false)
+        browserView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: false)
     }
     
     // MARK: - 界面方法

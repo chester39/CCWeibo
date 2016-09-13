@@ -96,9 +96,11 @@ class EmoticonKeyboardController: UIViewController {
         for button in emoticonBar.items! {
             if button.tag == item.tag {
                 button.tintColor = CommonDarkColor
+                button.setBackgroundImage(UIImage(named: "compose_emotion_table_left_normal"), forState: .Normal, barMetrics: .Default)
                 
             } else {
                 button.tintColor = StatusTabBarTextColor
+                button.setBackgroundImage(nil, forState: .Normal, barMetrics: .Default)
             }
         }
         
@@ -154,7 +156,7 @@ extension EmoticonKeyboardController: UICollectionViewDelegate {
             packageArray[0].appendLastEmoticon(emoticon)
         }
     }
-    
+
 }
 
 class EmoticonKeyboardLayout: UICollectionViewFlowLayout {

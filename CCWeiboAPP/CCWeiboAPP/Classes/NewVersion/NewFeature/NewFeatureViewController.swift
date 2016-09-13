@@ -6,12 +6,24 @@
 
 import UIKit
 
+import Cartography
+
+// 最大新特性界面数
+let maxCount = 4
+
 class NewFeatureController: UIViewController {
 
-    // 最大新特性界面数
-    private var maxCount = 4
     // 新特性集合视图
-    var newFeatureView = UICollectionView(frame: kScreenFrame, collectionViewLayout: PictureLayout())
+    private var newFeatureView = UICollectionView(frame: kScreenFrame, collectionViewLayout: PictureLayout())
+    // 页码指示器
+    private var pageControl: UIPageControl = {
+        let page = UIPageControl()
+        page.numberOfPages = maxCount
+        page.pageIndicatorTintColor = CommonLightColor
+        page.currentPageIndicatorTintColor = AuxiliaryTextColor
+        
+        return page
+    }()
     
     // MARK: - 系统方法
     
@@ -23,6 +35,7 @@ class NewFeatureController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        setupConstraints()
     }
     
     // MARK: - 界面方法
@@ -36,6 +49,19 @@ class NewFeatureController: UIViewController {
         newFeatureView.delegate = self
         newFeatureView.registerClass(NewFeatureCell.self, forCellWithReuseIdentifier: kNewFeatureReuseIdentifier)
         view.addSubview(newFeatureView)
+        
+        view.addSubview(pageControl)
+    }
+    
+    /**
+     初始化约束方法
+     */
+    private func setupConstraints() {
+        
+        constrain(pageControl) { (pageControl) in
+            pageControl.centerX == pageControl.superview!.centerX
+            pageControl.bottom == pageControl.superview!.bottom - kViewAdapter
+        }
     }
 
 }
@@ -79,6 +105,7 @@ extension NewFeatureController: UICollectionViewDelegate {
         
         let index = collectionView.indexPathsForVisibleItems().last!
         let currentCell = collectionView.cellForItemAtIndexPath(index) as! NewFeatureCell
+        pageControl.currentPage = collectionView.indexPathsForVisibleItems().last!.item % maxCount
         if index.item == (maxCount - 1) {
             currentCell.startAnimation()
         }
