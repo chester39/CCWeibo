@@ -12,6 +12,8 @@ class EmoticonKeyboardController: UIViewController {
 
     // 表情包数组
     var packageArray: [EmoticonPackage] = EmoticonPackage.loadEmoticonPackageArray()
+    // 闭包回调
+    var emoticonCallback: (emoticon: EmoticonModel) -> ()
     
     // 表情组工具栏
     private lazy var emoticonBar: UIToolbar = {
@@ -55,6 +57,26 @@ class EmoticonKeyboardController: UIViewController {
         
         return page
     }()
+    
+    // MARK: - 初始化方法
+    
+    /**
+     回调初始化方法
+     */
+    init(callback: (emoticon: EmoticonModel) -> ()) {
+        
+        self.emoticonCallback = callback
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    /**
+     数据解码XIB初始化方法
+     */
+    required init?(coder aDecoder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - 系统方法
     
@@ -170,6 +192,8 @@ extension EmoticonKeyboardController: UICollectionViewDelegate {
         if emoticon.isRemoveButton == false {
             packageArray[0].appendLastEmoticon(emoticon)
         }
+        
+        emoticonCallback(emoticon: emoticon)
     }
 
 }

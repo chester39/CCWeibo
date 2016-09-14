@@ -189,6 +189,65 @@ extension UILabel {
     }
 }
 
+extension UITextView {
+    
+    /**
+     插入表情方法
+     */
+    func insertEmoticon(emoticon: EmoticonModel) {
+        
+        if let emojiString = emoticon.emoticonString {
+            let range = selectedTextRange!
+            replaceRange(range, withText: emojiString)
+            
+            return
+        }
+        
+        if let pngPath = emoticon.pngPath {
+            let attributedString = NSMutableAttributedString(attributedString: attributedText)
+            
+            let attachment = EmoticonAttachment()
+            let fontHeight = font!.lineHeight
+            attachment.emoticonChs = emoticon.chs
+            attachment.bounds = CGRect(x: 0, y: -4, width: fontHeight, height: fontHeight)
+            attachment.image = UIImage(contentsOfFile: pngPath)
+            let imageAttributedString = NSAttributedString(attachment: attachment)
+            
+            let range = selectedRange
+            attributedString.replaceCharactersInRange(range, withAttributedString: imageAttributedString)
+            attributedText = attributedString
+            
+            selectedRange = NSRange(location: range.location + 1, length: 0)
+            font = UIFont.systemFontOfSize(18)
+            
+            return
+        }
+        
+        if emoticon.isRemoveButton {
+            deleteBackward()
+        }
+    }
+    
+    /**
+     获取表情文字方法
+     */
+    func acquireEmoticonString() -> String {
+        
+        let range = NSRange(location: 0, length: attributedText.length)
+        var string = String()
+        
+        attributedText.enumerateAttributesInRange(range, options: NSAttributedStringEnumerationOptions(rawValue: 0)) { (dict, range, _) in
+            if let attachment = dict["NSAttachment"] as? EmoticonAttachment {
+                string += attachment.emoticonChs!
+            } else {
+                string += (self.text as NSString).substringWithRange(range)
+            }
+        }
+        
+        return string
+    }
+}
+
 extension MBProgressHUD {
     
     /**

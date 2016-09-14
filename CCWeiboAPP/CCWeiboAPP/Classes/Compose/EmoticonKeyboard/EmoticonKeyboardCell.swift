@@ -63,4 +63,12 @@ class EmoticonKeyboardCell: UICollectionViewCell {
         emoticonButton.frame = CGRectInset(bounds, kViewEdge, kViewEdge)
         contentView.addSubview(emoticonButton)
     }
+    
+}
+
+class EmoticonAttachment: NSTextAttachment {
+    
+    // 表情字符串
+    var emoticonChs: String?
+    
 }

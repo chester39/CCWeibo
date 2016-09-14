@@ -11,7 +11,7 @@ import Cartography
 class PlaceholderTextView: UITextView {
 
     // 占位符标签
-    private lazy var placeholderLabel: UILabel = {
+    lazy var placeholderLabel: UILabel = {
         let label = UILabel()
         label.text = "分享新鲜事..."
         label.textColor = AuxiliaryTextColor
@@ -52,7 +52,6 @@ class PlaceholderTextView: UITextView {
         
         font = UIFont.systemFontOfSize(18)
         alwaysBounceVertical = true
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(textDidChange), name: UITextViewTextDidChangeNotification, object: self)
     }
     
     /**
@@ -64,15 +63,5 @@ class PlaceholderTextView: UITextView {
             placeholderLabel.top == placeholderLabel.superview!.top + 8
             placeholderLabel.left == placeholderLabel.superview!.left + 4
         }
-    }
-    
-    // MARK: - 通知方法
-    
-    /**
-     文本已经改变方法
-     */
-    @objc private func textDidChange() {
-        
-        placeholderLabel.hidden = hasText()
     }
 }

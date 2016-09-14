@@ -47,7 +47,7 @@ class KeyboardToolbar: UIToolbar {
     // 更多按钮
     lazy var moreButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
-        button.image = UIImage(named: "compose_new_group")
+        button.image = UIImage(named: "compose_addbutton_background")
         button.style = .Plain
         
         return button

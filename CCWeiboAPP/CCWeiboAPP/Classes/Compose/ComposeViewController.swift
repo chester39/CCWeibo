@@ -13,14 +13,17 @@ class ComposeViewController: UIViewController {
 
     // 标题视图
     private var titleView = TitleView(frame: CGRect(x: 0, y: 0, width: kViewStandard, height: kNavigationBarHeight))
-    // 占位符文本视图
-    private var textView = PlaceholderTextView()
+    // 复合文本视图
+    private var statusView = PlaceholderTextView()
     // 键盘工具条
-    private var toolBar = KeyboardToolbar()
-    // 表情键盘
-    private var emoticonKeyboard = EmoticonKeyboardController()
+    private var keyboardBar = KeyboardToolbar()
     // 变化约束组
     private var group = ConstraintGroup()
+    // 表情键盘
+    private lazy var emoticonKeyboard: EmoticonKeyboardController = EmoticonKeyboardController { [unowned self] (emoticon) in
+        self.statusView.insertEmoticon(emoticon)
+        self.textViewDidChange(self.statusView)
+    }
     
     // 发送按钮
     private lazy var composeItem: UIBarButtonItem = {
@@ -56,7 +59,7 @@ class ComposeViewController: UIViewController {
         
         super.viewDidAppear(animated)
         
-        textView.becomeFirstResponder()
+        statusView.becomeFirstResponder()
     }
     
     /**
@@ -66,7 +69,7 @@ class ComposeViewController: UIViewController {
         
         super.viewWillDisappear(animated)
         
-        textView.resignFirstResponder()
+        statusView.resignFirstResponder()
     }
     
     /**
@@ -88,16 +91,16 @@ class ComposeViewController: UIViewController {
         navigationItem.rightBarButtonItem = composeItem
         navigationItem.titleView = titleView
         
-        textView.delegate = self
-        view.addSubview(textView)
+        statusView.delegate = self
+        view.addSubview(statusView)
     
-        for button in toolBar.items! {
+        for button in keyboardBar.items! {
             button.target = self
         }
 
-        toolBar.pictureButton.action = #selector(pictureButtonDidClick)
-        toolBar.emoticonButton.action = #selector(emoticonButtonDidClick)
-        view.addSubview(toolBar)
+        keyboardBar.pictureButton.action = #selector(pictureButtonDidClick)
+        keyboardBar.emoticonButton.action = #selector(emoticonButtonDidClick)
+        view.addSubview(keyboardBar)
     }
     
     /**
@@ -105,17 +108,17 @@ class ComposeViewController: UIViewController {
      */
     private func setupConstraints() {
         
-        constrain(textView, toolBar) { (textView, toolBar) in
-            textView.edges == inset(textView.superview!.edges, 0)
+        constrain(statusView, keyboardBar) { (statusView, keyboardBar) in
+            statusView.edges == inset(statusView.superview!.edges, 0)
             
-            toolBar.width == kScreenWidth
-            toolBar.height == kNavigationBarHeight
-            toolBar.left == toolBar.superview!.left
+            keyboardBar.width == kScreenWidth
+            keyboardBar.height == kNavigationBarHeight
+            keyboardBar.left == keyboardBar.superview!.left
             
         }
         
-        constrain(toolBar, replace: group) { (toolBar) in
-            toolBar.bottom == toolBar.superview!.bottom
+        constrain(keyboardBar, replace: group) { (keyboardBar) in
+            keyboardBar.bottom == keyboardBar.superview!.bottom
         }
     }
     
@@ -134,7 +137,7 @@ class ComposeViewController: UIViewController {
      */
     @objc private func composeButtonDidClick() {
         
-        let text = textView.text
+        let text = statusView.acquireEmoticonString()
         NetworkingUtil.sharedInstance.sendWeiboStatuses(text) { (object, error) in
             if error != nil {
                 MBProgressHUD.showMessage("微博发送失败", delay: 2.0)
@@ -150,7 +153,7 @@ class ComposeViewController: UIViewController {
      */
     @objc private func pictureButtonDidClick() {
         
-        toolBar.pictureButton.tintColor = (toolBar.pictureButton.tintColor == MainColor) ? AuxiliaryTextColor : MainColor
+        keyboardBar.pictureButton.tintColor = (keyboardBar.pictureButton.tintColor == MainColor) ? AuxiliaryTextColor : MainColor
     }
     
     /**
@@ -158,16 +161,17 @@ class ComposeViewController: UIViewController {
      */
     @objc private func emoticonButtonDidClick() {
         
-        toolBar.emoticonButton.tintColor = (toolBar.emoticonButton.tintColor == MainColor) ? AuxiliaryTextColor : MainColor
-        textView.resignFirstResponder()
-        if textView.inputView != nil {
-            textView.inputView = nil
+        keyboardBar.emoticonButton.tintColor = (keyboardBar.emoticonButton.tintColor == MainColor) ? AuxiliaryTextColor : MainColor
+        statusView.resignFirstResponder()
+        
+        if statusView.inputView != nil {
+            statusView.inputView = nil
             
         } else {
-            textView.inputView = emoticonKeyboard.view
+            statusView.inputView = emoticonKeyboard.view
         }
         
-        textView.becomeFirstResponder()
+        statusView.becomeFirstResponder()
     }
     
     // MARK: - 通知方法
@@ -180,7 +184,7 @@ class ComposeViewController: UIViewController {
         let rect = notice.userInfo![UIKeyboardFrameEndUserInfoKey]!.CGRectValue
         let offsetY = kScreenHeight - rect.origin.y
         
-        constrain(toolBar, replace: group) { (toolBar) in
+        constrain(keyboardBar, replace: group) { (toolBar) in
             toolBar.bottom == toolBar.superview!.bottom - offsetY
         }
         
@@ -201,6 +205,7 @@ extension ComposeViewController: UITextViewDelegate {
     func textViewDidChange(textView: UITextView) {
         
         composeItem.enabled = textView.hasText()
+        statusView.placeholderLabel.hidden = textView.hasText()
     }
     
     /**
@@ -208,6 +213,6 @@ extension ComposeViewController: UITextViewDelegate {
      */
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         
-        textView.resignFirstResponder()
+        statusView.resignFirstResponder()
     }
 }
