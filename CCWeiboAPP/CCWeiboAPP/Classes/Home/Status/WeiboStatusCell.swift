@@ -11,10 +11,10 @@ import SDWebImage
 
 class WeiboStatusCell: BaseStatusCell {
 
-    // 变化约束组
+    /// 变化约束组
     private var group = ConstraintGroup()
     
-    // 微博模型
+    /// 微博模型
     override var viewModel: StatusViewModel? {
         didSet {
             iconView.sd_setImageWithURL(viewModel?.iconImageURL)

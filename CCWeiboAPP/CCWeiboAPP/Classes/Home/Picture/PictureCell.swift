@@ -11,12 +11,12 @@ import SDWebImage
 
 class PictureCell: UICollectionViewCell {
     
-    // 图片视图
+    /// 图片视图
     var imageView = ProgressImageView()
-    // GIF按钮
+    /// GIF按钮
     var gifView = UIImageView()
     
-    // 图片URL
+    /// 图片URL
     var url: NSURL? {
         didSet {
             imageView.sd_setImageWithURL(url)

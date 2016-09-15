@@ -10,9 +10,9 @@ import Cartography
 
 class TitleView: UIView {
     
-    // 标题标签
+    /// 标题标签
     private var titleLabel = UILabel(text: "发送微博", fontSize: 18, lines: 1)
-    // 副标题标签
+    /// 副标题标签
     private var subtitleLabel = UILabel(text: "", fontSize: 14, lines: 1)
     
     // MARK: - 初始化方法

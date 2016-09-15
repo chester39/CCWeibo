@@ -9,7 +9,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    // 应用窗口
+    /// 应用窗口
     var window: UIWindow?
 
     // MARK: - 系统代理方法

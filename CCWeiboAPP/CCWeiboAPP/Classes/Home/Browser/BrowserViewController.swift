@@ -11,12 +11,12 @@ import MBProgressHUD
 
 class BrowserViewController: UIViewController {
 
-    // 微博配图中图URL数组
+    /// 微博配图中图URL数组
     var pictureURLArray: [NSURL]
-    // Cell索引
+    /// Cell索引
     var indexPath: NSIndexPath
     
-    // 照片浏览视图
+    /// 照片浏览视图
     private lazy var browserView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: PictureLayout())
         collectionView.dataSource = self
@@ -25,7 +25,7 @@ class BrowserViewController: UIViewController {
         return collectionView
     }()
     
-    // 关闭按钮
+    /// 关闭按钮
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.setTitle("关闭", forState: .Normal)
@@ -39,7 +39,7 @@ class BrowserViewController: UIViewController {
         return button
     }()
     
-    // 保存按钮
+    /// 保存按钮
     private lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("保存", forState: .Normal)

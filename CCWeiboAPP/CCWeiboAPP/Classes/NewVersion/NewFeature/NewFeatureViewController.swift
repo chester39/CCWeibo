@@ -8,12 +8,12 @@ import UIKit
 
 import Cartography
 
-// 最大新特性界面数
+/// 最大新特性界面数
 let maxCount = 4
 
 class NewFeatureController: UIViewController {
 
-    // 新特性集合视图
+    /// 新特性集合视图
     private lazy var newFeatureView: UICollectionView = {
         let collectionView = UICollectionView(frame: kScreenFrame, collectionViewLayout: PictureLayout())
         collectionView.dataSource = self
@@ -23,7 +23,7 @@ class NewFeatureController: UIViewController {
         return collectionView
     }()
     
-    // 页码指示器
+    /// 页码指示器
     private lazy var pageControl: UIPageControl = {
         let page = UIPageControl()
         page.numberOfPages = maxCount

@@ -12,9 +12,9 @@ import MBProgressHUD
 
 class OAuthViewController: UIViewController {
     
-    // 授权网页视图
+    /// 授权网页视图
     var oauthView = WKWebView(frame: kScreenFrame)
-    // 透明指示层
+    /// 透明指示层
     var hud = MBProgressHUD()
     
     // MARK: - 系统方法

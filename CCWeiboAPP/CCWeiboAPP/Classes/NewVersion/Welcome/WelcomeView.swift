@@ -10,13 +10,13 @@ import Cartography
 
 class WelcomeView: UIView {
     
-    // 背景图片视图
+    /// 背景图片视图
     private var backgroundView = UIImageView()
-    // 头像图片视图
+    /// 头像图片视图
     var avatarView = UIImageView()
-    // 标题标签
+    /// 标题标签
     var textLabel = UILabel(text: "", fontSize: 20, lines: 0)
-    // 变化约束组
+    /// 变化约束组
     private var group = ConstraintGroup()
     
     // MARK: - 初始化方法

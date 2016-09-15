@@ -8,10 +8,10 @@ import UIKit
 
 class PopoverPresentationController: UIPresentationController {
     
-    // 弹出框尺寸
+    /// 弹出框尺寸
     var presentFrame = CGRectZero
     
-    // 蒙版按钮
+    /// 蒙版按钮
     private lazy var coverButton: UIButton = {
         let button = UIButton(type: .System)
         button.frame = kScreenFrame

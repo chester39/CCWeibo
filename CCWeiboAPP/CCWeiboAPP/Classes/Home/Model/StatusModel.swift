@@ -8,25 +8,25 @@ import UIKit
 
 class StatusModel: NSObject {
 
-    // 微博创建时间
+    /// 微博创建时间
     var createdAt: String?
-    // 微博ID
+    /// 微博ID
     var weiboID: Int = 0
-    // 微博信息内容
+    /// 微博信息内容
     var text: String?
-    // 微博来源
+    /// 微博来源
     var source: String?
-    // 微博配图数组
+    /// 微博配图数组
     var pictureURLArray: [[String: AnyObject]]?
-    // 转发数
+    /// 转发数
     var repostsCount: Int = 0
-    // 评论数
+    /// 评论数
     var commentsCount: Int = 0
-    // 表态数
+    /// 表态数
     var attitudesCount: Int = 0
-    // 转发微博
+    /// 转发微博
     var retweetedStatus: StatusModel?
-    // 微博用户
+    /// 微博用户
     var user: UserModel?
     
     // MARK: - 初始化方法

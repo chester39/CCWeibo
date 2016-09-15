@@ -8,7 +8,7 @@ import UIKit
 
 class PopoverViewController: UIViewController {
     
-    // 弹出框视图
+    /// 弹出框视图
     private var popoverView = PopoverView(frame: kScreenFrame)
     
     // MARK: - 系统方法

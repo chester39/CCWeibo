@@ -11,30 +11,30 @@ import SDWebImage
 
 class BaseStatusCell: UITableViewCell {
 
-    // 头像图片视图
+    /// 头像图片视图
     var iconView = UIImageView()
-    // 认证图片视图
+    /// 认证图片视图
     var verifiedView = UIImageView()
-    // 昵称标签
+    /// 昵称标签
     var nameLabel = UILabel(text: "", fontSize: 15, lines: 1)
-    // 会员图片视图
+    /// 会员图片视图
     var vipView = UIImageView()
-    // 时间标签
+    /// 时间标签
     var timeLabel = UILabel(text: "", fontSize: 12, lines: 1)
-    // 来源标签
+    /// 来源标签
     var sourceLabel = UILabel(text: "", fontSize: 12, lines: 1)
-    // 信息内容标签
+    /// 信息内容标签
     var contentLabel = UILabel(text: "", fontSize: 15, lines: 0)
-    // 底部视图
+    /// 底部视图
     var footerView = UIView()
-    // 转发按钮
+    /// 转发按钮
     var retweetButton = UIButton(imageName: "timeline_icon_retweet", backgroundImageName: "timeline_card_bottom_background")
-    // 评论按钮
+    /// 评论按钮
     var commentButton = UIButton(imageName: "timeline_icon_comment", backgroundImageName: "timeline_card_bottom_background")
-    // 点赞按钮
+    /// 点赞按钮
     var likeButton = UIButton(imageName: "timeline_icon_unlike", backgroundImageName: "timeline_card_bottom_background")
 
-    // 集合布局
+    /// 集合布局
     lazy var flowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = kViewEdge
@@ -43,14 +43,14 @@ class BaseStatusCell: UITableViewCell {
         return layout
     }()
     
-    // 图片集合视图
+    /// 图片集合视图
     lazy var pictureView: PictureCollectionView = {
         let pictureView = PictureCollectionView(frame: CGRectZero, collectionViewLayout: self.flowLayout)
         
         return pictureView
     }()
     
-    // 微博模型
+    /// 微博模型
     var viewModel: StatusViewModel?
     
     // MARK: - 界面方法

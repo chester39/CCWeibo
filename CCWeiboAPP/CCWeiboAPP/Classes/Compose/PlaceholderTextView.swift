@@ -10,7 +10,7 @@ import Cartography
 
 class PlaceholderTextView: UITextView {
 
-    // 占位符标签
+    /// 占位符标签
     lazy var placeholderLabel: UILabel = {
         let label = UILabel()
         label.text = "分享新鲜事..."

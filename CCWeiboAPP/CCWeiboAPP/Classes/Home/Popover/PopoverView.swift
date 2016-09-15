@@ -10,9 +10,9 @@ import Cartography
 
 class PopoverView: UIView {
 
-    // 背景图片视图
+    /// 背景图片视图
     private var backgroundView = UIImageView()
-    // 表格视图
+    /// 表格视图
     private var tableView = UITableView()
     
     // MARK: - 初始化方法

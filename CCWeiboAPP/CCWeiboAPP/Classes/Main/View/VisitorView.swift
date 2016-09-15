@@ -10,15 +10,15 @@ import Cartography
 
 class VisitorView: UIView {
     
-    // 注册按钮
+    /// 注册按钮
     var registerButton = UIButton(type: .System)
-    // 登录按钮
+    /// 登录按钮
     var loginButton = UIButton(type: .System)
-    // 旋转视图
+    /// 旋转视图
     private var rotationView = UIImageView()
-    // 图标按钮
+    /// 图标按钮
     private var iconView = UIImageView()
-    // 文字标签
+    /// 文字标签
     private var textLabel = UILabel(text: "", fontSize: 18, lines: 0)
 
     // MARK: - 初始化方法

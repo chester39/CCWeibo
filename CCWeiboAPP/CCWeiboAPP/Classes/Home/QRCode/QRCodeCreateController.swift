@@ -10,7 +10,7 @@ import Cartography
 
 class QRCodeCreateController: UIViewController {
 
-    // 用户图片视图
+    /// 用户图片视图
     var customImageView = UIImageView()
     
     // MARK: - 系统方法

@@ -26,11 +26,11 @@ protocol BrowserPresentationDelegate: NSObjectProtocol {
 
 class BrowserPresentationController: UIPresentationController {
     
-    // 控制器是否被显示
+    /// 控制器是否被显示
     private var isPresented = false
-    // Cell索引
+    /// Cell索引
     private var indexPath: NSIndexPath?
-    // BrowserPresentationDelegate代理
+    /// BrowserPresentationDelegate代理
     weak var browserDelegate: BrowserPresentationDelegate?
     
     /**

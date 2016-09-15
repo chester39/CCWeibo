@@ -8,11 +8,11 @@ import UIKit
 
 class EmoticonPackage: NSObject {
 
-    // 表情包id
+    /// 表情包id
     var id: String?
-    // 表情包名称
+    /// 表情包名称
     var groupNameCn:String?
-    // 表情包全部表情
+    /// 表情包全部表情
     var emoticonArray: [EmoticonModel]?
     
     // MARK: - 初始化方法

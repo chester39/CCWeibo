@@ -10,12 +10,12 @@ import Cartography
 
 class EmoticonKeyboardController: UIViewController {
 
-    // 表情包数组
+    /// 表情包数组
     var packageArray: [EmoticonPackage] = EmoticonPackage.loadEmoticonPackageArray()
-    // 闭包回调
+    /// 闭包回调
     var emoticonCallback: (emoticon: EmoticonModel) -> ()
     
-    // 表情组工具栏
+    /// 表情组工具栏
     private lazy var emoticonBar: UIToolbar = {
         let toolbar = UIToolbar()
         toolbar.tintColor = StatusTabBarTextColor
@@ -38,7 +38,7 @@ class EmoticonKeyboardController: UIViewController {
         return toolbar
     }()
     
-    // 表情键盘视图
+    /// 表情键盘视图
     private lazy var emoticonView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: EmoticonKeyboardLayout())
         collectionView.backgroundColor = ClearColor
@@ -49,7 +49,7 @@ class EmoticonKeyboardController: UIViewController {
         return collectionView
     }()
     
-    // 页码指示器
+    /// 页码指示器
     private lazy var pageControl: UIPageControl = {
         let page = UIPageControl()
         page.pageIndicatorTintColor = CommonLightColor

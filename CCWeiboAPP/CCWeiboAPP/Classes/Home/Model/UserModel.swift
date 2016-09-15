@@ -8,15 +8,15 @@ import UIKit
 
 class UserModel: NSObject {
     
-    // 用户ID
+    /// 用户ID
     var userID: Int = 0
-    // 用户昵称
+    /// 用户昵称
     var screenName: String?
-    // 用户头像地址
+    /// 用户头像地址
     var avatarLarge: String?
-    // 用户认证类型
+    /// 用户认证类型
     var verifiedType: Int = -1
-    // 用户会员等级
+    /// 用户会员等级
     var memberRank: Int = -1
     
     // MARK: - 初始化方法

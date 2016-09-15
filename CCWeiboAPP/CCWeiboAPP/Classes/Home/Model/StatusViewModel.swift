@@ -8,23 +8,23 @@ import UIKit
 
 class StatusViewModel: NSObject {
     
-    // 用户头像URL
+    /// 用户头像URL
     var iconImageURL: NSURL?
-    // 用户认证图片
+    /// 用户认证图片
     var verifiedImage: UIImage?
-    // 用户会员等级图片
+    /// 用户会员等级图片
     var memberRankImage: UIImage?
-    // 微博创建时间
+    /// 微博创建时间
     var creatTimeText: String = ""
-    // 微博来源
+    /// 微博来源
     var sourceText: String = ""
-    // 微博配图URL数组
+    /// 微博配图URL数组
     var thumbnailPictureArray: [NSURL]?
-    // 微博配图大图URL数组
+    /// 微博配图大图URL数组
     var middlePictureArray: [NSURL]?
-    // 转发微博信息内容
+    /// 转发微博信息内容
     var retweetText: NSMutableAttributedString?
-    // 微博模型
+    /// 微博模型
     var status: StatusModel
     
     /**

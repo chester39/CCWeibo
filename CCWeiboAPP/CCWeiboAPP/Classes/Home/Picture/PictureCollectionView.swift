@@ -10,7 +10,7 @@ import SDWebImage
 
 class PictureCollectionView: UICollectionView {
 
-    // 微博模型
+    /// 微博模型
     var viewModel: StatusViewModel? {
         didSet {
             reloadData()

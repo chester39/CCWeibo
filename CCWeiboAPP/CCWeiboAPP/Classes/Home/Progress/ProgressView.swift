@@ -8,7 +8,7 @@ import UIKit
 
 class ProgressView: UIView {
 
-    // 当前进度
+    /// 当前进度
     var progress: CGFloat = 0.0 {
         didSet {
             setNeedsDisplay()

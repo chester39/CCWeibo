@@ -10,7 +10,7 @@ import Cartography
 
 class NewFeatureCell: UICollectionViewCell {
     
-    // 图片下标
+    /// <#Description#> 图片下标
     var index: Int = 0 {
         didSet {
             let name = "new_feature_\(index + 1)"
@@ -19,7 +19,7 @@ class NewFeatureCell: UICollectionViewCell {
         }
     }
     
-    // 开始按钮
+    /// 开始按钮
     private lazy var startButton: UIButton = {
         let button = UIButton(imageName: nil, backgroundImageName: "new_feature_button")
         button.addTarget(self, action: #selector(startButtonDidClick), forControlEvents: .TouchUpInside)
@@ -27,7 +27,7 @@ class NewFeatureCell: UICollectionViewCell {
         return button
     }()
     
-    // 图片视图
+    /// 图片视图
     private lazy var imageView = UIImageView()
     
     // MARK: - 初始化方法

@@ -12,16 +12,16 @@ import SDWebImage
 
 class HomeViewController: BaseViewController {
     
-    // 微博数组
+    /// 微博数组
     var statusArray: [StatusViewModel]?
-    // Cell行高缓存
+    /// Cell行高缓存
     private var rowHeightCaches = [Int: CGFloat]()
-    // 最后一条微博与否
+    /// 最后一条微博与否
     private var isLastStatus = false
-    // 浏览视图转场管理器
+    /// 浏览视图转场管理器
     private lazy var browerPresentationManager: BrowserPresentationController = BrowserPresentationController()
     
-    // 刷新提醒标签
+    /// 刷新提醒标签
     private var tipLabel: UILabel = {
         let label = UILabel(text: "没有更多微博", fontSize: 15, lines: 1)
         label.backgroundColor = MainColor
@@ -33,7 +33,7 @@ class HomeViewController: BaseViewController {
         return label
     }()
     
-    // 标题按钮
+    /// 标题按钮
     private lazy var titleButton: UIButton = {
         let button = TitleButton()
         let title = UserAccount.loadUserAccount()?.screenName
@@ -43,7 +43,7 @@ class HomeViewController: BaseViewController {
         return button
     }()
     
-    // 标题按钮转场管理器
+    /// 标题按钮转场管理器
     private lazy var popoverPresentationManager: PopoverPresentationManager = {
         let manager = PopoverPresentationManager()
         let presentWidth: CGFloat = kViewDistance

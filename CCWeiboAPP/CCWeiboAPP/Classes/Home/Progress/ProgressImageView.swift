@@ -8,10 +8,10 @@ import UIKit
 
 class ProgressImageView: UIImageView {
 
-    // 进度条视图
+    /// 进度条视图
     private lazy var progressView: ProgressView = ProgressView()
     
-    // 当前进度
+    /// 当前进度
     var progress: CGFloat = 0.0 {
         didSet {
             progressView.progress = progress

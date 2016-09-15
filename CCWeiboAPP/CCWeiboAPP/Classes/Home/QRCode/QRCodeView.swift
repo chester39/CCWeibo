@@ -10,17 +10,17 @@ import Cartography
 
 class QRCodeView: UIView {
 
-    // 底部标签栏
+    /// 底部标签栏
     var tabBar = UITabBar()
-    // 容器视图
+    /// 容器视图
     var containerView = UIView()
-    // 边框图片视图
+    /// 边框图片视图
     private var edgeView = UIImageView()
-    // 波纹图片视图
+    /// 波纹图片视图
     var waveView = UIImageView()
-    // 文字标签
+    /// 文字标签
     var textLabel = UILabel(text: "将二维码放入框内, 即可扫描二维码", fontSize: 17, lines: 0)
-    // 名片按钮
+    /// 名片按钮
     var cardButton = UIButton(type: .System)
     
     // MARK: - 初始化方法

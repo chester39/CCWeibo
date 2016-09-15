@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class NetworkingUtil {
     
-    // 单例初始化方法
+    /// 单例初始化方法
     static let sharedInstance = NetworkingUtil()
     
     /**

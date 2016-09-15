@@ -8,20 +8,20 @@ import UIKit
 
 class EmoticonModel: NSObject {
     
-    // 表情组名
+    /// 表情组名
     var id: String?
-    // 表情字符串
+    /// 表情字符串
     var chs: String?
-    // 表情图片路径
+    /// 表情图片路径
     var pngPath: String?
-    // 转换后Emoji表情字符串
+    /// 转换后Emoji表情字符串
     var emoticonString: String?
-    // 删除按钮与否
+    /// 删除按钮与否
     var isRemoveButton: Bool = false
-    // 表情使用次数
+    /// 表情使用次数
     var count: Int = 0
     
-    // 表情图片
+    /// 表情图片
     var png: String? {
         didSet {
             let path = NSBundle.mainBundle().pathForResource(id, ofType: nil, inDirectory: "Emoticons.bundle")!
@@ -29,7 +29,7 @@ class EmoticonModel: NSObject {
         }
     }
     
-    // Emoji表情字符串
+    /// Emoji表情字符串
     var code: String? {
         didSet {
             let scanner = NSScanner(string: code ?? "")

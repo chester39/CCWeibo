@@ -11,21 +11,21 @@ import MBProgressHUD
 
 class ComposeViewController: UIViewController {
 
-    // 标题视图
+    /// 标题视图
     private var titleView = TitleView(frame: CGRect(x: 0, y: 0, width: kViewStandard, height: kNavigationBarHeight))
-    // 复合文本视图
+    /// 复合文本视图
     private var statusView = PlaceholderTextView()
-    // 键盘工具条
+    /// 键盘工具条
     private var keyboardBar = KeyboardToolbar()
-    // 变化约束组
+    /// 变化约束组
     private var group = ConstraintGroup()
-    // 表情键盘
+    /// 表情键盘
     private lazy var emoticonKeyboard: EmoticonKeyboardController = EmoticonKeyboardController { [unowned self] (emoticon) in
         self.statusView.insertEmoticon(emoticon)
         self.textViewDidChange(self.statusView)
     }
     
-    // 发送按钮
+    /// 发送按钮
     private lazy var composeItem: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.title = "发送"

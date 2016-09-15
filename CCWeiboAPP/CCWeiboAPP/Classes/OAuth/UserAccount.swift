@@ -11,28 +11,27 @@ import SwiftyJSON
 
 class UserAccount: NSObject {
     
-    // 授权使用令牌
+    /// 授权使用令牌
     var accessToken: String?
     
-    // 授权生命周期
+    /// 授权生命周期
     var expiresIn: Int = 0 {
         didSet {
             expiresDate = NSDate(timeIntervalSinceNow: NSTimeInterval(expiresIn))
         }
     }
     
-    // 授权用户ID
+    /// 授权用户ID
     var uid: String?
-    // 授权过期具体时间
+    /// 授权过期具体时间
     var expiresDate: NSDate?
-    // 用户昵称
+    /// 用户昵称
     var screenName: String?
-    // 用户头像地址
+    /// 用户头像地址
     var avatarLarge: String?
-    
-    // 用户授权模型
+    /// 用户授权模型
     static var userAccount: UserAccount?
-    // 归档文件路径
+    /// 归档文件路径
     static let filePath: String = kUserAccountFileName.acquireCachesDirectory()
     
     // MARK: - 初始化方法

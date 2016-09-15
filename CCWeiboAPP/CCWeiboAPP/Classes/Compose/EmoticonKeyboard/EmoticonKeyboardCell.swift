@@ -8,7 +8,7 @@ import UIKit
 
 class EmoticonKeyboardCell: UICollectionViewCell {
     
-    // 表情按钮
+    /// 表情按钮
     private lazy var emoticonButton: UIButton = {
         let button = UIButton(type: .Custom)
         button.userInteractionEnabled = false
@@ -17,7 +17,7 @@ class EmoticonKeyboardCell: UICollectionViewCell {
         return button
     }()
     
-    // 表情模型
+    /// 表情模型
     var emoticon: EmoticonModel? {
         didSet {
             emoticonButton.setTitle(emoticon?.emoticonString ?? "", forState: .Normal)
@@ -68,7 +68,7 @@ class EmoticonKeyboardCell: UICollectionViewCell {
 
 class EmoticonAttachment: NSTextAttachment {
     
-    // 表情字符串
+    /// 表情字符串
     var emoticonChs: String?
     
 }

@@ -8,7 +8,7 @@ import UIKit
 
 class KeyboardToolbar: UIToolbar {
 
-    // 图片按钮
+    /// 图片按钮
     lazy var pictureButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.image = UIImage(named: "compose_toolbar_picture")
@@ -17,7 +17,7 @@ class KeyboardToolbar: UIToolbar {
         return button
     }()
     
-    // 提及按钮
+    /// 提及按钮
     lazy var mentionButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.image = UIImage(named: "compose_mentionbutton_background")
@@ -26,7 +26,7 @@ class KeyboardToolbar: UIToolbar {
         return button
     }()
     
-    // 趋势按钮
+    /// 趋势按钮
     lazy var trendButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.image = UIImage(named: "compose_trendbutton_background")
@@ -35,7 +35,7 @@ class KeyboardToolbar: UIToolbar {
         return button
     }()
     
-    // 表情按钮
+    /// 表情按钮
     lazy var emoticonButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.image = UIImage(named: "compose_emoticonbutton_background")
@@ -44,7 +44,7 @@ class KeyboardToolbar: UIToolbar {
         return button
     }()
     
-    // 更多按钮
+    /// 更多按钮
     lazy var moreButton: UIBarButtonItem = {
         let button = UIBarButtonItem()
         button.image = UIImage(named: "compose_addbutton_background")

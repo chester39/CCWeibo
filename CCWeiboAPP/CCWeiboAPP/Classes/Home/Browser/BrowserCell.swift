@@ -10,7 +10,7 @@ import SDWebImage
 
 class BrowserCell: UICollectionViewCell {
 
-    // 图标URL
+    /// 图标URL
     var imageURL: NSURL? {
         didSet {
             indicatorView.startAnimating()
@@ -33,7 +33,7 @@ class BrowserCell: UICollectionViewCell {
         }
     }
     
-    // 基本滑动视图
+    /// 基本滑动视图
     private lazy var baseView: UIScrollView = {
        
         let scrollView = UIScrollView()
@@ -44,9 +44,9 @@ class BrowserCell: UICollectionViewCell {
         return scrollView
     }()
     
-    // 图片视图
+    /// 图片视图
     lazy var imageView: UIImageView = UIImageView()
-    // 提示视图
+    /// 提示视图
     private lazy var indicatorView: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
     
     // MARK: - 初始化方法
