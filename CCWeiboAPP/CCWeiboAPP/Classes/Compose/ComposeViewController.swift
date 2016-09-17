@@ -24,10 +24,14 @@ class ComposeViewController: UIViewController {
     /// 最大微博字数
     private let maxStatusCount = 140
     
-    /// 表情键盘
-    private lazy var emoticonKeyboardController: EmoticonKeyboardController = EmoticonKeyboardController { [unowned self] (emoticon) in
+    /// 表情键盘控制器
+    private lazy var emoticonKeyboardVC: EmoticonKeyboardController = EmoticonKeyboardController { [unowned self] (emoticon) in
         self.statusView.insertEmoticon(emoticon)
         self.textViewDidChange(self.statusView)
+    }
+    
+    private lazy var photoPickerVC: PhotoPickerController = {
+        
     }
     
     /// 发送按钮
@@ -54,7 +58,7 @@ class ComposeViewController: UIViewController {
         setupConstraints()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
-        addChildViewController(emoticonKeyboardController)
+        addChildViewController(emoticonKeyboardVC)
     }
     
     /**
@@ -180,11 +184,17 @@ class ComposeViewController: UIViewController {
                 statusView.inputView = nil
                 
             } else {
-                statusView.inputView = emoticonKeyboardController.view
+                statusView.inputView = emoticonKeyboardVC.view
             }
             
             statusView.becomeFirstResponder()
             
+        case keyboardBar.pictureButton:
+            statusView.resignFirstResponder()
+            let photoPickerVC = PhotoPickerController()
+            addChildViewController(photoPickerVC)
+            statusView.inputView = photoPickerVC.view
+            statusView.becomeFirstResponder()
         default:
             break
         }
