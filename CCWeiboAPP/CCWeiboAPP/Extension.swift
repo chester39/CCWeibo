@@ -49,6 +49,7 @@ extension NSDate {
             dateFormatter.dateFormat = "HH:mm"
             if dateDayString == nowDayString {
                 dateString = "今天\(dateFormatter.stringFromDate(date))"
+                
             } else {
                 dateString = "昨天\(dateFormatter.stringFromDate(date))"
             }
@@ -61,6 +62,7 @@ extension NSDate {
             if dateYearString == nowYearString {
                 dateFormatter.dateFormat = "MM-dd"
                 dateString = dateFormatter.stringFromDate(date)
+                
             } else {
                 dateFormatter.dateFormat = "yyyy/MM/dd"
                 dateString = dateFormatter.stringFromDate(date)
@@ -239,6 +241,7 @@ extension UITextView {
         attributedText.enumerateAttributesInRange(range, options: NSAttributedStringEnumerationOptions(rawValue: 0)) { (dict, range, _) in
             if let attachment = dict["NSAttachment"] as? EmoticonAttachment {
                 string += attachment.emoticonChs!
+                
             } else {
                 string += (self.text as NSString).substringWithRange(range)
             }

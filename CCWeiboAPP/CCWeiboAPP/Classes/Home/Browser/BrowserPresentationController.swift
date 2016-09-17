@@ -60,7 +60,6 @@ extension BrowserPresentationController: UIViewControllerTransitioningDelegate {
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         isPresented = true
-        
         return self
     }
     
@@ -70,7 +69,6 @@ extension BrowserPresentationController: UIViewControllerTransitioningDelegate {
     func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         isPresented = false
-        
         return self
     }
     

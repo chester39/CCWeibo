@@ -10,7 +10,7 @@ import Cartography
 
 class NewFeatureCell: UICollectionViewCell {
     
-    /// <#Description#> 图片下标
+    /// 图片下标
     var index: Int = 0 {
         didSet {
             let name = "new_feature_\(index + 1)"

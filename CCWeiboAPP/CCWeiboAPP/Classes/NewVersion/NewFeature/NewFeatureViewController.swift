@@ -8,10 +8,11 @@ import UIKit
 
 import Cartography
 
-/// 最大新特性界面数
-let maxCount = 4
 
 class NewFeatureController: UIViewController {
+    
+    /// 最大新特性界面数
+    private let maxNewFeatureCount = 4
 
     /// 新特性集合视图
     private lazy var newFeatureView: UICollectionView = {
@@ -26,7 +27,6 @@ class NewFeatureController: UIViewController {
     /// 页码指示器
     private lazy var pageControl: UIPageControl = {
         let page = UIPageControl()
-        page.numberOfPages = maxCount
         page.pageIndicatorTintColor = CommonLightColor
         page.currentPageIndicatorTintColor = AuxiliaryTextColor
         
@@ -54,6 +54,8 @@ class NewFeatureController: UIViewController {
     private func setupUI() {
 
         view.addSubview(newFeatureView)
+        
+        pageControl.numberOfPages = maxNewFeatureCount
         view.addSubview(pageControl)
     }
     
@@ -85,7 +87,7 @@ extension NewFeatureController: UICollectionViewDataSource {
      */
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return maxCount
+        return maxNewFeatureCount
     }
     
     /**
@@ -95,6 +97,7 @@ extension NewFeatureController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kNewFeatureReuseIdentifier, forIndexPath: indexPath) as! NewFeatureCell
         cell.index = indexPath.item
+        
         return cell
     }
     
@@ -109,8 +112,8 @@ extension NewFeatureController: UICollectionViewDelegate {
         
         let index = collectionView.indexPathsForVisibleItems().last!
         let currentCell = collectionView.cellForItemAtIndexPath(index) as! NewFeatureCell
-        pageControl.currentPage = collectionView.indexPathsForVisibleItems().last!.item % maxCount
-        if index.item == (maxCount - 1) {
+        pageControl.currentPage = collectionView.indexPathsForVisibleItems().last!.item % maxNewFeatureCount
+        if index.item == (maxNewFeatureCount - 1) {
             currentCell.startAnimation()
         }
     }

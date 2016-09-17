@@ -65,6 +65,7 @@ class PictureCollectionView: UICollectionView {
             } else {
                 let data = NSData(contentsOfURL: key)
                 image = UIImage(data: data!)
+                
                 return (cellSize: image.size, collectionSize: image.size)
             }
         
@@ -73,6 +74,7 @@ class PictureCollectionView: UICollectionView {
             let row = column
             let width = imageWidth * CGFloat(column) + kViewEdge * CGFloat(column - 1)
             let height = imageHeight * CGFloat(row) + kViewEdge * CGFloat(row - 1)
+            
             return (cellSize: CGSize(width: imageWidth, height: imageHeight), collectionSize: CGSize(width: width, height: height))
             
         default:
@@ -80,6 +82,7 @@ class PictureCollectionView: UICollectionView {
             let row = (count - 1) / 3 + 1
             let width = imageWidth * CGFloat(column) + kViewEdge * CGFloat(column - 1)
             let height = imageHeight * CGFloat(row) + kViewEdge * CGFloat(row - 1)
+            
             return (cellSize: CGSize(width: imageWidth, height: imageHeight), collectionSize: CGSize(width: width, height: height))
         }
     }

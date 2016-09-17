@@ -155,7 +155,6 @@ class BrowserViewController: UIViewController {
         
         if error != nil {
             MBProgressHUD.showMessage("图片保存失败", delay: 1.0)
-            
             return
         }
         

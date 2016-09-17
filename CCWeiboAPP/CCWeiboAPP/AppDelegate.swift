@@ -102,15 +102,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let currentVersion = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String
         let defaults = NSUserDefaults.standardUserDefaults()
         let sandboxVersion = (defaults.objectForKey(kAppVersion) as? String) ?? "0.0"
-        
         if currentVersion.compare(sandboxVersion) == NSComparisonResult.OrderedDescending {
             print("存在新版本")
             defaults.setObject(currentVersion, forKey: kAppVersion)
+            
             return true
         }
         
         print("没有新版本")
-        
         return false
     }
     

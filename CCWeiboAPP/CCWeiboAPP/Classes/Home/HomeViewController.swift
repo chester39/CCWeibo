@@ -175,19 +175,16 @@ class HomeViewController: BaseViewController {
         
         guard let array = notice.userInfo!["middlePicture"] as? [NSURL] else {
             MBProgressHUD.showMessage("图片获取失败", delay: 1.0)
-            
             return
         }
         
         guard let index = notice.userInfo!["indexPath"] as? NSIndexPath else {
             MBProgressHUD.showMessage("索引获取失败", delay: 1.0)
-            
             return
         }
         
         guard let pictureCollectionView = notice.object as? PictureCollectionView else {
             MBProgressHUD.showMessage("图片视图获取失败", delay: 1.0)
-            
             return
         }
         
@@ -324,6 +321,7 @@ extension HomeViewController {
             }
             
             return cell
+            
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(kWeiboStatusReuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
             cell.viewModel = statusArray![indexPath.row]
