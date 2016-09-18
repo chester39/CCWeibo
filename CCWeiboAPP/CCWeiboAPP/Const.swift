@@ -114,3 +114,5 @@ let kNewFeatureReuseIdentifier: String = "NewFeatureCell"
 let kBrowserReuseIdentifier: String = "BrowserCell"
 /// 表情键盘Cell重用标识符
 let kEmoticonKeyboardReuseIdentifier: String = "EmoticonKeyboardCell"
+/// 照片选择Cell重用标识符
+let kPhotoPickerReuseIdentifier: String = "PhotoPickerCell"

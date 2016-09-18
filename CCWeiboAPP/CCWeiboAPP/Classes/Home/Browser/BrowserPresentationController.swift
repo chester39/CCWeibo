@@ -22,6 +22,7 @@ protocol BrowserPresentationDelegate: NSObjectProtocol {
      浏览图片绝对尺寸方法
      */
     func browerPresentationWillToFrame(browserPresentationController: BrowserPresentationController, indexPath: NSIndexPath) -> CGRect
+    
 }
 
 class BrowserPresentationController: UIPresentationController {

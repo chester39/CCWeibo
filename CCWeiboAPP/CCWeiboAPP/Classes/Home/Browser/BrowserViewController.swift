@@ -64,6 +64,7 @@ class BrowserViewController: UIViewController {
         self.indexPath = indexPath
         
         super.init(nibName: nil, bundle: nil)
+        
         setupUI()
         setupConstraints()
     }

@@ -21,6 +21,8 @@ class ComposeViewController: UIViewController {
     private var numberLabel = UILabel(text: "", fontSize: 15, lines: 1)
     /// 变化约束组
     private var group = ConstraintGroup()
+    /// 照片选择控制器
+    private lazy var photoPickerVC = PhotoPickerController()
     /// 最大微博字数
     private let maxStatusCount = 140
     
@@ -30,9 +32,6 @@ class ComposeViewController: UIViewController {
         self.textViewDidChange(self.statusView)
     }
     
-    private lazy var photoPickerVC: PhotoPickerController = {
-        
-    }
     
     /// 发送按钮
     private lazy var composeItem: UIBarButtonItem = {
@@ -59,6 +58,7 @@ class ComposeViewController: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
         addChildViewController(emoticonKeyboardVC)
+        addChildViewController(photoPickerVC)
     }
     
     /**
@@ -156,10 +156,10 @@ class ComposeViewController: UIViewController {
         let text = statusView.acquireEmoticonString()
         NetworkingUtil.sharedInstance.sendWeiboStatuses(text) { (object, error) in
             if error != nil {
-                MBProgressHUD.showMessage("微博发送失败", delay: 2.0)
+                MBProgressHUD.showMessage("微博发送失败", delay: 1.0)
             }
             
-            MBProgressHUD.showMessage("微博发送成功", delay: 2.0)
+            MBProgressHUD.showMessage("微博发送成功", delay: 1.0)
             self.closeButtonDidClick()
         }
     }
@@ -177,28 +177,20 @@ class ComposeViewController: UIViewController {
             }
         }
         
+        statusView.resignFirstResponder()
+        
         switch item {
         case keyboardBar.emoticonButton:
-            statusView.resignFirstResponder()
-            if statusView.inputView != nil {
-                statusView.inputView = nil
-                
-            } else {
-                statusView.inputView = emoticonKeyboardVC.view
-            }
-            
-            statusView.becomeFirstResponder()
+            statusView.inputView = (item.tintColor == MainColor) ? emoticonKeyboardVC.view : nil
             
         case keyboardBar.pictureButton:
-            statusView.resignFirstResponder()
-            let photoPickerVC = PhotoPickerController()
-            addChildViewController(photoPickerVC)
-            statusView.inputView = photoPickerVC.view
-            statusView.becomeFirstResponder()
+            statusView.inputView = (item.tintColor == MainColor) ? photoPickerVC.view : nil
+            
         default:
             break
         }
 
+        statusView.becomeFirstResponder()
     }
     
     // MARK: - 通知方法
@@ -257,4 +249,5 @@ extension ComposeViewController: UITextViewDelegate {
         
         statusView.resignFirstResponder()
     }
+    
 }
