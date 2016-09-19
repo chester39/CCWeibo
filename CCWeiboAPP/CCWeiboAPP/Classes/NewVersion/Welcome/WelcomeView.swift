@@ -103,7 +103,7 @@ class WelcomeView: UIView {
             avatarView.bottom == avatarView.superview!.top + kViewDistance
         }
         
-        UIView.animateWithDuration(1.5, animations: {
+        UIView.animateWithDuration(1.0, animations: {
             self.layoutIfNeeded()
         }) { (_) in
             UIView.animateWithDuration(1.0, animations: {

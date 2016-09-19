@@ -28,7 +28,7 @@ import Cartography
 class PhotoPickerCell: UICollectionViewCell {
     
     /// 图片按钮
-    var imageButton = UIButton(imageName: "compose_pic_add", backgroundImageName: nil)
+    var imageButton = UIButton(imageName: nil, backgroundImageName: "compose_pic_add")
     /// 删除按钮
     var removeButton = UIButton(type: .Custom)
     /// PhotoPickerCellDelegate代理
@@ -40,12 +40,12 @@ class PhotoPickerCell: UICollectionViewCell {
             removeExistingImageView()
             if image == nil {
                 removeButton.hidden = true
-                imageButton.setImage(UIImage(named: "compose_pic_add"), forState: .Normal)
-                imageButton.setImage(UIImage(named: "compose_pic_add_highlighted"), forState: .Highlighted)
+                imageButton.setBackgroundImage(UIImage(named: "compose_pic_add"), forState: .Normal)
+                imageButton.setBackgroundImage(UIImage(named: "compose_pic_add_highlighted"), forState: .Highlighted)
                 
             } else {
                 removeButton.hidden = false
-                imageButton.setImage(image, forState: .Normal)
+                imageButton.setBackgroundImage(image, forState: .Normal)
                 imageButton.contentMode = .ScaleAspectFill
                 imageButton.clipsToBounds = true
             }
@@ -83,7 +83,7 @@ class PhotoPickerCell: UICollectionViewCell {
         imageButton.addTarget(self, action: #selector(imageButtonDidClick), forControlEvents: .TouchUpInside)
         addSubview(imageButton)
         
-        removeButton.setImage(UIImage(named: "compose_photo_close"), forState: .Normal)
+        removeButton.setBackgroundImage(UIImage(named: "compose_photo_close"), forState: .Normal)
         removeButton.hidden = true
         removeButton.addTarget(self, action: #selector(removeButtonDidClick), forControlEvents: .TouchUpInside)
         addSubview(removeButton)
@@ -97,8 +97,8 @@ class PhotoPickerCell: UICollectionViewCell {
         constrain(imageButton, removeButton) { (imageButton, removeButton) in
             imageButton.edges == inset(imageButton.superview!.edges, 0)
             
-            removeButton.width == kViewPadding
-            removeButton.height == kViewPadding
+            removeButton.width == kViewBorder
+            removeButton.height == kViewBorder
             removeButton.top == removeButton.superview!.top
             removeButton.right == removeButton.superview!.right
         }

@@ -13,7 +13,9 @@ import TZImagePickerController
 class PhotoPickerController: UIViewController {
     
     /// 照片数组
-    private var imageArray = [(image: UIImage, asset: PHAsset)]()
+    var imageArray = [UIImage]()
+    /// 已选照片数组
+    private var assetArray = [PHAsset]()
     /// 最大图片数
     private let maxPhotoCount = 9
     /// 照片集合视图
@@ -65,6 +67,7 @@ class PhotoPickerController: UIViewController {
      */
     private func setupUI() {
 
+        photoView.backgroundColor = RetweetStatusBackgroundColor
         view.addSubview(photoView)
     }
     
@@ -106,7 +109,7 @@ extension PhotoPickerController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kPhotoPickerReuseIdentifier, forIndexPath: indexPath) as! PhotoPickerCell
         cell.delegate = self
         if indexPath.item < imageArray.count {
-            cell.image = imageArray[indexPath.item].image
+            cell.image = imageArray[indexPath.item]
         } else {
             cell.image = nil
         }
@@ -123,31 +126,12 @@ extension PhotoPickerController: PhotoPickerCellDelegate {
      */
     func photoPickerCellImageButtonDidClick(cell: PhotoPickerCell) {
         
-        let photoArray = imageArray.map {
-            $0.image
-        }
-        let assetArray = imageArray.map {
-            $0.asset
-        }
-        
         let indexPath = photoView.indexPathForCell(cell)!
-        let ipc = TZImagePickerController(selectedAssets: NSMutableArray(array: assetArray), selectedPhotos: NSMutableArray(array: photoArray), index: indexPath.item)
-        ipc.maxImagesCount = maxPhotoCount
-        ipc.sortAscendingByModificationDate = false
-        ipc.allowPickingOriginalPhoto = true
-        ipc.allowPickingVideo = false
-        ipc.pickerDelegate = self
+        let ipc = TZImagePickerController(selectedAssets: NSMutableArray(array: assetArray), selectedPhotos: NSMutableArray(array: imageArray), index: indexPath.item)
+        ipc.allowPickingOriginalPhoto = false
         ipc.didFinishPickingPhotosHandle = {(photos: [UIImage]!, assets: [AnyObject]!, isSelectOriginalPhoto: Bool) -> Void in
-            self.imageArray.removeAll()
-            for i in 0 ..< photos.count {
-                let existImage = self.imageArray.contains{
-                    $0.image == photos[i] || $0.asset == assets[i] as! PHAsset
-                }
-                if self.imageArray.count < self.maxPhotoCount && existImage == false {
-                    self.imageArray.append((image: photos[i], asset: assets[i] as! PHAsset))
-                }
-            }
-            
+            self.imageArray = photos
+            self.assetArray = assets as! [PHAsset]
             self.photoView.reloadData()
         }
         
@@ -161,13 +145,10 @@ extension PhotoPickerController: PhotoPickerCellDelegate {
         
         let ipc = TZImagePickerController(maxImagesCount: maxPhotoCount, delegate: self)
         ipc.sortAscendingByModificationDate = false
-        ipc.allowPickingOriginalPhoto = true
+        ipc.allowPickingOriginalPhoto = false
         ipc.allowPickingVideo = false
+        ipc.selectedAssets = NSMutableArray(array: assetArray)
         
-        let array = imageArray.map {
-            $0.asset
-        }
-        ipc.selectedAssets = NSMutableArray(array: array)
         presentViewController(ipc, animated: true, completion: nil)
     }
     
@@ -175,16 +156,13 @@ extension PhotoPickerController: PhotoPickerCellDelegate {
      删除按钮点击方法
      */
     func photoPickerCellRemoveButtonDidClick(cell: PhotoPickerCell) {
-        
-        if let image = cell.image {
-            let index = imageArray.indexOf {
-                $0.image == image
-            }
-            imageArray.removeAtIndex(index!)
-            photoView.reloadData()
-        }
-    }
     
+        let indexPath = photoView.indexPathForCell(cell)!
+        imageArray.removeAtIndex(indexPath.item)
+        assetArray.removeAtIndex(indexPath.item)
+        photoView.reloadData()
+    }
+
 }
 
 extension PhotoPickerController: TZImagePickerControllerDelegate {
@@ -194,16 +172,8 @@ extension PhotoPickerController: TZImagePickerControllerDelegate {
      */
     func imagePickerController(picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [AnyObject]!, isSelectOriginalPhoto: Bool) {
         
-        imageArray.removeAll()
-        for i in 0 ..< photos.count {
-            let existImage = imageArray.contains{
-                $0.image == photos[i] || $0.asset == assets[i] as! PHAsset
-            }
-            if imageArray.count < maxPhotoCount && existImage == false {
-                imageArray.append((image: photos[i], asset: assets[i] as! PHAsset))
-            }
-        }
-        
+        imageArray = photos
+        assetArray = assets as! [PHAsset]
         photoView.reloadData()
     }
 
@@ -218,7 +188,7 @@ class PhotoPickerLayout: UICollectionViewFlowLayout {
         
         super.prepareLayout()
         
-        itemSize = CGSize(width: kViewAdapter, height: kViewAdapter)
+        itemSize = CGSize(width: kViewStandard, height: kViewStandard)
         minimumInteritemSpacing = kViewPadding
         minimumLineSpacing = kViewPadding
 

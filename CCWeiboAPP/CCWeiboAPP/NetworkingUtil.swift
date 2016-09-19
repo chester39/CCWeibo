@@ -95,19 +95,46 @@ class NetworkingUtil {
     /**
      发送微博内容方法
      */
-    func sendWeiboStatuses(status: String, finished: (object: AnyObject?, error: NSError?) -> ()) {
+    func sendWeiboStatuses(status: String, image: UIImage?, finished: (object: AnyObject?, error: NSError?) -> ()) {
         
-        let path = "2/statuses/update.json"
+        var path = "2/statuses/"
         let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!, "status": status]
-        Alamofire.request(.POST, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
-            guard let data = response.data else {
-                finished(object: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "发送微博失败"]))
-                return
+        if image == nil {
+            path += "update.json"
+            Alamofire.request(.POST, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
+                guard let data = response.data else {
+                    finished(object: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "发送微博失败"]))
+                    return
+                }
+                
+                let json = JSON(data: data)
+                let dict = json.dictionaryObject
+                finished(object: dict, error: nil)
             }
             
-            let json = JSON(data: data)
-            let dict = json.dictionaryObject
-            finished(object: dict, error: nil)
+        } else {
+            path += "upload.json"
+            Alamofire.upload(.POST, kWeiboBaseURL + path, multipartFormData: { (multipartFormData) in
+                let imageData = UIImagePNGRepresentation(image!)!
+                let imageName = String(NSDate()) + ".png"
+                for (key, value) in parameters {
+                    multipartFormData.appendBodyPart(data: value.dataUsingEncoding(NSUTF8StringEncoding)!, name: key)
+                }
+                
+                multipartFormData.appendBodyPart(data: imageData, name: "pic", fileName: imageName, mimeType: "image/png")
+                }, encodingCompletion: { (encodingResult) in
+                    switch encodingResult {
+                    case .Success(let upload, _, _):
+                        upload.responseJSON(completionHandler: { response in
+                            let json = JSON(data: response.data!)
+                            let dict = json.dictionaryObject
+                            finished(object: dict, error: nil)
+                        })
+                        
+                    case .Failure(_):
+                        finished(object: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "发送微博失败"]))
+                    }
+            })
         }
     }
 

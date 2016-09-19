@@ -19,12 +19,17 @@ class ComposeViewController: UIViewController {
     private var keyboardBar = KeyboardToolbar()
     /// 数字标签
     private var numberLabel = UILabel(text: "", fontSize: 15, lines: 1)
-    /// 变化约束组
-    private var group = ConstraintGroup()
     /// 照片选择控制器
     private lazy var photoPickerVC = PhotoPickerController()
+    /// 照片视图
+    private var photoView = UIView()
+    /// 键盘变化约束组
+    private var keyboardGroup = ConstraintGroup()
+    /// 照片变化约束组
+    private var photoGroup = ConstraintGroup()
     /// 最大微博字数
     private let maxStatusCount = 140
+
     
     /// 表情键盘控制器
     private lazy var emoticonKeyboardVC: EmoticonKeyboardController = EmoticonKeyboardController { [unowned self] (emoticon) in
@@ -67,10 +72,10 @@ class ComposeViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         
         super.viewDidAppear(animated)
-        
+
         statusView.becomeFirstResponder()
     }
-    
+
     /**
      视图将要消失方法
      */
@@ -108,10 +113,11 @@ class ComposeViewController: UIViewController {
             button.action = #selector(itemButtonDidClick(_:))
         }
 
-        view.addSubview(keyboardBar)
-        
         numberLabel.hidden = true
         view.addSubview(numberLabel)
+        
+        view.addSubview(keyboardBar)
+        view.addSubview(photoView)
     }
     
     /**
@@ -130,11 +136,21 @@ class ComposeViewController: UIViewController {
         
         constrain(numberLabel, keyboardBar) { (numberLabel, keyboardBar) in
             numberLabel.left == numberLabel.superview!.right - kViewMargin
-            numberLabel.top == keyboardBar.top - kViewMargin
+            numberLabel.bottom == keyboardBar.top - kViewMargin
         }
         
-        constrain(keyboardBar, replace: group) { (keyboardBar) in
+        constrain(keyboardBar, replace: keyboardGroup) { (keyboardBar) in
             keyboardBar.bottom == keyboardBar.superview!.bottom
+        }
+        
+        constrain(photoView) { (photoView) in
+            photoView.left == photoView.superview!.left
+            photoView.bottom == photoView.superview!.bottom
+            photoView.right == photoView.superview!.right
+        }
+        
+        constrain(photoView, replace: photoGroup) { (photoView) in
+            photoView.height == 0
         }
     }
     
@@ -153,8 +169,9 @@ class ComposeViewController: UIViewController {
      */
     @objc private func composeButtonDidClick() {
         
+        let image = photoPickerVC.imageArray.last
         let text = statusView.acquireEmoticonString()
-        NetworkingUtil.sharedInstance.sendWeiboStatuses(text) { (object, error) in
+        NetworkingUtil.sharedInstance.sendWeiboStatuses(text, image: image) { (object, error) in
             if error != nil {
                 MBProgressHUD.showMessage("微博发送失败", delay: 1.0)
             }
@@ -174,23 +191,34 @@ class ComposeViewController: UIViewController {
                 item.tintColor = (item.tintColor == MainColor) ? AuxiliaryTextColor : MainColor
             } else {
                 button.tintColor = AuxiliaryTextColor
+                photoPickerVC.view.removeFromSuperview()
             }
         }
         
-        statusView.resignFirstResponder()
-        
         switch item {
         case keyboardBar.emoticonButton:
+            statusView.resignFirstResponder()
             statusView.inputView = (item.tintColor == MainColor) ? emoticonKeyboardVC.view : nil
+            statusView.becomeFirstResponder()
             
         case keyboardBar.pictureButton:
-            statusView.inputView = (item.tintColor == MainColor) ? photoPickerVC.view : nil
+            if item.tintColor == MainColor {
+                photoView.addSubview(photoPickerVC.view)
+                constrain(photoView, replace: photoGroup) { (photoView) in
+                    photoView.height == kScreenHeight * 0.7
+                }
+                
+                view.bringSubviewToFront(keyboardBar)
+                UIView.animateWithDuration(0.2, animations: {
+                    self.view.layoutIfNeeded()
+                })
+            } else {
+                photoPickerVC.view.removeFromSuperview()
+            }
             
         default:
             break
         }
-
-        statusView.becomeFirstResponder()
     }
     
     // MARK: - 通知方法
@@ -200,15 +228,16 @@ class ComposeViewController: UIViewController {
      */
     func keyboardWillChange(notice: NSNotification) {
         
+        let time = notice.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
         let rect = notice.userInfo![UIKeyboardFrameEndUserInfoKey]!.CGRectValue
         let offsetY = kScreenHeight - rect.origin.y
         
-        constrain(keyboardBar, replace: group) { (toolBar) in
-            toolBar.bottom == toolBar.superview!.bottom - offsetY
+        constrain(keyboardBar, replace: keyboardGroup) { (keyboardBar) in
+            keyboardBar.bottom == keyboardBar.superview!.bottom - offsetY
         }
         
         let curve = notice.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-        UIView.animateWithDuration(0.2) {
+        UIView.animateWithDuration(time) {
             UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: curve.integerValue)!)
             self.view.layoutIfNeeded()
         }
