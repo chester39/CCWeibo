@@ -30,13 +30,11 @@ class ComposeViewController: UIViewController {
     /// 最大微博字数
     private let maxStatusCount = 140
 
-    
     /// 表情键盘控制器
     private lazy var emoticonKeyboardVC: EmoticonKeyboardController = EmoticonKeyboardController { [unowned self] (emoticon) in
         self.statusView.insertEmoticon(emoticon)
         self.textViewDidChange(self.statusView)
     }
-    
     
     /// 发送按钮
     private lazy var composeItem: UIBarButtonItem = {

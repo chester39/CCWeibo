@@ -47,9 +47,11 @@ class RetweetStatusCell: BaseStatusCell {
                 likeButton.setTitle("\(viewModel!.status.attitudesCount)", forState: .Normal)
             }
             
-            retweetLabel.attributedText = viewModel?.retweetText
-            pictureView.viewModel = viewModel
+            let retweetText = EmoticonManager.emoticonMutableAttributedString(viewModel?.status.retweetedStatus?.text ?? "", font: contentLabel.font)
+            viewModel?.retweetUserText?.appendAttributedString(retweetText)
+            retweetLabel.attributedText = viewModel?.retweetUserText
             
+            pictureView.viewModel = viewModel
             let (cellSize, collectionSize) = pictureView.acquireLayoutSize()
             if cellSize != CGSizeZero {
                 flowLayout.itemSize = cellSize

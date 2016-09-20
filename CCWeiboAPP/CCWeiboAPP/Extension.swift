@@ -236,7 +236,7 @@ extension UITextView {
     func acquireEmoticonString() -> String {
         
         let range = NSRange(location: 0, length: attributedText.length)
-        var string = String()
+        var string = ""
         
         attributedText.enumerateAttributesInRange(range, options: NSAttributedStringEnumerationOptions(rawValue: 0)) { (dict, range, _) in
             if let attachment = dict["NSAttachment"] as? EmoticonAttachment {

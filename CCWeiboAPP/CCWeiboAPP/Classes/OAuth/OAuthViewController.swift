@@ -12,10 +12,42 @@ import MBProgressHUD
 
 class OAuthViewController: UIViewController {
     
-    /// 授权网页视图
-    var oauthView = WKWebView(frame: kScreenFrame)
     /// 透明指示层
     var hud = MBProgressHUD()
+    
+    /// 授权网页设置
+    @available(iOS 9.0, *) private lazy var kzWebViewConfiguration: WKWebViewConfiguration = {
+        let configuration = WKWebViewConfiguration()
+        configuration.allowsInlineMediaPlayback = true
+        configuration.allowsAirPlayForMediaPlayback = true
+        configuration.allowsPictureInPictureMediaPlayback = true
+        configuration.suppressesIncrementalRendering = true
+        configuration.mediaPlaybackRequiresUserAction = false
+        
+        return configuration
+    }()
+    
+    /// 授权网页视图
+    private lazy var oauthView: WKWebView = {
+        let webView = WKWebView(frame: kScreenFrame)
+        webView.allowsBackForwardNavigationGestures = true
+        webView.scrollView.showsVerticalScrollIndicator = false
+        webView.navigationDelegate = self
+        webView.sizeToFit()
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .New, context: nil)
+        
+        return webView
+    }()
+    
+    /// 网页进度条
+    private lazy var webProgressView: UIProgressView = {
+        let progress = UIProgressView(progressViewStyle: .Default)
+        progress.frame = CGRect(x: 0, y: kAvailableHeight, width: kScreenWidth, height: 2)
+        progress.trackTintColor = ClearColor
+        progress.progressTintColor = CommonLightColor
+        
+        return progress
+    }()
     
     // MARK: - 系统方法
     
@@ -26,15 +58,42 @@ class OAuthViewController: UIViewController {
         
         super.viewDidLoad()
         
+        setupUI()
+        NetworkingUtil.sharedInstance.loadRequestToken(oauthView)
+    }
+    
+    /**
+     KVO观察者方法
+     */
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        if object as? NSObject == oauthView && keyPath! == "estimatedProgress" {
+            let new: Float = change![NSKeyValueChangeNewKey] as! Float
+            if new == 1.0 {
+                webProgressView.hidden = true
+                webProgressView.setProgress(0.0, animated: false)
+                
+            } else {
+                webProgressView.hidden = false
+                webProgressView.setProgress(new, animated: true)
+            }
+        }
+    }
+    
+    // MARK: - 界面方法
+    
+    /**
+     初始化界面方法
+     */
+    private func setupUI() {
+        
         navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(20), NSForegroundColorAttributeName: MainColor]
-        navigationItem.title = "授权页面"
+        navigationItem.title = ""
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "填充", style: .Plain, target: self, action: #selector(fillButtonDidClick))
         
-        oauthView.navigationDelegate = self
         view.addSubview(oauthView)
-        
-        NetworkingUtil.sharedInstance.loadRequestToken(oauthView)
+        view.addSubview(webProgressView)
     }
     
     // MARK: - 按钮方法
@@ -65,8 +124,7 @@ extension OAuthViewController: WKNavigationDelegate {
      */
     func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         
-        hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.label.text = "正在加载中......"
+        webProgressView.hidden = false
     }
     
     /**
@@ -74,7 +132,7 @@ extension OAuthViewController: WKNavigationDelegate {
      */
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         
-        hud.hideAnimated(true)
+        navigationItem.title = webView.title
     }
     
     /**
@@ -82,7 +140,6 @@ extension OAuthViewController: WKNavigationDelegate {
      */
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         
-        hud.hideAnimated(true)
         print(navigationAction.request)
         
         guard let urlString = navigationAction.request.URL?.absoluteString else {

@@ -23,7 +23,7 @@ class StatusViewModel: NSObject {
     /// 微博配图大图URL数组
     var middlePictureArray: [NSURL]?
     /// 转发微博信息内容
-    var retweetText: NSMutableAttributedString?
+    var retweetUserText: NSMutableAttributedString?
     /// 微博模型
     var status: StatusModel
     
@@ -83,11 +83,10 @@ class StatusViewModel: NSObject {
             }
         }
         
-        if let text = status.retweetedStatus?.text {
-            let name = status.retweetedStatus?.user?.screenName ?? ""
+        if let name = status.retweetedStatus?.user?.screenName {
             let length = name.characters.count + 1
-            retweetText = NSMutableAttributedString(string: "@" + name + ": " + text)
-            retweetText?.addAttribute(NSForegroundColorAttributeName, value: RetweetUserTextColor, range: NSMakeRange(0, length))
+            retweetUserText = NSMutableAttributedString(string: "@" + name + ": ")
+            retweetUserText?.addAttribute(NSForegroundColorAttributeName, value: RetweetUserTextColor, range: NSMakeRange(0, length))
         }
     }
 }

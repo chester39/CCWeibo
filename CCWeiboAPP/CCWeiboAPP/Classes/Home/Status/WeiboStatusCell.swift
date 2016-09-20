@@ -29,7 +29,8 @@ class WeiboStatusCell: BaseStatusCell {
             
             timeLabel.text = viewModel?.creatTimeText
             sourceLabel.text = viewModel?.sourceText
-            contentLabel.text = viewModel?.status.text
+            
+            contentLabel.attributedText = EmoticonManager.emoticonMutableAttributedString(viewModel?.status.text ?? "", font: contentLabel.font)
             
             if viewModel?.status.repostsCount != 0 {
                 retweetButton.setTitle("\(viewModel!.status.repostsCount)", forState: .Normal)

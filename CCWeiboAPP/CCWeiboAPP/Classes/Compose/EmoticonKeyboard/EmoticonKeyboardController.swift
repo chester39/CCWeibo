@@ -11,7 +11,7 @@ import Cartography
 class EmoticonKeyboardController: UIViewController {
 
     /// 表情包数组
-    var packageArray: [EmoticonPackage] = EmoticonPackage.loadEmoticonPackageArray()
+    var managerArray: [EmoticonManager] = EmoticonManager.loadEmoticonManagerArray()
     /// 闭包回调
     var emoticonCallback: (emoticon: EmoticonModel) -> ()
     
@@ -154,7 +154,7 @@ extension EmoticonKeyboardController: UICollectionViewDataSource {
      */
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         
-        return packageArray.count
+        return managerArray.count
     }
     
     /**
@@ -162,7 +162,7 @@ extension EmoticonKeyboardController: UICollectionViewDataSource {
      */
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return packageArray[section].emoticonArray?.count ?? 0
+        return managerArray[section].emoticonArray?.count ?? 0
     }
     
     /**
@@ -171,8 +171,8 @@ extension EmoticonKeyboardController: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kEmoticonKeyboardReuseIdentifier, forIndexPath: indexPath) as! EmoticonKeyboardCell
-        let package = packageArray[indexPath.section]
-        cell.emoticon = package.emoticonArray![indexPath.item]
+        let manager = managerArray[indexPath.section]
+        cell.emoticon = manager.emoticonArray![indexPath.item]
         
         return cell
     }
@@ -186,11 +186,11 @@ extension EmoticonKeyboardController: UICollectionViewDelegate {
      */
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let package = packageArray[indexPath.section]
-        let emoticon = package.emoticonArray![indexPath.item]
+        let manager = managerArray[indexPath.section]
+        let emoticon = manager.emoticonArray![indexPath.item]
         emoticon.count += 1
         if emoticon.isRemoveButton == false {
-            packageArray[0].appendLastEmoticon(emoticon)
+            managerArray[0].appendLastEmoticon(emoticon)
         }
         
         emoticonCallback(emoticon: emoticon)
