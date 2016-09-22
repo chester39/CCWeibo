@@ -5,7 +5,9 @@
 //
 
 import UIKit
+import WebKit
 
+import ActiveLabel
 import Cartography
 import SDWebImage
 
@@ -16,7 +18,15 @@ class RetweetStatusCell: BaseStatusCell {
     /// 转发微博视图
     private var retweetView = UIView()
     /// 转发微博信息内容
-    private var retweetLabel = UILabel(text: "", fontSize: 14, lines: 0)
+    private var retweetLabel: ActiveLabel = {
+        let label = ActiveLabel()
+        label.numberOfLines = 0
+        label.font = UIFont.systemFontOfSize(14)
+        label.enabledTypes = [.Mention, .Hashtag, .URL]
+        label.mentionColor = RetweetUserTextColor
+        label.hashtagColor = MainColor
+        return label
+    }()
 
     /// 微博模型
     override var viewModel: StatusViewModel? {
@@ -33,7 +43,11 @@ class RetweetStatusCell: BaseStatusCell {
             
             timeLabel.text = viewModel?.creatTimeText
             sourceLabel.text = viewModel?.sourceText
-            contentLabel.text = viewModel?.status.text
+            
+            contentLabel.attributedText = EmoticonManager.emoticonMutableAttributedString(viewModel?.status.text ?? "", font: contentLabel.font)
+            contentLabel.handleURLTap { (url) in
+                UIApplication.sharedApplication().openURL(url)
+            }
             
             if viewModel?.status.repostsCount != 0 {
                 retweetButton.setTitle("\(viewModel!.status.repostsCount)", forState: .Normal)
@@ -46,10 +60,11 @@ class RetweetStatusCell: BaseStatusCell {
             if viewModel?.status.attitudesCount != 0 {
                 likeButton.setTitle("\(viewModel!.status.attitudesCount)", forState: .Normal)
             }
-            
-            let retweetText = EmoticonManager.emoticonMutableAttributedString(viewModel?.status.retweetedStatus?.text ?? "", font: contentLabel.font)
-            viewModel?.retweetUserText?.appendAttributedString(retweetText)
-            retweetLabel.attributedText = viewModel?.retweetUserText
+
+            retweetLabel.attributedText = EmoticonManager.emoticonMutableAttributedString(viewModel?.retweetText ?? "", font: contentLabel.font)
+            retweetLabel.handleURLTap { (url) in
+                UIApplication.sharedApplication().openURL(url)
+            }
             
             pictureView.viewModel = viewModel
             let (cellSize, collectionSize) = pictureView.acquireLayoutSize()

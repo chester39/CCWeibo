@@ -29,13 +29,15 @@ class NetworkingUtil {
      */
     func loadRequestToken(webView: WKWebView) {
         
-        let urlString = "\(kWeiboBaseURL)oauth2/authorize?client_id=\(kWeiboAppKey)&redirect_uri=\(kWeiboRedirectUri)"
-        guard let url = NSURL(string: urlString) else {
-            return
+        let path = "oauth2/authorize"
+        let parameters = ["client_id": kWeiboAppKey, "redirect_uri": kWeiboRedirectUri]
+        Alamofire.request(.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
+            guard let request = response.request else {
+                return
+            }
+            
+            webView.loadRequest(request)
         }
-        
-        let request = NSURLRequest(URL: url)
-        webView.loadRequest(request)
     }
     
     /**

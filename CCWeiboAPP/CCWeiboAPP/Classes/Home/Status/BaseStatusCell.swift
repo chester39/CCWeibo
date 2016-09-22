@@ -6,6 +6,7 @@
 
 import UIKit
 
+import ActiveLabel
 import Cartography
 import SDWebImage
 
@@ -24,7 +25,7 @@ class BaseStatusCell: UITableViewCell {
     /// 来源标签
     var sourceLabel = UILabel(text: "", fontSize: 12, lines: 1)
     /// 信息内容标签
-    var contentLabel = UILabel(text: "", fontSize: 15, lines: 0)
+    var contentLabel = ActiveLabel()
     /// 底部视图
     var footerView = UIView()
     /// 转发按钮
@@ -33,7 +34,7 @@ class BaseStatusCell: UITableViewCell {
     var commentButton = UIButton(imageName: "timeline_icon_comment", backgroundImageName: "timeline_card_bottom_background")
     /// 点赞按钮
     var likeButton = UIButton(imageName: "timeline_icon_unlike", backgroundImageName: "timeline_card_bottom_background")
-
+    
     /// 集合布局
     lazy var flowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -79,6 +80,11 @@ class BaseStatusCell: UITableViewCell {
         contentView.addSubview(sourceLabel)
         
         contentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewBorder
+        contentLabel.numberOfLines = 0
+        contentLabel.font = UIFont.systemFontOfSize(15)
+        contentLabel.enabledTypes = [.Mention, .Hashtag, .URL]
+        contentLabel.mentionColor = RetweetUserTextColor
+        contentLabel.hashtagColor = MainColor
         contentView.addSubview(contentLabel)
         
         contentView.addSubview(footerView)

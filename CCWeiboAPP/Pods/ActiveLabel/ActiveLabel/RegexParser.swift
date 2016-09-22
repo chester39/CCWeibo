@@ -10,11 +10,9 @@ import Foundation
 
 struct RegexParser {
 
-    static let hashtagPattern = "(?:^|\\s|$)#[\\p{L}0-9_]*"
-    static let mentionPattern = "(?:^|\\s|$|[.])@[\\p{L}0-9_]*"
-    static let urlPattern = "(^|[\\s.:;?\\-\\]<\\(])" +
-        "((https?://|www\\.|pic\\.)[-\\w;/?:@&=+$\\|\\_.!~*\\|'()\\[\\]%#,☺]+[\\w/#](\\(\\))?)" +
-    "(?=$|[\\s',\\|\\(\\).:;?\\-\\[\\]>\\)])"
+    static let hashtagPattern = "#([\\u4e00-\\u9fa5\\w\\-]+)#"
+    static let mentionPattern = "@[\\u4e00-\\u9fa5\\w\\-]+"
+    static let urlPattern = "((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(((http[s]{0,1}|ftp)://|)((?:(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))\\.){3}(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d))))(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)"
 
 
     static func getElements(from text: String, with pattern: String, range: NSRange) -> [NSTextCheckingResult]{

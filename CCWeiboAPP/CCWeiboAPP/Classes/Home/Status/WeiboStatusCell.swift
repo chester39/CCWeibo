@@ -31,6 +31,9 @@ class WeiboStatusCell: BaseStatusCell {
             sourceLabel.text = viewModel?.sourceText
             
             contentLabel.attributedText = EmoticonManager.emoticonMutableAttributedString(viewModel?.status.text ?? "", font: contentLabel.font)
+            contentLabel.handleURLTap { (url) in
+                UIApplication.sharedApplication().openURL(url)
+            }
             
             if viewModel?.status.repostsCount != 0 {
                 retweetButton.setTitle("\(viewModel!.status.repostsCount)", forState: .Normal)

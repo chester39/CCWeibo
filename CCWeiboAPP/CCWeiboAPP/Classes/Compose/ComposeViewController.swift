@@ -193,9 +193,9 @@ class ComposeViewController: UIViewController {
             }
         }
         
+        statusView.resignFirstResponder()
         switch item {
         case keyboardBar.emoticonButton:
-            statusView.resignFirstResponder()
             statusView.inputView = (item.tintColor == MainColor) ? emoticonKeyboardVC.view : nil
             statusView.becomeFirstResponder()
             
