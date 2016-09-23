@@ -14,8 +14,6 @@ class HomeViewController: BaseViewController {
     
     /// 微博数组
     var statusArray: [StatusViewModel]?
-    /// Cell行高缓存
-    private var rowHeightCaches = [Int: CGFloat]()
     /// 最后一条微博与否
     private var isLastStatus = false
     /// 浏览视图转场管理器
@@ -72,16 +70,6 @@ class HomeViewController: BaseViewController {
         setupNavigation()
         setupTableView()
         loadWeiboStatus()
-    }
-    
-    /**
-     收到内存警告方法
-     */
-    override func didReceiveMemoryWarning() {
-        
-        super.didReceiveMemoryWarning()
-        
-        rowHeightCaches.removeAll()
     }
     
     /**
@@ -188,11 +176,11 @@ class HomeViewController: BaseViewController {
             return
         }
         
-        let pbc = BrowserViewController(urlArray: array, indexPath: index)
-        pbc.transitioningDelegate = browerPresentationManager
-        pbc.modalPresentationStyle = .Custom
+        let bvc = BrowserViewController(urlArray: array, indexPath: index)
+        bvc.transitioningDelegate = browerPresentationManager
+        bvc.modalPresentationStyle = .Custom
         browerPresentationManager.acquireDefaultData(index, browserDelegate: pictureCollectionView)
-        presentViewController(pbc, animated: true, completion: nil)
+        presentViewController(bvc, animated: true, completion: nil)
     }
     
     // MARK: - 数据方法

@@ -95,6 +95,32 @@ class NetworkingUtil {
     }
     
     /**
+     读取公共微博方法
+     */
+    func loadPublicStatuses(finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
+        
+        assert(UserAccount.loadUserAccount() != nil, "必须授权之后才能获取微博数据")
+        
+        let path = "2/statuses/public_timeline.json"
+        let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!]
+        Alamofire.request(.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
+            guard let data = response.data else {
+                finished(array: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
+                return
+            }
+            
+            let json = JSON(data: data)
+            var array = [[String: AnyObject]]()
+            for (index: _, subJson: subJSON) in json["statuses"] {
+                let dict = subJSON.dictionaryObject!
+                array.append(dict)
+            }
+            
+            finished(array: array, error: nil)
+        }
+    }
+    
+    /**
      发送微博内容方法
      */
     func sendWeiboStatuses(status: String, image: UIImage?, finished: (object: AnyObject?, error: NSError?) -> ()) {

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Robert Böhnke. All rights reserved.
 //
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import UIKit
 #else
 import AppKit
@@ -65,3 +65,16 @@ public func inset(edges: Edges, _ top: CGFloat, _ leading: CGFloat, _ bottom: CG
         Coefficients(1, -trailing)
     ])
 }
+
+#if os(iOS) || os(tvOS)
+/// Insets edges individually with UIEdgeInset.
+///
+/// - parameter edges:    The edges to inset.
+/// - parameter insets:   The amounts by which to inset all edges, in points via UIEdgeInsets.
+///
+/// - returns: A new expression with the inset edges.
+///
+public func inset(edges: Edges, _ insets: UIEdgeInsets) -> Expression<Edges> {
+    return inset(edges, insets.top, insets.left, insets.bottom, insets.right)
+}
+#endif
