@@ -99,20 +99,3 @@ let kRootViewControllerSwitched: String = "RootViewControllerSwitched"
 let kAppVersion: String = "AppVersion"
 /// 图片浏览器展示
 let kBrowserViewControllerShowed: String = "BrowserViewControllerShowed"
-
-// MARK: - Cell重用标识符
-
-/// 图片Cell重用标识符
-let kPictureReuseIdentifier: String = "PictureCell"
-/// 微博Cell重用标识符
-let kWeiboStatusReuseIdentifier: String = "WeiboStatusCell"
-/// 转发微博Cell重用标识符
-let kRetweetStatusReuseIdentifier: String = "RetweetStatusCell"
-/// 新特性Cell重用标识符
-let kNewFeatureReuseIdentifier: String = "NewFeatureCell"
-/// 图片浏览Cell重用标识符
-let kBrowserReuseIdentifier: String = "BrowserCell"
-/// 表情键盘Cell重用标识符
-let kEmoticonKeyboardReuseIdentifier: String = "EmoticonKeyboardCell"
-/// 照片选择Cell重用标识符
-let kPhotoPickerReuseIdentifier: String = "PhotoPickerCell"

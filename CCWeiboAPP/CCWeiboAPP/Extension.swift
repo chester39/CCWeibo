@@ -198,7 +198,7 @@ extension UITextView {
      */
     func insertEmoticon(emoticon: EmoticonModel) {
         
-        if let emojiString = emoticon.emoticonString {
+        if let emojiString = emoticon.emojiString {
             let range = selectedTextRange!
             replaceRange(range, withText: emojiString)
             

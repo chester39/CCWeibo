@@ -18,6 +18,10 @@ class HomeViewController: BaseViewController {
     private var isLastStatus = false
     /// 浏览视图转场管理器
     private lazy var browerPresentationManager: BrowserPresentationController = BrowserPresentationController()
+    /// 微博Cell重用标识符
+    private let weiboReuseIdentifier: String = "WeiboStatusCell"
+    /// 转发微博Cell重用标识符
+    private let retweetReuseIdentifier: String = "RetweetStatusCell"
     
     /// 刷新提醒标签
     private var tipLabel: UILabel = {
@@ -106,8 +110,8 @@ class HomeViewController: BaseViewController {
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: kWeiboStatusReuseIdentifier)
-        tableView.registerClass(RetweetStatusCell.self, forCellReuseIdentifier: kRetweetStatusReuseIdentifier)
+        tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: weiboReuseIdentifier)
+        tableView.registerClass(RetweetStatusCell.self, forCellReuseIdentifier: retweetReuseIdentifier)
         
         tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadWeiboStatus))
         tableView.mj_header.automaticallyChangeAlpha = true
@@ -301,7 +305,7 @@ extension HomeViewController {
         
         let viewModel = statusArray![indexPath.row]
         if viewModel.status.retweetedStatus != nil {
-            let cell = tableView.dequeueReusableCellWithIdentifier(kRetweetStatusReuseIdentifier, forIndexPath: indexPath) as! RetweetStatusCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(retweetReuseIdentifier, forIndexPath: indexPath) as! RetweetStatusCell
             cell.viewModel = statusArray![indexPath.row]
             if indexPath.row == (statusArray!.count - 1) {
                 isLastStatus = true
@@ -311,7 +315,7 @@ extension HomeViewController {
             return cell
             
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(kWeiboStatusReuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(weiboReuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
             cell.viewModel = statusArray![indexPath.row]
             if indexPath.row == (statusArray!.count - 1) {
                 isLastStatus = true

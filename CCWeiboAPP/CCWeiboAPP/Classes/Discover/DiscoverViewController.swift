@@ -16,7 +16,10 @@ class DiscoverViewController: BaseViewController {
     var statusArray: [StatusViewModel]?
     /// 浏览视图转场管理器
     private lazy var browerPresentationManager: BrowserPresentationController = BrowserPresentationController()
-    
+    /// 微博Cell重用标识符
+    private let weiboReuseIdentifier: String = "WeiboStatusCell"
+    /// 转发微博Cell重用标识符
+    private let retweetReuseIdentifier: String = "RetweetStatusCell"
     // MARK: - 系统方法
     
     /**
@@ -55,8 +58,8 @@ class DiscoverViewController: BaseViewController {
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: kWeiboStatusReuseIdentifier)
-        tableView.registerClass(RetweetStatusCell.self, forCellReuseIdentifier: kRetweetStatusReuseIdentifier)
+        tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: weiboReuseIdentifier)
+        tableView.registerClass(RetweetStatusCell.self, forCellReuseIdentifier: retweetReuseIdentifier)
         
         tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadWeiboStatus))
         tableView.mj_header.automaticallyChangeAlpha = true
@@ -172,13 +175,13 @@ extension DiscoverViewController {
         
         let viewModel = statusArray![indexPath.row]
         if viewModel.status.retweetedStatus != nil {
-            let cell = tableView.dequeueReusableCellWithIdentifier(kRetweetStatusReuseIdentifier, forIndexPath: indexPath) as! RetweetStatusCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(retweetReuseIdentifier, forIndexPath: indexPath) as! RetweetStatusCell
             cell.viewModel = statusArray![indexPath.row]
             
             return cell
             
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(kWeiboStatusReuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(weiboReuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
             cell.viewModel = statusArray![indexPath.row]
             
             return cell

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Robert Böhnke. All rights reserved.
 //
 
-#if os(iOS) || os(tvOS)
+#if os(iOS)
 import UIKit
 #else
 import AppKit
@@ -37,7 +37,7 @@ internal func closestCommonAncestor(a: View, b: View) -> View? {
 private func ancestors(v: View) -> AnySequence<View> {
     return AnySequence { () -> AnyGenerator<View> in
         var view: View? = v
-        return AnyGenerator {
+        return anyGenerator {
             let current = view
             view = view?.superview
             return current

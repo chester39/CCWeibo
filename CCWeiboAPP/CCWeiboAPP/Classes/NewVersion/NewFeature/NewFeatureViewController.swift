@@ -8,18 +8,18 @@ import UIKit
 
 import Cartography
 
-
 class NewFeatureController: UIViewController {
-    
+
     /// 最大新特性界面数
     private let maxNewFeatureCount = 4
-
+    /// Cell重用标识符
+    private let reuseIdentifier: String = "NewFeatureCell"
+    
     /// 新特性集合视图
     private lazy var newFeatureView: UICollectionView = {
         let collectionView = UICollectionView(frame: kScreenFrame, collectionViewLayout: PictureLayout())
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.registerClass(NewFeatureCell.self, forCellWithReuseIdentifier: kNewFeatureReuseIdentifier)
         
         return collectionView
     }()
@@ -53,6 +53,7 @@ class NewFeatureController: UIViewController {
      */
     private func setupUI() {
 
+        newFeatureView.registerClass(NewFeatureCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         view.addSubview(newFeatureView)
         
         pageControl.numberOfPages = maxNewFeatureCount
@@ -95,7 +96,7 @@ extension NewFeatureController: UICollectionViewDataSource {
      */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kNewFeatureReuseIdentifier, forIndexPath: indexPath) as! NewFeatureCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! NewFeatureCell
         cell.index = indexPath.item
         
         return cell

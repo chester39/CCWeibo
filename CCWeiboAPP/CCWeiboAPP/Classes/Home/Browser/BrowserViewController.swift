@@ -15,12 +15,13 @@ class BrowserViewController: UIViewController {
     var pictureURLArray: [NSURL]
     /// Cell索引
     var indexPath: NSIndexPath
+    /// Cell重用标识符
+    private let reuseIdentifier: String = "BrowserCell"
     
     /// 照片浏览视图
     private lazy var browserView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: PictureLayout())
         collectionView.dataSource = self
-        collectionView.registerClass(BrowserCell.self, forCellWithReuseIdentifier: kBrowserReuseIdentifier)
         
         return collectionView
     }()
@@ -96,6 +97,7 @@ class BrowserViewController: UIViewController {
      */
     private func setupUI() {
         
+        browserView.registerClass(BrowserCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         browserView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(browserView)
         
@@ -187,7 +189,7 @@ extension BrowserViewController: UICollectionViewDataSource {
      */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kBrowserReuseIdentifier, forIndexPath: indexPath) as! BrowserCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! BrowserCell
         cell.imageURL = pictureURLArray[indexPath.item]
         
         return cell

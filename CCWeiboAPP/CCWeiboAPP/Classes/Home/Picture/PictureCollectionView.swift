@@ -8,8 +8,11 @@ import UIKit
 
 import SDWebImage
 
-class PictureCollectionView: UICollectionView {
+/// Cell重用标识符
+private let reuseIdentifier: String = "PictureCell"
 
+class PictureCollectionView: UICollectionView {
+    
     /// 微博模型
     var viewModel: StatusViewModel? {
         didSet {
@@ -26,7 +29,7 @@ class PictureCollectionView: UICollectionView {
         
         super.init(frame: frame, collectionViewLayout: layout)
         
-        registerClass(PictureCell.self, forCellWithReuseIdentifier: kPictureReuseIdentifier)
+        registerClass(PictureCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         dataSource = self
         delegate = self
         
@@ -112,7 +115,7 @@ extension PictureCollectionView: UICollectionViewDataSource {
      */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kPictureReuseIdentifier, forIndexPath: indexPath) as! PictureCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PictureCell
         cell.url = viewModel!.thumbnailPictureArray![indexPath.item]
         
         return cell

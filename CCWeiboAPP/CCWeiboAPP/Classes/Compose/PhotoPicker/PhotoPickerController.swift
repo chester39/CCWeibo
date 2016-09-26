@@ -18,13 +18,15 @@ class PhotoPickerController: UIViewController {
     private var assetArray = [PHAsset]()
     /// 最大图片数
     private let maxPhotoCount = 9
+    /// Cell重用标识符
+    let reuseIdentifier: String = "PhotoPickerCell"
+    
     /// 照片集合视图
     private lazy var photoView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: PhotoPickerLayout())
         collectionView.backgroundColor = CommonLightColor
         collectionView.contentInset = UIEdgeInsets(top: kViewEdge, left: kViewEdge, bottom: kViewEdge, right: kViewEdge)
         collectionView.dataSource = self
-        collectionView.registerClass(PhotoPickerCell.self, forCellWithReuseIdentifier: kPhotoPickerReuseIdentifier)
         
         return collectionView
     }()
@@ -66,7 +68,8 @@ class PhotoPickerController: UIViewController {
      初始化界面方法
      */
     private func setupUI() {
-
+        
+        photoView.registerClass(PhotoPickerCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         photoView.backgroundColor = RetweetStatusBackgroundColor
         view.addSubview(photoView)
     }
@@ -106,7 +109,7 @@ extension PhotoPickerController: UICollectionViewDataSource {
      */
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kPhotoPickerReuseIdentifier, forIndexPath: indexPath) as! PhotoPickerCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PhotoPickerCell
         cell.delegate = self
         if indexPath.item < imageArray.count {
             cell.image = imageArray[indexPath.item]
