@@ -249,6 +249,38 @@ extension UITextView {
         
         return string
     }
+    
+}
+
+extension UIWindow {
+    
+    /**
+     判断是否浅色方法
+     */
+    class func isLightColor(string: String) -> Bool {
+        
+        let redString = (string as NSString).substringWithRange(NSRange(location: 1, length: 2))
+        let greenString = (string as NSString).substringWithRange(NSRange(location: 3, length: 2))
+        let blueString = (string as NSString).substringWithRange(NSRange(location: 5, length: 2))
+        
+        var scanner = NSScanner(string: redString)
+        var red: UInt32 = 0
+        var green: UInt32 = 0
+        var blue: UInt32 = 0
+        scanner.scanHexInt(&red)
+        scanner = NSScanner(string: greenString)
+        scanner.scanHexInt(&green)
+        scanner = NSScanner(string: blueString)
+        scanner.scanHexInt(&blue)
+        
+        if (red + blue + green) < 382 {
+            return false
+            
+        } else {
+            return true
+        }
+    }
+    
 }
 
 extension MBProgressHUD {
