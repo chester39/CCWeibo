@@ -176,6 +176,32 @@ extension UIColor {
     
 }
 
+extension UIImage {
+    
+    /**
+     图片染色方法
+     */
+    func tintImageWithColor(color: UIColor, alpha: CGFloat) -> UIImage {
+        
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContextWithOptions(rect.size, true, scale)
+        let context = UIGraphicsGetCurrentContext()
+        drawInRect(rect)
+        
+        CGContextSetFillColorWithColor(context, color.CGColor)
+        CGContextSetAlpha(context, alpha)
+        CGContextSetBlendMode(context, .SourceAtop)
+        CGContextFillRect(context, rect)
+        
+        let imageRef = CGBitmapContextCreateImage(context)!
+        let newImage = UIImage(CGImage: imageRef, scale: scale, orientation: imageOrientation)
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
+}
+
 extension UILabel {
     
     /**
