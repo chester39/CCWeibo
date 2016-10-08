@@ -38,6 +38,7 @@ class ProfileViewController: BaseViewController {
             return
         }
         
+        setupNavigation()
         setupTableView()
     }
     
@@ -60,8 +61,8 @@ class ProfileViewController: BaseViewController {
     private func setupTableView() {
         
         tableView = UITableView(frame: kScreenFrame, style: .Grouped)
+        tableView.sectionHeaderHeight = kViewEdge
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: profileReuseIdentifier)
-        
     }
 
 }
@@ -92,6 +93,7 @@ extension ProfileViewController {
         
         let cell = UITableViewCell(style: .Value1, reuseIdentifier: profileReuseIdentifier)
         cell.accessoryType = .DisclosureIndicator
+        
         let group = profileArray[indexPath.section]
         let profile = group.detail[indexPath.row]
         cell.textLabel?.text = profile.title
@@ -103,6 +105,27 @@ extension ProfileViewController {
         cell.detailTextLabel?.font = UIFont.systemFontOfSize(12)
         
         return cell
+    }
+    
+}
+
+extension ProfileViewController {
+    
+    /**
+     选中行方法
+     */
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let group = profileArray[indexPath.section]
+        let profile = group.detail[indexPath.row]
+        
+        let message = "测试使用"
+        let alertVC = UIAlertController(title: profile.title, message: message, preferredStyle: .Alert)
+        let cancelButton = UIAlertAction.init(title: "确定", style: .Cancel) { (action) in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        alertVC.addAction(cancelButton)
+        presentViewController(alertVC, animated: true, completion: nil)
     }
     
 }
