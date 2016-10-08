@@ -32,19 +32,33 @@ class WeiboStatusCell: BaseStatusCell {
             
             contentLabel.attributedText = EmoticonManager.emoticonMutableAttributedString(viewModel?.status.text ?? "", font: contentLabel.font)
             contentLabel.handleURLTap { (url) in
-                UIApplication.sharedApplication().openURL(url)
+                if let tempDelegate = self.delegate {
+                    tempDelegate.statusCellDidShowWebViewWithURL(self, url: url)
+                }
             }
             
             if viewModel?.status.repostsCount != 0 {
-                retweetButton.setTitle("\(viewModel!.status.repostsCount)", forState: .Normal)
+                guard let count = viewModel?.status.repostsCount else {
+                    return
+                }
+                
+                retweetButton.setTitle("\(count)", forState: .Normal)
             }
             
             if viewModel?.status.commentsCount != 0 {
-                commentButton.setTitle("\(viewModel!.status.commentsCount)", forState: .Normal)
+                guard let count = viewModel?.status.commentsCount else {
+                    return
+                }
+                
+                commentButton.setTitle("\(count)", forState: .Normal)
             }
             
             if viewModel?.status.attitudesCount != 0 {
-                likeButton.setTitle("\(viewModel!.status.attitudesCount)", forState: .Normal)
+                guard let count = viewModel?.status.attitudesCount else {
+                    return
+                }
+                
+                likeButton.setTitle("\(count)", forState: .Normal)
             }
             
             pictureView.viewModel = viewModel

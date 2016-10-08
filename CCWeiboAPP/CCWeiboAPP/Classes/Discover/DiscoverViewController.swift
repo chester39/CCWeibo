@@ -20,6 +20,7 @@ class DiscoverViewController: BaseViewController {
     private let weiboReuseIdentifier: String = "WeiboStatusCell"
     /// 转发微博Cell重用标识符
     private let retweetReuseIdentifier: String = "RetweetStatusCell"
+    
     // MARK: - 系统方法
     
     /**
@@ -55,7 +56,7 @@ class DiscoverViewController: BaseViewController {
      */
     private func setupTableView() {
         
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.separatorStyle = .None
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: weiboReuseIdentifier)
@@ -177,15 +178,30 @@ extension DiscoverViewController {
         if viewModel.status.retweetedStatus != nil {
             let cell = tableView.dequeueReusableCellWithIdentifier(retweetReuseIdentifier, forIndexPath: indexPath) as! RetweetStatusCell
             cell.viewModel = statusArray![indexPath.row]
+            cell.delegate = self
             
             return cell
             
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(weiboReuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
             cell.viewModel = statusArray![indexPath.row]
-            
+            cell.delegate = self
+
             return cell
         }
+    }
+    
+}
+
+extension DiscoverViewController: BaseStatusCellDelegate {
+    
+    /**
+     由URL显示网页视图方法
+     */
+    func statusCellDidShowWebViewWithURL(cell: BaseStatusCell, url: NSURL) {
+        
+        let webVC = WebViewController(url: url)
+        self.navigationController?.pushViewController(webVC, animated: false)
     }
     
 }

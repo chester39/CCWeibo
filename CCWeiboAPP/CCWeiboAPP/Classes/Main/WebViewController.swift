@@ -1,7 +1,7 @@
 //
-//	OAuthViewController.swift
+//  WebViewController.swift
 //		CCWeiboAPP
-//		Chen Chen @ August 18th, 2016
+//		Chen Chen @ October 8th, 2016
 //
 
 import UIKit
@@ -9,10 +9,13 @@ import WebKit
 
 import Cartography
 
-class OAuthViewController: UIViewController {
+class WebViewController: UIViewController {
     
-    /// 授权网页视图
-    private lazy var oauthView: WKWebView = {
+    /// 网页URL
+    private var url: NSURL?
+    
+    /// 网页视图
+    private lazy var webView: WKWebView = {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
         configuration.suppressesIncrementalRendering = true
@@ -28,8 +31,8 @@ class OAuthViewController: UIViewController {
         return webView
     }()
     
-    /// 网页进度条
-    private lazy var oauthProgressView: UIProgressView = {
+    /// 进度条
+    private lazy var webProgressView: UIProgressView = {
         let progress = UIProgressView(progressViewStyle: .Default)
         progress.frame = CGRect(x: 0, y: kAvailableHeight, width: kScreenWidth, height: 2)
         progress.trackTintColor = ClearColor
@@ -37,6 +40,33 @@ class OAuthViewController: UIViewController {
         
         return progress
     }()
+    
+    // MARK: - 初始化方法
+    
+    /**
+     网页URL初始化方法
+     */
+    init(url: NSURL?) {
+        
+        super.init(nibName: nil, bundle: nil)
+        self.url = url
+    }
+    
+    /**
+     数据解码XIB初始化方法
+     */
+    required init?(coder aDecoder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    /**
+     反初始化方法
+     */
+    deinit {
+        
+        webView.removeObserver(self, forKeyPath: "estimatedProgress")
+    }
     
     // MARK: - 系统方法
     
@@ -48,7 +78,9 @@ class OAuthViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        NetworkingUtil.sharedInstance.loadRequestToken(oauthView)
+        
+        let request = NSURLRequest(URL: url!)
+        webView.loadRequest(request)
     }
     
     /**
@@ -56,15 +88,15 @@ class OAuthViewController: UIViewController {
      */
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
-        if object as? NSObject == oauthView && keyPath! == "estimatedProgress" {
+        if object as? NSObject == webView && keyPath! == "estimatedProgress" {
             let new: Float = change![NSKeyValueChangeNewKey] as! Float
             if new == 1.0 {
-                oauthProgressView.hidden = true
-                oauthProgressView.setProgress(0.0, animated: false)
+                webProgressView.hidden = true
+                webProgressView.setProgress(0.0, animated: false)
                 
             } else {
-                oauthProgressView.hidden = false
-                oauthProgressView.setProgress(new, animated: true)
+                webProgressView.hidden = false
+                webProgressView.setProgress(new, animated: true)
             }
         }
     }
@@ -79,10 +111,10 @@ class OAuthViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(20), NSForegroundColorAttributeName: MainColor]
         navigationItem.title = ""
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "填充", style: .Plain, target: self, action: #selector(fillButtonDidClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "刷新", style: .Plain, target: self, action: #selector(refreshButtonDidClick))
         
-        view.addSubview(oauthView)
-        view.addSubview(oauthProgressView)
+        view.addSubview(webView)
+        view.addSubview(webProgressView)
     }
     
     // MARK: - 按钮方法
@@ -92,28 +124,27 @@ class OAuthViewController: UIViewController {
      */
     func closeButtonDidClick() {
         
-        NSNotificationCenter.defaultCenter().postNotificationName(kRootViewControllerSwitched, object: true)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     /**
-     填充按钮点击方法
+     刷新按钮点击方法
      */
-    func fillButtonDidClick() {
+    func refreshButtonDidClick() {
         
-        let jsString = "document.getElementById('userId').value = 'c910309c@sina.com';"
-        oauthView.evaluateJavaScript(jsString, completionHandler: nil)
+        webView.reload()
     }
     
 }
 
-extension OAuthViewController: WKNavigationDelegate {
-
+extension WebViewController: WKNavigationDelegate {
+    
     /**
      网页开始加载方法
      */
     func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         
-        oauthProgressView.hidden = false
+        webProgressView.hidden = false
     }
     
     /**

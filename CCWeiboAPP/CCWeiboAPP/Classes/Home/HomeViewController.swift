@@ -107,7 +107,7 @@ class HomeViewController: BaseViewController {
      */
     private func setupTableView() {
         
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.separatorStyle = .None
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: weiboReuseIdentifier)
@@ -307,6 +307,7 @@ extension HomeViewController {
         if viewModel.status.retweetedStatus != nil {
             let cell = tableView.dequeueReusableCellWithIdentifier(retweetReuseIdentifier, forIndexPath: indexPath) as! RetweetStatusCell
             cell.viewModel = statusArray![indexPath.row]
+            cell.delegate = self
             if indexPath.row == (statusArray!.count - 1) {
                 isLastStatus = true
                 loadWeiboStatus()
@@ -317,6 +318,7 @@ extension HomeViewController {
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(weiboReuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
             cell.viewModel = statusArray![indexPath.row]
+            cell.delegate = self
             if indexPath.row == (statusArray!.count - 1) {
                 isLastStatus = true
                 loadWeiboStatus()
@@ -324,6 +326,19 @@ extension HomeViewController {
             
             return cell
         }
+    }
+    
+}
+
+extension HomeViewController: BaseStatusCellDelegate {
+    
+    /**
+     由URL显示网页视图方法
+     */
+    func statusCellDidShowWebViewWithURL(cell: BaseStatusCell, url: NSURL) {
+        
+        let webVC = WebViewController(url: url)
+        self.navigationController?.pushViewController(webVC, animated: false)
     }
     
 }

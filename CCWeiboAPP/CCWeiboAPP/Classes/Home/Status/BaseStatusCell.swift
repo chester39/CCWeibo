@@ -10,6 +10,16 @@ import ActiveLabel
 import Cartography
 import SDWebImage
 
+
+protocol BaseStatusCellDelegate: NSObjectProtocol {
+    
+    /**
+     由URL显示网页视图方法
+     */
+    func statusCellDidShowWebViewWithURL(cell: BaseStatusCell, url: NSURL)
+    
+}
+
 class BaseStatusCell: UITableViewCell {
 
     /// 头像图片视图
@@ -34,6 +44,8 @@ class BaseStatusCell: UITableViewCell {
     var commentButton = UIButton(imageName: "timeline_icon_comment", backgroundImageName: "timeline_card_bottom_background")
     /// 点赞按钮
     var likeButton = UIButton(imageName: "timeline_icon_unlike", backgroundImageName: "timeline_card_bottom_background")
+    /// BaseStatusCellDelegate代理
+    weak var delegate: BaseStatusCellDelegate?
     
     /// 集合布局
     lazy var flowLayout: UICollectionViewFlowLayout = {
