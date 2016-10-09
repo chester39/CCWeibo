@@ -30,6 +30,8 @@ let RetweetStatusBackgroundColor = UIColor(hex: 0xE5E5E5)
 let RetweetUserTextColor = UIColor(hex: 0x3F6380)
 /// 底部栏文字颜色: Dark Gray
 let StatusTabBarTextColor = UIColor.darkGrayColor()
+/// 分割线颜色: F6F6F6
+let DivideLineColor = UIColor(hex: 0xF6F6F6)
 /// 二维码边缘颜色: Green
 let QRCodeBorderColor = UIColor.greenColor()
 /// 进度条背景颜色: 0.9 White

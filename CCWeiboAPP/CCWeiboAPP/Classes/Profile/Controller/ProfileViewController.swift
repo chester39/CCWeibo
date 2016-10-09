@@ -6,17 +6,14 @@
 
 import UIKit
 
+import SDWebImage
+
 class ProfileViewController: BaseViewController {
     
     /// 个人Cell重用标识符
     private let profileReuseIdentifier: String = "ProfileStatusCell"
     /// 个人信息视图
-    private var personView: PersonView = {
-        let view = PersonView((frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewStandard)))
-        view.backgroundColor = CommonLightColor
-        
-        return view
-    }()
+    private var personView = PersonView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewStandard))
     
     /// 个人资料数组
     private lazy var profileArray: [ProfileGroup] = {
@@ -46,7 +43,7 @@ class ProfileViewController: BaseViewController {
         }
         
         setupNavigation()
-        setupTableView()
+        setupUI()
     }
     
     // MARK: - 界面方法
@@ -65,7 +62,23 @@ class ProfileViewController: BaseViewController {
     /**
      初始化表格视图方法
      */
-    private func setupTableView() {
+    private func setupUI() {
+        
+        assert(UserAccount.loadUserAccount() != nil, "必须授权之后才能使用用户数据")
+        guard let user = UserAccount.loadUserAccount() else {
+            return
+        }
+        
+        personView.backgroundColor = CommonLightColor
+        personView.iconView.sd_setImageWithURL(NSURL(string: user.avatarLarge!))
+        personView.nameLabel.text = user.screenName!
+        personView.statusesView.titleLabel.text = String(user.statusesCount)
+        personView.friendsView.titleLabel.text = String(user.friendsCount)
+        personView.followersView.titleLabel.text = String(user.followersCount)
+        
+        let intro = user.descriptionIntro!
+        let text = (intro == "" ? "暂无介绍" : intro)
+        personView.introLabel.text = "简介：\(text)"
         
         tableView = UITableView(frame: kScreenFrame, style: .Grouped)
         tableView.tableHeaderView = personView

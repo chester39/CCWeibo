@@ -194,6 +194,10 @@ class UserAccount: NSObject {
             let json = JSON(data: data)
             self.avatarLarge = json[kAvatarLarge].string
             self.screenName = json[kScreenName].string
+            self.descriptionIntro = json[kDescription].string
+            self.followersCount = json[kFollowersCount].int!
+            self.friendsCount = json[kFriendsCount].int!
+            self.statusesCount = json[kStatusesCount].int!
             
             finished(account: self, error: nil)
         }

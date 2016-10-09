@@ -161,23 +161,7 @@ extension WebViewController: WKNavigationDelegate {
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         
         print(navigationAction.request)
-        
-        guard let urlString = navigationAction.request.URL?.absoluteString else {
-            return
-        }
-        
-        if urlString.hasPrefix(kWeiboRedirectUri) == false {
-            decisionHandler(WKNavigationActionPolicy.Allow)
-        }
-        
-        let key = "code="
-        if urlString.containsString(key) {
-            let code = navigationAction.request.URL?.query?.substringFromIndex(key.endIndex)
-            NetworkingUtil.sharedInstance.loadAccessToken(code)
-            decisionHandler(WKNavigationActionPolicy.Cancel)
-        }
-        
-        decisionHandler(WKNavigationActionPolicy.Cancel)
+        decisionHandler(WKNavigationActionPolicy.Allow)
     }
     
 }

@@ -11,21 +11,21 @@ import Cartography
 class PersonView: UIView {
     
     /// 头像图片视图
-    private var iconView = UIImageView()
+    var iconView = UIImageView()
     /// 昵称标签
-    private var nameLabel = UILabel(text: "", fontSize: 15, lines: 1)
+    var nameLabel = UILabel(text: "", fontSize: 15, lines: 1)
     /// 简介标签
-    private var introLabel = UILabel(text: "", fontSize: 12, lines: 1)
+    var introLabel = UILabel(text: "", fontSize: 12, lines: 1)
     /// 会员按钮
     private var vipButton = UIButton(type: .Custom)
-    /// 底部视图
-    private var footerView = UIView()
+    /// 分割线
+    private var divideLine = UIView()
     /// 微博数视图
-    private var statusesView = TitleView(frame: CGRectZero)
+    var statusesView = TitleView(frame: CGRectZero)
     /// 关注数视图
-    private var friendsView = TitleView(frame: CGRectZero)
+    var friendsView = TitleView(frame: CGRectZero)
     /// 粉丝数视图
-    private var followersView = TitleView(frame: CGRectZero)
+    var followersView = TitleView(frame: CGRectZero)
     
     // MARK: - 初始化方法
     
@@ -54,24 +54,14 @@ class PersonView: UIView {
      初始化界面方法
      */
     private func setupUI() {
-        
-        assert(UserAccount.loadUserAccount() != nil, "必须授权之后才能使用用户数据")
-        guard let user = UserAccount.loadUserAccount() else {
-            return
-        }
 
         iconView.layer.cornerRadius = 20.0
         iconView.clipsToBounds = true
-        iconView.sd_setImageWithURL(NSURL(string: user.avatarLarge!))
         addSubview(iconView)
-
-        nameLabel.text = user.screenName!
+        
         addSubview(nameLabel)
         
-        let intro = user.descriptionIntro!
-        let text = (intro == "" ? "暂无介绍" : intro)
         introLabel.textColor = AuxiliaryTextColor
-        introLabel.text = "简介：\(text)"
         addSubview(introLabel)
         
         vipButton.setImage(UIImage(named: "common_icon_membership"), forState: .Normal)
@@ -80,25 +70,21 @@ class PersonView: UIView {
         vipButton.titleLabel?.font = UIFont.systemFontOfSize(14)
         vipButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
         addSubview(vipButton)
-
-        footerView.layer.borderWidth = 1.0
-        footerView.layer.borderColor = AuxiliaryTextColor.CGColor
-        addSubview(footerView)
         
-        statusesView.titleLabel.text = String(user.statusesCount)
+        divideLine.backgroundColor = DivideLineColor
+        addSubview(divideLine)
+        
         statusesView.subtitleLabel.text = "微博"
         statusesView.subtitleLabel.textColor = AuxiliaryTextColor
-        footerView.addSubview(statusesView)
+        addSubview(statusesView)
         
-        friendsView.titleLabel.text = String(user.friendsCount)
         friendsView.subtitleLabel.text = "关注"
         friendsView.subtitleLabel.textColor = AuxiliaryTextColor
-        footerView.addSubview(friendsView)
+        addSubview(friendsView)
         
-        followersView.titleLabel.text = String(user.followersCount)
         followersView.subtitleLabel.text = "微博"
         followersView.subtitleLabel.textColor = AuxiliaryTextColor
-        footerView.addSubview(followersView)
+        addSubview(followersView)
     }
     
     /**
@@ -126,26 +112,28 @@ class PersonView: UIView {
             vipButton.right == vipButton.superview!.right - kViewPadding
         }
         
-        constrain(footerView, iconView) { (footerView, iconView) in
-            footerView.top == iconView.bottom + kViewPadding
-            footerView.left == footerView.superview!.left
-            footerView.bottom == footerView.superview!.bottom
-            footerView.right == footerView.superview!.right
+        constrain(divideLine, iconView) { (divideLine, iconView) in
+            divideLine.height == 1
+            divideLine.top == iconView.bottom + kViewEdge
+            divideLine.left == divideLine.superview!.left + kViewEdge
+            divideLine.right == divideLine.superview!.right - kViewEdge
         }
         
         constrain(statusesView, friendsView, followersView) { (statusesView, friendsView, followersView) in
-            statusesView.left == statusesView.superview!.left
-            followersView.right == followersView.superview!.right
-            
             statusesView.width == friendsView.width
             friendsView.width == followersView.width
             
-            statusesView.height == 50
+            statusesView.height == 40
             friendsView.height == statusesView.height
             followersView.height == statusesView.height
             
-            align(top: statusesView, friendsView, followersView, statusesView.superview!)
-            align(bottom: statusesView, friendsView, followersView, statusesView.superview!)
+            statusesView.left == statusesView.superview!.left
+            followersView.right == followersView.superview!.right
+            
+            statusesView.bottom == statusesView.superview!.bottom
+            friendsView.bottom == statusesView.superview!.bottom
+            followersView.bottom == followersView.superview!.bottom
+
             distribute(by: 0, leftToRight: statusesView, friendsView, followersView)
         }
     }
