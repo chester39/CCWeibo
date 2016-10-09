@@ -13,9 +13,9 @@ class WelcomeView: UIView {
     /// 背景图片视图
     private var backgroundView = UIImageView()
     /// 头像图片视图
-    var avatarView = UIImageView()
+    private var avatarView = UIImageView()
     /// 标题标签
-    var textLabel = UILabel(text: "", fontSize: 20, lines: 0)
+    private var textLabel = UILabel(text: "", fontSize: 20, lines: 0)
     /// 变化约束组
     private var group = ConstraintGroup()
     
@@ -51,21 +51,16 @@ class WelcomeView: UIView {
         addSubview(backgroundView)
         
         assert(UserAccount.loadUserAccount() != nil, "必须授权之后才能显示欢迎界面")
+        guard let user = UserAccount.loadUserAccount() else {
+            return
+        }
         
-        avatarView.layer.cornerRadius = 45
+        avatarView.layer.cornerRadius = 45.0
         avatarView.clipsToBounds = true
-        guard let url = NSURL(string: UserAccount.loadUserAccount()!.avatarLarge!) else {
-            return
-        }
-        
-        avatarView.sd_setImageWithURL(url)
+        avatarView.sd_setImageWithURL(NSURL(string: user.avatarLarge!))
         addSubview(avatarView)
-        
-        guard let userName = UserAccount.loadUserAccount()!.screenName else {
-            return
-        }
-        
-        textLabel.text = "欢迎回来, \(userName)"
+
+        textLabel.text = "欢迎回来, \(user.screenName!)"
         textLabel.textAlignment = .Center
         textLabel.alpha = 0.0
         addSubview(textLabel)

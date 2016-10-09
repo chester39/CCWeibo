@@ -11,9 +11,9 @@ import Cartography
 class TitleView: UIView {
     
     /// 标题标签
-    private var titleLabel = UILabel(text: "发送微博", fontSize: 18, lines: 1)
+    var titleLabel = UILabel(text: "", fontSize: 18, lines: 1)
     /// 副标题标签
-    private var subtitleLabel = UILabel(text: "", fontSize: 14, lines: 1)
+    var subtitleLabel = UILabel(text: "", fontSize: 14, lines: 1)
     
     // MARK: - 初始化方法
     
@@ -46,12 +46,6 @@ class TitleView: UIView {
         titleLabel.textAlignment = .Center
         addSubview(titleLabel)
         
-        guard let userName = UserAccount.loadUserAccount()!.screenName else {
-            return
-        }
-        
-        subtitleLabel.text = userName
-        subtitleLabel.textColor = MainColor
         subtitleLabel.textAlignment = .Center
         addSubview(subtitleLabel)
         

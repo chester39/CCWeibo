@@ -10,6 +10,13 @@ class ProfileViewController: BaseViewController {
     
     /// 个人Cell重用标识符
     private let profileReuseIdentifier: String = "ProfileStatusCell"
+    /// 个人信息视图
+    private var personView: PersonView = {
+        let view = PersonView((frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewStandard)))
+        view.backgroundColor = CommonLightColor
+        
+        return view
+    }()
     
     /// 个人资料数组
     private lazy var profileArray: [ProfileGroup] = {
@@ -61,7 +68,8 @@ class ProfileViewController: BaseViewController {
     private func setupTableView() {
         
         tableView = UITableView(frame: kScreenFrame, style: .Grouped)
-        tableView.sectionHeaderHeight = kViewEdge
+        tableView.tableHeaderView = personView
+        tableView.sectionFooterHeight = kViewEdge
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: profileReuseIdentifier)
     }
 
@@ -128,4 +136,12 @@ extension ProfileViewController {
         presentViewController(alertVC, animated: true, completion: nil)
     }
     
+    /**
+     头部区域高度方法
+     */
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return kViewEdge
+    }
+
 }

@@ -11,8 +11,6 @@ import MBProgressHUD
 
 class ComposeViewController: UIViewController {
 
-    /// 标题视图
-    private var titleView = TitleView(frame: CGRect(x: 0, y: 0, width: kViewStandard, height: kNavigationBarHeight))
     /// 复合文本视图
     private var statusView = PlaceholderTextView()
     /// 键盘工具条
@@ -30,6 +28,18 @@ class ComposeViewController: UIViewController {
     /// 最大微博字数
     private let maxStatusCount = 140
 
+    /// 标题视图
+    private var titleView: TitleView = {
+        let view = TitleView(frame: CGRect(x: 0, y: 0, width: kViewStandard, height: kNavigationBarHeight))
+        view.titleLabel.text = "发送微博"
+        if let userName = UserAccount.loadUserAccount()!.screenName {
+            view.subtitleLabel.text = userName
+            view.subtitleLabel.textColor = MainColor
+        }
+        
+        return view
+    }()
+    
     /// 表情键盘控制器
     private lazy var emoticonKeyboardVC: EmoticonKeyboardController = EmoticonKeyboardController { [unowned self] (emoticon) in
         self.statusView.insertEmoticon(emoticon)

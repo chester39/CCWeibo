@@ -62,6 +62,14 @@ let kExpiresDate: String = "expires_date"
 let kScreenName: String = "screen_name"
 /// 用户头像地址
 let kAvatarLarge: String = "avatar_large"
+/// 用户简介
+let kDescription: String = "description"
+/// 用户粉丝数
+let kFollowersCount: String = "followers_count"
+/// 用户关注数
+let kFriendsCount: String = "friends_count"
+/// 用户微博数
+let kStatusesCount: String = "statuses_count"
 /// 微博通用ID
 let kWeiboID: String = "id"
 /// 用户认证类型

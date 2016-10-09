@@ -13,14 +13,6 @@ class UserAccount: NSObject {
     
     /// 授权使用令牌
     var accessToken: String?
-    
-    /// 授权生命周期
-    var expiresIn: Int = 0 {
-        didSet {
-            expiresDate = NSDate(timeIntervalSinceNow: NSTimeInterval(expiresIn))
-        }
-    }
-    
     /// 授权用户ID
     var uid: String?
     /// 授权过期具体时间
@@ -33,6 +25,21 @@ class UserAccount: NSObject {
     static var userAccount: UserAccount?
     /// 归档文件路径
     static let filePath: String = kUserAccountFileName.acquireCachesDirectory()
+    /// 用户简介
+    var descriptionIntro: String?
+    /// 用户粉丝数
+    var followersCount: Int = 0
+    /// 用户关注数
+    var friendsCount: Int = 0
+    /// 用户微博数
+    var statusesCount: Int = 0
+    
+    /// 授权生命周期
+    var expiresIn: Int = 0 {
+        didSet {
+            expiresDate = NSDate(timeIntervalSinceNow: NSTimeInterval(expiresIn))
+        }
+    }
     
     // MARK: - 初始化方法
     
@@ -72,6 +79,18 @@ class UserAccount: NSObject {
         case kExpiresDate:
             expiresDate = value as? NSDate
             
+        case kDescription:
+            descriptionIntro = value as? String
+            
+        case kFollowersCount:
+            followersCount = value as! Int
+            
+        case kFriendsCount:
+            friendsCount = value as! Int
+            
+        case kStatusesCount:
+            statusesCount = value as! Int
+            
         default:
             break
         }
@@ -90,6 +109,10 @@ class UserAccount: NSObject {
         aCoder.encodeObject(expiresDate, forKey: kExpiresDate)
         aCoder.encodeObject(avatarLarge, forKey: kAvatarLarge)
         aCoder.encodeObject(screenName, forKey: kScreenName)
+        aCoder.encodeObject(descriptionIntro, forKey: kDescription)
+        aCoder.encodeInteger(followersCount, forKey: kFollowersCount)
+        aCoder.encodeInteger(friendsCount, forKey: kFriendsCount)
+        aCoder.encodeInteger(statusesCount, forKey: kStatusesCount)
     }
     
     /**
@@ -103,6 +126,10 @@ class UserAccount: NSObject {
         expiresDate = aDecoder.decodeObjectForKey(kExpiresDate) as? NSDate
         avatarLarge = aDecoder.decodeObjectForKey(kAvatarLarge) as? String
         screenName = aDecoder.decodeObjectForKey(kScreenName) as? String
+        descriptionIntro = aDecoder.decodeObjectForKey(kDescription) as? String
+        followersCount = aDecoder.decodeIntegerForKey(kFollowersCount) as Int
+        friendsCount = aDecoder.decodeIntegerForKey(kFriendsCount) as Int
+        statusesCount = aDecoder.decodeIntegerForKey(kStatusesCount) as Int
     }
     
     // MARK: - 归档方法
