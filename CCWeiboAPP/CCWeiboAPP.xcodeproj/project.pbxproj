@@ -48,6 +48,7 @@
 		25CBB6021DA8C95F006F34E4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CBB6011DA8C95F006F34E4 /* WebViewController.swift */; };
 		25CBB6061DA8F446006F34E4 /* WeiboProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25CBB6051DA8F446006F34E4 /* WeiboProfile.plist */; };
 		25D360071D655BF8004A45AA /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D360061D655BF8004A45AA /* OAuthViewController.swift */; };
+		25F414211DAB997000E6FE0B /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F414201DAB997000E6FE0B /* ThemeButton.swift */; };
 		25FF791D1D79524E0098F064 /* PictureCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF791C1D79524E0098F064 /* PictureCollectionView.swift */; };
 		25FF79231D7977F20098F064 /* PictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF79221D7977F20098F064 /* PictureCell.swift */; };
 		867D5D351D8D325200B5A41F /* PhotoPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867D5D341D8D325200B5A41F /* PhotoPickerController.swift */; };
@@ -112,6 +113,7 @@
 		25CBB6051DA8F446006F34E4 /* WeiboProfile.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WeiboProfile.plist; sourceTree = "<group>"; };
 		25D360061D655BF8004A45AA /* OAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 		25D360091D66A6EB004A45AA /* CCWeiboAPP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CCWeiboAPP-Bridging-Header.h"; sourceTree = "<group>"; };
+		25F414201DAB997000E6FE0B /* ThemeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
 		25FF791C1D79524E0098F064 /* PictureCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureCollectionView.swift; sourceTree = "<group>"; };
 		25FF79221D7977F20098F064 /* PictureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureCell.swift; sourceTree = "<group>"; };
 		867D5D341D8D325200B5A41F /* PhotoPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerController.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				86D700551D411C73003C65D7 /* DiscoverViewController.swift */,
+				25F414201DAB997000E6FE0B /* ThemeButton.swift */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				250622831D5C0E9C000B542B /* PopoverPresentationManager.swift in Sources */,
 				86C656921D7C187600BEDB17 /* WeiboStatusCell.swift in Sources */,
 				86E15E891D47AE810006CCC4 /* BaseViewController.swift in Sources */,
+				25F414211DAB997000E6FE0B /* ThemeButton.swift in Sources */,
 				259C62F41D6D7BE100884257 /* WelcomeView.swift in Sources */,
 				25A033491D76DD8F00152FE5 /* UserModel.swift in Sources */,
 				25A033501D76DDCA00152FE5 /* TitleButton.swift in Sources */,

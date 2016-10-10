@@ -28,7 +28,7 @@ class TitleButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - 覆盖方法
+    // MARK: - 基本方法
     
     /**
      设置标题方法

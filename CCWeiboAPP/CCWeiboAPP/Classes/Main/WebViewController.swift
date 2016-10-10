@@ -156,7 +156,7 @@ extension WebViewController: WKNavigationDelegate {
     }
     
     /**
-     收到响应后跳转与否方法
+     收到响应后跳转方法
      */
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         

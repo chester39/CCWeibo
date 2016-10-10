@@ -13,7 +13,7 @@ class NewFeatureController: UIViewController {
     /// 最大新特性界面数
     private let maxNewFeatureCount = 4
     /// Cell重用标识符
-    private let reuseIdentifier: String = "NewFeatureCell"
+    private let reuseIdentifier = "NewFeatureCell"
     
     /// 新特性集合视图
     private lazy var newFeatureView: UICollectionView = {

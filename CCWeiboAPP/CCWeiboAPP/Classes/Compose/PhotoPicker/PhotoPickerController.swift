@@ -19,7 +19,7 @@ class PhotoPickerController: UIViewController {
     /// 最大图片数
     private let maxPhotoCount = 9
     /// Cell重用标识符
-    let reuseIdentifier: String = "PhotoPickerCell"
+    let reuseIdentifier = "PhotoPickerCell"
     
     /// 照片集合视图
     private lazy var photoView: UICollectionView = {

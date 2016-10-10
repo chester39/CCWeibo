@@ -17,7 +17,7 @@ class EmoticonKeyboardController: UIViewController {
     /// 选中按钮
     private lazy var selectedButton = UIButton(type: .Custom)
     /// Cell重用标识符
-    private let reuseIdentifier: String = "EmoticonKeyboardCell"
+    private let reuseIdentifier = "EmoticonKeyboardCell"
     
     /// 表情组工具栏
     private lazy var emoticonBar: UIToolbar = {

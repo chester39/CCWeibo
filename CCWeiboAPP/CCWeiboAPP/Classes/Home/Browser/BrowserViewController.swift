@@ -16,7 +16,7 @@ class BrowserViewController: UIViewController {
     /// Cell索引
     var indexPath: NSIndexPath
     /// Cell重用标识符
-    private let reuseIdentifier: String = "BrowserCell"
+    private let reuseIdentifier = "BrowserCell"
     
     /// 照片浏览视图
     private lazy var browserView: UICollectionView = {

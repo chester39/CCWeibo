@@ -15,12 +15,17 @@ class DiscoverViewController: BaseViewController {
     /// 微博数组
     var statusArray: [StatusViewModel]?
     /// 浏览视图转场管理器
-    private lazy var browerPresentationManager: BrowserPresentationController = BrowserPresentationController()
+    private var browerPresentationManager = BrowserPresentationController()
+    /// 搜索控制器
+    private var searchVC = UISearchController()
+    /// 搜索结果数组
+    private var resultArray: [[String: AnyObject]]?
     /// 微博Cell重用标识符
-    private let weiboReuseIdentifier: String = "WeiboStatusCell"
+    private let weiboReuseIdentifier = "WeiboStatusCell"
     /// 转发微博Cell重用标识符
-    private let retweetReuseIdentifier: String = "RetweetStatusCell"
-    
+    private let retweetReuseIdentifier = "RetweetStatusCell"
+    /// 搜索结果Cell重用标识符
+    private let resultReuseIdentifier = "ResultCell"
     // MARK: - 系统方法
     
     /**
@@ -35,7 +40,7 @@ class DiscoverViewController: BaseViewController {
             return
         }
         
-        setupTableView()
+        setupUI()
         loadWeiboStatus()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(pictureCellDidClick(_:)), name: kBrowserViewControllerShowed, object: nil)
@@ -54,13 +59,24 @@ class DiscoverViewController: BaseViewController {
     /**
      初始化表格视图方法
      */
-    private func setupTableView() {
+    private func setupUI() {
+        
+        searchVC = UISearchController(searchResultsController: nil)
+        searchVC.dimsBackgroundDuringPresentation = false
+        searchVC.hidesNavigationBarDuringPresentation = false
+        searchVC.definesPresentationContext = true
+        searchVC.searchBar.searchBarStyle = .Minimal
+        searchVC.searchBar.placeholder = "请输入搜索内容"
+        searchVC.searchBar.sizeToFit()
+        searchVC.searchResultsUpdater = self
+        navigationItem.titleView = searchVC.searchBar
         
         tableView.separatorStyle = .None
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: weiboReuseIdentifier)
         tableView.registerClass(RetweetStatusCell.self, forCellReuseIdentifier: retweetReuseIdentifier)
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: resultReuseIdentifier)
         
         tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadWeiboStatus))
         tableView.mj_header.automaticallyChangeAlpha = true
@@ -166,6 +182,10 @@ extension DiscoverViewController {
      */
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        if searchVC.active {
+            return resultArray?.count ?? 0
+        }
+        
         return statusArray?.count ?? 0
     }
     
@@ -173,6 +193,15 @@ extension DiscoverViewController {
      每行内容方法
      */
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if searchVC.active {
+            let cell = tableView.dequeueReusableCellWithIdentifier(resultReuseIdentifier, forIndexPath: indexPath)
+            let dict = resultArray![indexPath.row]
+            cell.textLabel?.text = dict[kScreenName] as? String
+            cell.accessoryType = .DisclosureIndicator
+            
+            return cell
+        }
         
         let viewModel = statusArray![indexPath.row]
         if viewModel.status.retweetedStatus != nil {
@@ -193,6 +222,49 @@ extension DiscoverViewController {
     
 }
 
+extension DiscoverViewController {
+    
+    /**
+     选中行方法
+     */
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if searchVC.active {
+            let dict = resultArray![indexPath.row]
+            let id = dict[kUID] as! Int
+            let urlString = "http://weibo.com/u/\(id)"
+            let url = NSURL(string: urlString)!
+            
+            let webVC = WebViewController(url: url)
+            navigationController?.pushViewController(webVC, animated: true)
+        }
+    }
+    
+}
+
+
+extension DiscoverViewController: UISearchResultsUpdating {
+    
+    /**
+     更新搜索结果方法
+     */
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        
+        let text = searchController.searchBar.text
+        if text != "" {
+            NetworkingUtil.sharedInstance.searchWeiboUsers(text!) { (array, error) in
+                self.resultArray = array
+                self.tableView.reloadData()
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.reloadData()
+        }
+    }
+    
+}
+
 extension DiscoverViewController: BaseStatusCellDelegate {
     
     /**
@@ -201,7 +273,7 @@ extension DiscoverViewController: BaseStatusCellDelegate {
     func statusCellDidShowWebViewWithURL(cell: BaseStatusCell, url: NSURL) {
         
         let webVC = WebViewController(url: url)
-        self.navigationController?.pushViewController(webVC, animated: false)
+        self.navigationController?.pushViewController(webVC, animated: true)
     }
     
 }

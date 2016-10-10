@@ -18,6 +18,14 @@ class UserModel: NSObject {
     var verifiedType: Int = -1
     /// 用户会员等级
     var memberRank: Int = -1
+    /// 用户简介
+    var descriptionIntro: String?
+    /// 用户粉丝数
+    var followersCount: Int = 0
+    /// 用户关注数
+    var friendsCount: Int = 0
+    /// 用户微博数
+    var statusesCount: Int = 0
     
     // MARK: - 初始化方法
     
@@ -33,6 +41,10 @@ class UserModel: NSObject {
         avatarLarge = dict[kAvatarLarge] as? String
         verifiedType = dict[kVerifiedType] as! Int
         memberRank = dict[kMbRank] as! Int
+        descriptionIntro = dict[kDescription] as? String
+        followersCount = dict[kFollowersCount] as! Int
+        friendsCount = dict[kFriendsCount] as! Int
+        statusesCount = dict[kStatusesCount] as! Int
     }
     
     /**

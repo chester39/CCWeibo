@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 /// Cell重用标识符
-private let reuseIdentifier: String = "PictureCell"
+private let reuseIdentifier = "PictureCell"
 
 class PictureCollectionView: UICollectionView {
     

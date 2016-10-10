@@ -165,5 +165,28 @@ class NetworkingUtil {
             })
         }
     }
+    
+    /**
+     搜索用户方法
+     */
+    func searchWeiboUsers(search: String, finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
+        
+        let path = "2/search/suggestions/users.json"
+        let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!, "q": search, "count": String(50)]
+        Alamofire.request(.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
+            guard let data = response.data else {
+                finished(array: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
+                return
+            }
+            
+            let json = JSON(data: data)
+            var array = [[String: AnyObject]]()
+            for dict in json.arrayObject! {
+                array.append(dict as! [String : AnyObject])
+            }
+            
+            finished(array: array, error: nil)
+        }
+    }
 
 }

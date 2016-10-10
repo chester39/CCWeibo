@@ -11,7 +11,7 @@ import SDWebImage
 class ProfileViewController: BaseViewController {
     
     /// 个人Cell重用标识符
-    private let profileReuseIdentifier: String = "ProfileStatusCell"
+    private let reuseIdentifier = "ProfileStatusCell"
     /// 个人信息视图
     private var personView = PersonView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewStandard))
     
@@ -83,7 +83,7 @@ class ProfileViewController: BaseViewController {
         tableView = UITableView(frame: kScreenFrame, style: .Grouped)
         tableView.tableHeaderView = personView
         tableView.sectionFooterHeight = kViewEdge
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: profileReuseIdentifier)
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
 
 }
@@ -112,7 +112,7 @@ extension ProfileViewController {
      */
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell(style: .Value1, reuseIdentifier: profileReuseIdentifier)
+        let cell = UITableViewCell(style: .Value1, reuseIdentifier: reuseIdentifier)
         cell.accessoryType = .DisclosureIndicator
         
         let group = profileArray[indexPath.section]

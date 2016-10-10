@@ -17,11 +17,11 @@ class HomeViewController: BaseViewController {
     /// 最后一条微博与否
     private var isLastStatus = false
     /// 浏览视图转场管理器
-    private lazy var browerPresentationManager: BrowserPresentationController = BrowserPresentationController()
+    private var browerPresentationManager = BrowserPresentationController()
     /// 微博Cell重用标识符
-    private let weiboReuseIdentifier: String = "WeiboStatusCell"
+    private let weiboReuseIdentifier = "WeiboStatusCell"
     /// 转发微博Cell重用标识符
-    private let retweetReuseIdentifier: String = "RetweetStatusCell"
+    private let retweetReuseIdentifier = "RetweetStatusCell"
     
     /// 刷新提醒标签
     private var tipLabel: UILabel = {
@@ -338,7 +338,7 @@ extension HomeViewController: BaseStatusCellDelegate {
     func statusCellDidShowWebViewWithURL(cell: BaseStatusCell, url: NSURL) {
         
         let webVC = WebViewController(url: url)
-        self.navigationController?.pushViewController(webVC, animated: false)
+        self.navigationController?.pushViewController(webVC, animated: true)
     }
     
 }
