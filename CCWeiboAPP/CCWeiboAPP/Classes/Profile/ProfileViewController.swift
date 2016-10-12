@@ -7,6 +7,7 @@
 import UIKit
 
 import SDWebImage
+import SwiftyJSON
 
 class ProfileViewController: BaseViewController {
     
@@ -18,10 +19,13 @@ class ProfileViewController: BaseViewController {
     /// 个人资料数组
     private lazy var profileArray: [ProfileGroup] = {
         var array = [ProfileGroup]()
-        if let dictArray = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("WeiboProfile", ofType: "plist")!) {
-            for dict in dictArray {
-                let group = ProfileGroup(dict: dict as! [String: AnyObject])
-                array.append(group)
+        if let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("WeiboProfile", ofType: "json")!) {
+            let json = JSON(data: data)
+            if let jsonArray = json.arrayObject {
+                for dict in jsonArray {
+                    let group = ProfileGroup(dict: dict as! [String: AnyObject])
+                    array.append(group)
+                }
             }
         }
        

@@ -6,6 +6,8 @@
 
 import UIKit
 
+import SwiftyJSON
+
 class MainViewController: UITabBarController {
     
     /// 发布按钮
@@ -29,6 +31,9 @@ class MainViewController: UITabBarController {
         addChildControllerArray()
     }
     
+    /**
+     视图将要显示方法
+     */
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -55,22 +60,13 @@ class MainViewController: UITabBarController {
             print("加载二进制数据失败")
             return
         }
-        
-        do {
-            let jsonObject = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! [[String: AnyObject]]
-            for dict in jsonObject {
-                let title = dict["title"] as? String
-                let vcName = dict["vcName"] as? String
-                let imageName = dict["imageName"] as? String
-                addChildController(vcName, title: title, imageName: imageName)
-            }
-            
-        } catch {
-            addChildController("HomeViewController", title: "首页", imageName: "tabbar_home")
-            addChildController("MessageViewController", title: "消息", imageName: "tabbar_message_center")
-            addChildController("NullViewController", title: "", imageName: "")
-            addChildController("DiscoverViewController", title: "发现", imageName: "tabbar_discover")
-            addChildController("ProfileViewController", title: "我的", imageName: "tabbar_profile")
+
+        let json = JSON(data: data)
+        for dict in json.arrayObject! {
+            let title = dict["title"] as? String
+            let vcName = dict["vcName"] as? String
+            let imageName = dict["imageName"] as? String
+            addChildController(vcName, title: title, imageName: imageName)
         }
     }
     

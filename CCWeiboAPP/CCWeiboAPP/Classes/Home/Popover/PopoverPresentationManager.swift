@@ -76,7 +76,7 @@ extension PopoverPresentationManager: UIViewControllerAnimatedTransitioning {
     }
     
     /**
-     显示转场动画方法
+     将要显示转场动画方法
      */
     private func willPresentedController(transitionContext: UIViewControllerContextTransitioning) {
         
@@ -96,7 +96,7 @@ extension PopoverPresentationManager: UIViewControllerAnimatedTransitioning {
     }
     
     /**
-     消失转场动画方法
+     将要消失转场动画方法
      */
     private func willDismissedController(transitionContext: UIViewControllerContextTransitioning) {
         

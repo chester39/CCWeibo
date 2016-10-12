@@ -65,4 +65,5 @@ class PictureCell: UICollectionViewCell {
             gifView.right == gifView.superview!.right
         }
     }
+    
 }

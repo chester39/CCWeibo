@@ -57,7 +57,10 @@ class NetworkingUtil {
             }
             
             let json = JSON(data: data)
-            let dict = json.dictionaryObject!
+            guard let dict = json.dictionaryObject else {
+                return
+            }
+            
             let account = UserAccount(dict: dict)
             account.loadUserInfo({ (account, error) in
                 account?.saveUserAccount()
@@ -86,7 +89,11 @@ class NetworkingUtil {
             let json = JSON(data: data)
             var array = [[String: AnyObject]]()
             for (index: _, subJson: subJSON) in json["statuses"] {
-                let dict = subJSON.dictionaryObject!
+                guard let dict = subJSON.dictionaryObject else {
+                    finished(array: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
+                    return
+                }
+                
                 array.append(dict)
             }
             
@@ -112,7 +119,11 @@ class NetworkingUtil {
             let json = JSON(data: data)
             var array = [[String: AnyObject]]()
             for (index: _, subJson: subJSON) in json["statuses"] {
-                let dict = subJSON.dictionaryObject!
+                guard let dict = subJSON.dictionaryObject else {
+                    finished(array: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
+                    return
+                }
+                
                 array.append(dict)
             }
             
@@ -169,24 +180,29 @@ class NetworkingUtil {
     /**
      搜索用户方法
      */
-    func searchWeiboUsers(search: String, finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
+    func searchWeiboUsers(search: String?, finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
         
         let path = "2/search/suggestions/users.json"
-        let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!, "q": search, "count": String(50)]
+        let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!, "q": search ?? "", "count": String(50)]
         Alamofire.request(.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
             guard let data = response.data else {
-                finished(array: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
+                finished(array: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "搜索数据失败"]))
                 return
             }
             
             let json = JSON(data: data)
             var array = [[String: AnyObject]]()
-            for dict in json.arrayObject! {
+            guard let jsonArray = json.arrayObject else {
+                finished(array: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "搜索数据失败"]))
+                return
+            }
+            
+            for dict in jsonArray {
                 array.append(dict as! [String : AnyObject])
             }
             
             finished(array: array, error: nil)
         }
     }
-
+        
 }

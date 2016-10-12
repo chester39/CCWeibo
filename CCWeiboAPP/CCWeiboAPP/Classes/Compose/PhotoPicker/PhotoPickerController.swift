@@ -24,7 +24,7 @@ class PhotoPickerController: UIViewController {
     /// 照片集合视图
     private lazy var photoView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: PhotoPickerLayout())
-        collectionView.backgroundColor = CommonLightColor
+        collectionView.backgroundColor = RetweetStatusBackgroundColor
         collectionView.contentInset = UIEdgeInsets(top: kViewEdge, left: kViewEdge, bottom: kViewEdge, right: kViewEdge)
         collectionView.dataSource = self
         
@@ -70,7 +70,6 @@ class PhotoPickerController: UIViewController {
     private func setupUI() {
         
         photoView.registerClass(PhotoPickerCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        photoView.backgroundColor = RetweetStatusBackgroundColor
         view.addSubview(photoView)
     }
     

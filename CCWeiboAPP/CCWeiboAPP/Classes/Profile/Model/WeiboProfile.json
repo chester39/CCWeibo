@@ -1,0 +1,92 @@
+[
+  {
+    "detail": [
+      {
+        "icon": "avatar_default_small",
+        "title": "新的好友",
+        "remark": ""
+      },
+      {
+        "icon": "avatar_default_small",
+        "title": "微博等级",
+        "remark": "连续登录天数"
+      }
+    ],
+    "group": "基本",
+  },
+  {
+    "detail": [
+      {
+        "icon": "avatar_default_small",
+        "title": "我的相册",
+        "remark": ""
+      },
+      {
+        "icon": "avatar_default_small",
+        "title": "我的点评",
+        "remark": ""
+      },
+      {
+        "icon": "avatar_default_small",
+        "title": "我的点评",
+        "remark": ""
+      }
+    ],
+    "group": "我的",
+  },
+  {
+    "detail": [
+      {
+        "icon": "avatar_default_small",
+        "title": "微博支付",
+        "remark": "参与众筹抽豪礼"
+      },
+      {
+        "icon": "avatar_default_small",
+        "title": "微博运动",
+        "remark": "每天10000步，你达标了吗？"
+      }
+    ],
+    "group": "活动",
+  },
+  {
+    "detail": [
+      {
+        "icon": "avatar_default_small",
+        "title": "粉丝头条",
+        "remark": "推广博文及账号的利器"
+      },
+      {
+        "icon": "avatar_default_small",
+        "title": "粉丝服务",
+        "remark": "橱窗、私信、营销、数据助手"
+      }
+    ],
+    "group": "粉丝",
+  },
+  {
+    "detail": [
+      {
+        "icon": "avatar_default_small",
+        "title": "草稿箱",
+        "remark": "5"
+      }
+    ],
+    "group": "草稿",
+  },
+  {
+    "detail": [
+      {
+        "icon": "avatar_default_small",
+        "title": "我的文章",
+        "remark": ""
+      },
+      {
+        "icon": "avatar_default_small",
+        "title": "我的收藏",
+        "remark": ""
+      }
+    ],
+    "group": "更多",
+  }
+]

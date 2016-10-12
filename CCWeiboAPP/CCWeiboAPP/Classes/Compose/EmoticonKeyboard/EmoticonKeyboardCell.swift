@@ -70,4 +70,5 @@ class EmoticonAttachment: NSTextAttachment {
     
     /// 表情简体字符串
     var emoticonChs: String?
+    
 }

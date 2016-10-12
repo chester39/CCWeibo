@@ -231,6 +231,7 @@ class HomeViewController: BaseViewController {
             self.tableView.mj_footer.endRefreshing()
             self.acquireImageCaches(modelArray)
             self.showRefreshStatus(modelArray.count)
+            
             self.tableView.reloadData()
         }
     }

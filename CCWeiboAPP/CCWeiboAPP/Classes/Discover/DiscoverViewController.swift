@@ -20,12 +20,15 @@ class DiscoverViewController: BaseViewController {
     private var searchVC = UISearchController()
     /// 搜索结果数组
     private var resultArray: [[String: AnyObject]]?
+    
+    private var headerView = DiscoverHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 270))
     /// 微博Cell重用标识符
     private let weiboReuseIdentifier = "WeiboStatusCell"
     /// 转发微博Cell重用标识符
     private let retweetReuseIdentifier = "RetweetStatusCell"
     /// 搜索结果Cell重用标识符
     private let resultReuseIdentifier = "ResultCell"
+
     // MARK: - 系统方法
     
     /**
@@ -68,12 +71,14 @@ class DiscoverViewController: BaseViewController {
         searchVC.searchBar.searchBarStyle = .Minimal
         searchVC.searchBar.placeholder = "请输入搜索内容"
         searchVC.searchBar.sizeToFit()
+        searchVC.delegate = self
         searchVC.searchResultsUpdater = self
         navigationItem.titleView = searchVC.searchBar
         
         tableView.separatorStyle = .None
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.tableHeaderView = headerView
         tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: weiboReuseIdentifier)
         tableView.registerClass(RetweetStatusCell.self, forCellReuseIdentifier: retweetReuseIdentifier)
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: resultReuseIdentifier)
@@ -137,6 +142,7 @@ class DiscoverViewController: BaseViewController {
             self.tableView.mj_header.endRefreshing()
             self.statusArray = modelArray
             self.acquireImageCaches(modelArray)
+            
             self.tableView.reloadData()
         }
     }
@@ -196,9 +202,11 @@ extension DiscoverViewController {
         
         if searchVC.active {
             let cell = tableView.dequeueReusableCellWithIdentifier(resultReuseIdentifier, forIndexPath: indexPath)
-            let dict = resultArray![indexPath.row]
-            cell.textLabel?.text = dict[kScreenName] as? String
-            cell.accessoryType = .DisclosureIndicator
+            if resultArray != nil && resultArray?.count != 0 {
+                let dict = resultArray![indexPath.row]
+                cell.textLabel?.text = dict[kScreenName] as? String
+                cell.accessoryType = .DisclosureIndicator
+            }
             
             return cell
         }
@@ -242,6 +250,25 @@ extension DiscoverViewController {
     
 }
 
+extension DiscoverViewController: UISearchControllerDelegate {
+    
+    /**
+     将要显示搜索控制器方法
+     */
+    func willPresentSearchController(searchController: UISearchController) {
+        
+        tableView.tableHeaderView = nil
+    }
+    
+    /**
+     将要消失搜索控制器方法
+     */
+    func willDismissSearchController(searchController: UISearchController) {
+        
+        tableView.tableHeaderView = headerView
+    }
+    
+}
 
 extension DiscoverViewController: UISearchResultsUpdating {
     
@@ -251,11 +278,9 @@ extension DiscoverViewController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
         let text = searchController.searchBar.text
-        if text != "" {
-            NetworkingUtil.sharedInstance.searchWeiboUsers(text!) { (array, error) in
-                self.resultArray = array
-                self.tableView.reloadData()
-            }
+        NetworkingUtil.sharedInstance.searchWeiboUsers(text) { (array, error) in
+            self.resultArray = array
+            self.tableView.reloadData()
         }
         
         dispatch_async(dispatch_get_main_queue()) {
