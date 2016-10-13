@@ -20,7 +20,7 @@ class DiscoverViewController: BaseViewController {
     private var searchVC = UISearchController()
     /// 搜索结果数组
     private var resultArray: [[String: AnyObject]]?
-    
+    /// 头部视图
     private var headerView = DiscoverHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 270))
     /// 微博Cell重用标识符
     private let weiboReuseIdentifier = "WeiboStatusCell"
@@ -60,7 +60,7 @@ class DiscoverViewController: BaseViewController {
     // MARK: - 界面方法
     
     /**
-     初始化表格视图方法
+     初始化界面方法
      */
     private func setupUI() {
         

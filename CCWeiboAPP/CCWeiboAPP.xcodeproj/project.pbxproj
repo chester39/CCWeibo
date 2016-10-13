@@ -55,6 +55,8 @@
 		25F4143D1DAE410B00E6FE0B /* DiscoverTheme.json in Resources */ = {isa = PBXBuildFile; fileRef = 25F4143B1DAE410B00E6FE0B /* DiscoverTheme.json */; };
 		25F4143E1DAE410B00E6FE0B /* DiscoverTopic.json in Resources */ = {isa = PBXBuildFile; fileRef = 25F4143C1DAE410B00E6FE0B /* DiscoverTopic.json */; };
 		25F414401DAE41DD00E6FE0B /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F4143F1DAE41DD00E6FE0B /* TopicCell.swift */; };
+		25F414421DAF765C00E6FE0B /* BasicMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = 25F414411DAF765C00E6FE0B /* BasicMessage.json */; };
+		25F414461DAF82A600E6FE0B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F414451DAF82A600E6FE0B /* MessageCell.swift */; };
 		25FF791D1D79524E0098F064 /* PictureCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF791C1D79524E0098F064 /* PictureCollectionView.swift */; };
 		25FF79231D7977F20098F064 /* PictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF79221D7977F20098F064 /* PictureCell.swift */; };
 		867D5D351D8D325200B5A41F /* PhotoPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867D5D341D8D325200B5A41F /* PhotoPickerController.swift */; };
@@ -125,6 +127,8 @@
 		25F4143B1DAE410B00E6FE0B /* DiscoverTheme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DiscoverTheme.json; sourceTree = "<group>"; };
 		25F4143C1DAE410B00E6FE0B /* DiscoverTopic.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DiscoverTopic.json; sourceTree = "<group>"; };
 		25F4143F1DAE41DD00E6FE0B /* TopicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
+		25F414411DAF765C00E6FE0B /* BasicMessage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BasicMessage.json; sourceTree = "<group>"; };
+		25F414451DAF82A600E6FE0B /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		25FF791C1D79524E0098F064 /* PictureCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureCollectionView.swift; sourceTree = "<group>"; };
 		25FF79221D7977F20098F064 /* PictureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureCell.swift; sourceTree = "<group>"; };
 		867D5D341D8D325200B5A41F /* PhotoPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerController.swift; sourceTree = "<group>"; };
@@ -463,6 +467,8 @@
 		86D7004E1D411B79003C65D7 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				25F414411DAF765C00E6FE0B /* BasicMessage.json */,
+				25F414451DAF82A600E6FE0B /* MessageCell.swift */,
 				86D700571D411C7C003C65D7 /* MessageViewController.swift */,
 			);
 			path = Message;
@@ -548,6 +554,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25F414421DAF765C00E6FE0B /* BasicMessage.json in Resources */,
 				25F4143E1DAE410B00E6FE0B /* DiscoverTopic.json in Resources */,
 				25F414251DADE61800E6FE0B /* WeiboProfile.json in Resources */,
 				8688900D1D3D26E70038F753 /* LaunchScreen.storyboard in Resources */,
@@ -668,6 +675,7 @@
 				252EEB011D66E9F100AC064D /* Const.swift in Sources */,
 				25CBB6021DA8C95F006F34E4 /* WebViewController.swift in Sources */,
 				257B0BAA1D7D46B5003EBC91 /* BrowserViewController.swift in Sources */,
+				25F414461DAF82A600E6FE0B /* MessageCell.swift in Sources */,
 				86C656951D7C193100BEDB17 /* ProgressView.swift in Sources */,
 				25BE300B1D6A98D100947C4B /* UserAccount.swift in Sources */,
 				252CA6251D863E1B005042F5 /* EmoticonKeyboardCell.swift in Sources */,

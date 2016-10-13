@@ -64,7 +64,7 @@ class ProfileViewController: BaseViewController {
     }
     
     /**
-     初始化表格视图方法
+     初始化界面方法
      */
     private func setupUI() {
         

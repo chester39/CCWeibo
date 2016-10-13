@@ -52,27 +52,15 @@ class RetweetStatusCell: BaseStatusCell {
             }
             
             if viewModel?.status.repostsCount != 0 {
-                guard let count = viewModel?.status.repostsCount else {
-                    return
-                }
-                
-                retweetButton.setTitle("\(count)", forState: .Normal)
+                retweetButton.setTitle("\(viewModel!.status.repostsCount)", forState: .Normal)
             }
             
             if viewModel?.status.commentsCount != 0 {
-                guard let count = viewModel?.status.commentsCount else {
-                    return
-                }
-                
-                commentButton.setTitle("\(count)", forState: .Normal)
+                commentButton.setTitle("\(viewModel!.status.commentsCount)", forState: .Normal)
             }
             
             if viewModel?.status.attitudesCount != 0 {
-                guard let count = viewModel?.status.attitudesCount else {
-                    return
-                }
-                
-                likeButton.setTitle("\(count)", forState: .Normal)
+                likeButton.setTitle("\(viewModel!.status.attitudesCount)", forState: .Normal)
             }
 
             retweetLabel.attributedText = EmoticonManager.emoticonMutableAttributedString(viewModel?.retweetText ?? "", font: contentLabel.font)
