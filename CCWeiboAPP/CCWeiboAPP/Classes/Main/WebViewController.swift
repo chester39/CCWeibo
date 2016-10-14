@@ -34,7 +34,7 @@ class WebViewController: UIViewController {
     /// 进度条
     private lazy var webProgressView: UIProgressView = {
         let progress = UIProgressView(progressViewStyle: .Default)
-        progress.frame = CGRect(x: 0, y: kAvailableHeight, width: kScreenWidth, height: 2)
+        progress.frame = CGRect(x: 0, y: kTopHeight, width: kScreenWidth, height: 2)
         progress.trackTintColor = ClearColor
         progress.progressTintColor = MainColor
         

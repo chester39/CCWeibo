@@ -204,5 +204,35 @@ class NetworkingUtil {
             finished(array: array, error: nil)
         }
     }
+    
+    /**
+     读取微博评论方法
+     */
+    func loadStatusCommits(id: Int, finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
         
+        assert(UserAccount.loadUserAccount() != nil, "必须授权之后才能获取微博数据")
+        
+        let path = "2/comments/show.json"
+        let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!, kWeiboID: String(id)]
+        Alamofire.request(.GET, kWeiboBaseURL + path, parameters: parameters).responseJSON { response in
+            guard let data = response.data else {
+                finished(array: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
+                return
+            }
+            
+            let json = JSON(data: data)
+            var array = [[String: AnyObject]]()
+            for (index: _, subJson: subJSON) in json["comments"] {
+                guard let dict = subJSON.dictionaryObject else {
+                    finished(array: nil, error: NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
+                    return
+                }
+                
+                array.append(dict)
+            }
+            
+            finished(array: array, error: nil)
+        }
+    }
+    
 }

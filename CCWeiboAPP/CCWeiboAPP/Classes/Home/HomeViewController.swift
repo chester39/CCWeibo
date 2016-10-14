@@ -307,7 +307,7 @@ extension HomeViewController {
         let viewModel = statusArray![indexPath.row]
         if viewModel.status.retweetedStatus != nil {
             let cell = tableView.dequeueReusableCellWithIdentifier(retweetReuseIdentifier, forIndexPath: indexPath) as! RetweetStatusCell
-            cell.viewModel = statusArray![indexPath.row]
+            cell.viewModel = viewModel
             cell.delegate = self
             if indexPath.row == (statusArray!.count - 1) {
                 isLastStatus = true
@@ -318,7 +318,7 @@ extension HomeViewController {
             
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(weiboReuseIdentifier, forIndexPath: indexPath) as! WeiboStatusCell
-            cell.viewModel = statusArray![indexPath.row]
+            cell.viewModel = viewModel
             cell.delegate = self
             if indexPath.row == (statusArray!.count - 1) {
                 isLastStatus = true
@@ -327,6 +327,20 @@ extension HomeViewController {
             
             return cell
         }
+    }
+    
+}
+
+extension HomeViewController {
+    
+    /**
+     选中行方法
+     */
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let viewModel = statusArray![indexPath.row]
+        let detailVC = DetailViewController(viewModel: viewModel)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
 }

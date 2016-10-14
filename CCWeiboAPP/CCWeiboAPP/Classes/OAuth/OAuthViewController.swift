@@ -31,7 +31,7 @@ class OAuthViewController: UIViewController {
     /// 网页进度条
     private lazy var oauthProgressView: UIProgressView = {
         let progress = UIProgressView(progressViewStyle: .Default)
-        progress.frame = CGRect(x: 0, y: kAvailableHeight, width: kScreenWidth, height: 2)
+        progress.frame = CGRect(x: 0, y: kTopHeight, width: kScreenWidth, height: 2)
         progress.trackTintColor = ClearColor
         progress.progressTintColor = MainColor
         

@@ -33,8 +33,10 @@ let kScreenHeight: CGFloat = UIScreen.mainScreen().bounds.size.height
 let kStatusBarHeight: CGFloat = 20
 /// 导航栏高度: 44
 let kNavigationBarHeight: CGFloat = 44
+/// 顶端高度: 64
+let kTopHeight: CGFloat = 64
 /// 可用高度: 64
-let kAvailableHeight: CGFloat = (kStatusBarHeight + kNavigationBarHeight)
+let kAvailableHeight: CGFloat = kScreenHeight - kTopHeight
 /// 键盘高度: 238
 let kKeyboardHeight: CGFloat = 238
 
@@ -58,6 +60,8 @@ let kExpiresIn: String = "expires_in"
 let kUID: String = "uid"
 /// 授权过期具体时间
 let kExpiresDate: String = "expires_date"
+/// 用户
+let kUser: String = "user"
 /// 用户昵称
 let kScreenName: String = "screen_name"
 /// 用户头像地址
@@ -94,6 +98,8 @@ let kCommentsCount: String = "comments_count"
 let kAttitudesCount: String = "attitudes_count"
 /// 转发微博
 let kRetweetedStatus: String = "retweeted_status"
+/// 评论楼层
+let kFloorNumber: String = "floor_number"
 
 // MARK: - 通知常数
 

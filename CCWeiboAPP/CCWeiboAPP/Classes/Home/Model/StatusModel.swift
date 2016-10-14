@@ -57,7 +57,7 @@ class StatusModel: NSObject {
      */
     override func setValue(value: AnyObject?, forKey key: String) {
         
-        if key == "user" {
+        if key == kUser {
             user = UserModel(dict: value as! [String: AnyObject])
             return
         }

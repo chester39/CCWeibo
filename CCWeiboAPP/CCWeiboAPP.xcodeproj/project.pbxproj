@@ -46,6 +46,8 @@
 		25BE300B1D6A98D100947C4B /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BE300A1D6A98D100947C4B /* UserAccount.swift */; };
 		25CBB6021DA8C95F006F34E4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CBB6011DA8C95F006F34E4 /* WebViewController.swift */; };
 		25D360071D655BF8004A45AA /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D360061D655BF8004A45AA /* OAuthViewController.swift */; };
+		25E9B6F11DB0D88300763016 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E9B6F01DB0D88300763016 /* DetailViewController.swift */; };
+		25E9B6F31DB0E18500763016 /* CommitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E9B6F21DB0E18500763016 /* CommitModel.swift */; };
 		25F414251DADE61800E6FE0B /* WeiboProfile.json in Resources */ = {isa = PBXBuildFile; fileRef = 25F414241DADE61800E6FE0B /* WeiboProfile.json */; };
 		25F414331DAE2F2100E6FE0B /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F4142F1DAE2F2100E6FE0B /* ThemeButton.swift */; };
 		25F414341DAE2F2100E6FE0B /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F414301DAE2F2100E6FE0B /* ThemeCell.swift */; };
@@ -118,6 +120,8 @@
 		25CBB6011DA8C95F006F34E4 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		25D360061D655BF8004A45AA /* OAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 		25D360091D66A6EB004A45AA /* CCWeiboAPP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CCWeiboAPP-Bridging-Header.h"; sourceTree = "<group>"; };
+		25E9B6F01DB0D88300763016 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		25E9B6F21DB0E18500763016 /* CommitModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitModel.swift; sourceTree = "<group>"; };
 		25F414241DADE61800E6FE0B /* WeiboProfile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WeiboProfile.json; sourceTree = "<group>"; };
 		25F4142F1DAE2F2100E6FE0B /* ThemeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
 		25F414301DAE2F2100E6FE0B /* ThemeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
@@ -302,6 +306,15 @@
 			path = OAuth;
 			sourceTree = "<group>";
 		};
+		25E9B6EF1DB0D86A00763016 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				25E9B6F21DB0E18500763016 /* CommitModel.swift */,
+				25E9B6F01DB0D88300763016 /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		25F4142C1DAE2F2100E6FE0B /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -442,6 +455,7 @@
 			children = (
 				86D700531D411C48003C65D7 /* HomeViewController.swift */,
 				257B0BA61D7D46B5003EBC91 /* Browser */,
+				25E9B6EF1DB0D86A00763016 /* Detail */,
 				25A0333F1D76DD8F00152FE5 /* Model */,
 				25FF791B1D79524E0098F064 /* Picture */,
 				250621CC1D5B00B1000B542B /* Popover */,
@@ -629,6 +643,7 @@
 				25A033491D76DD8F00152FE5 /* UserModel.swift in Sources */,
 				25A033501D76DDCA00152FE5 /* TitleButton.swift in Sources */,
 				259C62F31D6D7BE100884257 /* NewFeatureViewController.swift in Sources */,
+				25E9B6F31DB0E18500763016 /* CommitModel.swift in Sources */,
 				25F414381DAE2F5000E6FE0B /* ProfileViewController.swift in Sources */,
 				257B0BA91D7D46B5003EBC91 /* BrowserCell.swift in Sources */,
 				252CA6261D863E1B005042F5 /* EmoticonKeyboardController.swift in Sources */,
@@ -647,6 +662,7 @@
 				255467F71D912B360060874A /* TitleView.swift in Sources */,
 				86D700541D411C48003C65D7 /* HomeViewController.swift in Sources */,
 				86C6568F1D7C187600BEDB17 /* BaseStatusCell.swift in Sources */,
+				25E9B6F11DB0D88300763016 /* DetailViewController.swift in Sources */,
 				257B0BAC1D7D46FA003EBC91 /* BrowserPresentationController.swift in Sources */,
 				25F414361DAE2F3C00E6FE0B /* DiscoverViewController.swift in Sources */,
 				25A129981D7FB4230031570C /* Color.swift in Sources */,

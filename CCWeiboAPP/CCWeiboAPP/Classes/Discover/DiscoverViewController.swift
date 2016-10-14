@@ -244,7 +244,7 @@ extension DiscoverViewController {
             let url = NSURL(string: urlString)!
             
             let webVC = WebViewController(url: url)
-            navigationController?.pushViewController(webVC, animated: true)
+            navigationController?.pushViewController(webVC, animated: false)
         }
     }
     
