@@ -11,17 +11,17 @@ import Cartography
 class MessageCell: UITableViewCell {
 
     /// 头像图片视图
-    var iconView = UIImageView()
+    private var iconView = UIImageView()
     /// 认证图片视图
-    var verifiedView = UIImageView()
+    private var verifiedView = UIImageView()
     /// 昵称标签
-    var nameLabel = UILabel(text: "", fontSize: 15, lines: 1)
+    private var nameLabel = UILabel(text: "", fontSize: 15, lines: 1)
     /// 信息内容标签
-    var contentLabel = UILabel(text: "", fontSize: 13, lines: 1)
+    private var contentLabel = UILabel(text: "", fontSize: 13, lines: 1)
     /// 时间标签
-    var timeLabel = UILabel(text: "", fontSize: 12, lines: 1)
+    private var timeLabel = UILabel(text: "", fontSize: 12, lines: 1)
     /// 消息标签
-    var messageLabel = UILabel(text: "", fontSize: 12, lines: 1)
+    private var messageLabel = UILabel(text: "", fontSize: 12, lines: 1)
 
     /// 微博模型
     var viewModel: StatusViewModel? {

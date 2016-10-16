@@ -17,6 +17,7 @@ class RetweetStatusCell: BaseStatusCell {
     private var group = ConstraintGroup()
     /// 转发微博视图
     private var retweetView = UIView()
+    
     /// 转发微博信息内容
     private var retweetLabel: ActiveLabel = {
         let label = ActiveLabel()
@@ -25,6 +26,7 @@ class RetweetStatusCell: BaseStatusCell {
         label.enabledTypes = [.Mention, .Hashtag, .URL]
         label.mentionColor = RetweetUserTextColor
         label.hashtagColor = MainColor
+        
         return label
     }()
 

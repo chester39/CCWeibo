@@ -10,6 +10,9 @@ import Cartography
 
 class NewFeatureCell: UICollectionViewCell {
     
+    /// 图片视图
+    private lazy var imageView = UIImageView()
+    
     /// 图片下标
     var index: Int = 0 {
         didSet {
@@ -26,9 +29,6 @@ class NewFeatureCell: UICollectionViewCell {
         
         return button
     }()
-    
-    /// 图片视图
-    private lazy var imageView = UIImageView()
     
     // MARK: - 初始化方法
     

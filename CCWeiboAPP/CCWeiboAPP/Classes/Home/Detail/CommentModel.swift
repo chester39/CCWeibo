@@ -1,17 +1,17 @@
 //
-//  CommitModel.swift
+//  CommentModel.swift
 //		CCWeiboAPP
 //		Chen Chen @ October 14th, 2016
 //
 
 import UIKit
 
-class CommitModel: NSObject {
+class CommentModel: NSObject {
     
     /// 评论创建时间
     var createdAt: String?
     /// 评论ID
-    var commitID: Int = 0
+    var commentID: Int = 0
     /// 评论楼层
     var floorNumber: Int = 0
     /// 评论信息内容
@@ -53,7 +53,7 @@ class CommitModel: NSObject {
         
         switch key {
         case kWeiboID:
-            commitID = value as! Int
+            commentID = value as! Int
             
         case kCreatedAt:
             createdAt = value as? String

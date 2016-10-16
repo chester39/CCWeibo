@@ -7,14 +7,13 @@
 import UIKit
 
 import MBProgressHUD
-import SDWebImage
 
 class DetailViewController: UIViewController {
 
     /// 微博视图模型
     private var viewModel: StatusViewModel?
     /// 评论数组
-    private var commentArray: [CommitModel]?
+    private var commentArray: [CommentModel]?
     /// 表格视图
     private var tableView = UITableView(frame: kScreenFrame, style: .Grouped)
     /// 微博Cell重用标识符
@@ -22,7 +21,7 @@ class DetailViewController: UIViewController {
     /// 转发微博Cell重用标识符
     private let retweetReuseIdentifier = "RetweetStatusCell"
     /// 评论Cell重用标识符
-    private let commitReuseIdentifier = "CommitCell"
+    private let commentReuseIdentifier = "CommentCell"
     
     // MARK: - 初始化方法
     
@@ -71,7 +70,7 @@ class DetailViewController: UIViewController {
         tableView.dataSource = self
         tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: weiboReuseIdentifier)
         tableView.registerClass(RetweetStatusCell.self, forCellReuseIdentifier: retweetReuseIdentifier)
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: commitReuseIdentifier)
+        tableView.registerClass(CommentCell.self, forCellReuseIdentifier: commentReuseIdentifier)
         
         view.addSubview(tableView)
     }
@@ -100,9 +99,9 @@ class DetailViewController: UIViewController {
                 return
             }
             
-            var modelArray = [CommitModel]()
+            var modelArray = [CommentModel]()
             for dict in commitArray {
-                let commit = CommitModel(dict: dict)
+                let commit = CommentModel(dict: dict)
                 modelArray.append(commit)
             }
             
@@ -160,16 +159,21 @@ extension DetailViewController: UITableViewDataSource {
             }
             
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(commitReuseIdentifier, forIndexPath: indexPath)
-            let commit = commentArray![indexPath.row]
-            cell.textLabel?.text = commit.text
-            let url = NSURL(string: (commit.user?.avatarLarge)!)
-            cell.imageView?.sd_setImageWithURL(url)
+            let cell = tableView.dequeueReusableCellWithIdentifier(commentReuseIdentifier, forIndexPath: indexPath) as! CommentCell
+            let comment = commentArray![indexPath.row]
+            cell.comment = comment
             
             return cell
         }
     }
     
+}
+
+extension DetailViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        <#code#>
+    }
 }
 
 extension DetailViewController: BaseStatusCellDelegate {

@@ -14,7 +14,7 @@ class PictureCell: UICollectionViewCell {
     /// 图片视图
     var imageView = ProgressImageView()
     /// GIF按钮
-    var gifView = UIImageView()
+    private var gifView = UIImageView()
     
     /// 图片URL
     var url: NSURL? {
