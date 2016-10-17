@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
     /// 头视图
     private var headerView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewMargin))
-        view.backgroundColor = MainColor
+        view.backgroundColor = CommonLightColor
         
         return view
     }()
@@ -95,10 +95,10 @@ class DetailViewController: UIViewController {
         
         let line = UIView()
         line.frame.origin.x = button.frame.origin.x
-        line.frame.origin.y = kViewMargin - 2
+        line.frame.origin.y = kViewMargin - kViewEdge
         line.frame.size.width = kViewAdapter
         line.frame.size.height = 1
-        line.backgroundColor = CommonLightColor
+        line.backgroundColor = MainColor
         headerView.addSubview(line)
     }
     
@@ -198,12 +198,14 @@ extension DetailViewController: UITableViewDelegate {
         if section == 1 {
             let retweetButton = UIButton(frame: CGRect(x: 0, y: 0, width: kViewAdapter, height: kViewMargin))
             retweetButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+            retweetButton.setTitleColor(CommonDarkColor, forState: .Normal)
             retweetButton.setTitle("转发 \(viewModel!.status.repostsCount)", forState: .Normal)
             retweetButton.addTarget(self, action: #selector(buttonDidClick(_:)), forControlEvents: .TouchUpInside)
             headerView.addSubview(retweetButton)
             
             let commentButton = UIButton(frame: CGRect(x: kViewAdapter, y: 0, width: kViewAdapter, height: kViewMargin))
             commentButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+            commentButton.setTitleColor(CommonDarkColor, forState: .Normal)
             commentButton.setTitle("评论 \(viewModel!.status.commentsCount)", forState: .Normal)
             commentButton.addTarget(self, action: #selector(buttonDidClick(_:)), forControlEvents: .TouchUpInside)
             buttonDidClick(commentButton)
@@ -211,6 +213,7 @@ extension DetailViewController: UITableViewDelegate {
             
             let likeButton = UIButton(frame: CGRect(x: kScreenWidth - kViewAdapter, y: 0, width: kViewAdapter, height: kViewMargin))
             likeButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+            likeButton.setTitleColor(CommonDarkColor, forState: .Normal)
             likeButton.setTitle("赞 \(viewModel!.status.attitudesCount)", forState: .Normal)
             likeButton.addTarget(self, action: #selector(buttonDidClick(_:)), forControlEvents: .TouchUpInside)
             headerView.addSubview(likeButton)
