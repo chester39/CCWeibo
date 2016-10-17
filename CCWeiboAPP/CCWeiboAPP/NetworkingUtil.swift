@@ -208,7 +208,7 @@ class NetworkingUtil {
     /**
      读取微博评论方法
      */
-    func loadStatusCommits(id: Int, finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
+    func loadStatusComments(id: Int, finished: (array: [[String: AnyObject]]?, error: NSError?) -> ()) {
         
         assert(UserAccount.loadUserAccount() != nil, "必须授权之后才能获取微博数据")
         

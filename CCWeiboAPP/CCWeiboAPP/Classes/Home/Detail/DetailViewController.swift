@@ -15,7 +15,7 @@ class DetailViewController: UIViewController {
     /// 评论数组
     private var commentArray: [CommentModel]?
     /// 表格视图
-    private var tableView = UITableView(frame: kScreenFrame, style: .Grouped)
+    private var tableView = UITableView(frame: kScreenFrame, style: .Plain)
     /// 微博Cell重用标识符
     private let weiboReuseIdentifier = "WeiboStatusCell"
     /// 转发微博Cell重用标识符
@@ -23,6 +23,14 @@ class DetailViewController: UIViewController {
     /// 评论Cell重用标识符
     private let commentReuseIdentifier = "CommentCell"
     
+    /// 头视图
+    private var headerView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewMargin))
+        view.backgroundColor = MainColor
+        
+        return view
+    }()
+
     // MARK: - 初始化方法
     
     /**
@@ -53,8 +61,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        setupConstraints()
-        loadWeiboStatus()
+        loadCommentStatus()
     }
     
     // MARK: - 界面方法
@@ -68,18 +75,31 @@ class DetailViewController: UIViewController {
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.registerClass(WeiboStatusCell.self, forCellReuseIdentifier: weiboReuseIdentifier)
         tableView.registerClass(RetweetStatusCell.self, forCellReuseIdentifier: retweetReuseIdentifier)
         tableView.registerClass(CommentCell.self, forCellReuseIdentifier: commentReuseIdentifier)
-        
         view.addSubview(tableView)
     }
     
     /**
-     初始化约束方法
+     按钮点击方法
      */
-    private func setupConstraints() {
+    @objc private func buttonDidClick(button: UIButton) {
         
+        for view in headerView.subviews {
+            if view.frame.size.height == 1 {
+                view.removeFromSuperview()
+            }
+        }
+        
+        let line = UIView()
+        line.frame.origin.x = button.frame.origin.x
+        line.frame.origin.y = kViewMargin - 2
+        line.frame.size.width = kViewAdapter
+        line.frame.size.height = 1
+        line.backgroundColor = CommonLightColor
+        headerView.addSubview(line)
     }
     
     // MARK: - 数据方法
@@ -87,22 +107,22 @@ class DetailViewController: UIViewController {
     /**
      读取微博数据方法
      */
-    private func loadWeiboStatus() {
+    private func loadCommentStatus() {
         
         let id = viewModel!.status.weiboID
-        NetworkingUtil.sharedInstance.loadStatusCommits(id) { (array, error) in
+        NetworkingUtil.sharedInstance.loadStatusComments(id) { (array, error) in
             if error != nil {
                 MBProgressHUD.showMessage("评论数据获取失败", delay: 1.0)
             }
             
-            guard let commitArray = array else {
+            guard let commentArray = array else {
                 return
             }
             
             var modelArray = [CommentModel]()
-            for dict in commitArray {
-                let commit = CommentModel(dict: dict)
-                modelArray.append(commit)
+            for dict in commentArray {
+                let comment = CommentModel(dict: dict)
+                modelArray.append(comment)
             }
             
             self.commentArray = modelArray
@@ -142,7 +162,6 @@ extension DetailViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            
             if viewModel!.status.retweetedStatus != nil {
                 let cell = tableView.dequeueReusableCellWithIdentifier(retweetReuseIdentifier, forIndexPath: indexPath) as! RetweetStatusCell
                 cell.viewModel = viewModel!
@@ -171,9 +190,52 @@ extension DetailViewController: UITableViewDataSource {
 
 extension DetailViewController: UITableViewDelegate {
     
+    /**
+     每组头视图内容方法
+     */
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        <#code#>
+        
+        if section == 1 {
+            let retweetButton = UIButton(frame: CGRect(x: 0, y: 0, width: kViewAdapter, height: kViewMargin))
+            retweetButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+            retweetButton.setTitle("转发 \(viewModel!.status.repostsCount)", forState: .Normal)
+            retweetButton.addTarget(self, action: #selector(buttonDidClick(_:)), forControlEvents: .TouchUpInside)
+            headerView.addSubview(retweetButton)
+            
+            let commentButton = UIButton(frame: CGRect(x: kViewAdapter, y: 0, width: kViewAdapter, height: kViewMargin))
+            commentButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+            commentButton.setTitle("评论 \(viewModel!.status.commentsCount)", forState: .Normal)
+            commentButton.addTarget(self, action: #selector(buttonDidClick(_:)), forControlEvents: .TouchUpInside)
+            buttonDidClick(commentButton)
+            headerView.addSubview(commentButton)
+            
+            let likeButton = UIButton(frame: CGRect(x: kScreenWidth - kViewAdapter, y: 0, width: kViewAdapter, height: kViewMargin))
+            likeButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+            likeButton.setTitle("赞 \(viewModel!.status.attitudesCount)", forState: .Normal)
+            likeButton.addTarget(self, action: #selector(buttonDidClick(_:)), forControlEvents: .TouchUpInside)
+            headerView.addSubview(likeButton)
+            
+            return headerView
+            
+        } else {
+            return nil
+        }
+
     }
+    
+    /**
+     每组头视图高度方法
+     */
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if section == 1 {
+            return kViewMargin
+            
+        } else {
+            return 0
+        }
+    }
+    
 }
 
 extension DetailViewController: BaseStatusCellDelegate {

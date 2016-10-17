@@ -151,3 +151,19 @@ extension MessageViewController {
     }
     
 }
+
+extension MessageViewController {
+    
+    /**
+     将要结束抓拽方法
+     */
+    override func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        if velocity.y > 0 {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+            
+        } else {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
+}
