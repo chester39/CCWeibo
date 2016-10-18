@@ -130,7 +130,7 @@ class RetweetStatusCell: BaseStatusCell {
     private func setupUI() {
         
         retweetView.clipsToBounds = true
-        retweetView.layer.cornerRadius = 5.0
+        retweetView.layer.cornerRadius = kViewEdge
         retweetView.layer.borderWidth = 1.0
         retweetView.layer.borderColor = RetweetStatusBackgroundColor.CGColor
         retweetView.backgroundColor = RetweetStatusBackgroundColor

@@ -89,7 +89,7 @@ class CommentCell: UITableViewCell {
      */
     private func setupUI() {
         
-        iconView.layer.cornerRadius = 20.0
+        iconView.layer.cornerRadius = kViewBorder
         iconView.clipsToBounds = true
         contentView.addSubview(iconView)
         

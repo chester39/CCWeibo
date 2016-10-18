@@ -73,7 +73,7 @@ class BaseStatusCell: UITableViewCell {
      */
     func setupBaseUI() {
         
-        iconView.layer.cornerRadius = 20.0
+        iconView.layer.cornerRadius = kViewBorder
         iconView.clipsToBounds = true
         contentView.addSubview(iconView)
         

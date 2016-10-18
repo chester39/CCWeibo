@@ -11,10 +11,10 @@ import SwiftyJSON
 
 class ProfileViewController: BaseViewController {
     
-    /// 个人Cell重用标识符
-    private let reuseIdentifier = "ProfileStatusCell"
     /// 个人信息视图
     private var personView = PersonView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewStandard))
+    /// 个人Cell重用标识符
+    private let reuseIdentifier = "ProfileStatusCell"
     
     /// 个人资料数组
     private lazy var profileArray: [ProfileGroup] = {
@@ -52,14 +52,13 @@ class ProfileViewController: BaseViewController {
     
     // MARK: - 界面方法
     
-    
     /**
      初始化导航栏方法
      */
     private func setupNavigation() {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "添加好友", style: .Plain, target: self, action: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "设置", style: .Plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "设置", style: .Plain, target: self, action: #selector(settingButtonDidClick))
         navigationItem.title = "我"
     }
     
@@ -88,6 +87,15 @@ class ProfileViewController: BaseViewController {
         tableView.tableHeaderView = personView
         tableView.sectionFooterHeight = kViewEdge
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+    }
+    
+    /**
+     设置按钮点击方法
+     */
+    @objc private func settingButtonDidClick() {
+        
+        let settingVC = SettingViewController()
+        navigationController?.pushViewController(settingVC, animated: true)
     }
 
 }

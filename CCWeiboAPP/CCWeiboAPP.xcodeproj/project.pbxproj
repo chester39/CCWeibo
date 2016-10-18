@@ -30,6 +30,8 @@
 		257B0BA91D7D46B5003EBC91 /* BrowserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257B0BA71D7D46B5003EBC91 /* BrowserCell.swift */; };
 		257B0BAA1D7D46B5003EBC91 /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257B0BA81D7D46B5003EBC91 /* BrowserViewController.swift */; };
 		257B0BAC1D7D46FA003EBC91 /* BrowserPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257B0BAB1D7D46FA003EBC91 /* BrowserPresentationController.swift */; };
+		258D373F1DB5BD1600EE02C3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258D373E1DB5BD1600EE02C3 /* SettingView.swift */; };
+		258D37411DB60E4F00EE02C3 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258D37401DB60E4F00EE02C3 /* SettingViewController.swift */; };
 		259AEF4E1D8262E600C6C407 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259AEF4B1D8262E600C6C407 /* ComposeViewController.swift */; };
 		259C62EA1D6D7A3F00884257 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C62E91D6D7A3F00884257 /* PopoverView.swift */; };
 		259C62F21D6D7BE100884257 /* NewFeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C62ED1D6D7BE100884257 /* NewFeatureCell.swift */; };
@@ -104,6 +106,8 @@
 		257B0BA71D7D46B5003EBC91 /* BrowserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserCell.swift; sourceTree = "<group>"; };
 		257B0BA81D7D46B5003EBC91 /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		257B0BAB1D7D46FA003EBC91 /* BrowserPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserPresentationController.swift; sourceTree = "<group>"; };
+		258D373E1DB5BD1600EE02C3 /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		258D37401DB60E4F00EE02C3 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		259AEF4B1D8262E600C6C407 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		259C62E91D6D7A3F00884257 /* PopoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverView.swift; path = Popover/PopoverView.swift; sourceTree = "<group>"; };
 		259C62ED1D6D7BE100884257 /* NewFeatureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFeatureCell.swift; sourceTree = "<group>"; };
@@ -240,6 +244,15 @@
 				257B0BA81D7D46B5003EBC91 /* BrowserViewController.swift */,
 			);
 			path = Browser;
+			sourceTree = "<group>";
+		};
+		258D373D1DB5BD1600EE02C3 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				258D373E1DB5BD1600EE02C3 /* SettingView.swift */,
+				258D37401DB60E4F00EE02C3 /* SettingViewController.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		259AEF4A1D8262E600C6C407 /* Compose */ = {
@@ -496,6 +509,7 @@
 			children = (
 				25F414371DAE2F5000E6FE0B /* ProfileViewController.swift */,
 				2563009F1DA9ECCA00CD8994 /* Model */,
+				258D373D1DB5BD1600EE02C3 /* Setting */,
 				256300A21DA9ECCA00CD8994 /* View */,
 			);
 			path = Profile;
@@ -656,6 +670,7 @@
 				256300A51DA9ECCA00CD8994 /* ProfileModel.swift in Sources */,
 				250622881D5D6201000B542B /* QRCodeViewController.swift in Sources */,
 				25D360071D655BF8004A45AA /* OAuthViewController.swift in Sources */,
+				258D37411DB60E4F00EE02C3 /* SettingViewController.swift in Sources */,
 				25F4143A1DAE3F0E00E6FE0B /* DiscoverHeaderView.swift in Sources */,
 				25A033481D76DD8F00152FE5 /* StatusViewModel.swift in Sources */,
 				252CA6271D863E1B005042F5 /* EmoticonModel.swift in Sources */,
@@ -673,6 +688,7 @@
 				25A033471D76DD8F00152FE5 /* StatusModel.swift in Sources */,
 				25A033511D76DDCA00152FE5 /* VisitorView.swift in Sources */,
 				868890031D3D26E70038F753 /* AppDelegate.swift in Sources */,
+				258D373F1DB5BD1600EE02C3 /* SettingView.swift in Sources */,
 				25F414341DAE2F2100E6FE0B /* ThemeCell.swift in Sources */,
 				25A0333E1D76DB9300152FE5 /* NetworkingUtil.swift in Sources */,
 				259C62F21D6D7BE100884257 /* NewFeatureCell.swift in Sources */,

@@ -30,7 +30,7 @@ class BrowserViewController: UIViewController {
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.setTitle("关闭", forState: .Normal)
-        button.layer.cornerRadius = 5.0
+        button.layer.cornerRadius = kViewEdge
         button.layer.masksToBounds = true
         button.layer.borderWidth = 1.0
         button.layer.borderColor = CommonLightColor.CGColor
@@ -44,7 +44,7 @@ class BrowserViewController: UIViewController {
     private lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("保存", forState: .Normal)
-        button.layer.cornerRadius = 5.0
+        button.layer.cornerRadius = kViewEdge
         button.layer.masksToBounds = true
         button.layer.borderWidth = 1.0
         button.layer.borderColor = CommonLightColor.CGColor

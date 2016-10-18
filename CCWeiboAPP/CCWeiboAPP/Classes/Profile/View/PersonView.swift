@@ -55,7 +55,7 @@ class PersonView: UIView {
      */
     private func setupUI() {
 
-        iconView.layer.cornerRadius = 20.0
+        iconView.layer.cornerRadius = kViewBorder
         iconView.clipsToBounds = true
         addSubview(iconView)
         
@@ -106,8 +106,8 @@ class PersonView: UIView {
         }
         
         constrain(vipButton) { (vipButton) in
-            vipButton.width == 60
-            vipButton.height == 30
+            vipButton.width == kViewAdapter
+            vipButton.height == kViewMargin
             vipButton.top == vipButton.superview!.top  + kViewPadding
             vipButton.right == vipButton.superview!.right - kViewPadding
         }
