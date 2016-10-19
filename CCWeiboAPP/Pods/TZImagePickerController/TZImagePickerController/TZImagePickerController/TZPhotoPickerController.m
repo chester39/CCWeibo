@@ -212,7 +212,7 @@ static CGSize AssetGridThumbnailSize;
     [_okButton setTitle:[NSBundle tz_localizedStringForKey:@"Done"] forState:UIControlStateDisabled];
     [_okButton setTitleColor:tzImagePickerVc.oKButtonTitleColorNormal forState:UIControlStateNormal];
     [_okButton setTitleColor:tzImagePickerVc.oKButtonTitleColorDisabled forState:UIControlStateDisabled];
-    _okButton.enabled = tzImagePickerVc.selectedModels.count || tzImagePickerVc.alwaysEnableDoneBtn;
+    _okButton.enabled = tzImagePickerVc.selectedModels.count;
     
     _numberImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamedFromMyBundle:tzImagePickerVc.photoNumberIconImageName]];
     _numberImageView.frame = CGRectMake(self.view.tz_width - 56 - 28, 10, 30, 30);
@@ -272,13 +272,6 @@ static CGSize AssetGridThumbnailSize;
 
 - (void)okButtonClick {
     TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
-    // 1.6.8 判断是否满足最小必选张数的限制
-    if (tzImagePickerVc.minImagesCount && tzImagePickerVc.selectedModels.count < tzImagePickerVc.minImagesCount) {
-        NSString *title = [NSString stringWithFormat:[NSBundle tz_localizedStringForKey:@"Select a minimum of %zd photos"], tzImagePickerVc.minImagesCount];
-        [tzImagePickerVc showAlertWithTitle:title];
-        return;
-    }
-    
     [tzImagePickerVc showProgressHUD];
     NSMutableArray *photos = [NSMutableArray array];
     NSMutableArray *assets = [NSMutableArray array];
@@ -299,32 +292,24 @@ static CGSize AssetGridThumbnailSize;
 
             for (id item in photos) { if ([item isKindOfClass:[NSNumber class]]) return; }
             
-            [self didGetAllPhotos:photos assets:assets infoArr:infoArr];
-        }];
-    }
-    if (tzImagePickerVc.selectedModels.count <= 0) {
-        [self didGetAllPhotos:photos assets:assets infoArr:infoArr];
-    }
-}
+            if ([tzImagePickerVc.pickerDelegate respondsToSelector:@selector(imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:)]) {
+                [tzImagePickerVc.pickerDelegate imagePickerController:tzImagePickerVc didFinishPickingPhotos:photos sourceAssets:assets isSelectOriginalPhoto:_isSelectOriginalPhoto];
+            }
+            if ([tzImagePickerVc.pickerDelegate respondsToSelector:@selector(imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:infos:)]) {
+                [tzImagePickerVc.pickerDelegate imagePickerController:tzImagePickerVc didFinishPickingPhotos:photos sourceAssets:assets isSelectOriginalPhoto:_isSelectOriginalPhoto infos:infoArr];
+            }
+            if (tzImagePickerVc.didFinishPickingPhotosHandle) {
+                tzImagePickerVc.didFinishPickingPhotosHandle(photos,assets,_isSelectOriginalPhoto);
+            }
+            if (tzImagePickerVc.didFinishPickingPhotosWithInfosHandle) {
+                tzImagePickerVc.didFinishPickingPhotosWithInfosHandle(photos,assets,_isSelectOriginalPhoto,infoArr);
+            }
+            [tzImagePickerVc hideProgressHUD];
 
-- (void)didGetAllPhotos:(NSArray *)photos assets:(NSArray *)assets infoArr:(NSArray *)infoArr{
-    TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
-    if ([tzImagePickerVc.pickerDelegate respondsToSelector:@selector(imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:)]) {
-        [tzImagePickerVc.pickerDelegate imagePickerController:tzImagePickerVc didFinishPickingPhotos:photos sourceAssets:assets isSelectOriginalPhoto:_isSelectOriginalPhoto];
-    }
-    if ([tzImagePickerVc.pickerDelegate respondsToSelector:@selector(imagePickerController:didFinishPickingPhotos:sourceAssets:isSelectOriginalPhoto:infos:)]) {
-        [tzImagePickerVc.pickerDelegate imagePickerController:tzImagePickerVc didFinishPickingPhotos:photos sourceAssets:assets isSelectOriginalPhoto:_isSelectOriginalPhoto infos:infoArr];
-    }
-    if (tzImagePickerVc.didFinishPickingPhotosHandle) {
-        tzImagePickerVc.didFinishPickingPhotosHandle(photos,assets,_isSelectOriginalPhoto);
-    }
-    if (tzImagePickerVc.didFinishPickingPhotosWithInfosHandle) {
-        tzImagePickerVc.didFinishPickingPhotosWithInfosHandle(photos,assets,_isSelectOriginalPhoto,infoArr);
-    }
-    [tzImagePickerVc hideProgressHUD];
-    
-    if (tzImagePickerVc.autoDismiss) {
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            if (tzImagePickerVc.autoDismiss) {
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
     }
 }
 
@@ -461,16 +446,16 @@ static CGSize AssetGridThumbnailSize;
 }
 
 - (void)refreshBottomToolBarStatus {
-    TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
+    TZImagePickerController *imagePickerVc = (TZImagePickerController *)self.navigationController;
     
-    _previewButton.enabled = tzImagePickerVc.selectedModels.count > 0;
-    _okButton.enabled = tzImagePickerVc.selectedModels.count > 0 || tzImagePickerVc.alwaysEnableDoneBtn;
+    _previewButton.enabled = imagePickerVc.selectedModels.count > 0;
+    _okButton.enabled = imagePickerVc.selectedModels.count > 0;
     
-    _numberImageView.hidden = tzImagePickerVc.selectedModels.count <= 0;
-    _numberLable.hidden = tzImagePickerVc.selectedModels.count <= 0;
-    _numberLable.text = [NSString stringWithFormat:@"%zd",tzImagePickerVc.selectedModels.count];
+    _numberImageView.hidden = imagePickerVc.selectedModels.count <= 0;
+    _numberLable.hidden = imagePickerVc.selectedModels.count <= 0;
+    _numberLable.text = [NSString stringWithFormat:@"%zd",imagePickerVc.selectedModels.count];
     
-    _originalPhotoButton.enabled = tzImagePickerVc.selectedModels.count > 0;
+    _originalPhotoButton.enabled = imagePickerVc.selectedModels.count > 0;
     _originalPhotoButton.selected = (_isSelectOriginalPhoto && _originalPhotoButton.enabled);
     _originalPhotoLable.hidden = (!_originalPhotoButton.isSelected);
     if (_isSelectOriginalPhoto) [self getSelectedPhotoBytes];
