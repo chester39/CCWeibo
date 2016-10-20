@@ -25,7 +25,7 @@ class PopoverPresentationController: UIPresentationController {
     /**
      自定义初始化方法
      */
-    override init(presentedViewController: UIViewController, presentingViewController: UIViewController) {
+    override init(presentedViewController: UIViewController, presentingViewController: UIViewController?) {
         
         super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
     }

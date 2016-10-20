@@ -188,12 +188,12 @@ extension UIImage {
         let context = UIGraphicsGetCurrentContext()
         drawInRect(rect)
         
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextSetAlpha(context, alpha)
-        CGContextSetBlendMode(context, .SourceAtop)
-        CGContextFillRect(context, rect)
+        CGContextSetFillColorWithColor(context!, color.CGColor)
+        CGContextSetAlpha(context!, alpha)
+        CGContextSetBlendMode(context!, .SourceAtop)
+        CGContextFillRect(context!, rect)
         
-        let imageRef = CGBitmapContextCreateImage(context)!
+        let imageRef = CGBitmapContextCreateImage(context!)!
         let newImage = UIImage(CGImage: imageRef, scale: scale, orientation: imageOrientation)
         UIGraphicsEndImageContext()
         
@@ -214,13 +214,13 @@ extension UIImage {
         UIGraphicsEndImageContext()
         
         UIGraphicsBeginImageContext(size)
-        colorImage.drawInRect(rect)
+        colorImage!.drawInRect(rect)
         drawInRect(rect)
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImage
+        return newImage!
     }
     
 }

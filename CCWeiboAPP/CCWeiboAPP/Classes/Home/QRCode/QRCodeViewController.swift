@@ -153,7 +153,7 @@ extension QRCodeViewController: UINavigationControllerDelegate, UIImagePickerCon
         }
         
         let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyLow])
-        let resultArray = detector.featuresInImage(ciImage)
+        let resultArray = detector!.featuresInImage(ciImage)
         for result in resultArray {
             print((result as! CIQRCodeFeature).messageString)
         }

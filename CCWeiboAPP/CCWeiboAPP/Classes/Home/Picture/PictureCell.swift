@@ -20,7 +20,7 @@ class PictureCell: UICollectionViewCell {
     var url: NSURL? {
         didSet {
             imageView.sd_setImageWithURL(url)
-            if let flag = url?.absoluteString.lowercaseString.hasSuffix("gif") {
+            if let flag = url?.absoluteString!.lowercaseString.hasSuffix("gif") {
                 gifView.hidden = !flag
             }
         }

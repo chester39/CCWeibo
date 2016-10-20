@@ -35,6 +35,14 @@ class BrowserPresentationController: UIPresentationController {
     weak var browserDelegate: BrowserPresentationDelegate?
     
     /**
+     自定义初始化方法
+     */
+    override init(presentedViewController: UIViewController, presentingViewController: UIViewController?) {
+        
+        super.init(presentedViewController: presentedViewController, presentingViewController: presentingViewController)
+    }
+    
+    /**
      获取默认数据方法
      */
     func acquireDefaultData(indexPath: NSIndexPath, browserDelegate: BrowserPresentationDelegate) {
@@ -50,7 +58,7 @@ extension BrowserPresentationController: UIViewControllerTransitioningDelegate {
     /**
      衔接被显示和发起显示控制器方法
      */
-    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController) -> UIPresentationController? {
         
         return BrowserPresentationController(presentedViewController: presented, presentingViewController: presenting)
     }
@@ -113,14 +121,14 @@ extension BrowserPresentationController: UIViewControllerAnimatedTransitioning {
         
         let imageView = browserDelegate!.browerPresentationWillShowImageView(self, indexPath: indexPath!)
         imageView.frame = browserDelegate!.browerPresentationWillFromFrame(self, indexPath: indexPath!)
-        transitionContext.containerView()?.addSubview(toView)
+        transitionContext.containerView().addSubview(toView)
         let toFrame = browserDelegate!.browerPresentationWillToFrame(self, indexPath: indexPath!)
         
         UIView.animateWithDuration(transitionDuration(transitionContext), animations: {
             imageView.frame = toFrame
         }) { (_) in
             imageView.removeFromSuperview()
-            transitionContext.containerView()?.addSubview(toView)
+            transitionContext.containerView().addSubview(toView)
             transitionContext.completeTransition(true)
         }
     }

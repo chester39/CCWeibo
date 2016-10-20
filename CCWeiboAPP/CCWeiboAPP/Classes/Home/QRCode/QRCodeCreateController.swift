@@ -78,10 +78,10 @@ class QRCodeCreateController: UIViewController {
         
         let width = CGRectGetWidth(extent) * scale
         let height = CGRectGetHeight(extent) * scale
-        let colorSpaceRef: CGColorSpaceRef = CGColorSpaceCreateDeviceGray()!
+        let colorSpaceRef: CGColorSpaceRef = CGColorSpaceCreateDeviceGray()
         let bitmapRef = CGBitmapContextCreate(nil, Int(width), Int(height), 8, 0, colorSpaceRef, 0)!
         let context = CIContext(options: nil)
-        let bitmapImage: CGImageRef = context.createCGImage(image, fromRect: extent)
+        let bitmapImage: CGImageRef = context.createCGImage(image, fromRect: extent)!
         
         CGContextSetInterpolationQuality(bitmapRef, CGInterpolationQuality.None)
         CGContextScaleCTM(bitmapRef, scale, scale)

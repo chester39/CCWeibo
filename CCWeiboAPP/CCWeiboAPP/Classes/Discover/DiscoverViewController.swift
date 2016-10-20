@@ -15,7 +15,7 @@ class DiscoverViewController: BaseViewController {
     /// 微博数组
     var statusArray: [StatusViewModel]?
     /// 浏览视图转场管理器
-    private var browerPresentationManager = BrowserPresentationController()
+    private lazy var browerPresentationManager: BrowserPresentationController = BrowserPresentationController()
     /// 搜索控制器
     private var searchVC = UISearchController()
     /// 搜索结果数组

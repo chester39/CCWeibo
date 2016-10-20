@@ -20,7 +20,7 @@ extension PopoverPresentationManager: UIViewControllerTransitioningDelegate {
     /**
      衔接被显示和发起显示控制器方法
      */
-    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController) -> UIPresentationController? {
         
         let ppc = PopoverPresentationController(presentedViewController: presented, presentingViewController: presenting)
         ppc.presentFrame = presentFrame
@@ -85,7 +85,7 @@ extension PopoverPresentationManager: UIViewControllerAnimatedTransitioning {
             return
         }
         
-        transitionContext.containerView()?.addSubview(toView)
+        transitionContext.containerView().addSubview(toView)
         toView.transform = CGAffineTransformMakeScale(1.0, 0.0)
         toView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.0)
         UIView.animateWithDuration(transitionDuration(transitionContext), animations: {
