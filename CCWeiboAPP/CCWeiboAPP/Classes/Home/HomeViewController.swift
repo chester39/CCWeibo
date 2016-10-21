@@ -17,7 +17,7 @@ class HomeViewController: BaseViewController {
     /// 最后一条微博与否
     private var isLastStatus = false
     /// 浏览视图转场管理器
-    private lazy var browerPresentationManager: BrowserPresentationController = BrowserPresentationController()
+    private lazy var browerPresentationManager: BrowserPresentationController = BrowserPresentationController(presentedViewController: self, presentingViewController: nil)
     /// 微博Cell重用标识符
     private let weiboReuseIdentifier = "WeiboStatusCell"
     /// 转发微博Cell重用标识符
