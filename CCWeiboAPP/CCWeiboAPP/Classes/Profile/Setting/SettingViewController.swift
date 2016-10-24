@@ -16,6 +16,8 @@ class SettingViewController: UIViewController {
     var tableView = UITableView(frame: kScreenFrame, style: .Plain)
     /// 设置视图
     var settingView = SettingView()
+    
+    var imageView = UIImageView(frame: CGRect(x: 0, y: -kTopHeight, width: kScreenWidth, height: 200))
     /// 设置Cell重用标识符
     private let reuseIdentifier = "SettingCell"
     
@@ -38,7 +40,8 @@ class SettingViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
-        navigationController?.navigationBarHidden = true
+        let coverView = navigationController?.navigationBar.subviews.first
+        coverView?.alpha = 0
     }
     
     /**
@@ -48,7 +51,8 @@ class SettingViewController: UIViewController {
         
         super.viewWillDisappear(animated)
         
-        navigationController?.navigationBarHidden = false
+        let coverView = navigationController?.navigationBar.subviews.first
+        coverView?.alpha = 1
     }
     
     /**
@@ -58,11 +62,14 @@ class SettingViewController: UIViewController {
         
         if keyPath == "contentOffset" {
             let offset = change![NSKeyValueChangeNewKey]!.CGPointValue
-            if offset.y <= 0 && -offset.y >= kViewDistance {
-                settingView.frame.size.height = -offset.y
+            if offset.y <= 0 {
+                let scale = ((tableView.tableHeaderView?.frame.size.height)! - offset.y) / (tableView.tableHeaderView?.frame.size.height)!
+                imageView.transform = CGAffineTransformMakeScale(scale, scale)
+                imageView.f
                 
             } else {
                 settingView.frame.size.height = kViewDistance
+                
             }
         }
     }
@@ -85,13 +92,14 @@ class SettingViewController: UIViewController {
         edgesForExtendedLayout = .None
         tableView.contentInset = UIEdgeInsets(top: kTopHeight, left: 0, bottom: 0, right: 0)
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.addObserver(self, forKeyPath: "contentOffset", options: .New, context: nil)
         view.addSubview(tableView)
         
-        settingView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: kViewDistance)
-        view.addSubview(settingView)
-        view.bringSubviewToFront(settingView)
+        imageView.image = UIImage(named: "compose_app_empty")
+        view.addSubview(imageView)
+        
     }
 
 }
@@ -122,5 +130,16 @@ extension SettingViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
         
         return cell
+    }
+    
+}
+
+extension SettingViewController: UITableViewDelegate {
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        UIView.animateWithDuration(1.0) { 
+            self.settingView.alpha = 1.0
+        }
     }
 }
