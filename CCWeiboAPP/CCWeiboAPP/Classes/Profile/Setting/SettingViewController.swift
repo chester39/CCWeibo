@@ -13,11 +13,11 @@ import SDWebImage
 class SettingViewController: UIViewController {
     
     /// 表格视图
-    var tableView = UITableView(frame: kScreenFrame, style: .Plain)
-    /// 设置视图
-    var settingView = SettingView()
-    
-    var imageView = UIImageView(frame: CGRect(x: 0, y: -kTopHeight, width: kScreenWidth, height: 200))
+    var tableView = UITableView(frame: kScreenFrame, style: .Grouped)
+    /// 图片视图
+    var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewDistance))
+    /// 导航栏背景视图
+    var barView = UIView()
     /// 设置Cell重用标识符
     private let reuseIdentifier = "SettingCell"
     
@@ -40,8 +40,7 @@ class SettingViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
-        let coverView = navigationController?.navigationBar.subviews.first
-        coverView?.alpha = 0
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     /**
@@ -51,55 +50,40 @@ class SettingViewController: UIViewController {
         
         super.viewWillDisappear(animated)
         
-        let coverView = navigationController?.navigationBar.subviews.first
-        coverView?.alpha = 1
+        navigationController?.navigationBar.barTintColor = nil
+        navigationController?.navigationBar.tintColor = MainColor
+        navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
     }
-    
-    /**
-     KVO观察者方法
-     */
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        
-        if keyPath == "contentOffset" {
-            let offset = change![NSKeyValueChangeNewKey]!.CGPointValue
-            if offset.y <= 0 {
-                let scale = ((tableView.tableHeaderView?.frame.size.height)! - offset.y) / (tableView.tableHeaderView?.frame.size.height)!
-                imageView.transform = CGAffineTransformMakeScale(scale, scale)
-                imageView.f
-                
-            } else {
-                settingView.frame.size.height = kViewDistance
-                
-            }
-        }
-    }
-    
-    /**
-     反初始化方法
-     */
-    deinit {
-        
-        tableView.removeObserver(self, forKeyPath: "contentOffset")
-    }
-    
+  
     // MARK: - 界面方法
     
     /**
      初始化界面方法
      */
     private func setupUI() {
+
+        navigationController?.navigationBar.barTintColor = MainColor
+        navigationController?.navigationBar.tintColor = CommonDarkColor
+        navigationItem.title = "设置"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
         
-        edgesForExtendedLayout = .None
-        tableView.contentInset = UIEdgeInsets(top: kTopHeight, left: 0, bottom: 0, right: 0)
+        tableView.showsVerticalScrollIndicator = false
+        tableView.tableHeaderView = imageView
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.addObserver(self, forKeyPath: "contentOffset", options: .New, context: nil)
         view.addSubview(tableView)
         
         imageView.image = UIImage(named: "compose_app_empty")
-        view.addSubview(imageView)
+        barView = (navigationController?.navigationBar.subviews.first)!
+    }
+    
+    /**
+     关闭按钮点击方法
+     */
+    func closeButtonDidClick() {
         
+        navigationController?.popViewControllerAnimated(true)
     }
 
 }
@@ -111,7 +95,7 @@ extension SettingViewController: UITableViewDataSource {
      */
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return 1
+        return 4
     }
     
     /**
@@ -119,7 +103,22 @@ extension SettingViewController: UITableViewDataSource {
      */
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 30
+        switch section {
+        case 0:
+            return 2
+          
+        case 1:
+            return 3
+            
+        case 2:
+            return 3
+            
+        case 3:
+            return 1
+            
+        default:
+            return 0
+        }
     }
     
     /**
@@ -128,6 +127,56 @@ extension SettingViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "账号管理"
+                
+            case 1:
+                cell.textLabel?.text = "账号安全"
+                
+            default:
+                break
+            }
+            
+        case 1:
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "通知"
+                
+            case 1:
+                cell.textLabel?.text = "隐私"
+                
+            case 2:
+                cell.textLabel?.text = "通用设置"
+                
+            default:
+                break
+            }
+            
+        case 2:
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "清理缓存"
+                
+            case 1:
+                cell.textLabel?.text = "意见反馈"
+                
+            case 2:
+                cell.textLabel?.text = "关于微博"
+                
+            default:
+                break
+            }
+            
+        case 3:
+            cell.textLabel?.text = "退出当前账号"
+            cell.textLabel?.textColor = MainColor
+            
+        default:
+            break
+        }
         
         return cell
     }
@@ -136,10 +185,52 @@ extension SettingViewController: UITableViewDataSource {
 
 extension SettingViewController: UITableViewDelegate {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    /**
+     选中行方法
+     */
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        UIView.animateWithDuration(1.0) { 
-            self.settingView.alpha = 1.0
+        if indexPath.section == 2 && indexPath.row == 0 {
+            let cachesSize = view.acquireCachesSize()
+            let format = String(format: "%.2f", cachesSize)
+            let message = "当前缓存为\(format) MB，是否需要清除？"
+            let alertVC = UIAlertController(title: "清理缓存", message: message, preferredStyle: .Alert)
+            let cancelButton = UIAlertAction(title: "取消", style: .Cancel) { (action) in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+            let okButton = UIAlertAction.init(title: "确定", style: .Destructive) { (action) in
+                self.view.clearCaches()
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+            alertVC.addAction(cancelButton)
+            alertVC.addAction(okButton)
+            presentViewController(alertVC, animated: true, completion: nil)
+            
+        } else if indexPath.section == 3 {
+            let message = "是否退出当前账号？"
+            let alertVC = UIAlertController(title: "退出当前账号", message: message, preferredStyle: .Alert)
+            let cancelButton = UIAlertAction(title: "取消", style: .Cancel) { (action) in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+            let okButton = UIAlertAction.init(title: "确定", style: .Destructive) { (action) in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+            alertVC.addAction(cancelButton)
+            alertVC.addAction(okButton)
+            presentViewController(alertVC, animated: true, completion: nil)
         }
     }
+    
+    /**
+     开始滚动方法
+     */
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        barView.alpha = scrollView.contentOffset.y / kViewDistance
+    }
+    
 }

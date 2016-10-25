@@ -81,7 +81,7 @@ extension String {
      */
     func acquireCachesDirectory() -> String {
         
-        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last!
+        let path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).last!
         let name = (self as NSString).lastPathComponent
         let filePath = (path as NSString).stringByAppendingPathComponent(name)
         
@@ -93,7 +93,7 @@ extension String {
      */
     func acquireDocumentDirectory() -> String {
         
-        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last!
+        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).last!
         let name = (self as NSString).lastPathComponent
         let filePath = (path as NSString).stringByAppendingPathComponent(name)
         
@@ -105,7 +105,7 @@ extension String {
      */
     func acquireTemporaryDirectory() -> String {
         
-        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last!
+        let path = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).last!
         let name = (self as NSString).lastPathComponent
         let filePath = (path as NSString).stringByAppendingPathComponent(name)
         
@@ -297,6 +297,53 @@ extension UITextView {
         }
         
         return string
+    }
+    
+}
+
+extension UIView {
+    
+    /**
+     获取缓存大小方法
+     */
+    func acquireCachesSize() -> Float {
+        
+        let cachePath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).last!
+        let fileAttributes = NSFileManager.defaultManager().subpathsAtPath(cachePath)!
+        var size = 0
+        for fileName in fileAttributes {
+            let path = cachePath.stringByAppendingString("/\(fileName)")
+            let attributes = try! NSFileManager.defaultManager().attributesOfItemAtPath(path)
+            for (numberA, numberB) in attributes {
+                if numberA == NSFileSize {
+                    size += numberB as! Int
+                }
+            }
+        }
+        
+        let mb: Float = Float(size) / 1024 / 1024
+        
+        return mb
+    }
+    
+    /**
+     清除缓存方法
+     */
+    func clearCaches() {
+     
+        let cachePath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true).last!
+        let fileAttributes = NSFileManager.defaultManager().subpathsAtPath(cachePath)!
+        for fileName in fileAttributes {
+            let path = cachePath.stringByAppendingString("/\(fileName)")
+            if NSFileManager.defaultManager().fileExistsAtPath(path) {
+                do {
+                    try NSFileManager.defaultManager().removeItemAtPath(path)
+                    
+                } catch {
+                    print("清除缓存失败")
+                }
+            }
+        }
     }
     
 }

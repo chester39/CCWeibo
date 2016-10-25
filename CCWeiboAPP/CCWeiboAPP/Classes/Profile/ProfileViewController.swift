@@ -154,9 +154,10 @@ extension ProfileViewController {
         
         let message = "测试使用"
         let alertVC = UIAlertController(title: profile.title, message: message, preferredStyle: .Alert)
-        let cancelButton = UIAlertAction.init(title: "确定", style: .Cancel) { (action) in
+        let cancelButton = UIAlertAction(title: "确定", style: .Cancel) { (action) in
             self.dismissViewControllerAnimated(true, completion: nil)
         }
+        
         alertVC.addAction(cancelButton)
         presentViewController(alertVC, animated: true, completion: nil)
     }

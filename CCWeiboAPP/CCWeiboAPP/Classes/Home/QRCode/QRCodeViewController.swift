@@ -54,7 +54,7 @@ class QRCodeViewController: UIViewController {
         view = qrCodeView
         
         navigationController?.navigationBar.barTintColor = CommonDarkColor
-        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(19), NSForegroundColorAttributeName: CommonLightColor]
+        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(20), NSForegroundColorAttributeName: CommonLightColor]
         navigationItem.title = "扫一扫"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "相册", style: .Plain, target: self, action: #selector(albumButtonDidClick))
