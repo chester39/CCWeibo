@@ -216,7 +216,17 @@ extension SettingViewController: UITableViewDelegate {
             }
             
             let okButton = UIAlertAction.init(title: "确定", style: .Destructive) { (action) in
+                
+                if NSFileManager.defaultManager().fileExistsAtPath(UserAccount.filePath) {
+                    do {
+                        try NSFileManager.defaultManager().removeItemAtPath(UserAccount.filePath)
+                        
+                    } catch {
+                        print("退出失败")
+                    }
+                }
                 self.dismissViewControllerAnimated(true, completion: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName(kRootViewControllerSwitched, object: false)
             }
             
             alertVC.addAction(cancelButton)
