@@ -248,6 +248,26 @@ extension DiscoverViewController {
         }
     }
     
+    /**
+     开始滚动方法
+     */
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        let offsetY = scrollView.contentOffset.y + tableView.contentInset.top
+        let panTranslationY = scrollView.panGestureRecognizer.translationInView(tableView).y
+        if offsetY > 64 {
+            if panTranslationY > 0 {
+                navigationController?.setNavigationBarHidden(false, animated: true)
+                
+            } else {
+                navigationController?.setNavigationBarHidden(true, animated: true)
+            }
+            
+        } else {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
+    
 }
 
 extension DiscoverViewController: UISearchControllerDelegate {

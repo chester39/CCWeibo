@@ -113,3 +113,5 @@ let kRootViewControllerSwitched: String = "RootViewControllerSwitched"
 let kAppVersion: String = "AppVersion"
 /// 图片浏览器展示
 let kBrowserViewControllerShowed: String = "BrowserViewControllerShowed"
+/// 微博推送
+let kWeiboNotification: String = "WeiboNotification"

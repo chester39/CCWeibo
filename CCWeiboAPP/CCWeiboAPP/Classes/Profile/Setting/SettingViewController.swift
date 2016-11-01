@@ -8,8 +8,6 @@
 
 import UIKit
 
-import SDWebImage
-
 class SettingViewController: UIViewController {
     
     /// 表格视图
@@ -18,6 +16,8 @@ class SettingViewController: UIViewController {
     var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewDistance))
     /// 导航栏背景视图
     var barView = UIView()
+    /// 临时透明度
+    var tempAlpha: CGFloat = 0
     /// 设置Cell重用标识符
     private let reuseIdentifier = "SettingCell"
     
@@ -41,6 +41,8 @@ class SettingViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.shadowImage = UIImage()
+        barView = (navigationController?.navigationBar.subviews.first)!
+        barView.alpha = tempAlpha
     }
     
     /**
@@ -67,15 +69,20 @@ class SettingViewController: UIViewController {
         navigationItem.title = "设置"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
         
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewDistance))
+        headerView.backgroundColor = UIColor.clearColor()
+        
         tableView.showsVerticalScrollIndicator = false
-        tableView.tableHeaderView = imageView
+        tableView.tableHeaderView = headerView
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         view.addSubview(tableView)
         
-        imageView.image = UIImage(named: "compose_app_empty")
-        barView = (navigationController?.navigationBar.subviews.first)!
+        imageView.image = UIImage(named: "arsenal_background")
+        imageView.contentMode = .ScaleAspectFill
+        imageView.clipsToBounds = true
+        view.addSubview(imageView)
     }
     
     /**
@@ -83,7 +90,7 @@ class SettingViewController: UIViewController {
      */
     func closeButtonDidClick() {
         
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(false)
     }
 
 }
@@ -225,6 +232,7 @@ extension SettingViewController: UITableViewDelegate {
                         print("退出失败")
                     }
                 }
+                
                 self.dismissViewControllerAnimated(true, completion: nil)
                 NSNotificationCenter.defaultCenter().postNotificationName(kRootViewControllerSwitched, object: false)
             }
@@ -240,7 +248,22 @@ extension SettingViewController: UITableViewDelegate {
      */
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
-        barView.alpha = scrollView.contentOffset.y / kViewDistance
+        let offsetY = scrollView.contentOffset.y
+        if offsetY >= 0 {
+            imageView.frame.origin.y = -offsetY
+            if offsetY <= kViewDistance {
+                tempAlpha = (offsetY / (kViewDistance - kTopHeight) >= 1) ? 1 : offsetY / (kViewDistance - kTopHeight)
+                
+            } else if offsetY > kViewDistance {
+                tempAlpha = 1.0
+            }
+            
+            barView.alpha = tempAlpha
+            
+        } else {
+            imageView.transform = CGAffineTransformMakeScale(1 + offsetY / -kViewDistance, 1 + offsetY / -kViewDistance)
+            imageView.frame.origin.y = 0
+        }
     }
     
 }

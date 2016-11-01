@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(changeRootViewController(_:)), name: kRootViewControllerSwitched, object: nil)
         registerNotification()
+        createLocalNotification()
         
         return true
     }
@@ -193,8 +194,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func createLocalNotification() {
         
         let components = NSDateComponents()
-        components.hour = 20
-        components.minute = 30
+        components.weekday = 3
+        components.hour = 18
+        components.minute = 18
         
         if #available(iOS 10.0, *) {
             let content = UNMutableNotificationContent()
@@ -204,8 +206,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             content.body = "打开App，速度查看最新最快的微博消息！"
             content.userInfo = ["url": "http://weibo.com"]
             
-            let trigger = UNCalendarNotificationTrigger(dateMatchingComponents: components, repeats: true)
-            let request = UNNotificationRequest(identifier: "WeiboNotification", content: content, trigger: trigger)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//            let trigger = UNCalendarNotificationTrigger(dateMatchingComponents: components, repeats: true)
+            let request = UNNotificationRequest(identifier: kWeiboNotification, content: content, trigger: trigger)
             UNUserNotificationCenter.currentNotificationCenter().addNotificationRequest(request, withCompletionHandler: { (error) in
                 if error == nil {
                     print("本地推送成功")

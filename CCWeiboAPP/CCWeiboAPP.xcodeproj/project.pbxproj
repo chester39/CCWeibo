@@ -99,6 +99,7 @@
 		255467F21D912B360060874A /* KeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
 		255467F31D912B360060874A /* PlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
 		255467F41D912B360060874A /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		255E13471DC8388A00ECFF26 /* CC微博.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CC微博.entitlements"; sourceTree = "<group>"; };
 		256300A01DA9ECCA00CD8994 /* ProfileGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGroup.swift; sourceTree = "<group>"; };
 		256300A11DA9ECCA00CD8994 /* ProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		256300A61DA9ECFF00CD8994 /* PersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
@@ -397,6 +398,7 @@
 		868890011D3D26E70038F753 /* CCWeiboAPP */ = {
 			isa = PBXGroup;
 			children = (
+				255E13471DC8388A00ECFF26 /* CC微博.entitlements */,
 				868890021D3D26E70038F753 /* AppDelegate.swift */,
 				25D360091D66A6EB004A45AA /* CCWeiboAPP-Bridging-Header.h */,
 				25A129971D7FB4230031570C /* Color.swift */,
@@ -558,6 +560,17 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = U4A6RHW364;
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -826,6 +839,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_ENTITLEMENTS = "CCWeiboAPP/CC微博.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CCWeiboAPP/Info.plist;
@@ -845,6 +859,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_ENTITLEMENTS = "CCWeiboAPP/CC微博.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CCWeiboAPP/Info.plist;
