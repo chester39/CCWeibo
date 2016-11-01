@@ -64,12 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     func applicationDidBecomeActive(application: UIApplication) {
 
-        let number = application.applicationIconBadgeNumber
-        if number != 0 {
-            application.applicationIconBadgeNumber = 0
-        }
-        
-        application.cancelAllLocalNotifications()
+        application.applicationIconBadgeNumber = 0
     }
 
     /**
@@ -194,9 +189,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func createLocalNotification() {
         
         let components = NSDateComponents()
-        components.weekday = 3
-        components.hour = 18
-        components.minute = 18
+        components.hour = 20
+        components.minute = 30
         
         if #available(iOS 10.0, *) {
             let content = UNMutableNotificationContent()
@@ -206,8 +200,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             content.body = "打开App，速度查看最新最快的微博消息！"
             content.userInfo = ["url": "http://weibo.com"]
             
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-//            let trigger = UNCalendarNotificationTrigger(dateMatchingComponents: components, repeats: true)
+            let trigger = UNCalendarNotificationTrigger(dateMatchingComponents: components, repeats: true)
             let request = UNNotificationRequest(identifier: kWeiboNotification, content: content, trigger: trigger)
             UNUserNotificationCenter.currentNotificationCenter().addNotificationRequest(request, withCompletionHandler: { (error) in
                 if error == nil {
