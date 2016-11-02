@@ -110,7 +110,7 @@ class PhotoPickerCell: UICollectionViewCell {
     private func removeExistingImageView() {
         
         for view in subviews {
-            if view.isKindOfClass(UIImageView.self) {
+            if view is UIImageView {
                 view.removeFromSuperview()
             }
         }

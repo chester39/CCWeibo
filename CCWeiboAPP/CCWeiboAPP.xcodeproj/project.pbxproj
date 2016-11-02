@@ -65,7 +65,6 @@
 		867D5D371D8D327D00B5A41F /* PhotoPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867D5D361D8D327D00B5A41F /* PhotoPickerCell.swift */; };
 		868890031D3D26E70038F753 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868890021D3D26E70038F753 /* AppDelegate.swift */; };
 		8688900A1D3D26E70038F753 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 868890091D3D26E70038F753 /* Assets.xcassets */; };
-		8688900D1D3D26E70038F753 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8688900B1D3D26E70038F753 /* LaunchScreen.storyboard */; };
 		86B5E9951D44FCF100A5D0F0 /* MainViewControllerSettings.json in Resources */ = {isa = PBXBuildFile; fileRef = 86B5E9931D44FCF100A5D0F0 /* MainViewControllerSettings.json */; };
 		86B5E9981D44FD1200A5D0F0 /* NullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5E9971D44FD1200A5D0F0 /* NullViewController.swift */; };
 		86C36E6B1DCA0E66006A6FEA /* AdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C36E681DCA0E66006A6FEA /* AdViewController.swift */; };
@@ -144,7 +143,6 @@
 		86888FFF1D3D26E70038F753 /* CC微博.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CC微博.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		868890021D3D26E70038F753 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		868890091D3D26E70038F753 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8688900C1D3D26E70038F753 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8688900E1D3D26E70038F753 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86B5E9931D44FCF100A5D0F0 /* MainViewControllerSettings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MainViewControllerSettings.json; sourceTree = "<group>"; };
 		86B5E9971D44FD1200A5D0F0 /* NullViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullViewController.swift; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 		86D700511D411C26003C65D7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		86D700531D411C48003C65D7 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		86D700571D411C7C003C65D7 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
-		86F761E11DC4B1250034CD79 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		ABCB858622B0C382EF7E306D /* Pods-CCWeiboAPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCWeiboAPP.release.xcconfig"; path = "Pods/Target Support Files/Pods-CCWeiboAPP/Pods-CCWeiboAPP.release.xcconfig"; sourceTree = "<group>"; };
 		F70C364AD593EBEE2DD624DB /* Pods_CCWeiboAPP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCWeiboAPP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -409,7 +406,6 @@
 				25A0333D1D76DB9300152FE5 /* NetworkingUtil.swift */,
 				86D700491D411B79003C65D7 /* Classes */,
 				868890091D3D26E70038F753 /* Assets.xcassets */,
-				8688900B1D3D26E70038F753 /* LaunchScreen.storyboard */,
 				8688900E1D3D26E70038F753 /* Info.plist */,
 			);
 			path = CCWeiboAPP;
@@ -611,7 +607,6 @@
 				25F414421DAF765C00E6FE0B /* BasicMessage.json in Resources */,
 				25F4143E1DAE410B00E6FE0B /* DiscoverTopic.json in Resources */,
 				25F414251DADE61800E6FE0B /* WeiboProfile.json in Resources */,
-				8688900D1D3D26E70038F753 /* LaunchScreen.storyboard in Resources */,
 				25F4143D1DAE410B00E6FE0B /* DiscoverTheme.json in Resources */,
 				8688900A1D3D26E70038F753 /* Assets.xcassets in Resources */,
 				86B5E9951D44FCF100A5D0F0 /* MainViewControllerSettings.json in Resources */,
@@ -742,18 +737,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		8688900B1D3D26E70038F753 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8688900C1D3D26E70038F753 /* Base */,
-				86F761E11DC4B1250034CD79 /* zh-Hans */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8688900F1D3D26E70038F753 /* Debug */ = {

@@ -82,7 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         
-        print("设备注册成功，\(deviceToken)")
+        var deviceString = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
+        deviceString = deviceString.stringByReplacingOccurrencesOfString(" ", withString: "")
+        print("设备注册成功，\(deviceString)")
     }
     
     /**
@@ -167,11 +169,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UIApplication.sharedApplication().registerForRemoteNotifications()
                 if granted {
                     print("授权注册成功")
+                    
                 } else {
                     print("授权注册失败")
                 }
             })
-            
             center.getNotificationSettingsWithCompletionHandler({ (setting) in
                 if setting.authorizationStatus == .Authorized {
                     print("已授权")
@@ -213,14 +215,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
             
         } else {
+            let pushDate = NSDate(timeIntervalSince1970: 12 * 60 * 60 + 30)
             let notification = UILocalNotification()
-            let pushDate = NSDate(timeIntervalSinceNow: 10)
             notification.fireDate = pushDate
+            notification.timeZone = NSTimeZone.defaultTimeZone()
+            notification.soundName = UILocalNotificationDefaultSoundName
             notification.alertTitle = "新的微博消息"
             notification.alertBody = "打开App，速度查看最新最快的微博消息！"
             notification.applicationIconBadgeNumber = 1
             notification.userInfo = ["url": "http://weibo.com"]
             UIApplication.sharedApplication().scheduleLocalNotification(notification)
+            print("本地推送成功")
         }
     }
     
@@ -237,7 +242,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let userInfo = response.notification.request.content.userInfo
         print(userInfo)
         if response.notification.request.trigger is UNPushNotificationTrigger {
-            print("远程推送")
+            let adVC = AdViewController()
+            window?.rootViewController = adVC
             
         } else {
             let adVC = AdViewController()
