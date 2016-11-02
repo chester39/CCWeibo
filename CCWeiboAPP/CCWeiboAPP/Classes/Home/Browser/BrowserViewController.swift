@@ -29,11 +29,11 @@ class BrowserViewController: UIViewController {
     /// 关闭按钮
     private lazy var closeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("关闭", forState: .Normal)
         button.layer.cornerRadius = kViewEdge
         button.layer.masksToBounds = true
         button.layer.borderWidth = 1.0
         button.layer.borderColor = CommonLightColor.CGColor
+        button.setTitle("关闭", forState: .Normal)
         button.setTitleColor(CommonLightColor, forState: .Normal)
         button.addTarget(self, action: #selector(closeButtonDidClick), forControlEvents: .TouchUpInside)
         

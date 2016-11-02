@@ -66,13 +66,13 @@ class SettingViewController: UIViewController {
 
         navigationController?.navigationBar.barTintColor = MainColor
         navigationController?.navigationBar.tintColor = CommonDarkColor
-        navigationItem.title = "设置"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewDistance))
         headerView.backgroundColor = UIColor.clearColor()
         
         tableView.showsVerticalScrollIndicator = false
+        tableView.alwaysBounceVertical = true
         tableView.tableHeaderView = headerView
         tableView.dataSource = self
         tableView.delegate = self
@@ -259,10 +259,12 @@ extension SettingViewController: UITableViewDelegate {
             }
             
             barView.alpha = tempAlpha
+            navigationItem.title = "设置"
             
         } else {
             imageView.transform = CGAffineTransformMakeScale(1 + offsetY / -kViewDistance, 1 + offsetY / -kViewDistance)
             imageView.frame.origin.y = 0
+            navigationItem.title = ""
         }
     }
     

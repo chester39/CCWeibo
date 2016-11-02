@@ -37,7 +37,7 @@ class PictureCell: UICollectionViewCell {
 
         contentView.addSubview(imageView)
         
-        gifView.image = UIImage(named: "gif")
+        gifView.image = UIImage(named: "GIF")
         contentView.addSubview(gifView)
     }
     

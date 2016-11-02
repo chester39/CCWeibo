@@ -98,7 +98,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         
-        
+        let userInfo = notification.userInfo
+        print(userInfo)
+        let adVC = AdViewController()
+        window?.rootViewController = adVC
     }
     
     /**
@@ -188,10 +191,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     private func createLocalNotification() {
         
-        let components = NSDateComponents()
-        components.hour = 20
-        components.minute = 30
-        
         if #available(iOS 10.0, *) {
             let content = UNMutableNotificationContent()
             content.badge = 1
@@ -200,13 +199,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             content.body = "打开App，速度查看最新最快的微博消息！"
             content.userInfo = ["url": "http://weibo.com"]
             
+            let components = NSDateComponents()
+            components.hour = 20
+            components.minute = 30
+            
             let trigger = UNCalendarNotificationTrigger(dateMatchingComponents: components, repeats: true)
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
             let request = UNNotificationRequest(identifier: kWeiboNotification, content: content, trigger: trigger)
             UNUserNotificationCenter.currentNotificationCenter().addNotificationRequest(request, withCompletionHandler: { (error) in
                 if error == nil {
                     print("本地推送成功")
                 }
             })
+            
+        } else {
+            let notification = UILocalNotification()
+            let pushDate = NSDate(timeIntervalSinceNow: 10)
+            notification.fireDate = pushDate
+            notification.alertTitle = "新的微博消息"
+            notification.alertBody = "打开App，速度查看最新最快的微博消息！"
+            notification.applicationIconBadgeNumber = 1
+            notification.userInfo = ["url": "http://weibo.com"]
+            UIApplication.sharedApplication().scheduleLocalNotification(notification)
         }
     }
     
@@ -222,12 +236,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         let userInfo = response.notification.request.content.userInfo
         print(userInfo)
-        if (response.notification.request.trigger?.isKindOfClass(UNPushNotificationTrigger.self)) != nil {
+        if response.notification.request.trigger is UNPushNotificationTrigger {
             print("远程推送")
             
         } else {
-            print("本地推送")
+            let adVC = AdViewController()
+            window?.rootViewController = adVC
         }
+        
         completionHandler()
     }
     
@@ -239,13 +255,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         let userInfo = notification.request.content.userInfo
         print(userInfo)
-        if (notification.request.trigger?.isKindOfClass(UNPushNotificationTrigger.self)) != nil {
-            print("远程推送")
-            
-        } else {
-            print("本地推送")
-        }
-        
         completionHandler([.Alert, .Badge, .Sound])
     }
     
