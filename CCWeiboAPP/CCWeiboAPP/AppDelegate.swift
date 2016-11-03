@@ -28,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = MainColor
         UITabBar.appearance().tintColor = MainColor
         
+        if let options = launchOptions {
+            launchWithNotification(options)
+        }
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(changeRootViewController(_:)), name: kRootViewControllerSwitched, object: nil)
         registerNotification()
         createLocalNotification()
@@ -154,6 +158,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("没有新版本")
         return false
+    }
+    
+    /**
+     推送启动方法
+     */
+    private func launchWithNotification(options: [NSObject: AnyObject]) {
+        
+        if let remoteNotification = options[UIApplicationLaunchOptionsRemoteNotificationKey] {
+            let userInfo = remoteNotification as? [NSObject: AnyObject]
+            print(userInfo)
+            let adVC = AdViewController()
+            window?.rootViewController = adVC
+            
+        } else if let localNotification = options[UIApplicationLaunchOptionsLocalNotificationKey] {
+            let userInfo = localNotification as? [NSObject: AnyObject]
+            print(userInfo)
+            let adVC = AdViewController()
+            window?.rootViewController = adVC
+        }
     }
     
     /**

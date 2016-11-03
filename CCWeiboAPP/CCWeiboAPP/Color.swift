@@ -11,7 +11,7 @@ import Foundation
 
 /// App主颜色: Orange
 let MainColor = UIColor.orangeColor()
-///  通用浅颜色: White
+/// 通用浅颜色: White
 let CommonLightColor = UIColor.whiteColor()
 /// 通用深颜色: Black
 let CommonDarkColor = UIColor.blackColor()
