@@ -108,6 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(userInfo)
         let adVC = AdViewController()
         window?.rootViewController = adVC
+        application.applicationIconBadgeNumber -= 1
     }
     
     /**
@@ -116,6 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
         print(userInfo)
+        application.applicationIconBadgeNumber -= 1
         completionHandler(.NewData)
     }
     
@@ -241,6 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let pushDate = NSDate(timeIntervalSince1970: 12 * 60 * 60 + 30)
             let notification = UILocalNotification()
             notification.fireDate = pushDate
+            notification.repeatInterval  = .Weekday
             notification.timeZone = NSTimeZone.defaultTimeZone()
             notification.soundName = UILocalNotificationDefaultSoundName
             notification.alertTitle = "新的微博消息"
@@ -273,6 +276,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             window?.rootViewController = adVC
         }
         
+        UIApplication.sharedApplication().applicationIconBadgeNumber -= 1
         completionHandler()
     }
     

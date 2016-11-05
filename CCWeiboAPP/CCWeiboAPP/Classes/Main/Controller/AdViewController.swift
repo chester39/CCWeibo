@@ -91,7 +91,7 @@ class AdViewController: UIViewController {
     @objc private func updateTime() {
         
         countdown -= 1.0
-        passButton.setTitle(String(format: "跳过 %.0f", countdown), forState: .Normal)
+        passButton.setTitle(String(format: "跳过 %.0f s", countdown), forState: .Normal)
         if countdown == 0.0 {
             timer.invalidate()
         }
