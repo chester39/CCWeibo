@@ -49,6 +49,7 @@ class WebViewController: UIViewController {
     init(url: NSURL?) {
         
         super.init(nibName: nil, bundle: nil)
+        
         self.url = url
     }
     

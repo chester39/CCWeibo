@@ -75,11 +75,17 @@ class BaseStatusCell: UITableViewCell {
         
         iconView.layer.cornerRadius = kViewBorder
         iconView.clipsToBounds = true
+        iconView.userInteractionEnabled = true
+        let imageGesture = UITapGestureRecognizer.init(target: self, action: #selector(iconViewDidClick(_:)))
+        iconView.addGestureRecognizer(imageGesture)
         contentView.addSubview(iconView)
         
         verifiedView.image = UIImage(named: "avatar_vip")
         contentView.addSubview(verifiedView)
         
+        nameLabel.userInteractionEnabled = true
+        let labelGesture = UITapGestureRecognizer.init(target: self, action: #selector(nameLabelDidClick(_:)))
+        nameLabel.addGestureRecognizer(labelGesture)
         contentView.addSubview(nameLabel)
         
         vipView.image = UIImage(named: "common_icon_membership")
@@ -170,6 +176,36 @@ class BaseStatusCell: UITableViewCell {
             align(top: retweetButton, commentButton, likeButton, retweetButton.superview!)
             align(bottom: retweetButton, commentButton, likeButton, retweetButton.superview!)
             distribute(by: 0, leftToRight: retweetButton, commentButton, likeButton)
+        }
+    }
+    
+    // MARK: - 点击方法
+    
+    /**
+     头像图片视图点击方法
+     */
+    func iconViewDidClick(gesture: UITapGestureRecognizer) {
+        
+        if let id = self.viewModel?.status.user?.userID {
+            let urlString = "http://weibo.com/u/\(id)"
+            let url = NSURL(string: urlString)!
+            if let tempDelegate = delegate {
+                tempDelegate.statusCellDidShowWebViewWithURL(self, url: url)
+            }
+        }
+    }
+    
+    /**
+     昵称标签点击方法
+     */
+    func nameLabelDidClick(gesture: UITapGestureRecognizer) {
+        
+        if let id = self.viewModel?.status.user?.userID {
+            let urlString = "http://weibo.com/u/\(id)"
+            let url = NSURL(string: urlString)!
+            if let tempDelegate = delegate {
+                tempDelegate.statusCellDidShowWebViewWithURL(self, url: url)
+            }
         }
     }
     

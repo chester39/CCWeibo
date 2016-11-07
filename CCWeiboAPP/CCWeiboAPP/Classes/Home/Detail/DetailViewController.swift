@@ -249,7 +249,7 @@ extension DetailViewController: BaseStatusCellDelegate {
     func statusCellDidShowWebViewWithURL(cell: BaseStatusCell, url: NSURL) {
         
         let webVC = WebViewController(url: url)
-        self.navigationController?.pushViewController(webVC, animated: true)
+        navigationController?.pushViewController(webVC, animated: true)
     }
     
 }

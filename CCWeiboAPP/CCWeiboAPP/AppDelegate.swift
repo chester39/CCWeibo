@@ -240,11 +240,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
             
         } else {
-            let pushDate = NSDate(timeIntervalSince1970: 12 * 60 * 60 + 30)
+            let pushDate = NSDate(timeIntervalSince1970: 12 * 60 * 60 + 30 * 60)
             let notification = UILocalNotification()
             notification.fireDate = pushDate
             notification.repeatInterval  = .Weekday
-            notification.timeZone = NSTimeZone.defaultTimeZone()
+            notification.timeZone = .defaultTimeZone()
             notification.soundName = UILocalNotificationDefaultSoundName
             notification.alertTitle = "新的微博消息"
             notification.alertBody = "打开App，速度查看最新最快的微博消息！"
@@ -266,12 +266,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(center: UNUserNotificationCenter, didReceiveNotificationResponse response: UNNotificationResponse, withCompletionHandler completionHandler: () -> Void) {
         
         let userInfo = response.notification.request.content.userInfo
-        print(userInfo)
         if response.notification.request.trigger is UNPushNotificationTrigger {
+            print("远程推送，\(userInfo)")
             let adVC = AdViewController()
             window?.rootViewController = adVC
             
         } else {
+            print("本地推送，\(userInfo)")
             let adVC = AdViewController()
             window?.rootViewController = adVC
         }
