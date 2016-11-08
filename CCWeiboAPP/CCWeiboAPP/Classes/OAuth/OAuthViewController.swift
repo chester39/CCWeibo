@@ -92,7 +92,7 @@ class OAuthViewController: UIViewController {
      */
     func closeButtonDidClick() {
         
-        NSNotificationCenter.defaultCenter().postNotificationName(kRootViewControllerSwitched, object: true)
+        NSNotificationCenter.defaultCenter().postNotificationName(kRootViewControllerSwitched, object: false)
     }
     
     /**

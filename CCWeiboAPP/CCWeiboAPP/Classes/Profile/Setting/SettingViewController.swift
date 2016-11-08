@@ -54,7 +54,8 @@ class SettingViewController: UIViewController {
         
         navigationController?.navigationBar.barTintColor = nil
         navigationController?.navigationBar.tintColor = MainColor
-        navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: .Default)
+        navigationController?.navigationBar.shadowImage = nil
+        barView.alpha = 1.0
     }
   
     // MARK: - 界面方法
@@ -64,6 +65,7 @@ class SettingViewController: UIViewController {
      */
     private func setupUI() {
 
+        automaticallyAdjustsScrollViewInsets = false
         navigationController?.navigationBar.barTintColor = MainColor
         navigationController?.navigationBar.tintColor = CommonDarkColor
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
@@ -234,7 +236,7 @@ extension SettingViewController: UITableViewDelegate {
                 }
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
-                NSNotificationCenter.defaultCenter().postNotificationName(kRootViewControllerSwitched, object: false)
+                NSNotificationCenter.defaultCenter().postNotificationName(kRootViewControllerSwitched, object: true)
             }
             
             alertVC.addAction(cancelButton)
@@ -253,13 +255,19 @@ extension SettingViewController: UITableViewDelegate {
             imageView.frame.origin.y = -offsetY
             if offsetY <= kViewDistance {
                 tempAlpha = (offsetY / (kViewDistance - kTopHeight) >= 1) ? 1 : offsetY / (kViewDistance - kTopHeight)
+                if tempAlpha == 1.0 {
+                    navigationItem.title = "设置"
+                    
+                } else {
+                    navigationItem.title = ""
+                }
                 
             } else if offsetY > kViewDistance {
                 tempAlpha = 1.0
+                navigationItem.title = "设置"
             }
             
             barView.alpha = tempAlpha
-            navigationItem.title = "设置"
             
         } else {
             imageView.transform = CGAffineTransformMakeScale(1 + offsetY / -kViewDistance, 1 + offsetY / -kViewDistance)

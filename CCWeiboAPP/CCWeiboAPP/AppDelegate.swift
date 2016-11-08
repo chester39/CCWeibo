@@ -32,9 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             launchWithNotification(options)
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(changeRootViewController(_:)), name: kRootViewControllerSwitched, object: nil)
         registerNotification()
         createLocalNotification()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(changeRootViewController(_:)), name: kRootViewControllerSwitched, object: nil)
         
         return true
     }
@@ -121,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler(.NewData)
     }
     
-    // MARK: - 自定义方法
+    // MARK: - 控制器方法
     
     /**
      改变根控制器方法
@@ -162,8 +162,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return false
     }
     
+    // MARK: - 推送方法
+    
     /**
-     推送启动方法
+     由推送启动方法
      */
     private func launchWithNotification(options: [NSObject: AnyObject]) {
         
@@ -231,7 +233,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             components.minute = 30
             
             let trigger = UNCalendarNotificationTrigger(dateMatchingComponents: components, repeats: true)
-//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
             let request = UNNotificationRequest(identifier: kWeiboNotification, content: content, trigger: trigger)
             UNUserNotificationCenter.currentNotificationCenter().addNotificationRequest(request, withCompletionHandler: { (error) in
                 if error == nil {
@@ -240,7 +241,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
             
         } else {
-            let pushDate = NSDate(timeIntervalSince1970: 12 * 60 * 60 + 30 * 60)
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "HH:mm:ss"
+            let pushDate = formatter.dateFromString("20:30:00")
+            
             let notification = UILocalNotification()
             notification.fireDate = pushDate
             notification.repeatInterval  = .Weekday

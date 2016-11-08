@@ -147,14 +147,14 @@ class UserAccount: NSObject {
      */
     class func loadUserAccount() -> UserAccount? {
         
+        guard let account = NSKeyedUnarchiver.unarchiveObjectWithFile(UserAccount.filePath) as? UserAccount else {
+            return nil
+        }
+        
         if UserAccount.userAccount != nil {
             return UserAccount.userAccount
         }
-        
         print(UserAccount.filePath)
-        guard let account = NSKeyedUnarchiver.unarchiveObjectWithFile(UserAccount.filePath) as? UserAccount else {
-            return UserAccount.userAccount
-        }
         
         guard let date = account.expiresDate where date.compare(NSDate()) != NSComparisonResult.OrderedAscending else {
             print("授权已过期")
