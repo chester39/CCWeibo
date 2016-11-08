@@ -4,7 +4,7 @@
 //
 //  Created by 谭真 on 15/12/24.
 //  Copyright © 2015年 谭真. All rights reserved.
-//  version 1.6.8 - 2016.10.08
+//  version 1.7.1 - 2016.10.18
 
 /*
  经过测试，比起xib的方式，把TZAssetCell改用纯代码的方式来写，滑动帧数明显提高了（约提高10帧左右）
@@ -84,6 +84,14 @@
 @property (nonatomic, strong) NSMutableArray *selectedAssets;
 @property (nonatomic, strong) NSMutableArray<TZAssetModel *> *selectedModels;
 
+/// Minimum selectable photo width, Default is 0
+/// 最小可选中的图片宽度，默认是0，小于这个宽度的图片不可选中
+@property (nonatomic, assign) NSInteger minPhotoWidthSelectable;
+@property (nonatomic, assign) NSInteger minPhotoHeightSelectable;
+/// Hide the photo what can not be selected, Default is NO
+/// 隐藏不可以选中的图片，默认是NO，不推荐将其设置为YES
+@property (nonatomic, assign) BOOL hideWhenCanNotSelect;
+
 - (void)showAlertWithTitle:(NSString *)title;
 - (void)showProgressHUD;
 - (void)hideProgressHUD;
@@ -141,7 +149,9 @@
 // photos数组里的UIImage对象，默认是828像素宽，你可以通过设置photoWidth属性的值来改变它
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto;
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos;
-- (void)imagePickerControllerDidCancel:(TZImagePickerController *)picker;
+- (void)imagePickerControllerDidCancel:(TZImagePickerController *)picker __attribute__((deprecated("Use -tz_imagePickerControllerDidCancel:.")));
+- (void)tz_imagePickerControllerDidCancel:(TZImagePickerController *)picker;
+
 // If user picking a video, this callback will be called.
 // If system version > iOS8,asset is kind of PHAsset class, else is ALAsset class.
 // 如果用户选择了一个视频，下面的handle会被执行

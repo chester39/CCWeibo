@@ -67,6 +67,14 @@
         self.type = TZAssetCellTypeVideo;
         self.timeLength.text = model.timeLength;
     }
+    
+    // 让宽度/高度小于 最小可选照片尺寸 的图片不能选中
+    if (![[TZImageManager manager] isPhotoSelectableWithAsset:model.asset]) {
+        if (_selectImageView.hidden == NO) {
+            self.selectPhotoButton.hidden = YES;
+            _selectImageView.hidden = YES;
+        }
+    }
 }
 
 - (void)setMaxImagesCount:(NSInteger)maxImagesCount {
@@ -106,11 +114,11 @@
 
 - (UIButton *)selectPhotoButton {
     if (_selectImageView == nil) {
-        UIButton *selectImageView = [[UIButton alloc] init];
-        selectImageView.frame = CGRectMake(self.tz_width - 44, 0, 44, 44);
-        [selectImageView addTarget:self action:@selector(selectPhotoButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:selectImageView];
-        _selectPhotoButton = selectImageView;
+        UIButton *selectPhotoButton = [[UIButton alloc] init];
+        selectPhotoButton.frame = CGRectMake(self.tz_width - 44, 0, 44, 44);
+        [selectPhotoButton addTarget:self action:@selector(selectPhotoButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:selectPhotoButton];
+        _selectPhotoButton = selectPhotoButton;
     }
     return _selectPhotoButton;
 }

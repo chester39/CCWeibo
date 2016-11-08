@@ -61,12 +61,16 @@ static CGFloat TZScreenScale;
 
 /// Return YES if Authorized 返回YES如果得到了授权
 - (BOOL)authorizationStatusAuthorized {
+    return [self authorizationStatus] == 3;
+}
+
+- (NSInteger)authorizationStatus {
     if (iOS8Later) {
-        if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) return YES;
+        return [PHPhotoLibrary authorizationStatus];
     } else {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusAuthorized) return YES;
+        return [ALAssetsLibrary authorizationStatus];
 #pragma clang diagnostic pop
     }
     return NO;
@@ -82,8 +86,10 @@ static CGFloat TZScreenScale;
         if (!allowPickingVideo) option.predicate = [NSPredicate predicateWithFormat:@"mediaType == %ld", PHAssetMediaTypeImage];
         if (!allowPickingImage) option.predicate = [NSPredicate predicateWithFormat:@"mediaType == %ld",
                                                     PHAssetMediaTypeVideo];
-        // option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:self.sortAscendingByModificationDate]];
-        option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"modificationDate" ascending:self.sortAscendingByModificationDate]];
+        // option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"modificationDate" ascending:self.sortAscendingByModificationDate]];
+        if (!self.sortAscendingByModificationDate) {
+            option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:self.sortAscendingByModificationDate]];
+        }
         PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
         for (PHAssetCollection *collection in smartAlbums) {
             // 有可能是PHCollectionList类的的对象，过滤掉
@@ -118,11 +124,19 @@ static CGFloat TZScreenScale;
         if (!allowPickingVideo) option.predicate = [NSPredicate predicateWithFormat:@"mediaType == %ld", PHAssetMediaTypeImage];
         if (!allowPickingImage) option.predicate = [NSPredicate predicateWithFormat:@"mediaType == %ld",
                                                     PHAssetMediaTypeVideo];
-        // option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:self.sortAscendingByModificationDate]];
-        option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"modificationDate" ascending:self.sortAscendingByModificationDate]];
+        // option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"modificationDate" ascending:self.sortAscendingByModificationDate]];
+        if (!self.sortAscendingByModificationDate) {
+            option.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:self.sortAscendingByModificationDate]];
+        }
+        // 我的照片流 1.6.10重新加入..
+        PHFetchResult *myPhotoStreamAlbum = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumMyPhotoStream options:nil];
         PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
         PHFetchResult *topLevelUserCollections = [PHCollectionList fetchTopLevelUserCollectionsWithOptions:nil];
-        
+        for (PHAssetCollection *collection in myPhotoStreamAlbum) {
+            PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:option];
+            if (fetchResult.count < 1) continue;
+            [albumArr addObject:[self modelWithResult:fetchResult name:collection.localizedTitle]];
+        }
         for (PHAssetCollection *collection in smartAlbums) {
             // 有可能是PHCollectionList类的的对象，过滤掉
             if (![collection isKindOfClass:[PHAssetCollection class]]) continue;
@@ -136,7 +150,6 @@ static CGFloat TZScreenScale;
             }
         }
         for (PHAssetCollection *collection in topLevelUserCollections) {
-            // 有可能是PHCollectionList类的的对象，过滤掉
             if (![collection isKindOfClass:[PHAssetCollection class]]) continue;
             PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:option];
             if (fetchResult.count < 1) continue;
@@ -191,6 +204,13 @@ static CGFloat TZScreenScale;
             if (!allowPickingVideo && type == TZAssetModelMediaTypeVideo) return;
             if (!allowPickingImage && type == TZAssetModelMediaTypePhoto) return;
             
+            if (self.hideWhenCanNotSelect) {
+                // 过滤掉尺寸不满足要求的图片
+                if (![self isPhotoSelectableWithAsset:asset]) {
+                    return;
+                }
+            }
+            
             NSString *timeLength = type == TZAssetModelMediaTypeVideo ? [NSString stringWithFormat:@"%0.0f",asset.duration] : @"";
             timeLength = [self getNewTimeFromDurationSecond:timeLength.integerValue];
             [photoArr addObject:[TZAssetModel modelWithAsset:asset type:type timeLength:timeLength]];
@@ -228,6 +248,12 @@ static CGFloat TZScreenScale;
                 timeLength = [self getNewTimeFromDurationSecond:timeLength.integerValue];
                 [photoArr addObject:[TZAssetModel modelWithAsset:result type:type timeLength:timeLength]];
             } else {
+                if (self.hideWhenCanNotSelect) {
+                    // 过滤掉尺寸不满足要求的图片
+                    if (![self isPhotoSelectableWithAsset:result]) {
+                        return;
+                    }
+                }
                 [photoArr addObject:[TZAssetModel modelWithAsset:result type:type]];
             }
         };
@@ -634,7 +660,7 @@ static CGFloat TZScreenScale;
     } else if ([asset isKindOfClass:[ALAsset class]]) {
         NSURL *videoURL =[asset valueForProperty:ALAssetPropertyAssetURL]; // ALAssetPropertyURLs
 #pragma clang diagnostic pop
-        AVURLAsset *videoAsset = [[AVURLAsset alloc]initWithURL:videoURL options:nil];
+        AVURLAsset *videoAsset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
         [self startExportVideoWithVideoAsset:videoAsset completion:completion];
     }
 }
@@ -672,7 +698,10 @@ static CGFloat TZScreenScale;
         if (![[NSFileManager defaultManager] fileExistsAtPath:[NSHomeDirectory() stringByAppendingFormat:@"/tmp"]]) {
             [[NSFileManager defaultManager] createDirectoryAtPath:[NSHomeDirectory() stringByAppendingFormat:@"/tmp"] withIntermediateDirectories:YES attributes:nil error:nil];
         }
-
+        
+        // 修正视频转向
+        session.videoComposition = [self fixedCompositionWithAsset:videoAsset];
+        
         // Begin to export video to the output path asynchronously.
         [session exportAsynchronouslyWithCompletionHandler:^(void) {
             switch (session.status) {
@@ -744,6 +773,28 @@ static CGFloat TZScreenScale;
     }
 }
 
+/// 检查照片大小是否满足最小要求
+- (BOOL)isPhotoSelectableWithAsset:(id)asset {
+    CGSize photoSize = [self photoSizeWithAsset:asset];
+    if (self.minPhotoWidthSelectable > photoSize.width || self.minPhotoHeightSelectable > photoSize.height) {
+        return NO;
+    }
+    return YES;
+}
+
+- (CGSize)photoSizeWithAsset:(id)asset {
+    if (iOS8Later) {
+        PHAsset *phAsset = (PHAsset *)asset;
+        return CGSizeMake(phAsset.pixelWidth, phAsset.pixelHeight);
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        ALAsset *alAsset = (ALAsset *)asset;
+#pragma clang diagnostic pop
+        return alAsset.defaultRepresentation.dimensions;
+    }
+}
+
 #pragma mark - Private Method
 
 - (TZAlbumModel *)modelWithResult:(id)result name:(NSString *)name{
@@ -782,6 +833,74 @@ static CGFloat TZScreenScale;
     return orientation;
 }
 
+/// 获取优化后的视频转向信息
+- (AVMutableVideoComposition *)fixedCompositionWithAsset:(AVAsset *)videoAsset {
+    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
+    // 视频转向
+    int degrees = [self degressFromVideoFileWithAsset:videoAsset];
+    if (degrees != 0) {
+        CGAffineTransform translateToCenter;
+        CGAffineTransform mixedTransform;
+        videoComposition.frameDuration = CMTimeMake(1, 30);
+        
+        NSArray *tracks = [videoAsset tracksWithMediaType:AVMediaTypeVideo];
+        AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
+        
+        if (degrees == 90) {
+            // 顺时针旋转90°
+            translateToCenter = CGAffineTransformMakeTranslation(videoTrack.naturalSize.height, 0.0);
+            mixedTransform = CGAffineTransformRotate(translateToCenter,M_PI_2);
+            videoComposition.renderSize = CGSizeMake(videoTrack.naturalSize.height,videoTrack.naturalSize.width);
+        } else if(degrees == 180){
+            // 顺时针旋转180°
+            translateToCenter = CGAffineTransformMakeTranslation(videoTrack.naturalSize.width, videoTrack.naturalSize.height);
+            mixedTransform = CGAffineTransformRotate(translateToCenter,M_PI);
+            videoComposition.renderSize = CGSizeMake(videoTrack.naturalSize.width,videoTrack.naturalSize.height);
+        } else if(degrees == 270){
+            // 顺时针旋转270°
+            translateToCenter = CGAffineTransformMakeTranslation(0.0, videoTrack.naturalSize.width);
+            mixedTransform = CGAffineTransformRotate(translateToCenter,M_PI_2*3.0);
+            videoComposition.renderSize = CGSizeMake(videoTrack.naturalSize.height,videoTrack.naturalSize.width);
+        }
+        
+        AVMutableVideoCompositionInstruction *roateInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+        roateInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, [videoAsset duration]);
+        AVMutableVideoCompositionLayerInstruction *roateLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
+        
+        [roateLayerInstruction setTransform:mixedTransform atTime:kCMTimeZero];
+        
+        roateInstruction.layerInstructions = @[roateLayerInstruction];
+        // 加入视频方向信息
+        videoComposition.instructions = @[roateInstruction];
+    }
+    return videoComposition;
+}
+
+/// 获取视频角度
+- (int)degressFromVideoFileWithAsset:(AVAsset *)asset {
+    int degress = 0;
+    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    if([tracks count] > 0) {
+        AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
+        CGAffineTransform t = videoTrack.preferredTransform;
+        if(t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0){
+            // Portrait
+            degress = 90;
+        } else if(t.a == 0 && t.b == -1.0 && t.c == 1.0 && t.d == 0){
+            // PortraitUpsideDown
+            degress = 270;
+        } else if(t.a == 1.0 && t.b == 0 && t.c == 0 && t.d == 1.0){
+            // LandscapeRight
+            degress = 0;
+        } else if(t.a == -1.0 && t.b == 0 && t.c == 0 && t.d == -1.0){
+            // LandscapeLeft
+            degress = 180;
+        }
+    }
+    return degress;
+}
+
+/// 修正图片转向
 - (UIImage *)fixOrientation:(UIImage *)aImage {
     if (!self.shouldFixOrientation) return aImage;
     
@@ -861,3 +980,12 @@ static CGFloat TZScreenScale;
 }
 
 @end
+
+
+//@implementation TZSortDescriptor
+//
+//- (id)reversedSortDescriptor {
+//    return [NSNumber numberWithBool:![TZImageManager manager].sortAscendingByModificationDate];
+//}
+//
+//@end

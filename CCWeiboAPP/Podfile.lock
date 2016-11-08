@@ -1,35 +1,35 @@
 PODS:
-  - ActiveLabel (0.6.2)
-  - Alamofire (3.5.1)
-  - Cartography (0.7.0)
+  - ActiveLabel (0.7.0)
+  - Alamofire (4.0.1)
+  - Cartography (1.0.1)
   - MBProgressHUD (1.0.0)
   - MJRefresh (3.1.12)
-  - SDWebImage (3.8.2):
-    - SDWebImage/Core (= 3.8.2)
-  - SDWebImage/Core (3.8.2)
-  - SwiftyJSON (2.4.0)
-  - TZImagePickerController (1.6.8)
+  - SDWebImage (4.0.0-beta2):
+    - SDWebImage/Core (= 4.0.0-beta2)
+  - SDWebImage/Core (4.0.0-beta2)
+  - SwiftyJSON (3.1.1)
+  - TZImagePickerController (1.7.1)
 
 DEPENDENCIES:
-  - ActiveLabel (~> 0.6.2)
-  - Alamofire (~> 3.5.1)
-  - Cartography (~> 0.7.0)
+  - ActiveLabel (~> 0.7.0)
+  - Alamofire (~> 4.0.1)
+  - Cartography (~> 1.0.1)
   - MBProgressHUD (~> 1.0.0)
   - MJRefresh (~> 3.1.12)
-  - SDWebImage (~> 3.8.2)
-  - SwiftyJSON (~> 2.4.0)
-  - TZImagePickerController (~> 1.6.8)
+  - SDWebImage (~> 4.0.0-beta2)
+  - SwiftyJSON (~> 3.1.1)
+  - TZImagePickerController (~> 1.7.1)
 
 SPEC CHECKSUMS:
-  ActiveLabel: 2394eb48a2e31644ea90d6543c17bffe1d06f549
-  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
-  Cartography: dd6044b6fe352252f68b648df5bff47841e591cc
+  ActiveLabel: eb405c5b99275be52fac161f7a55cab1dd672c54
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  Cartography: c1460e99395b824d9d75360b0382faeb0b33dcd7
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
-  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
-  TZImagePickerController: fdb508b0ab14310728fb0d7eb418a7ee0acea741
+  SDWebImage: e379f33106cf8d6766f970c0ef1c3fb609c94d78
+  SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
+  TZImagePickerController: cbfd57ba947263759b860f74132dd1bc33125afc
 
-PODFILE CHECKSUM: d3d6a0006d53556f032bb5b5a405a31f640a3822
+PODFILE CHECKSUM: 37c9035a3861a7296a669311ffee96c96f14c934
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1

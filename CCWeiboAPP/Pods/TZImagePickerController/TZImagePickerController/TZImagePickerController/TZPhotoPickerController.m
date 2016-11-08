@@ -30,7 +30,7 @@
 }
 @property CGRect previousPreheatRect;
 @property (nonatomic, assign) BOOL isSelectOriginalPhoto;
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) TZCollectionView *collectionView;
 @property (nonatomic, strong) UIImagePickerController *imagePickerVc;
 @end
 
@@ -122,7 +122,7 @@ static CGSize AssetGridThumbnailSize;
     CGFloat top = 44;
     if (iOS7Later) top += 20;
     CGFloat collectionViewHeight = tzImagePickerVc.maxImagesCount > 1 ? self.view.tz_height - 50 - top : self.view.tz_height - top;
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, top, self.view.tz_width, collectionViewHeight) collectionViewLayout:layout];
+    _collectionView = [[TZCollectionView alloc] initWithFrame:CGRectMake(0, top, self.view.tz_width, collectionViewHeight) collectionViewLayout:layout];
     _collectionView.backgroundColor = [UIColor whiteColor];
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
@@ -249,6 +249,9 @@ static CGSize AssetGridThumbnailSize;
     TZImagePickerController *imagePickerVc = (TZImagePickerController *)self.navigationController;
     if (imagePickerVc.autoDismiss) {
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+    if ([imagePickerVc.pickerDelegate respondsToSelector:@selector(tz_imagePickerControllerDidCancel:)]) {
+        [imagePickerVc.pickerDelegate tz_imagePickerControllerDidCancel:imagePickerVc];
     }
     if ([imagePickerVc.pickerDelegate respondsToSelector:@selector(imagePickerControllerDidCancel:)]) {
         [imagePickerVc.pickerDelegate imagePickerControllerDidCancel:imagePickerVc];
@@ -549,7 +552,14 @@ static CGSize AssetGridThumbnailSize;
         if (iOS8Later) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         } else {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=Privacy&path=CAMERA"]];
+            NSURL *privacyUrl = [NSURL URLWithString:@"prefs:root=Privacy&path=CAMERA"];
+            if ([[UIApplication sharedApplication] canOpenURL:privacyUrl]) {
+                [[UIApplication sharedApplication] openURL:privacyUrl];
+            } else {
+                NSString *message = [NSBundle tz_localizedStringForKey:@"Can not jump to the privacy settings page, please go to the settings page by self, thank you"];
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:[NSBundle tz_localizedStringForKey:@"Sorry"] message:message delegate:nil cancelButtonTitle:[NSBundle tz_localizedStringForKey:@"OK"] otherButtonTitles: nil];
+                [alert show];
+            }
         }
     }
 }
@@ -716,6 +726,19 @@ static CGSize AssetGridThumbnailSize;
         [indexPaths addObject:indexPath];
     }
     return indexPaths;
+}
+
+@end
+
+
+
+@implementation TZCollectionView
+
+- (BOOL)touchesShouldCancelInContentView:(UIView *)view {
+    if ( [view isKindOfClass:[UIControl class]]) {
+        return YES;
+    }
+    return [super touchesShouldCancelInContentView:view];
 }
 
 @end

@@ -4,7 +4,7 @@
 //
 //  Created by 谭真 on 15/12/24.
 //  Copyright © 2015年 谭真. All rights reserved.
-//  version 1.6.8 - 2016.10.08
+//  version 1.7.1 - 2016.10.18
 
 #import "TZImagePickerController.h"
 #import "TZPhotoPickerController.h"
@@ -200,6 +200,7 @@
         [_settingBtn removeFromSuperview];
         [_timer invalidate];
         _timer = nil;
+        [self pushPhotoPickerVc];
     }
 }
 
@@ -295,6 +296,21 @@
     [TZImageManager manager].columnNumber = _columnNumber;
 }
 
+- (void)setMinPhotoWidthSelectable:(NSInteger)minPhotoWidthSelectable {
+    _minPhotoWidthSelectable = minPhotoWidthSelectable;
+    [TZImageManager manager].minPhotoWidthSelectable = minPhotoWidthSelectable;
+}
+
+- (void)setMinPhotoHeightSelectable:(NSInteger)minPhotoHeightSelectable {
+    _minPhotoHeightSelectable = minPhotoHeightSelectable;
+    [TZImageManager manager].minPhotoHeightSelectable = minPhotoHeightSelectable;
+}
+
+- (void)setHideWhenCanNotSelect:(BOOL)hideWhenCanNotSelect {
+    _hideWhenCanNotSelect = hideWhenCanNotSelect;
+    [TZImageManager manager].hideWhenCanNotSelect = hideWhenCanNotSelect;
+}
+
 - (void)setPhotoPreviewMaxWidth:(CGFloat)photoPreviewMaxWidth {
     _photoPreviewMaxWidth = photoPreviewMaxWidth;
     if (photoPreviewMaxWidth > 800) {
@@ -338,36 +354,25 @@
     if (iOS8Later) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
     } else {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=Privacy&path=PHOTOS"]];
+        NSURL *privacyUrl = [NSURL URLWithString:@"prefs:root=Privacy&path=PHOTOS"];
+        if ([[UIApplication sharedApplication] canOpenURL:privacyUrl]) {
+            [[UIApplication sharedApplication] openURL:privacyUrl];
+        } else {
+            NSString *message = [NSBundle tz_localizedStringForKey:@"Can not jump to the privacy settings page, please go to the settings page by self, thank you"];
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:[NSBundle tz_localizedStringForKey:@"Sorry"] message:message delegate:nil cancelButtonTitle:[NSBundle tz_localizedStringForKey:@"OK"] otherButtonTitles: nil];
+            [alert show];
+        }
     }
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (iOS7Later) viewController.automaticallyAdjustsScrollViewInsets = NO;
     if (_timer) { [_timer invalidate]; _timer = nil;}
-    
-    if (self.childViewControllers.count > 0) {
-        UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(3, 0, 50, 44)];
-        [backButton setImage:[UIImage imageNamedFromMyBundle:@"navi_back.png"] forState:UIControlStateNormal];
-        backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
-        [backButton setTitle:@"返回" forState:UIControlStateNormal];
-        backButton.titleLabel.font = [UIFont systemFontOfSize:15];
-        [backButton addTarget:self action:@selector(popViewControllerAnimated:) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem* backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-        
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        backButtonItem.style = UIBarButtonItemStyleBordered;
-#pragma clang diagnostic pop
-        self.topViewController.navigationItem.backBarButtonItem = backButtonItem;
-        
-        /**
-         另外一种只有箭头的返回键
-         UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:nil action:nil];
-         self.topViewController.navigationItem.backBarButtonItem = backItem;
-        */
-    }
     [super pushViewController:viewController animated:animated];
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end
@@ -387,6 +392,8 @@
     self.navigationItem.title = [NSBundle tz_localizedStringForKey:@"Photos"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[NSBundle tz_localizedStringForKey:@"Cancel"] style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
     [self configTableView];
+    // 1.6.10 采用微信的方式，只在相册列表页定义backBarButtonItem为返回，其余的顺系统的做法
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[NSBundle tz_localizedStringForKey:@"Back"] style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -435,6 +442,9 @@
     }
     if ([imagePickerVc.pickerDelegate respondsToSelector:@selector(imagePickerControllerDidCancel:)]) {
         [imagePickerVc.pickerDelegate imagePickerControllerDidCancel:imagePickerVc];
+    }
+    if ([imagePickerVc.pickerDelegate respondsToSelector:@selector(tz_imagePickerControllerDidCancel:)]) {
+        [imagePickerVc.pickerDelegate tz_imagePickerControllerDidCancel:imagePickerVc];
     }
     if (imagePickerVc.imagePickerControllerDidCancelHandle) {
         imagePickerVc.imagePickerControllerDidCancelHandle();
