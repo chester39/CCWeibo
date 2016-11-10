@@ -4,7 +4,7 @@ UILabel drop-in replacement supporting Hashtags (#), Mentions (@), URLs (http://
 
 ## Features
 
-* Swift 3
+* Swift 2+
 * Default support for **Hashtags, Mentions, Links**
 * Support for **custom types** via regex
 * Ability to enable highlighting only for the desired types
@@ -23,9 +23,9 @@ import ActiveLabel
 let label = ActiveLabel()
 
 label.numberOfLines = 0
-label.enabledTypes = [.mention, .hashtag, .url]
+label.enabledTypes = [.Mention, .Hashtag, .URL]
 label.text = "This is a post with #hashtags and a @userhandle."
-label.textColor = .black
+label.textColor = .blackColor()
 label.handleHashtagTap { hashtag in
   print("Success. You just tapped the \(hashtag) hashtag")
 }
@@ -34,11 +34,11 @@ label.handleHashtagTap { hashtag in
 ## Custom types
 
 ```swift
-    let customType = ActiveType.custom(pattern: "\\swith\\b") //Regex that looks for "with"
-    label.enabledTypes = [.mention, .hashtag, .url, customType]
+    let customType = ActiveType.Custom(pattern: "\\swith\\b") //Regex that looks for "with"
+    label.enabledTypes = [.Mention, .Hashtag, .URL, customType]
     
-    label.customColor[customType] = UIColor.purple
-    label.customSelectedColor[customType] = UIColor.green
+    label.customColor[customType] = UIColor.purpleColor()
+    label.customSelectedColor[customType] = UIColor.greenColor()
     
     label.handleCustomTap(for: customType) { element in 
         print("Custom type tapped: \(element)") 
@@ -50,7 +50,7 @@ label.handleHashtagTap { hashtag in
 By default, an ActiveLabel instance has the following configuration
 
 ```swift
-    label.enabledTypes = [.mention, .hashtag, .url]
+    label.enabledTypes = [.Mention, .Hashtag, .URL]
 ```
 
 But feel free to enable/disable to fit your requirements
@@ -119,7 +119,7 @@ label.handleHashtagTap { hashtag in print("\(hashtag) tapped") }
 ##### `handleURLTap: (NSURL) -> ()`
 
 ```swift
-label.handleURLTap { url in UIApplication.shared.openURL(url) }
+label.handleURLTap { url in UIApplication.sharedApplication().openURL(url) }
 ```
 
 ##### `handleCustomTap(for type: ActiveType, handler: (String) -> ())`

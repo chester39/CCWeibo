@@ -8,44 +8,44 @@
 
 import Foundation
 
-typealias ActiveFilterPredicate = ((String) -> Bool)
+typealias ActiveFilterPredicate = (String -> Bool)
 
 struct ActiveBuilder {
 
     static func createElements(type: ActiveType, from text: String, range: NSRange, filterPredicate: ActiveFilterPredicate?) -> [ElementTuple] {
         switch type {
-        case .mention, .hashtag:
+        case .Mention, .Hashtag:
             return createElementsIgnoringFirstCharacter(from: text, for: type, range: range, filterPredicate: filterPredicate)
-        case .url:
+        case .URL:
             return createElements(from: text, for: type, range: range, filterPredicate: filterPredicate)
-        case .custom:
+        case .Custom:
             return createElements(from: text, for: type, range: range, minLength: 1, filterPredicate: filterPredicate)
         }
     }
 
     static func createURLElements(from text: String, range: NSRange, maximumLenght: Int?) -> ([ElementTuple], String) {
-        let type = ActiveType.url
+        let type = ActiveType.URL
         var text = text
         let matches = RegexParser.getElements(from: text, with: type.pattern, range: range)
         let nsstring = text as NSString
         var elements: [ElementTuple] = []
 
         for match in matches where match.range.length > 2 {
-            let word = nsstring.substring(with: match.range)
-                .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            let word = nsstring.substringWithRange(match.range)
+                .stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
 
-            guard let maxLenght = maximumLenght, word.characters.count > maxLenght else {
-                let range = maximumLenght == nil ? match.range : (text as NSString).range(of: word)
+            guard let maxLenght = maximumLenght where word.characters.count > maxLenght else {
+                let range = maximumLenght == nil ? match.range : (text as NSString).rangeOfString(word)
                 let element = ActiveElement.create(with: type, text: word)
                 elements.append((range, element, type))
                 continue
             }
 
             let trimmedWord = word.trim(to: maxLenght)
-            text = text.replacingOccurrences(of: word, with: trimmedWord)
+            text = text.stringByReplacingOccurrencesOfString(word, withString: trimmedWord)
 
-            let newRange = (text as NSString).range(of: trimmedWord)
-            let element = ActiveElement.url(original: word, trimmed: trimmedWord)
+            let newRange = (text as NSString).rangeOfString(trimmedWord)
+            let element = ActiveElement.URL(original: word, trimmed: trimmedWord)
             elements.append((newRange, element, type))
         }
         return (elements, text)
@@ -62,8 +62,8 @@ struct ActiveBuilder {
         var elements: [ElementTuple] = []
 
         for match in matches where match.range.length > minLength {
-            let word = nsstring.substring(with: match.range)
-                .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            let word = nsstring.substringWithRange(match.range)
+                .stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             if filterPredicate?(word) ?? true {
                 let element = ActiveElement.create(with: type, text: word)
                 elements.append((match.range, element, type))
@@ -82,12 +82,12 @@ struct ActiveBuilder {
 
         for match in matches where match.range.length > 2 {
             let range = NSRange(location: match.range.location + 1, length: match.range.length - 1)
-            var word = nsstring.substring(with: range)
+            var word = nsstring.substringWithRange(range)
             if word.hasPrefix("@") {
-                word.remove(at: word.startIndex)
+                word.removeAtIndex(word.startIndex)
             }
             else if word.hasPrefix("#") {
-                word.remove(at: word.startIndex)
+                word.removeAtIndex(word.startIndex)
             }
 
             if filterPredicate?(word) ?? true {

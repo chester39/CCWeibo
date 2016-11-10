@@ -11,6 +11,6 @@ import Foundation
 extension String {
 
     func trim(to maximumCharacters: Int) -> String {
-        return substring(to: index(startIndex, offsetBy: maximumCharacters)) + "..."
+        return substringToIndex(startIndex.advancedBy(maximumCharacters)) + "..."
     }
 }

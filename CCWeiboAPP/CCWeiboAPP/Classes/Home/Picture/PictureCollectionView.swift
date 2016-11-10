@@ -61,15 +61,15 @@ class PictureCollectionView: UICollectionView {
             
         case 1:
             let key = viewModel!.thumbnailPictureArray!.first!
-            var image = SDWebImageManager.sharedManager().imageCache.imageFromDiskCacheForKey(key.absoluteString)
+            var image = SDWebImageManager.sharedManager().imageCache!.imageFromDiskCacheForKey(key.absoluteString)
             if image != nil {
-                return (cellSize: image.size, collectionSize: image.size)
+                return (cellSize: image!.size, collectionSize: image!.size)
                 
             } else {
                 let data = NSData(contentsOfURL: key)
                 image = UIImage(data: data!)
                 
-                return (cellSize: image.size, collectionSize: image.size)
+                return (cellSize: image!.size, collectionSize: image!.size)
             }
         
         case 4:

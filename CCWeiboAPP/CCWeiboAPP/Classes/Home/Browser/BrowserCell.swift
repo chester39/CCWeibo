@@ -18,7 +18,7 @@ class BrowserCell: UICollectionViewCell {
             
             imageView.sd_setImageWithURL(imageURL, placeholderImage: nil) { (image, error, _, url) in
                 self.indicatorView.stopAnimating()
-                let scale = image.size.width / image.size.height
+                let scale = image!.size.width / image!.size.height
                 let imageHeight = kScreenWidth / scale
                 self.imageView.frame = CGRect(origin: CGPointZero, size: CGSize(width: kScreenWidth, height: imageHeight))
                 
