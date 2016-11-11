@@ -43,7 +43,7 @@ class AdViewController: UIViewController {
         adView.contentMode = .ScaleAspectFit
         view.addSubview(adView)
         
-        passButton.setTitle("跳过 5", forState: .Normal)
+        passButton.setTitle("跳过 5 s", forState: .Normal)
         passButton.layer.cornerRadius = kViewEdge
         passButton.layer.masksToBounds = true
         passButton.layer.borderWidth = 1.0

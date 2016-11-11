@@ -12,6 +12,10 @@ class EmoticonKeyboardController: UIViewController {
 
     /// 表情包数组
     var managerArray: [EmoticonManager] = EmoticonManager.loadEmoticonManagerArray()
+    /// 数字数组
+    var numberArray: [Int] = [0, 0, 0, 0]
+    /// 基础标记
+    var baseTag = 100
     /// 闭包回调
     var emoticonCallback: (emoticon: EmoticonModel) -> ()
     /// 选中按钮
@@ -25,7 +29,7 @@ class EmoticonKeyboardController: UIViewController {
         toolbar.tintColor = StatusTabBarTextColor
         
         var itemArray = [UIBarButtonItem]()
-        var index = 0
+        var index = self.baseTag
         for manager in self.managerArray {
             let title = manager.groupNameCn
             let button = UIButton()
@@ -35,7 +39,7 @@ class EmoticonKeyboardController: UIViewController {
             button.sizeToFit()
             button.addTarget(self, action: #selector(itemButtonDidClick(_:)), forControlEvents: .TouchUpInside)
             button.tag = index
-            if index == 0 {
+            if index == self.baseTag {
                 self.changeSelectedButton(button)
             }
             
@@ -103,6 +107,10 @@ class EmoticonKeyboardController: UIViewController {
         
         setupUI()
         setupConstraints()
+        
+        for i in 0 ..< managerArray.count {
+            numberArray[i] = managerArray[i].emoticonArray?.count ?? 0
+        }
     }
     
     // MARK: - 界面方法
@@ -117,8 +125,9 @@ class EmoticonKeyboardController: UIViewController {
         
         view.addSubview(emoticonBar)
         
-        pageControl.numberOfPages = managerArray.count
+        pageControl.numberOfPages = 0
         view.addSubview(pageControl)
+        
     }
     
     /**
@@ -146,6 +155,21 @@ class EmoticonKeyboardController: UIViewController {
     // MARK: - 按钮方法
     
     /**
+     组件按钮已经点击方法
+     */
+    @objc private func itemButtonDidClick(button: UIButton) {
+        
+        let indexPath = NSIndexPath(forItem: 0, inSection: button.tag - baseTag)
+        let manager = managerArray[indexPath.section]
+        let pageCount = (manager.emoticonArray?.count ?? 0) / manager.maxEmoticonCount
+        pageControl.numberOfPages = pageCount
+        pageControl.currentPage = 0
+        
+        emoticonView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: false)
+        changeSelectedButton(button)
+    }
+    
+    /**
      改变选中按钮方法
      */
     private func changeSelectedButton(button: UIButton) {
@@ -156,16 +180,6 @@ class EmoticonKeyboardController: UIViewController {
         button.selected = true
         button.backgroundColor = MainColor
         selectedButton = button
-    }
-    
-    /**
-     组件按钮已经点击方法
-     */
-    @objc private func itemButtonDidClick(button: UIButton) {
-        
-        let indexPath = NSIndexPath(forItem: 0, inSection: button.tag)
-        emoticonView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Left, animated: false)
-        changeSelectedButton(button)
     }
 
 }
@@ -228,11 +242,29 @@ extension EmoticonKeyboardController: UIScrollViewDelegate {
      */
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
-        let page = Int(scrollView.contentOffset.x / kScreenWidth)
-        pageControl.currentPage = page
-        
         let indexPath = emoticonView.indexPathsForVisibleItems().first!
-        let button = emoticonBar.viewWithTag(indexPath.section) as! UIButton
+        let manager = managerArray[indexPath.section]
+        let pageCount = (manager.emoticonArray?.count ?? 0) / manager.maxEmoticonCount
+        
+        var tempPage = 1
+        switch indexPath.section {
+        case 0:
+            tempPage = 0
+        case 1:
+            tempPage = 1
+        case 2:
+            tempPage += numberArray[1] / manager.maxEmoticonCount
+        case 3:
+            tempPage += (numberArray[1] + numberArray[2]) / manager.maxEmoticonCount
+        default:
+            break
+        }
+        
+        let page = Int(scrollView.contentOffset.x / kScreenWidth)
+        pageControl.numberOfPages = pageCount
+        pageControl.currentPage = page - tempPage
+        
+        let button = emoticonBar.viewWithTag(indexPath.section + baseTag) as! UIButton
         changeSelectedButton(button)
     }
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25038C801DD5C8F800002B8E /* Emoticons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25038C7F1DD5C8F800002B8E /* Emoticons.bundle */; };
 		250621D11D5B29D0000B542B /* PopoverPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250621CF1D5B29D0000B542B /* PopoverPresentationController.swift */; };
 		250621D21D5B29D0000B542B /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250621D01D5B29D0000B542B /* PopoverViewController.swift */; };
 		250622831D5C0E9C000B542B /* PopoverPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250622821D5C0E9C000B542B /* PopoverPresentationManager.swift */; };
@@ -17,7 +18,6 @@
 		252CA6261D863E1B005042F5 /* EmoticonKeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252CA6211D863E1B005042F5 /* EmoticonKeyboardController.swift */; };
 		252CA6271D863E1B005042F5 /* EmoticonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252CA6221D863E1B005042F5 /* EmoticonModel.swift */; };
 		252CA6281D863E1B005042F5 /* EmoticonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252CA6231D863E1B005042F5 /* EmoticonManager.swift */; };
-		252CA6291D863E1B005042F5 /* Emoticons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 252CA6241D863E1B005042F5 /* Emoticons.bundle */; };
 		252EEB011D66E9F100AC064D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EEAFF1D66E9F100AC064D /* Const.swift */; };
 		252EEB021D66E9F100AC064D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252EEB001D66E9F100AC064D /* Extension.swift */; };
 		255467F51D912B360060874A /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255467F21D912B360060874A /* KeyboardToolbar.swift */; };
@@ -83,6 +83,7 @@
 
 /* Begin PBXFileReference section */
 		1F0B12A120BC1E947C656F13 /* Pods-CCWeiboAPP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCWeiboAPP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CCWeiboAPP/Pods-CCWeiboAPP.debug.xcconfig"; sourceTree = "<group>"; };
+		25038C7F1DD5C8F800002B8E /* Emoticons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Emoticons.bundle; sourceTree = "<group>"; };
 		250621CF1D5B29D0000B542B /* PopoverPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverPresentationController.swift; path = Popover/PopoverPresentationController.swift; sourceTree = "<group>"; };
 		250621D01D5B29D0000B542B /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverViewController.swift; path = Popover/PopoverViewController.swift; sourceTree = "<group>"; };
 		250622821D5C0E9C000B542B /* PopoverPresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverPresentationManager.swift; path = Popover/PopoverPresentationManager.swift; sourceTree = "<group>"; };
@@ -93,7 +94,6 @@
 		252CA6211D863E1B005042F5 /* EmoticonKeyboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonKeyboardController.swift; sourceTree = "<group>"; };
 		252CA6221D863E1B005042F5 /* EmoticonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonModel.swift; sourceTree = "<group>"; };
 		252CA6231D863E1B005042F5 /* EmoticonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonManager.swift; sourceTree = "<group>"; };
-		252CA6241D863E1B005042F5 /* Emoticons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Emoticons.bundle; sourceTree = "<group>"; };
 		252EEAFF1D66E9F100AC064D /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		252EEB001D66E9F100AC064D /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		255467F21D912B360060874A /* KeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				252CA6211D863E1B005042F5 /* EmoticonKeyboardController.swift */,
 				252CA6231D863E1B005042F5 /* EmoticonManager.swift */,
 				252CA6221D863E1B005042F5 /* EmoticonModel.swift */,
-				252CA6241D863E1B005042F5 /* Emoticons.bundle */,
+				25038C7F1DD5C8F800002B8E /* Emoticons.bundle */,
 			);
 			path = EmoticonKeyboard;
 			sourceTree = "<group>";
@@ -605,12 +605,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				25F414421DAF765C00E6FE0B /* BasicMessage.json in Resources */,
+				25038C801DD5C8F800002B8E /* Emoticons.bundle in Resources */,
 				25F4143E1DAE410B00E6FE0B /* DiscoverTopic.json in Resources */,
 				25F414251DADE61800E6FE0B /* WeiboProfile.json in Resources */,
 				25F4143D1DAE410B00E6FE0B /* DiscoverTheme.json in Resources */,
 				8688900A1D3D26E70038F753 /* Assets.xcassets in Resources */,
 				86B5E9951D44FCF100A5D0F0 /* MainViewControllerSettings.json in Resources */,
-				252CA6291D863E1B005042F5 /* Emoticons.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

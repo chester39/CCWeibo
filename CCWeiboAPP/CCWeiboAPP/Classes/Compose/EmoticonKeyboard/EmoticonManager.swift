@@ -15,7 +15,7 @@ class EmoticonManager: NSObject {
     /// 表情包全部表情
     var emoticonArray: [EmoticonModel]?
     /// 最大每页表情数
-    private let maxEmoticonCount = 21
+    let maxEmoticonCount = 21
     
     // MARK: - 初始化方法
     
@@ -74,7 +74,6 @@ class EmoticonManager: NSObject {
                 let emoticon = EmoticonModel(removeButton: true)
                 modelArray.append(emoticon)
                 index = 0
-                continue
             }
             
             let emoticon = EmoticonModel(dict: emoticonDict, id: id!)
