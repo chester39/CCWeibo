@@ -71,6 +71,9 @@ class DetailViewController: UIViewController {
      */
     private func setupUI() {
 
+        navigationItem.title = "微博正文"
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .Action, target: self, action: #selector(shareButtonDidClick))
+        
         tableView.separatorStyle = .None
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -100,6 +103,14 @@ class DetailViewController: UIViewController {
         line.frame.size.height = 1
         line.backgroundColor = MainColor
         headerView.addSubview(line)
+    }
+    
+    /**
+     分享按钮点击方法
+     */
+    @objc private func shareButtonDidClick() {
+        
+        print(#function)
     }
     
     // MARK: - 数据方法

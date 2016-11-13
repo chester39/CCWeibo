@@ -92,7 +92,7 @@ class SettingViewController: UIViewController {
      */
     func closeButtonDidClick() {
         
-        navigationController?.popViewControllerAnimated(false)
+        navigationController?.popViewControllerAnimated(true)
     }
 
 }
