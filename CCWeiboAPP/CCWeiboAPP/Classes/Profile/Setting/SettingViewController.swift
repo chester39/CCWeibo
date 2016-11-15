@@ -68,7 +68,7 @@ class SettingViewController: UIViewController {
         automaticallyAdjustsScrollViewInsets = false
         navigationController?.navigationBar.barTintColor = MainColor
         navigationController?.navigationBar.tintColor = CommonDarkColor
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .Plain, target: self, action: #selector(closeButtonDidClick))
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewDistance))
         headerView.backgroundColor = UIColor.clearColor()

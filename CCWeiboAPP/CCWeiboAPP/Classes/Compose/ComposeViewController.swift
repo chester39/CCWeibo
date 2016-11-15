@@ -68,10 +68,6 @@ class ComposeViewController: UIViewController {
         
         setupUI()
         setupConstraints()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
-        addChildViewController(emoticonKeyboardVC)
-        addChildViewController(photoPickerVC)
     }
     
     /**
@@ -108,6 +104,10 @@ class ComposeViewController: UIViewController {
      初始化界面方法
      */
     private func setupUI() {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
+        addChildViewController(emoticonKeyboardVC)
+        addChildViewController(photoPickerVC)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
         navigationItem.rightBarButtonItem = composeItem
