@@ -29,7 +29,7 @@ class HomeViewController: BaseViewController {
         label.backgroundColor = MainColor
         label.textColor = CommonLightColor
         label.textAlignment = .Center
-        label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: kNavigationBarHeight)
+        label.frame = CGRect(x: 0, y: kTopHeight - kNavigationBarHeight, width: kScreenWidth, height: kNavigationBarHeight)
         label.hidden = true
         
         return label
@@ -94,7 +94,8 @@ class HomeViewController: BaseViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(imageName: "navigationbar_friendattention", target: self, action: #selector(friendButtonDidClick))
         navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(qrcodeButtonDidClick))
         navigationItem.titleView = titleButton
-        navigationController?.navigationBar.insertSubview(tipLabel, atIndex: 0)
+//        navigationController?.navigationBar.insertSubview(tipLabel, atIndex: 0)
+        navigationController?.view.insertSubview(tipLabel, belowSubview: navigationController!.navigationBar)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidPresented, object: popoverPresentationManager)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(titleButtonDidChange), name: kPopoverPresentationManagerDidDismissed, object: popoverPresentationManager)
