@@ -65,4 +65,5 @@ class TitleView: UIView {
             subtitleLabel.centerX == subtitleLabel.superview!.centerX
         }
     }
+    
 }

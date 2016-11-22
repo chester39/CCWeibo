@@ -69,4 +69,5 @@ class EmoticonModel: NSObject {
     override func setValue(value: AnyObject?, forUndefinedKey key: String) {
         
     }
+    
 }

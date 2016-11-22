@@ -98,8 +98,8 @@ class MessageCell: UITableViewCell {
     private func setupConstraints() {
         
         constrain(iconView, verifiedView) { (iconView, verifiedView) in
-            iconView.width == 50
-            iconView.height == 50
+            iconView.width == 40
+            iconView.height == 40
             iconView.top == iconView.superview!.top + kViewPadding
             iconView.left == iconView.superview!.left + kViewPadding
             
