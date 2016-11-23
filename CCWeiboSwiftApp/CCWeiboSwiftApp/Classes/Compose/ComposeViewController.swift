@@ -107,7 +107,7 @@ class ComposeViewController: UIViewController {
      */
     private func setupUI() {
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notice:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notice:)), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
         addChildViewController(emoticonKeyboardVC)
         addChildViewController(photoPickerVC)
         
@@ -237,7 +237,7 @@ class ComposeViewController: UIViewController {
     /**
      键盘将要改变方法
      */
-    func keyboardWillChange(notice: NSNotification) {
+    @objc private func keyboardWillChange(notice: Notification) {
         
         let time = notice.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
         let rect = (notice.userInfo![UIKeyboardFrameEndUserInfoKey]! as! NSValue).cgRectValue

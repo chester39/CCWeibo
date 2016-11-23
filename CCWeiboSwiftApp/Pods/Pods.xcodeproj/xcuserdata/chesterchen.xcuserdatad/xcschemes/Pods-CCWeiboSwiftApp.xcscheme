@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0810"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0658D5D9664A87C5ABBB963484C3B838"
+               BlueprintIdentifier = "229915B0CE789DC2935C3F9C633DB012"
                BuildableName = "Pods_CCWeiboSwiftApp.framework"
                BlueprintName = "Pods-CCWeiboSwiftApp"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0658D5D9664A87C5ABBB963484C3B838"
+            BlueprintIdentifier = "229915B0CE789DC2935C3F9C633DB012"
             BuildableName = "Pods_CCWeiboSwiftApp.framework"
             BlueprintName = "Pods-CCWeiboSwiftApp"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0658D5D9664A87C5ABBB963484C3B838"
-            BuildableName = "Pods_CCWeiboSwiftApp.framework"
-            BlueprintName = "Pods-CCWeiboSwiftApp"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

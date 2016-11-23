@@ -11,13 +11,13 @@ import Cartography
 class EmoticonKeyboardController: UIViewController {
     
     /// 表情包数组
-    var managerArray: [EmoticonManager] = EmoticonManager.loadEmoticonManagerArray()
+    fileprivate var managerArray: [EmoticonManager] = EmoticonManager.loadEmoticonManagerArray()
     /// 数字数组
-    var numberArray: [Int] = [0, 0, 0, 0]
+    fileprivate var numberArray: [Int] = [0, 0, 0, 0]
     /// 基础标记
-    var baseTag = 100
+    fileprivate var baseTag = 100
     /// 闭包回调
-    var emoticonCallback: (_ emoticon: EmoticonModel) -> ()
+    fileprivate var emoticonCallback: (_ emoticon: EmoticonModel) -> ()
     /// 选中按钮
     private lazy var selectedButton = UIButton(type: .custom)
     /// Cell重用标识符
@@ -83,7 +83,7 @@ class EmoticonKeyboardController: UIViewController {
      */
     init(callback: @escaping (_ emoticon: EmoticonModel) -> ()) {
         
-        self.emoticonCallback = callback
+        emoticonCallback = callback
         
         super.init(nibName: nil, bundle: nil)
     }

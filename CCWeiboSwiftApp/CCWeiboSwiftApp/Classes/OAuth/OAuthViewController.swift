@@ -14,9 +14,9 @@ class OAuthViewController: UIViewController {
     /// 授权网页视图
     private lazy var oauthView: WKWebView = {
         let configuration = WKWebViewConfiguration()
+        configuration.allowsAirPlayForMediaPlayback = true
         configuration.allowsInlineMediaPlayback = true
         configuration.suppressesIncrementalRendering = true
-        configuration.allowsAirPlayForMediaPlayback = true
         
         let webView = WKWebView(frame: kScreenFrame, configuration: configuration)
         webView.allowsBackForwardNavigationGestures = true
@@ -90,15 +90,15 @@ class OAuthViewController: UIViewController {
     /**
      关闭按钮点击方法
      */
-    func closeButtonDidClick() {
+    @objc private func closeButtonDidClick() {
         
-        NotificationCenter.default.post(name: NSNotification.Name(kRootViewControllerSwitched), object: false)
+        NotificationCenter.default.post(name: Notification.Name(kRootViewControllerSwitched), object: false)
     }
     
     /**
      填充按钮点击方法
      */
-    func fillButtonDidClick() {
+    @objc private func fillButtonDidClick() {
         
         let jsString = "document.getElementById('userId').value = 'c910309c@sina.com';"
         oauthView.evaluateJavaScript(jsString, completionHandler: nil)

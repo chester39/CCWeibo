@@ -58,7 +58,7 @@ class EmoticonModel: NSObject {
      */
     init(removeButton: Bool) {
         
-        self.isRemoveButton = removeButton
+        isRemoveButton = removeButton
         
         super.init()
     }
