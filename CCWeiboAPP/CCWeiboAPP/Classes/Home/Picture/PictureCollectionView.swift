@@ -57,7 +57,7 @@ class PictureCollectionView: UICollectionView {
         
         switch count {
         case 0:
-            return (cellSize: CGSizeZero, collectionSize:CGSizeZero)
+            return (cellSize: CGSizeZero, collectionSize: CGSizeZero)
             
         case 1:
             let key = viewModel!.thumbnailPictureArray!.first!

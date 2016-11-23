@@ -90,7 +90,7 @@ class OAuthViewController: UIViewController {
     /**
      关闭按钮点击方法
      */
-    func closeButtonDidClick() {
+    @objc private func closeButtonDidClick() {
         
         NSNotificationCenter.defaultCenter().postNotificationName(kRootViewControllerSwitched, object: false)
     }
@@ -98,7 +98,7 @@ class OAuthViewController: UIViewController {
     /**
      填充按钮点击方法
      */
-    func fillButtonDidClick() {
+    @objc private func fillButtonDidClick() {
         
         let jsString = "document.getElementById('userId').value = 'c910309c@sina.com';"
         oauthView.evaluateJavaScript(jsString, completionHandler: nil)

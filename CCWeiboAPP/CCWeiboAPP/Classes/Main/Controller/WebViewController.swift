@@ -123,15 +123,15 @@ class WebViewController: UIViewController {
     /**
      关闭按钮点击方法
      */
-    func closeButtonDidClick() {
+    @objc private func closeButtonDidClick() {
         
-        self.navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     /**
      刷新按钮点击方法
      */
-    func refreshButtonDidClick() {
+    @objc private func refreshButtonDidClick() {
         
         webView.reload()
     }

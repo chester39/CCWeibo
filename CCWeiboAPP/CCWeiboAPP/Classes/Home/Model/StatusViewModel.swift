@@ -89,4 +89,5 @@ class StatusViewModel: NSObject {
         }
 
     }
+    
 }

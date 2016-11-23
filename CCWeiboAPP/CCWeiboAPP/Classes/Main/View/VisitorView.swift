@@ -49,7 +49,7 @@ class VisitorView: UIView {
      */
     private func setupUI() {
     
-        self.backgroundColor = VistorBackgroundColor
+        backgroundColor = VistorBackgroundColor
         
         rotationView.image = UIImage(named: "visitordiscover_feed_image_smallicon")
         addSubview(rotationView)

@@ -235,8 +235,8 @@ extension UILabel {
         self.init()
         
         self.text = text
-        self.font = UIFont.systemFontOfSize(fontSize)
-        self.numberOfLines = lines
+        font = UIFont.systemFontOfSize(fontSize)
+        numberOfLines = lines
     }
 }
 

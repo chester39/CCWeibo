@@ -13,11 +13,11 @@ class EmoticonKeyboardController: UIViewController {
     /// 表情包数组
     var managerArray: [EmoticonManager] = EmoticonManager.loadEmoticonManagerArray()
     /// 数字数组
-    var numberArray: [Int] = [0, 0, 0, 0]
+    private var numberArray: [Int] = [0, 0, 0, 0]
     /// 基础标记
-    var baseTag = 100
+    private var baseTag = 100
     /// 闭包回调
-    var emoticonCallback: (emoticon: EmoticonModel) -> ()
+    private var emoticonCallback: (emoticon: EmoticonModel) -> ()
     /// 选中按钮
     private lazy var selectedButton = UIButton(type: .Custom)
     /// Cell重用标识符
@@ -83,7 +83,7 @@ class EmoticonKeyboardController: UIViewController {
      */
     init(callback: (emoticon: EmoticonModel) -> ()) {
         
-        self.emoticonCallback = callback
+        emoticonCallback = callback
         
         super.init(nibName: nil, bundle: nil)
     }

@@ -10,7 +10,6 @@ import ActiveLabel
 import Cartography
 import SDWebImage
 
-
 protocol BaseStatusCellDelegate: NSObjectProtocol {
     
     /**
@@ -76,7 +75,7 @@ class BaseStatusCell: UITableViewCell {
         iconView.layer.cornerRadius = kViewBorder
         iconView.clipsToBounds = true
         iconView.userInteractionEnabled = true
-        let imageGesture = UITapGestureRecognizer.init(target: self, action: #selector(iconViewDidClick(_:)))
+        let imageGesture = UITapGestureRecognizer(target: self, action: #selector(iconViewDidClick(_:)))
         iconView.addGestureRecognizer(imageGesture)
         contentView.addSubview(iconView)
         
@@ -84,7 +83,7 @@ class BaseStatusCell: UITableViewCell {
         contentView.addSubview(verifiedView)
         
         nameLabel.userInteractionEnabled = true
-        let labelGesture = UITapGestureRecognizer.init(target: self, action: #selector(nameLabelDidClick(_:)))
+        let labelGesture = UITapGestureRecognizer(target: self, action: #selector(nameLabelDidClick(_:)))
         nameLabel.addGestureRecognizer(labelGesture)
         contentView.addSubview(nameLabel)
         

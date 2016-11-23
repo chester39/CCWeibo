@@ -28,9 +28,9 @@ import Cartography
 class PhotoPickerCell: UICollectionViewCell {
     
     /// 图片按钮
-    var imageButton = UIButton(imageName: nil, backgroundImageName: "compose_pic_add")
+    private var imageButton = UIButton(imageName: nil, backgroundImageName: "compose_pic_add")
     /// 删除按钮
-    var removeButton = UIButton(type: .Custom)
+    private var removeButton = UIButton(type: .Custom)
     /// PhotoPickerCellDelegate代理
     weak var delegate: PhotoPickerCellDelegate?
     
