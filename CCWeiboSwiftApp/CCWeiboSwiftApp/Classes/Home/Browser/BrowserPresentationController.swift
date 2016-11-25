@@ -127,7 +127,7 @@ extension BrowserPresentationController: UIViewControllerAnimatedTransitioning {
         
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             imageView.frame = toFrame
-        }) { (_) in
+        }) { _ in
             imageView.removeFromSuperview()
             transitionContext.containerView.addSubview(toView)
             transitionContext.completeTransition(true)

@@ -273,10 +273,10 @@ class HomeViewController: BaseViewController {
         
         UIView.animate(withDuration: 1.0, animations: {
             self.tipLabel.transform = CGAffineTransform(translationX: 0, y: kNavigationBarHeight)
-        }) { (_) in
+        }) { _ in
             UIView.animate(withDuration: 1.0, delay: 1.0, options: UIViewAnimationOptions(rawValue: 0), animations: {
                 self.tipLabel.transform = .identity
-            }, completion: { (_) in
+            }, completion: { _ in
                 self.tipLabel.isHidden = true
             })
         }

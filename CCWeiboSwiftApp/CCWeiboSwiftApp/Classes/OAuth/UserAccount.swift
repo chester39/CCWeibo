@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class UserAccount: NSObject {
+class UserAccount: NSObject, NSCoding {
 
     /// 授权使用令牌
     var accessToken: String?
@@ -52,18 +52,7 @@ class UserAccount: NSObject {
         
         setValuesForKeys(dict)
     }
-    
-    /**
-     输出字符串描述
-     */
-    override var description: String {
-        
-        let property = [kAccessToken, kExpiresIn, kUID, kExpiresDate]
-        let dict = dictionaryWithValues(forKeys: property)
-        
-        return "\(dict)"
-    }
-    
+
     /**
      存在未定义值KVC方法
      */
@@ -101,9 +90,9 @@ class UserAccount: NSObject {
     /**
      数据编码方法
      */
-    func encodeWithCoder(aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder) {
         
-        aCoder.encode(accessToken,forKey: kAccessToken)
+        aCoder.encode(accessToken, forKey: kAccessToken)
         aCoder.encode(expiresIn, forKey: kExpiresIn)
         aCoder.encode(uid, forKey: kUID)
         aCoder.encode(expiresDate, forKey: kExpiresDate)
@@ -121,15 +110,15 @@ class UserAccount: NSObject {
     required init?(coder aDecoder: NSCoder) {
         
         accessToken = aDecoder.decodeObject(forKey: kAccessToken) as? String
-        expiresIn = aDecoder.decodeInteger(forKey: kExpiresIn) as Int
+        expiresIn = aDecoder.decodeInteger(forKey: kExpiresIn)
         uid = aDecoder.decodeObject(forKey: kUID) as? String
         expiresDate = aDecoder.decodeObject(forKey: kExpiresDate) as? Date
         avatarLarge = aDecoder.decodeObject(forKey: kAvatarLarge) as? String
         screenName = aDecoder.decodeObject(forKey: kScreenName) as? String
         descriptionIntro = aDecoder.decodeObject(forKey: kDescription) as? String
-        followersCount = aDecoder.decodeInteger(forKey: kFollowersCount) as Int
-        friendsCount = aDecoder.decodeInteger(forKey: kFriendsCount) as Int
-        statusesCount = aDecoder.decodeInteger(forKey: kStatusesCount) as Int
+        followersCount = aDecoder.decodeInteger(forKey: kFollowersCount)
+        friendsCount = aDecoder.decodeInteger(forKey: kFriendsCount)
+        statusesCount = aDecoder.decodeInteger(forKey: kStatusesCount)
     }
     
     // MARK: - 归档方法
@@ -185,7 +174,7 @@ class UserAccount: NSObject {
         
         let path = "2/users/show.json"
         let parameters = ["access_token": accessToken!, "uid": uid!]
-        Alamofire.request(kWeiboBaseURL + path, method: .get, parameters: parameters).responseJSON { (response) in
+        Alamofire.request(kWeiboBaseURL + path, method: .get, parameters: parameters).responseJSON { response in
             guard let data = response.data else {
                 finished(nil, NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
                 return

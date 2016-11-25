@@ -27,7 +27,7 @@ class NetworkingUtil {
     /**
      获取请求令牌方法
      */
-    func loadRequestToken(_ webView: WKWebView) {
+    func loadRequestToken(webView: WKWebView) {
         
         let path = "oauth2/authorize"
         let parameters = ["client_id": kWeiboAppKey, "redirect_uri": kWeiboRedirectUri]
@@ -44,7 +44,7 @@ class NetworkingUtil {
     /**
      获取使用令牌方法
      */
-    func loadAccessToken(_ codeString: String?) {
+    func loadAccessToken(codeString: String?) {
         
         guard let code = codeString else {
             return

@@ -48,7 +48,7 @@ class OAuthViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        NetworkingUtil.shared.loadRequestToken(oauthView)
+        NetworkingUtil.shared.loadRequestToken(webView: oauthView)
     }
     
     /**
@@ -142,7 +142,7 @@ extension OAuthViewController: WKNavigationDelegate {
         let key = "code="
         if urlString.contains(key) {
             let code = navigationAction.request.url?.query?.substring(from: key.endIndex)
-            NetworkingUtil.shared.loadAccessToken(code)
+            NetworkingUtil.shared.loadAccessToken(codeString: code)
             decisionHandler(.cancel)
         }
         

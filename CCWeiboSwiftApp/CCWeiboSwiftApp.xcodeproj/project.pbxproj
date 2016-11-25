@@ -48,6 +48,10 @@
 		258F3DBF1DE59A6B0083751A /* BaseStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F3DBE1DE59A6B0083751A /* BaseStatusCell.swift */; };
 		258F3DC11DE59B650083751A /* WeiboStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F3DC01DE59B650083751A /* WeiboStatusCell.swift */; };
 		258F3DC31DE59C430083751A /* RetweetStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F3DC21DE59C430083751A /* RetweetStatusCell.swift */; };
+		25ED225A1DE7E39D00F59D83 /* NewFeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED22591DE7E39D00F59D83 /* NewFeatureCell.swift */; };
+		25ED225C1DE7E4C700F59D83 /* NewFeatureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED225B1DE7E4C700F59D83 /* NewFeatureController.swift */; };
+		25ED225E1DE7E69400F59D83 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED225D1DE7E69400F59D83 /* WelcomeView.swift */; };
+		25ED22601DE7E75A00F59D83 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED225F1DE7E75A00F59D83 /* WelcomeViewController.swift */; };
 		864DFC8B1DDB523A007F5D64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864DFC8A1DDB523A007F5D64 /* AppDelegate.swift */; };
 		864DFC921DDB523A007F5D64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 864DFC911DDB523A007F5D64 /* Assets.xcassets */; };
 		86C663DB1DDB64DA005E810A /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C663D91DDB64DA005E810A /* Const.swift */; };
@@ -97,6 +101,10 @@
 		258F3DBE1DE59A6B0083751A /* BaseStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseStatusCell.swift; sourceTree = "<group>"; };
 		258F3DC01DE59B650083751A /* WeiboStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiboStatusCell.swift; sourceTree = "<group>"; };
 		258F3DC21DE59C430083751A /* RetweetStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweetStatusCell.swift; sourceTree = "<group>"; };
+		25ED22591DE7E39D00F59D83 /* NewFeatureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFeatureCell.swift; sourceTree = "<group>"; };
+		25ED225B1DE7E4C700F59D83 /* NewFeatureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFeatureController.swift; sourceTree = "<group>"; };
+		25ED225D1DE7E69400F59D83 /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		25ED225F1DE7E75A00F59D83 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		459E082E02478DF43EEE9FEF /* Pods_CCWeiboSwiftApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCWeiboSwiftApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		864DFC871DDB523A007F5D64 /* CCWeiboSwiftApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCWeiboSwiftApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		864DFC8A1DDB523A007F5D64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +200,8 @@
 		250BA4591DDDB2B800D766A5 /* NewVersion */ = {
 			isa = PBXGroup;
 			children = (
+				25ED22571DE7E38100F59D83 /* NewFeature */,
+				25ED22581DE7E38100F59D83 /* Welcome */,
 			);
 			path = NewVersion;
 			sourceTree = "<group>";
@@ -339,6 +349,24 @@
 				258F3DC01DE59B650083751A /* WeiboStatusCell.swift */,
 			);
 			path = Status;
+			sourceTree = "<group>";
+		};
+		25ED22571DE7E38100F59D83 /* NewFeature */ = {
+			isa = PBXGroup;
+			children = (
+				25ED22591DE7E39D00F59D83 /* NewFeatureCell.swift */,
+				25ED225B1DE7E4C700F59D83 /* NewFeatureController.swift */,
+			);
+			path = NewFeature;
+			sourceTree = "<group>";
+		};
+		25ED22581DE7E38100F59D83 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				25ED225D1DE7E69400F59D83 /* WelcomeView.swift */,
+				25ED225F1DE7E75A00F59D83 /* WelcomeViewController.swift */,
+			);
+			path = Welcome;
 			sourceTree = "<group>";
 		};
 		541459903CA72433AB47AA06 /* Frameworks */ = {
@@ -527,6 +555,7 @@
 			files = (
 				250BA4721DDEF17600D766A5 /* OAuthViewController.swift in Sources */,
 				258F3DA71DE53BAF0083751A /* WebViewController.swift in Sources */,
+				25ED225C1DE7E4C700F59D83 /* NewFeatureController.swift in Sources */,
 				864DFC8B1DDB523A007F5D64 /* AppDelegate.swift in Sources */,
 				258F3DAB1DE542280083751A /* UserModel.swift in Sources */,
 				258F3DAF1DE543390083751A /* StatusViewModel.swift in Sources */,
@@ -560,8 +589,11 @@
 				250BA45F1DDDB2B800D766A5 /* HomeViewController.swift in Sources */,
 				250BA4611DDDB2B800D766A5 /* ProfileViewController.swift in Sources */,
 				250BA4601DDDB2B800D766A5 /* MessageViewController.swift in Sources */,
+				25ED22601DE7E75A00F59D83 /* WelcomeViewController.swift in Sources */,
 				258F3DB91DE585C30083751A /* PictureBrowserCell.swift in Sources */,
 				258F3DBB1DE589C00083751A /* BrowserPresentationController.swift in Sources */,
+				25ED225A1DE7E39D00F59D83 /* NewFeatureCell.swift in Sources */,
+				25ED225E1DE7E69400F59D83 /* WelcomeView.swift in Sources */,
 				250BA4631DDDB2BF00D766A5 /* Color.swift in Sources */,
 				250BA4651DDDB2F900D766A5 /* MainViewController.swift in Sources */,
 				258F3D8F1DE2E8B00083751A /* ComposeTitleView.swift in Sources */,
