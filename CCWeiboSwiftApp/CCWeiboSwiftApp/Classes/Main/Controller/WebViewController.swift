@@ -125,7 +125,7 @@ class WebViewController: UIViewController {
      */
     @objc private func closeButtonDidClick() {
         
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     /**

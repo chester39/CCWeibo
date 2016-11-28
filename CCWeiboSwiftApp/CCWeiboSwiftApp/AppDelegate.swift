@@ -222,7 +222,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func createLocalNotification() {
         
         if #available(iOS 10.0, *) {
-            var content = UNMutableNotificationContent()
+            let content = UNMutableNotificationContent()
             content.badge = 1
             content.title = "新的微博消息"
             content.subtitle = "查看最新的微博消息"

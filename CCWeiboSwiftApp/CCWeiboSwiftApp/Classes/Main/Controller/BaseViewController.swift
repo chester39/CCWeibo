@@ -53,10 +53,10 @@ class BaseViewController: UIViewController {
      */
     @objc private func loginButtonDidClick(button: UIButton) {
         
-        let oaVC = OAuthViewController()
-        let oaNC = UINavigationController()
-        oaNC.addChildViewController(oaVC)
-        present(oaNC, animated: true, completion: nil)
+        let oauthVC = OAuthViewController()
+        let oauthNC = UINavigationController()
+        oauthNC.addChildViewController(oauthVC)
+        present(oauthNC, animated: true, completion: nil)
     }
     
     /**

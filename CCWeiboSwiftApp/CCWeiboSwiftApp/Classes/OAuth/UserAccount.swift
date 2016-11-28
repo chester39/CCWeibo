@@ -110,15 +110,15 @@ class UserAccount: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         
         accessToken = aDecoder.decodeObject(forKey: kAccessToken) as? String
-        expiresIn = aDecoder.decodeInteger(forKey: kExpiresIn)
+        expiresIn = aDecoder.decodeInteger(forKey: kExpiresIn) as Int
         uid = aDecoder.decodeObject(forKey: kUID) as? String
         expiresDate = aDecoder.decodeObject(forKey: kExpiresDate) as? Date
         avatarLarge = aDecoder.decodeObject(forKey: kAvatarLarge) as? String
         screenName = aDecoder.decodeObject(forKey: kScreenName) as? String
         descriptionIntro = aDecoder.decodeObject(forKey: kDescription) as? String
-        followersCount = aDecoder.decodeInteger(forKey: kFollowersCount)
-        friendsCount = aDecoder.decodeInteger(forKey: kFriendsCount)
-        statusesCount = aDecoder.decodeInteger(forKey: kStatusesCount)
+        followersCount = aDecoder.decodeInteger(forKey: kFollowersCount) as Int
+        friendsCount = aDecoder.decodeInteger(forKey: kFriendsCount) as Int
+        statusesCount = aDecoder.decodeInteger(forKey: kStatusesCount) as Int
     }
     
     // MARK: - 归档方法

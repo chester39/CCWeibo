@@ -129,15 +129,15 @@ extension PhotoPickerController: PhotoPickerCellDelegate {
     func photoPickerCellImageButtonDidClick(cell: PhotoPickerCell) {
         
         let indexPath = photoView.indexPath(for: cell)!
-        let ipc = TZImagePickerController(selectedAssets: NSMutableArray(array: assetArray), selectedPhotos: NSMutableArray(array: imageArray), index: indexPath.item)!
-        ipc.allowPickingOriginalPhoto = false
-        ipc.didFinishPickingPhotosHandle = { photos, assets, isSelectOriginalPhoto -> Void in
+        let imagePickerVC = TZImagePickerController(selectedAssets: NSMutableArray(array: assetArray), selectedPhotos: NSMutableArray(array: imageArray), index: indexPath.item)!
+        imagePickerVC.allowPickingOriginalPhoto = false
+        imagePickerVC.didFinishPickingPhotosHandle = { photos, assets, isSelectOriginalPhoto -> Void in
             self.imageArray = photos!
             self.assetArray = assets as! [PHAsset]
             self.photoView.reloadData()
         }
         
-        present(ipc, animated: true, completion: nil)
+        present(imagePickerVC, animated: true, completion: nil)
     }
     
     /**
@@ -145,13 +145,13 @@ extension PhotoPickerController: PhotoPickerCellDelegate {
      */
     func photoPickerCellAddButtonDidClick(cell: PhotoPickerCell) {
         
-        let ipc = TZImagePickerController(maxImagesCount: maxPhotoCount, delegate: self)!
-        ipc.sortAscendingByModificationDate = false
-        ipc.allowPickingOriginalPhoto = false
-        ipc.allowPickingVideo = false
-        ipc.selectedAssets = NSMutableArray(array: assetArray)
+        let imagePickerVC = TZImagePickerController(maxImagesCount: maxPhotoCount, delegate: self)!
+        imagePickerVC.sortAscendingByModificationDate = false
+        imagePickerVC.allowPickingOriginalPhoto = false
+        imagePickerVC.allowPickingVideo = false
+        imagePickerVC.selectedAssets = NSMutableArray(array: assetArray)
         
-        present(ipc, animated: true, completion: nil)
+        present(imagePickerVC, animated: true, completion: nil)
     }
     
     /**

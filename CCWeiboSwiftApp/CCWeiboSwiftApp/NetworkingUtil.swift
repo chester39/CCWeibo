@@ -64,7 +64,7 @@ class NetworkingUtil {
             
             let account = UserAccount(dict: dict)
             account.loadUserInfo(finished: { account, error in
-                account?.saveUserAccount()
+                _ = account?.saveUserAccount()
             })
         }
 

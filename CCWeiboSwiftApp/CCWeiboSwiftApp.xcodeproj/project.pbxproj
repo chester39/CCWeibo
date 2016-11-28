@@ -22,6 +22,9 @@
 		250BA4721DDEF17600D766A5 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BA4711DDEF17600D766A5 /* OAuthViewController.swift */; };
 		250BA4741DDEF40000D766A5 /* NetworkingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BA4731DDEF40000D766A5 /* NetworkingUtil.swift */; };
 		250BA4761DDEFDA500D766A5 /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BA4751DDEFDA500D766A5 /* UserAccount.swift */; };
+		256B4E461DEC08B40073D126 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256B4E451DEC08B40073D126 /* QRCodeView.swift */; };
+		256B4E481DEC09640073D126 /* QRCodeCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256B4E471DEC09640073D126 /* QRCodeCreateController.swift */; };
+		256B4E4A1DEC0A610073D126 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256B4E491DEC0A610073D126 /* QRCodeViewController.swift */; };
 		258F3D891DE2E78B0083751A /* Emoticons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 258F3D861DE2E78B0083751A /* Emoticons.bundle */; };
 		258F3D8B1DE2E7AA0083751A /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F3D8A1DE2E7AA0083751A /* KeyboardToolbar.swift */; };
 		258F3D8D1DE2E84B0083751A /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F3D8C1DE2E84B0083751A /* PlaceholderTextView.swift */; };
@@ -48,6 +51,13 @@
 		258F3DBF1DE59A6B0083751A /* BaseStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F3DBE1DE59A6B0083751A /* BaseStatusCell.swift */; };
 		258F3DC11DE59B650083751A /* WeiboStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F3DC01DE59B650083751A /* WeiboStatusCell.swift */; };
 		258F3DC31DE59C430083751A /* RetweetStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F3DC21DE59C430083751A /* RetweetStatusCell.swift */; };
+		25A16B4F1DEBD3420044C278 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A16B4E1DEBD3420044C278 /* CommentModel.swift */; };
+		25A16B511DEBD3900044C278 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A16B501DEBD3900044C278 /* CommentCell.swift */; };
+		25A16B531DEBD59E0044C278 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A16B521DEBD59E0044C278 /* DetailViewController.swift */; };
+		25A16B551DEBD9550044C278 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A16B541DEBD9550044C278 /* PopoverView.swift */; };
+		25A16B571DEBD9CB0044C278 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A16B561DEBD9CB0044C278 /* PopoverViewController.swift */; };
+		25A16B591DEBD9FA0044C278 /* PopoverPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A16B581DEBD9FA0044C278 /* PopoverPresentationController.swift */; };
+		25A16B5B1DEBDAC00044C278 /* PopoverPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A16B5A1DEBDAC00044C278 /* PopoverPresentationManager.swift */; };
 		25ED225A1DE7E39D00F59D83 /* NewFeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED22591DE7E39D00F59D83 /* NewFeatureCell.swift */; };
 		25ED225C1DE7E4C700F59D83 /* NewFeatureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED225B1DE7E4C700F59D83 /* NewFeatureController.swift */; };
 		25ED225E1DE7E69400F59D83 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED225D1DE7E69400F59D83 /* WelcomeView.swift */; };
@@ -75,6 +85,9 @@
 		250BA4711DDEF17600D766A5 /* OAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 		250BA4731DDEF40000D766A5 /* NetworkingUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingUtil.swift; sourceTree = "<group>"; };
 		250BA4751DDEFDA500D766A5 /* UserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
+		256B4E451DEC08B40073D126 /* QRCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
+		256B4E471DEC09640073D126 /* QRCodeCreateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeCreateController.swift; sourceTree = "<group>"; };
+		256B4E491DEC0A610073D126 /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		258F3D861DE2E78B0083751A /* Emoticons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Emoticons.bundle; sourceTree = "<group>"; };
 		258F3D8A1DE2E7AA0083751A /* KeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
 		258F3D8C1DE2E84B0083751A /* PlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
@@ -101,6 +114,13 @@
 		258F3DBE1DE59A6B0083751A /* BaseStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseStatusCell.swift; sourceTree = "<group>"; };
 		258F3DC01DE59B650083751A /* WeiboStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiboStatusCell.swift; sourceTree = "<group>"; };
 		258F3DC21DE59C430083751A /* RetweetStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweetStatusCell.swift; sourceTree = "<group>"; };
+		25A16B4E1DEBD3420044C278 /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
+		25A16B501DEBD3900044C278 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		25A16B521DEBD59E0044C278 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		25A16B541DEBD9550044C278 /* PopoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
+		25A16B561DEBD9CB0044C278 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
+		25A16B581DEBD9FA0044C278 /* PopoverPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverPresentationController.swift; sourceTree = "<group>"; };
+		25A16B5A1DEBDAC00044C278 /* PopoverPresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverPresentationManager.swift; sourceTree = "<group>"; };
 		25ED22591DE7E39D00F59D83 /* NewFeatureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFeatureCell.swift; sourceTree = "<group>"; };
 		25ED225B1DE7E4C700F59D83 /* NewFeatureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFeatureController.swift; sourceTree = "<group>"; };
 		25ED225D1DE7E69400F59D83 /* WelcomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -295,6 +315,9 @@
 		258F3D9D1DE537970083751A /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				25A16B501DEBD3900044C278 /* CommentCell.swift */,
+				25A16B4E1DEBD3420044C278 /* CommentModel.swift */,
+				25A16B521DEBD59E0044C278 /* DetailViewController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -321,6 +344,10 @@
 		258F3DA01DE537970083751A /* Popover */ = {
 			isa = PBXGroup;
 			children = (
+				25A16B581DEBD9FA0044C278 /* PopoverPresentationController.swift */,
+				25A16B5A1DEBDAC00044C278 /* PopoverPresentationManager.swift */,
+				25A16B541DEBD9550044C278 /* PopoverView.swift */,
+				25A16B561DEBD9CB0044C278 /* PopoverViewController.swift */,
 			);
 			path = Popover;
 			sourceTree = "<group>";
@@ -337,6 +364,9 @@
 		258F3DA21DE537970083751A /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
+				256B4E451DEC08B40073D126 /* QRCodeView.swift */,
+				256B4E471DEC09640073D126 /* QRCodeCreateController.swift */,
+				256B4E491DEC0A610073D126 /* QRCodeViewController.swift */,
 			);
 			path = QRCode;
 			sourceTree = "<group>";
@@ -456,7 +486,7 @@
 				TargetAttributes = {
 					864DFC861DDB523A007F5D64 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 72SC2S8T6M;
+						DevelopmentTeam = U4A6RHW364;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -573,8 +603,11 @@
 				250BA46A1DDDB32900D766A5 /* NullViewController.swift in Sources */,
 				258F3D9B1DE430170083751A /* EmoticonKeyboardController.swift in Sources */,
 				250BA45D1DDDB2B800D766A5 /* ComposeViewController.swift in Sources */,
+				25A16B591DEBD9FA0044C278 /* PopoverPresentationController.swift in Sources */,
 				258F3D8B1DE2E7AA0083751A /* KeyboardToolbar.swift in Sources */,
+				25A16B5B1DEBDAC00044C278 /* PopoverPresentationManager.swift in Sources */,
 				250BA4741DDEF40000D766A5 /* NetworkingUtil.swift in Sources */,
+				256B4E4A1DEC0A610073D126 /* QRCodeViewController.swift in Sources */,
 				258F3DAD1DE542A50083751A /* StatusModel.swift in Sources */,
 				250BA46D1DDEA31500D766A5 /* BaseViewController.swift in Sources */,
 				258F3D991DE42FD20083751A /* EmoticonKeyboardCell.swift in Sources */,
@@ -585,16 +618,23 @@
 				258F3DB51DE572010083751A /* ProgressView.swift in Sources */,
 				258F3D951DE424A40083751A /* EmoticonModel.swift in Sources */,
 				250BA45E1DDDB2B800D766A5 /* DiscoverViewController.swift in Sources */,
+				25A16B571DEBD9CB0044C278 /* PopoverViewController.swift in Sources */,
 				250BA4701DDEA38500D766A5 /* VisitorView.swift in Sources */,
+				25A16B511DEBD3900044C278 /* CommentCell.swift in Sources */,
+				256B4E481DEC09640073D126 /* QRCodeCreateController.swift in Sources */,
+				25A16B4F1DEBD3420044C278 /* CommentModel.swift in Sources */,
+				25A16B551DEBD9550044C278 /* PopoverView.swift in Sources */,
 				250BA45F1DDDB2B800D766A5 /* HomeViewController.swift in Sources */,
 				250BA4611DDDB2B800D766A5 /* ProfileViewController.swift in Sources */,
 				250BA4601DDDB2B800D766A5 /* MessageViewController.swift in Sources */,
 				25ED22601DE7E75A00F59D83 /* WelcomeViewController.swift in Sources */,
+				25A16B531DEBD59E0044C278 /* DetailViewController.swift in Sources */,
 				258F3DB91DE585C30083751A /* PictureBrowserCell.swift in Sources */,
 				258F3DBB1DE589C00083751A /* BrowserPresentationController.swift in Sources */,
 				25ED225A1DE7E39D00F59D83 /* NewFeatureCell.swift in Sources */,
 				25ED225E1DE7E69400F59D83 /* WelcomeView.swift in Sources */,
 				250BA4631DDDB2BF00D766A5 /* Color.swift in Sources */,
+				256B4E461DEC08B40073D126 /* QRCodeView.swift in Sources */,
 				250BA4651DDDB2F900D766A5 /* MainViewController.swift in Sources */,
 				258F3D8F1DE2E8B00083751A /* ComposeTitleView.swift in Sources */,
 				258F3DB31DE571D00083751A /* ProgressImageView.swift in Sources */,
@@ -622,6 +662,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -671,6 +712,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -699,10 +741,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 072B4C9088EA4CC4C5C83328 /* Pods-CCWeiboSwiftApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = CCWeiboSwiftApp/CCWeiboSwiftApp.entitlements;
-				DEVELOPMENT_TEAM = 72SC2S8T6M;
+				DEVELOPMENT_TEAM = U4A6RHW364;
 				INFOPLIST_FILE = CCWeiboSwiftApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -717,10 +760,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 098096FA88C18863F73AFD69 /* Pods-CCWeiboSwiftApp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = CCWeiboSwiftApp/CCWeiboSwiftApp.entitlements;
-				DEVELOPMENT_TEAM = 72SC2S8T6M;
+				DEVELOPMENT_TEAM = U4A6RHW364;
 				INFOPLIST_FILE = CCWeiboSwiftApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

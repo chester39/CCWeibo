@@ -42,22 +42,22 @@ class HomeViewController: BaseViewController {
         let button = NavigationTitleButton()
         let title = UserAccount.loadUserAccount()?.screenName
         button.setTitle(title, for: .normal)
-//        button.addTarget(self, action: #selector(titleButtonDidClick(button:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(titleButtonDidClick(button:)), for: .touchUpInside)
         
         return button
     }()
     
-//    /// 标题按钮转场管理器
-//    private lazy var popoverPresentationManager: PopoverPresentationManager = {
-//        let manager = PopoverPresentationManager()
-//        let presentWidth: CGFloat = kViewDistance
-//        let presentHeight: CGFloat = 250
-//        let presentX: CGFloat = (kScreenWidth - presentWidth) / 2
-//        let presentY: CGFloat = kViewAdapter
-//        manager.presentFrame = CGRect(x: presentX, y: presentY, width: presentWidth, height: presentHeight)
-//        
-//        return manager
-//    }()
+    /// 标题按钮转场管理器
+    private lazy var popoverPresentationManager: PopoverPresentationManager = {
+        let manager = PopoverPresentationManager()
+        let presentWidth: CGFloat = kViewDistance
+        let presentHeight: CGFloat = 250
+        let presentX: CGFloat = (kScreenWidth - presentWidth) / 2
+        let presentY: CGFloat = kViewAdapter
+        manager.presentFrame = CGRect(x: presentX, y: presentY, width: presentWidth, height: presentHeight)
+        
+        return manager
+    }()
     
     // MARK: - 系统方法
     
@@ -94,12 +94,12 @@ class HomeViewController: BaseViewController {
     private func setupNavigation() {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(imageName: "navigationbar_friendattention", target: self, action: #selector(friendButtonDidClick))
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(qrcodeButtonDidClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(imageName: "navigationbar_pop", target: self, action: #selector(qrCodeButtonDidClick))
         navigationItem.titleView = titleButton
         navigationController?.view.insertSubview(tipLabel, belowSubview: navigationController!.navigationBar)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(titleButtonDidChange), name: Notification.Name(kPopoverPresentationManagerDidPresented), object: browerPresentationManager)
-        NotificationCenter.default.addObserver(self, selector: #selector(titleButtonDidChange), name: Notification.Name(kPopoverPresentationManagerDidDismissed), object: browerPresentationManager)
+        NotificationCenter.default.addObserver(self, selector: #selector(titleButtonDidChange), name: Notification.Name(kPopoverPresentationManagerDidPresented), object: popoverPresentationManager)
+        NotificationCenter.default.addObserver(self, selector: #selector(titleButtonDidChange), name: Notification.Name(kPopoverPresentationManagerDidDismissed), object: popoverPresentationManager)
         NotificationCenter.default.addObserver(self, selector: #selector(pictureCellDidClick(notice:)), name: Notification.Name(kBrowserViewControllerShowed), object: nil)
     }
     
@@ -115,6 +115,7 @@ class HomeViewController: BaseViewController {
         tableView.delegate = self
         tableView.register(WeiboStatusCell.self, forCellReuseIdentifier: weiboReuseIdentifier)
         tableView.register(RetweetStatusCell.self, forCellReuseIdentifier: retweetReuseIdentifier)
+        view.addSubview(tableView)
         
         tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadWeiboStatus))
         tableView.mj_header.isAutomaticallyChangeAlpha = true
@@ -133,16 +134,16 @@ class HomeViewController: BaseViewController {
         titleButton.isSelected = !titleButton.isSelected
     }
     
-//    /**
-//     标题按钮点击方法
-//     */
-//    @objc private func titleButtonDidClick(button: NavigationTitleButton) {
-//        
-//        let popoverVC = PopoverViewController()
-//        popoverVC.transitioningDelegate = popoverPresentationManager
-//        popoverVC.modalPresentationStyle = .custom
-//        presentViewController(popoverVC, animated: true, completion: nil)
-//    }
+    /**
+     标题按钮点击方法
+     */
+    @objc private func titleButtonDidClick(button: NavigationTitleButton) {
+        
+        let popoverVC = PopoverViewController()
+        popoverVC.transitioningDelegate = popoverPresentationManager
+        popoverVC.modalPresentationStyle = .custom
+        present(popoverVC, animated: true, completion: nil)
+    }
     
     /**
      好友按钮点击方法
@@ -152,16 +153,16 @@ class HomeViewController: BaseViewController {
         print(#function)
     }
     
-//    /**
-//     二维码按钮点击方法
-//     */
-//    @objc private func qrcodeButtonDidClick() {
-//        
-//        let qrcVC = QRCodeViewController()
-//        let qrcNC = UINavigationController()
-//        qrcNC.addChildViewController(qrcVC)
-//        presentViewController(qrcNC, animated: false, completion: nil)
-//    }
+    /**
+     二维码按钮点击方法
+     */
+    @objc private func qrCodeButtonDidClick() {
+        
+        let qrCodeVC = QRCodeViewController()
+        let qrCodeNC = UINavigationController()
+        qrCodeNC.addChildViewController(qrCodeVC)
+        present(qrCodeNC, animated: false, completion: nil)
+    }
     
     /**
      图片Cell点击方法
@@ -341,8 +342,8 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let viewModel = statusArray![indexPath.row]
-//        let detailVC = DetailViewController(viewModel: viewModel)
-//        navigationController?.pushViewController(detailVC, animated: true)
+        let detailVC = DetailViewController(viewModel: viewModel)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
 }

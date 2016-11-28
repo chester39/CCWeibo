@@ -32,12 +32,10 @@ class ComposeViewController: UIViewController {
     private var titleView: ComposeTitleView = {
         let view = ComposeTitleView(frame: CGRect(x: 0, y: 0, width: kViewStandard, height: kNavigationBarHeight))
         view.titleLabel.text = "发送微博"
-        view.subtitleLabel.text = "阇梨"
-        view.subtitleLabel.textColor = MainColor
-//        if let userName = UserAccount.loadUserAccount()!.screenName {
-//            view.subtitleLabel.text = userName
-//            view.subtitleLabel.textColor = MainColor
-//        }
+        if let userName = UserAccount.loadUserAccount()!.screenName {
+            view.subtitleLabel.text = userName
+            view.subtitleLabel.textColor = MainColor
+        }
         
         return view
     }()
