@@ -51,6 +51,11 @@
 		258F3DBF1DE59A6B0083751A /* BaseStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F3DBE1DE59A6B0083751A /* BaseStatusCell.swift */; };
 		258F3DC11DE59B650083751A /* WeiboStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F3DC01DE59B650083751A /* WeiboStatusCell.swift */; };
 		258F3DC31DE59C430083751A /* RetweetStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258F3DC21DE59C430083751A /* RetweetStatusCell.swift */; };
+		2592E6381DED6B8F00BF472A /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592E6371DED6B8F00BF472A /* ProfileModel.swift */; };
+		2592E63A1DED6BF000BF472A /* ProfileGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592E6391DED6BF000BF472A /* ProfileGroup.swift */; };
+		2592E63C1DED6C9600BF472A /* WeiboProfile.json in Resources */ = {isa = PBXBuildFile; fileRef = 2592E63B1DED6C9600BF472A /* WeiboProfile.json */; };
+		2592E63E1DED6CA900BF472A /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592E63D1DED6CA900BF472A /* PersonView.swift */; };
+		2592E6401DED6D7200BF472A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592E63F1DED6D7200BF472A /* SettingViewController.swift */; };
 		25A16B4F1DEBD3420044C278 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A16B4E1DEBD3420044C278 /* CommentModel.swift */; };
 		25A16B511DEBD3900044C278 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A16B501DEBD3900044C278 /* CommentCell.swift */; };
 		25A16B531DEBD59E0044C278 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A16B521DEBD59E0044C278 /* DetailViewController.swift */; };
@@ -114,6 +119,11 @@
 		258F3DBE1DE59A6B0083751A /* BaseStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseStatusCell.swift; sourceTree = "<group>"; };
 		258F3DC01DE59B650083751A /* WeiboStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiboStatusCell.swift; sourceTree = "<group>"; };
 		258F3DC21DE59C430083751A /* RetweetStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweetStatusCell.swift; sourceTree = "<group>"; };
+		2592E6371DED6B8F00BF472A /* ProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		2592E6391DED6BF000BF472A /* ProfileGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileGroup.swift; sourceTree = "<group>"; };
+		2592E63B1DED6C9600BF472A /* WeiboProfile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WeiboProfile.json; sourceTree = "<group>"; };
+		2592E63D1DED6CA900BF472A /* PersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
+		2592E63F1DED6D7200BF472A /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		25A16B4E1DEBD3420044C278 /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		25A16B501DEBD3900044C278 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		25A16B521DEBD59E0044C278 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -239,6 +249,9 @@
 			isa = PBXGroup;
 			children = (
 				250BA45C1DDDB2B800D766A5 /* ProfileViewController.swift */,
+				2592E6341DED6B7A00BF472A /* Model */,
+				2592E6351DED6B7A00BF472A /* Setting */,
+				2592E6361DED6B7A00BF472A /* View */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -379,6 +392,32 @@
 				258F3DC01DE59B650083751A /* WeiboStatusCell.swift */,
 			);
 			path = Status;
+			sourceTree = "<group>";
+		};
+		2592E6341DED6B7A00BF472A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2592E6371DED6B8F00BF472A /* ProfileModel.swift */,
+				2592E6391DED6BF000BF472A /* ProfileGroup.swift */,
+				2592E63B1DED6C9600BF472A /* WeiboProfile.json */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2592E6351DED6B7A00BF472A /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				2592E63F1DED6D7200BF472A /* SettingViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		2592E6361DED6B7A00BF472A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2592E63D1DED6CA900BF472A /* PersonView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		25ED22571DE7E38100F59D83 /* NewFeature */ = {
@@ -522,6 +561,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2592E63C1DED6C9600BF472A /* WeiboProfile.json in Resources */,
 				250BA4691DDDB32900D766A5 /* MainViewControllerSettings.json in Resources */,
 				258F3D891DE2E78B0083751A /* Emoticons.bundle in Resources */,
 				864DFC921DDB523A007F5D64 /* Assets.xcassets in Resources */,
@@ -583,6 +623,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2592E6401DED6D7200BF472A /* SettingViewController.swift in Sources */,
 				250BA4721DDEF17600D766A5 /* OAuthViewController.swift in Sources */,
 				258F3DA71DE53BAF0083751A /* WebViewController.swift in Sources */,
 				25ED225C1DE7E4C700F59D83 /* NewFeatureController.swift in Sources */,
@@ -598,8 +639,10 @@
 				86C663DC1DDB64DA005E810A /* Extension.swift in Sources */,
 				258F3DC31DE59C430083751A /* RetweetStatusCell.swift in Sources */,
 				258F3DB71DE57E3D0083751A /* PictureCollectionView.swift in Sources */,
+				2592E6381DED6B8F00BF472A /* ProfileModel.swift in Sources */,
 				258F3D931DE2EA280083751A /* PhotoPickerController.swift in Sources */,
 				258F3DBF1DE59A6B0083751A /* BaseStatusCell.swift in Sources */,
+				2592E63A1DED6BF000BF472A /* ProfileGroup.swift in Sources */,
 				250BA46A1DDDB32900D766A5 /* NullViewController.swift in Sources */,
 				258F3D9B1DE430170083751A /* EmoticonKeyboardController.swift in Sources */,
 				250BA45D1DDDB2B800D766A5 /* ComposeViewController.swift in Sources */,
@@ -622,6 +665,7 @@
 				250BA4701DDEA38500D766A5 /* VisitorView.swift in Sources */,
 				25A16B511DEBD3900044C278 /* CommentCell.swift in Sources */,
 				256B4E481DEC09640073D126 /* QRCodeCreateController.swift in Sources */,
+				2592E63E1DED6CA900BF472A /* PersonView.swift in Sources */,
 				25A16B4F1DEBD3420044C278 /* CommentModel.swift in Sources */,
 				25A16B551DEBD9550044C278 /* PopoverView.swift in Sources */,
 				250BA45F1DDDB2B800D766A5 /* HomeViewController.swift in Sources */,

@@ -1,0 +1,14 @@
+[
+  {
+  "icon": "messagescenter_at",
+  "title": "@我的",
+  },
+  {
+  "icon": "messagescenter_comments",
+  "title": "评论",
+  },
+  {
+  "icon": "messagescenter_good",
+  "title": "赞",
+  }
+]
