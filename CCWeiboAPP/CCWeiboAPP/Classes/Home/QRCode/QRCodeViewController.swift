@@ -117,7 +117,7 @@ class QRCodeViewController: UIViewController {
      */
     func albumButtonDidClick() {
         
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) == false {
+        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) == false {
             return
         }
         

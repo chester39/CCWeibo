@@ -11,13 +11,13 @@ import UIKit
 class SettingViewController: UIViewController {
     
     /// 表格视图
-    var tableView = UITableView(frame: kScreenFrame, style: .Grouped)
+    private var tableView = UITableView(frame: kScreenFrame, style: .Grouped)
     /// 图片视图
-    var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewDistance))
+    private var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewDistance))
     /// 导航栏背景视图
-    var barView = UIView()
+    private var barView = UIView()
     /// 临时透明度
-    var tempAlpha: CGFloat = 0
+    private var tempAlpha: CGFloat = 0
     /// 设置Cell重用标识符
     private let reuseIdentifier = "SettingCell"
     
@@ -71,7 +71,7 @@ class SettingViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .Plain, target: self, action: #selector(closeButtonDidClick))
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewDistance))
-        headerView.backgroundColor = UIColor.clearColor()
+        headerView.backgroundColor = ClearColor
         
         tableView.showsVerticalScrollIndicator = false
         tableView.alwaysBounceVertical = true
@@ -208,7 +208,7 @@ extension SettingViewController: UITableViewDelegate {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             
-            let okButton = UIAlertAction.init(title: "确定", style: .Destructive) { (action) in
+            let okButton = UIAlertAction(title: "确定", style: .Destructive) { (action) in
                 self.view.clearCaches()
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
@@ -224,7 +224,7 @@ extension SettingViewController: UITableViewDelegate {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             
-            let okButton = UIAlertAction.init(title: "确定", style: .Destructive) { (action) in
+            let okButton = UIAlertAction(title: "确定", style: .Destructive) { (action) in
                 
                 if NSFileManager.defaultManager().fileExistsAtPath(UserAccount.filePath) {
                     do {

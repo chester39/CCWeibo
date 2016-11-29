@@ -36,6 +36,7 @@ class ProfileGroup: NSObject {
                 let profile = ProfileModel(dict: dict)
                 array.append(profile)
             }
+            
             detail = array
             return
         }
