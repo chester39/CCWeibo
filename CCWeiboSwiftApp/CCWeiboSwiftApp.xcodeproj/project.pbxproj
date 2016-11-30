@@ -22,6 +22,9 @@
 		250BA4721DDEF17600D766A5 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BA4711DDEF17600D766A5 /* OAuthViewController.swift */; };
 		250BA4741DDEF40000D766A5 /* NetworkingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BA4731DDEF40000D766A5 /* NetworkingUtil.swift */; };
 		250BA4761DDEFDA500D766A5 /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BA4751DDEFDA500D766A5 /* UserAccount.swift */; };
+		252B6F701DEEA73E00CB267C /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B6F6F1DEEA73E00CB267C /* MessageCell.swift */; };
+		252B6F721DEEA75E00CB267C /* BasicMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = 252B6F711DEEA75E00CB267C /* BasicMessage.json */; };
+		252B6F741DEEA76700CB267C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 252B6F731DEEA76700CB267C /* Assets.xcassets */; };
 		256B4E461DEC08B40073D126 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256B4E451DEC08B40073D126 /* QRCodeView.swift */; };
 		256B4E481DEC09640073D126 /* QRCodeCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256B4E471DEC09640073D126 /* QRCodeCreateController.swift */; };
 		256B4E4A1DEC0A610073D126 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256B4E491DEC0A610073D126 /* QRCodeViewController.swift */; };
@@ -68,7 +71,6 @@
 		25ED225E1DE7E69400F59D83 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED225D1DE7E69400F59D83 /* WelcomeView.swift */; };
 		25ED22601DE7E75A00F59D83 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED225F1DE7E75A00F59D83 /* WelcomeViewController.swift */; };
 		864DFC8B1DDB523A007F5D64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864DFC8A1DDB523A007F5D64 /* AppDelegate.swift */; };
-		864DFC921DDB523A007F5D64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 864DFC911DDB523A007F5D64 /* Assets.xcassets */; };
 		86C663DB1DDB64DA005E810A /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C663D91DDB64DA005E810A /* Const.swift */; };
 		86C663DC1DDB64DA005E810A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C663DA1DDB64DA005E810A /* Extension.swift */; };
 /* End PBXBuildFile section */
@@ -90,6 +92,9 @@
 		250BA4711DDEF17600D766A5 /* OAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 		250BA4731DDEF40000D766A5 /* NetworkingUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingUtil.swift; sourceTree = "<group>"; };
 		250BA4751DDEFDA500D766A5 /* UserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
+		252B6F6F1DEEA73E00CB267C /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		252B6F711DEEA75E00CB267C /* BasicMessage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BasicMessage.json; sourceTree = "<group>"; };
+		252B6F731DEEA76700CB267C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		256B4E451DEC08B40073D126 /* QRCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		256B4E471DEC09640073D126 /* QRCodeCreateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeCreateController.swift; sourceTree = "<group>"; };
 		256B4E491DEC0A610073D126 /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
@@ -138,7 +143,6 @@
 		459E082E02478DF43EEE9FEF /* Pods_CCWeiboSwiftApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCWeiboSwiftApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		864DFC871DDB523A007F5D64 /* CCWeiboSwiftApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCWeiboSwiftApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		864DFC8A1DDB523A007F5D64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		864DFC911DDB523A007F5D64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		864DFC961DDB523A007F5D64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86C663D91DDB64DA005E810A /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		86C663DA1DDB64DA005E810A /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -222,6 +226,8 @@
 		250BA4571DDDB2B800D766A5 /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				252B6F711DEEA75E00CB267C /* BasicMessage.json */,
+				252B6F6F1DEEA73E00CB267C /* MessageCell.swift */,
 				250BA4581DDDB2B800D766A5 /* MessageViewController.swift */,
 			);
 			path = Message;
@@ -484,7 +490,7 @@
 				86C663DA1DDB64DA005E810A /* Extension.swift */,
 				250BA4731DDEF40000D766A5 /* NetworkingUtil.swift */,
 				250BA44F1DDDB2B800D766A5 /* Classes */,
-				864DFC911DDB523A007F5D64 /* Assets.xcassets */,
+				252B6F731DEEA76700CB267C /* Assets.xcassets */,
 				864DFC961DDB523A007F5D64 /* Info.plist */,
 			);
 			path = CCWeiboSwiftApp;
@@ -564,7 +570,8 @@
 				2592E63C1DED6C9600BF472A /* WeiboProfile.json in Resources */,
 				250BA4691DDDB32900D766A5 /* MainViewControllerSettings.json in Resources */,
 				258F3D891DE2E78B0083751A /* Emoticons.bundle in Resources */,
-				864DFC921DDB523A007F5D64 /* Assets.xcassets in Resources */,
+				252B6F721DEEA75E00CB267C /* BasicMessage.json in Resources */,
+				252B6F741DEEA76700CB267C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +671,7 @@
 				25A16B571DEBD9CB0044C278 /* PopoverViewController.swift in Sources */,
 				250BA4701DDEA38500D766A5 /* VisitorView.swift in Sources */,
 				25A16B511DEBD3900044C278 /* CommentCell.swift in Sources */,
+				252B6F701DEEA73E00CB267C /* MessageCell.swift in Sources */,
 				256B4E481DEC09640073D126 /* QRCodeCreateController.swift in Sources */,
 				2592E63E1DED6CA900BF472A /* PersonView.swift in Sources */,
 				25A16B4F1DEBD3420044C278 /* CommentModel.swift in Sources */,

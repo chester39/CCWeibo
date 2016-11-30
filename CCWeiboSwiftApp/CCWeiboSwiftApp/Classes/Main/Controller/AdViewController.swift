@@ -47,16 +47,14 @@ class AdViewController: UIViewController {
         passButton.layer.cornerRadius = kViewEdge
         passButton.layer.masksToBounds = true
         passButton.layer.borderWidth = 1.0
-        passButton.layer.borderColor = CommonDarkColor.cgColor
+        passButton.layer.borderColor = RetweetStatusBackgroundColor.cgColor
+        passButton.layer.backgroundColor = RetweetStatusBackgroundColor.cgColor
+        passButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         passButton.setTitleColor(CommonDarkColor, for: .normal)
         passButton.addTarget(self, action: #selector(passAdvertisement), for: .touchUpInside)
         view.addSubview(passButton)
         
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
-//        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5.0 * Double(NSEC_PER_SEC)))
-//        dispatch_after(delayTime, dispatch_get_main_queue()) {
-//            self.passAdvertisement()
-//        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             self.passAdvertisement()
         }
@@ -72,7 +70,7 @@ class AdViewController: UIViewController {
         }
         
         constrain(passButton) { passButton in
-            passButton.width == kViewStandard
+            passButton.width == kViewAdapter
             passButton.height == kViewMargin
             passButton.top == passButton.superview!.top + kViewBorder
             passButton.right == passButton.superview!.right - kViewBorder
