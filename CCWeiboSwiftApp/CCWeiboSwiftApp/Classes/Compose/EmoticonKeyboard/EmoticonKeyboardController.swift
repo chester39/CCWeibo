@@ -108,7 +108,7 @@ class EmoticonKeyboardController: UIViewController {
         setupUI()
         setupConstraints()
         
-        for i in 0 ..< managerArray.count {
+        for i in 0..<managerArray.count {
             numberArray[i] = managerArray[i].emoticonArray?.count ?? 0
         }
     }

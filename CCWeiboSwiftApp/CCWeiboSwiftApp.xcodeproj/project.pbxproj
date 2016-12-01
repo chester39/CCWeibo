@@ -25,6 +25,12 @@
 		252B6F701DEEA73E00CB267C /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B6F6F1DEEA73E00CB267C /* MessageCell.swift */; };
 		252B6F721DEEA75E00CB267C /* BasicMessage.json in Resources */ = {isa = PBXBuildFile; fileRef = 252B6F711DEEA75E00CB267C /* BasicMessage.json */; };
 		252B6F741DEEA76700CB267C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 252B6F731DEEA76700CB267C /* Assets.xcassets */; };
+		252B6F791DEFB7E100CB267C /* DiscoverTheme.json in Resources */ = {isa = PBXBuildFile; fileRef = 252B6F761DEFB7E100CB267C /* DiscoverTheme.json */; };
+		252B6F7A1DEFB7E100CB267C /* DiscoverTopic.json in Resources */ = {isa = PBXBuildFile; fileRef = 252B6F771DEFB7E100CB267C /* DiscoverTopic.json */; };
+		252B6F7C1DEFB84200CB267C /* ThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B6F7B1DEFB84200CB267C /* ThemeCell.swift */; };
+		252B6F7E1DEFB8B200CB267C /* DiscoverThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B6F7D1DEFB8B200CB267C /* DiscoverThemeButton.swift */; };
+		252B6F801DEFB98F00CB267C /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B6F7F1DEFB98F00CB267C /* TopicCell.swift */; };
+		252B6F821DEFB9F100CB267C /* DiscoverHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252B6F811DEFB9F100CB267C /* DiscoverHeaderView.swift */; };
 		256B4E461DEC08B40073D126 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256B4E451DEC08B40073D126 /* QRCodeView.swift */; };
 		256B4E481DEC09640073D126 /* QRCodeCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256B4E471DEC09640073D126 /* QRCodeCreateController.swift */; };
 		256B4E4A1DEC0A610073D126 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256B4E491DEC0A610073D126 /* QRCodeViewController.swift */; };
@@ -95,6 +101,12 @@
 		252B6F6F1DEEA73E00CB267C /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		252B6F711DEEA75E00CB267C /* BasicMessage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BasicMessage.json; sourceTree = "<group>"; };
 		252B6F731DEEA76700CB267C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		252B6F761DEFB7E100CB267C /* DiscoverTheme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DiscoverTheme.json; sourceTree = "<group>"; };
+		252B6F771DEFB7E100CB267C /* DiscoverTopic.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DiscoverTopic.json; sourceTree = "<group>"; };
+		252B6F7B1DEFB84200CB267C /* ThemeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeCell.swift; sourceTree = "<group>"; };
+		252B6F7D1DEFB8B200CB267C /* DiscoverThemeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverThemeButton.swift; sourceTree = "<group>"; };
+		252B6F7F1DEFB98F00CB267C /* TopicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
+		252B6F811DEFB9F100CB267C /* DiscoverHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverHeaderView.swift; sourceTree = "<group>"; };
 		256B4E451DEC08B40073D126 /* QRCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		256B4E471DEC09640073D126 /* QRCodeCreateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeCreateController.swift; sourceTree = "<group>"; };
 		256B4E491DEC0A610073D126 /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				250BA4531DDDB2B800D766A5 /* DiscoverViewController.swift */,
+				252B6F751DEFB7E100CB267C /* Model */,
+				252B6F781DEFB7E100CB267C /* View */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -286,6 +300,26 @@
 			children = (
 				258F3DA81DE5408F0083751A /* NavigationTitleButton.swift */,
 				250BA46F1DDEA38500D766A5 /* VisitorView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		252B6F751DEFB7E100CB267C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				252B6F761DEFB7E100CB267C /* DiscoverTheme.json */,
+				252B6F771DEFB7E100CB267C /* DiscoverTopic.json */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		252B6F781DEFB7E100CB267C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				252B6F811DEFB9F100CB267C /* DiscoverHeaderView.swift */,
+				252B6F7D1DEFB8B200CB267C /* DiscoverThemeButton.swift */,
+				252B6F7B1DEFB84200CB267C /* ThemeCell.swift */,
+				252B6F7F1DEFB98F00CB267C /* TopicCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -568,9 +602,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2592E63C1DED6C9600BF472A /* WeiboProfile.json in Resources */,
+				252B6F7A1DEFB7E100CB267C /* DiscoverTopic.json in Resources */,
 				250BA4691DDDB32900D766A5 /* MainViewControllerSettings.json in Resources */,
 				258F3D891DE2E78B0083751A /* Emoticons.bundle in Resources */,
 				252B6F721DEEA75E00CB267C /* BasicMessage.json in Resources */,
+				252B6F791DEFB7E100CB267C /* DiscoverTheme.json in Resources */,
 				252B6F741DEEA76700CB267C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -647,10 +683,12 @@
 				258F3DC31DE59C430083751A /* RetweetStatusCell.swift in Sources */,
 				258F3DB71DE57E3D0083751A /* PictureCollectionView.swift in Sources */,
 				2592E6381DED6B8F00BF472A /* ProfileModel.swift in Sources */,
+				252B6F7C1DEFB84200CB267C /* ThemeCell.swift in Sources */,
 				258F3D931DE2EA280083751A /* PhotoPickerController.swift in Sources */,
 				258F3DBF1DE59A6B0083751A /* BaseStatusCell.swift in Sources */,
 				2592E63A1DED6BF000BF472A /* ProfileGroup.swift in Sources */,
 				250BA46A1DDDB32900D766A5 /* NullViewController.swift in Sources */,
+				252B6F821DEFB9F100CB267C /* DiscoverHeaderView.swift in Sources */,
 				258F3D9B1DE430170083751A /* EmoticonKeyboardController.swift in Sources */,
 				250BA45D1DDDB2B800D766A5 /* ComposeViewController.swift in Sources */,
 				25A16B591DEBD9FA0044C278 /* PopoverPresentationController.swift in Sources */,
@@ -671,6 +709,7 @@
 				25A16B571DEBD9CB0044C278 /* PopoverViewController.swift in Sources */,
 				250BA4701DDEA38500D766A5 /* VisitorView.swift in Sources */,
 				25A16B511DEBD3900044C278 /* CommentCell.swift in Sources */,
+				252B6F7E1DEFB8B200CB267C /* DiscoverThemeButton.swift in Sources */,
 				252B6F701DEEA73E00CB267C /* MessageCell.swift in Sources */,
 				256B4E481DEC09640073D126 /* QRCodeCreateController.swift in Sources */,
 				2592E63E1DED6CA900BF472A /* PersonView.swift in Sources */,
@@ -689,6 +728,7 @@
 				256B4E461DEC08B40073D126 /* QRCodeView.swift in Sources */,
 				250BA4651DDDB2F900D766A5 /* MainViewController.swift in Sources */,
 				258F3D8F1DE2E8B00083751A /* ComposeTitleView.swift in Sources */,
+				252B6F801DEFB98F00CB267C /* TopicCell.swift in Sources */,
 				258F3DB31DE571D00083751A /* ProgressImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

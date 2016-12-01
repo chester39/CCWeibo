@@ -96,7 +96,7 @@ class EmoticonManager: NSObject {
         }
         
         let number = emoticonArray!.count % maxEmoticonCount
-        for _ in number ..< maxEmoticonCount - 1 {
+        for _ in number..<maxEmoticonCount - 1 {
             let emoticon = EmoticonModel(removeButton: false)
             emoticonArray?.append(emoticon)
         }

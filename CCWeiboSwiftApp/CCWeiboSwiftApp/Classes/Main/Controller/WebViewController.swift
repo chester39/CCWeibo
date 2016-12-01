@@ -22,6 +22,7 @@ class WebViewController: UIViewController {
         configuration.suppressesIncrementalRendering = true
         
         let webView = WKWebView(frame: kScreenFrame, configuration: configuration)
+        webView.isOpaque = false
         webView.allowsBackForwardNavigationGestures = true
         webView.scrollView.showsVerticalScrollIndicator = false
         webView.navigationDelegate = self
@@ -114,6 +115,7 @@ class WebViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(closeButtonDidClick))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "刷新", style: .plain, target: self, action: #selector(refreshButtonDidClick))
         
+        view.backgroundColor = CommonLightColor
         view.addSubview(webView)
         view.addSubview(webProgressView)
     }
