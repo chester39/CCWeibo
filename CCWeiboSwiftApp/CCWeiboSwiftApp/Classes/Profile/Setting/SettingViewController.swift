@@ -208,9 +208,9 @@ extension SettingViewController: UITableViewDelegate {
                 self.dismiss(animated: true, completion: nil)
             }
             
-            let okButton = UIAlertAction(title: "确定", style: .destructive) { action in
-                self.view.clearCaches()
-                self.dismiss(animated: true, completion: nil)
+            let okButton = UIAlertAction(title: "确定", style: .destructive) { [weak self] action in
+                self?.view.clearCaches()
+                self?.dismiss(animated: true, completion: nil)
             }
             
             alertVC.addAction(cancelButton)
@@ -220,12 +220,11 @@ extension SettingViewController: UITableViewDelegate {
         } else if indexPath.section == 3 {
             let message = "是否退出当前账号？"
             let alertVC = UIAlertController(title: "退出当前账号", message: message, preferredStyle: .alert)
-            let cancelButton = UIAlertAction(title: "取消", style: .cancel) { (action) in
-                self.dismiss(animated: true, completion: nil)
+            let cancelButton = UIAlertAction(title: "取消", style: .cancel) { [weak self] action in
+                self?.dismiss(animated: true, completion: nil)
             }
             
-            let okButton = UIAlertAction(title: "确定", style: .destructive) { action in
-                
+            let okButton = UIAlertAction(title: "确定", style: .destructive) { [weak self] action in
                 if FileManager.default.fileExists(atPath: UserAccount.filePath) {
                     do {
                         try FileManager.default.removeItem(atPath: UserAccount.filePath)
