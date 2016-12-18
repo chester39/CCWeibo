@@ -234,7 +234,7 @@ extension SettingViewController: UITableViewDelegate {
                     }
                 }
                 
-                self.dismiss(animated: true, completion: nil)
+                self?.dismiss(animated: true, completion: nil)
                 NotificationCenter.default.post(name: Notification.Name(kRootViewControllerSwitched), object: true)
             }
             

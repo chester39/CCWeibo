@@ -126,7 +126,7 @@ extension PhotoPickerController: PhotoPickerCellDelegate {
     /**
      图片按钮点击方法
      */
-    func photoPickerCellImageButtonDidClick(cell: PhotoPickerCell) {
+    func photoPickerCellDidClickImageButton(cell: PhotoPickerCell) {
         
         let indexPath = photoView.indexPath(for: cell)!
         let imagePickerVC = TZImagePickerController(selectedAssets: NSMutableArray(array: assetArray), selectedPhotos: NSMutableArray(array: imageArray), index: indexPath.item)!
@@ -143,7 +143,7 @@ extension PhotoPickerController: PhotoPickerCellDelegate {
     /**
      添加按钮点击方法
      */
-    func photoPickerCellAddButtonDidClick(cell: PhotoPickerCell) {
+    func photoPickerCellDidClickAddButton(cell: PhotoPickerCell) {
         
         let imagePickerVC = TZImagePickerController(maxImagesCount: maxPhotoCount, delegate: self)!
         imagePickerVC.sortAscendingByModificationDate = false
@@ -157,7 +157,7 @@ extension PhotoPickerController: PhotoPickerCellDelegate {
     /**
      删除按钮点击方法
      */
-    func photoPickerCellRemoveButtonDidClick(cell: PhotoPickerCell) {
+    func photoPickerCellDidClickRemoveButton(cell: PhotoPickerCell) {
         
         let indexPath = photoView.indexPath(for: cell)!
         imageArray.remove(at: indexPath.item)

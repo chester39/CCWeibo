@@ -13,15 +13,15 @@ import Cartography
     /**
      图片按钮点击方法
      */
-    @objc optional func photoPickerCellImageButtonDidClick(cell: PhotoPickerCell)
+    @objc optional func photoPickerCellDidClickImageButton(cell: PhotoPickerCell)
     /**
      添加按钮点击方法
      */
-    @objc optional func photoPickerCellAddButtonDidClick(cell: PhotoPickerCell)
+    @objc optional func photoPickerCellDidClickAddButton(cell: PhotoPickerCell)
     /**
      删除按钮点击方法
      */
-    @objc optional func photoPickerCellRemoveButtonDidClick(cell: PhotoPickerCell)
+    @objc optional func photoPickerCellDidClickRemoveButton(cell: PhotoPickerCell)
     
 }
 
@@ -125,13 +125,13 @@ class PhotoPickerCell: UICollectionViewCell {
         
         if let tempDelegate = delegate {
             if image == nil {
-                if tempDelegate.responds(to: #selector(PhotoPickerCellDelegate.photoPickerCellAddButtonDidClick(cell:))) {
-                    tempDelegate.photoPickerCellAddButtonDidClick!(cell: self)
+                if tempDelegate.responds(to: #selector(PhotoPickerCellDelegate.photoPickerCellDidClickAddButton(cell:))) {
+                    tempDelegate.photoPickerCellDidClickAddButton!(cell: self)
                 }
                 
             } else {
-                if tempDelegate.responds(to: #selector(PhotoPickerCellDelegate.photoPickerCellImageButtonDidClick(cell:))) {
-                    tempDelegate.photoPickerCellImageButtonDidClick!(cell: self)
+                if tempDelegate.responds(to: #selector(PhotoPickerCellDelegate.photoPickerCellDidClickImageButton(cell:))) {
+                    tempDelegate.photoPickerCellDidClickImageButton!(cell: self)
                 }
             }
         }
@@ -143,8 +143,8 @@ class PhotoPickerCell: UICollectionViewCell {
     @objc private func removeButtonDidClick() {
         
         if let tempDelegate = delegate {
-            if tempDelegate.responds(to: #selector(PhotoPickerCellDelegate.photoPickerCellRemoveButtonDidClick(cell:))) {
-                tempDelegate.photoPickerCellRemoveButtonDidClick!(cell: self)
+            if tempDelegate.responds(to: #selector(PhotoPickerCellDelegate.photoPickerCellDidClickRemoveButton(cell:))) {
+                tempDelegate.photoPickerCellDidClickRemoveButton!(cell: self)
             }
         }
     }
