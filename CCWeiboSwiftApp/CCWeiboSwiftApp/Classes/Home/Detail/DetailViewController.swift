@@ -72,7 +72,7 @@ class DetailViewController: UIViewController {
     private func setupUI() {
         
         navigationItem.title = "微博正文"
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: #selector(shareButtonDidClick))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonDidClick))
         
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 200

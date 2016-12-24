@@ -159,7 +159,7 @@ class EmoticonKeyboardController: UIViewController {
      */
     @objc private func itemButtonDidClick(button: UIButton) {
         
-        let indexPath = IndexPath.init(item: 0, section: button.tag - baseTag)
+        let indexPath = IndexPath(item: 0, section: button.tag - baseTag)
         let manager = managerArray[indexPath.section]
         let pageCount = (manager.emoticonArray?.count ?? 0) / manager.maxEmoticonCount
         pageControl.numberOfPages = pageCount

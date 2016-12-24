@@ -9,6 +9,7 @@ import UIKit
 import Cartography
 
 class ThemeCell: UICollectionViewCell {
+    
     /// 主题按钮
     var button = DiscoverThemeButton(frame: .zero)
     
@@ -21,12 +22,8 @@ class ThemeCell: UICollectionViewCell {
         
         super.init(frame: frame)
         
-        button.setTitleColor(CommonDarkColor, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        contentView.addSubview(button)
-        constrain(button) { button in
-            button.edges == inset(button.superview!.edges, 0)
-        }
+        setupUI()
+        setupConstraints()
     }
     
     /**
@@ -35,6 +32,28 @@ class ThemeCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - 界面方法
+    
+    /**
+     初始化界面方法
+     */
+    private func setupUI() {
+        
+        button.setTitleColor(CommonDarkColor, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        contentView.addSubview(button)
+    }
+    
+    /**
+     初始化约束方法
+     */
+    private func setupConstraints() {
+        
+        constrain(button) { button in
+            button.edges == inset(button.superview!.edges, 0)
+        }
     }
     
 }

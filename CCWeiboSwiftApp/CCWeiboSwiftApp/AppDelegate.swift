@@ -210,7 +210,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } else {
             let types: UIUserNotificationType = [.alert, .badge, .sound]
-            let setting = UIUserNotificationSettings.init(types: types, categories: nil)
+            let setting = UIUserNotificationSettings(types: types, categories: nil)
             UIApplication.shared.registerUserNotificationSettings(setting)
             UIApplication.shared.registerForRemoteNotifications()
         }
