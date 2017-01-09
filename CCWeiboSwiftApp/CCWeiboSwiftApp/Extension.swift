@@ -71,7 +71,38 @@ extension Date {
 
         return dateString
     }
+    
+    /**
+     获取指定天前字符串方法
+     */
+    static func acquireAssignedDaysAgo(number: TimeInterval, formatterString: String) -> String {
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = formatterString
+        let nowDate = Date()
+        let aDay: TimeInterval = 60 * 60 * 24
+        let daysAgo = Date(timeInterval: -(number * aDay), since: nowDate)
+        let daysAgoString = formatter.string(from: daysAgo)
 
+        return daysAgoString
+    }
+
+}
+
+extension NSMutableAttributedString {
+    
+    /**
+     改变部分文字颜色方法
+     */
+    class func changeColorWithString(color: UIColor, totalString: String, subString: String) -> NSMutableAttributedString {
+        
+        let attributedString = NSMutableAttributedString(string: totalString)
+        let range = (totalString as NSString).range(of: subString, options: .backwards)
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+        
+        return attributedString
+    }
+    
 }
 
 extension String {
@@ -110,6 +141,23 @@ extension String {
         let filePath = (path as NSString).appendingPathComponent(name)
 
         return filePath
+    }
+    
+    /**
+     调整数字表示方法
+     */
+    func adjustDigitalRepresentation() -> String {
+        
+        let length = characters.count
+        if length > 5 {
+            let oldNumber = Float(self)! / 1000
+            let newNumber = lroundf(oldNumber)
+            let newString = String(newNumber)
+            return newString + "k"
+            
+        } else {
+            return self
+        }
     }
 
 }
