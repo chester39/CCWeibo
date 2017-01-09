@@ -12,7 +12,7 @@ import SwiftyJSON
 class MessageViewController: BaseViewController {
 
     /// 微博数组
-    var statusArray: [StatusViewModel]?
+    private var statusArray: [StatusViewModel]?
     /// 基本Cell重用标识符
     private let basicReuseIdentifier = "BasicMessageCell"
     /// 微博Cell重用标识符
@@ -71,9 +71,9 @@ class MessageViewController: BaseViewController {
         
         tableView.estimatedRowHeight = kViewAdapter
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: basicReuseIdentifier)
         tableView.registerClass(MessageCell.self, forCellReuseIdentifier: weiboReuseIdentifier)
-        tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
     // MARK: - 数据方法
@@ -147,7 +147,6 @@ extension MessageViewController {
             
             return cell
         }
-
     }
     
 }
@@ -166,4 +165,5 @@ extension MessageViewController {
             navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
+    
 }

@@ -204,13 +204,13 @@ extension SettingViewController: UITableViewDelegate {
             let format = String(format: "%.2f", cachesSize)
             let message = "当前缓存为\(format) MB，是否需要清除？"
             let alertVC = UIAlertController(title: "清理缓存", message: message, preferredStyle: .Alert)
-            let cancelButton = UIAlertAction(title: "取消", style: .Cancel) { (action) in
-                self.dismissViewControllerAnimated(true, completion: nil)
+            let cancelButton = UIAlertAction(title: "取消", style: .Cancel) { [weak self] (action) in
+                self?.dismissViewControllerAnimated(true, completion: nil)
             }
             
-            let okButton = UIAlertAction(title: "确定", style: .Destructive) { (action) in
-                self.view.clearCaches()
-                self.dismissViewControllerAnimated(true, completion: nil)
+            let okButton = UIAlertAction(title: "确定", style: .Destructive) { [weak self] (action) in
+                self?.view.clearCaches()
+                self?.dismissViewControllerAnimated(true, completion: nil)
             }
             
             alertVC.addAction(cancelButton)
@@ -220,11 +220,11 @@ extension SettingViewController: UITableViewDelegate {
         } else if indexPath.section == 3 {
             let message = "是否退出当前账号？"
             let alertVC = UIAlertController(title: "退出当前账号", message: message, preferredStyle: .Alert)
-            let cancelButton = UIAlertAction(title: "取消", style: .Cancel) { (action) in
-                self.dismissViewControllerAnimated(true, completion: nil)
+            let cancelButton = UIAlertAction(title: "取消", style: .Cancel) { [weak self] (action) in
+                self?.dismissViewControllerAnimated(true, completion: nil)
             }
             
-            let okButton = UIAlertAction(title: "确定", style: .Destructive) { (action) in
+            let okButton = UIAlertAction(title: "确定", style: .Destructive) { [weak self] (action) in
                 
                 if NSFileManager.defaultManager().fileExistsAtPath(UserAccount.filePath) {
                     do {
@@ -235,7 +235,7 @@ extension SettingViewController: UITableViewDelegate {
                     }
                 }
                 
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self?.dismissViewControllerAnimated(true, completion: nil)
                 NSNotificationCenter.defaultCenter().postNotificationName(kRootViewControllerSwitched, object: true)
             }
             

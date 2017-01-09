@@ -19,6 +19,7 @@ class OAuthViewController: UIViewController {
         configuration.mediaPlaybackRequiresUserAction = false
         
         let webView = WKWebView(frame: kScreenFrame, configuration: configuration)
+        webView.opaque = false
         webView.allowsBackForwardNavigationGestures = true
         webView.scrollView.showsVerticalScrollIndicator = false
         webView.navigationDelegate = self
@@ -81,6 +82,7 @@ class OAuthViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "填充", style: .Plain, target: self, action: #selector(fillButtonDidClick))
         
+        view.backgroundColor = CommonLightColor
         view.addSubview(oauthView)
         view.addSubview(oauthProgressView)
     }

@@ -201,6 +201,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("授权注册失败")
                 }
             })
+            
             center.getNotificationSettingsWithCompletionHandler({ (setting) in
                 if setting.authorizationStatus == .Authorized {
                     print("已授权")

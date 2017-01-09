@@ -22,6 +22,7 @@ class WebViewController: UIViewController {
         configuration.mediaPlaybackRequiresUserAction = false
         
         let webView = WKWebView(frame: kScreenFrame, configuration: configuration)
+        webView.opaque = false
         webView.allowsBackForwardNavigationGestures = true
         webView.scrollView.showsVerticalScrollIndicator = false
         webView.navigationDelegate = self
@@ -114,6 +115,7 @@ class WebViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(closeButtonDidClick))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "刷新", style: .Plain, target: self, action: #selector(refreshButtonDidClick))
         
+        view.backgroundColor = CommonLightColor
         view.addSubview(webView)
         view.addSubview(webProgressView)
     }
@@ -162,7 +164,7 @@ extension WebViewController: WKNavigationDelegate {
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         
         print(navigationAction.request)
-        decisionHandler(WKNavigationActionPolicy.Allow)
+        decisionHandler(.Allow)
     }
     
 }

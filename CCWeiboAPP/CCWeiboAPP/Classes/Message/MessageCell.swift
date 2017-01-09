@@ -7,6 +7,7 @@
 import UIKit
 
 import Cartography
+import SDWebImage
 
 class MessageCell: UITableViewCell {
 
