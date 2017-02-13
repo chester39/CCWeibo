@@ -15,7 +15,7 @@ protocol BaseStatusCellDelegate: NSObjectProtocol {
     /**
      由URL显示网页视图方法
      */
-    func statusCellDidShowWebViewWithURL(cell: BaseStatusCell, url: URL)
+    func statusCellDidShowWebViewWithURLString(cell: BaseStatusCell, urlString: String)
     
 }
 
@@ -187,9 +187,8 @@ class BaseStatusCell: UITableViewCell {
         
         if let id = self.viewModel?.status.user?.userID {
             let urlString = "http://weibo.com/u/\(id)"
-            let url = URL(string: urlString)!
             if let tempDelegate = delegate {
-                tempDelegate.statusCellDidShowWebViewWithURL(cell: self, url: url)
+                tempDelegate.statusCellDidShowWebViewWithURLString(cell: self, urlString: urlString)
             }
         }
     }
@@ -201,9 +200,8 @@ class BaseStatusCell: UITableViewCell {
         
         if let id = self.viewModel?.status.user?.userID {
             let urlString = "http://weibo.com/u/\(id)"
-            let url = URL(string: urlString)!
             if let tempDelegate = delegate {
-                tempDelegate.statusCellDidShowWebViewWithURL(cell: self, url: url)
+                tempDelegate.statusCellDidShowWebViewWithURLString(cell: self, urlString: urlString)
             }
         }
     }

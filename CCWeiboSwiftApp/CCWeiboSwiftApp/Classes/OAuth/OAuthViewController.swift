@@ -60,8 +60,11 @@ class OAuthViewController: UIViewController {
         if object as? NSObject == oauthView && keyPath! == "estimatedProgress" {
             let new: Float = change![.newKey] as! Float
             if new == 1.0 {
-                oauthProgressView.isHidden = true
-                oauthProgressView.setProgress(0.0, animated: false)
+                oauthProgressView.setProgress(1.0, animated: false)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                    self.oauthProgressView.isHidden = true
+                    self.oauthProgressView.setProgress(0.0, animated: false)
+                })
                 
             } else {
                 oauthProgressView.isHidden = false

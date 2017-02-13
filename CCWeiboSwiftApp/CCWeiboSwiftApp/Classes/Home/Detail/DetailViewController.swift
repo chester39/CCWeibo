@@ -256,9 +256,10 @@ extension DetailViewController: BaseStatusCellDelegate {
     /**
      由URL显示网页视图方法
      */
-    func statusCellDidShowWebViewWithURL(cell: BaseStatusCell, url: URL) {
+    func statusCellDidShowWebViewWithURLString(cell: BaseStatusCell, urlString: String) {
         
-        let webVC = WebViewController(url: url as URL)
+        let webVC = WebViewController()
+        webVC.loadWithURLString(urlString: urlString)
         navigationController?.pushViewController(webVC, animated: true)
     }
 

@@ -41,6 +41,9 @@ class AdViewController: UIViewController {
         
         adView.image = UIImage(named: "advertisement")
         adView.contentMode = .scaleAspectFit
+        let imageGesture = UITapGestureRecognizer(target: self, action: #selector(adViewDidClick(gesture:)))
+        adView.isUserInteractionEnabled = true
+        adView.addGestureRecognizer(imageGesture)
         view.addSubview(adView)
         
         passButton.setTitle("跳过 5 s", for: .normal)
@@ -82,9 +85,11 @@ class AdViewController: UIViewController {
      */
     @objc private func passAdvertisement() {
         
-        NotificationCenter.default.post(name: Notification.Name(kRootViewControllerSwitched), object: true)
         timer.invalidate()
+        NotificationCenter.default.post(name: Notification.Name(kRootViewControllerSwitched), object: true)
     }
+    
+    // MARK: - 时间方法
     
     /**
      更新时间方法
@@ -96,6 +101,18 @@ class AdViewController: UIViewController {
         if countdown == 0.0 {
             timer.invalidate()
         }
+    }
+    
+    /**
+     广告点击方法
+     */
+    @objc private func adViewDidClick(gesture: UITapGestureRecognizer) {
+        
+        timer.invalidate()
+        let urlString = "http://chesterhupu.kuaizhan.com/"
+        let webVC = WebViewController()
+        webVC.loadWithURLString(urlString: urlString)
+        navigationController?.pushViewController(webVC, animated: true)
     }
 
 }

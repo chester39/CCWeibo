@@ -49,9 +49,10 @@ class RetweetStatusCell: BaseStatusCell {
             sourceLabel.text = viewModel?.sourceText
             
             contentLabel.attributedText = EmoticonManager.emoticonMutableAttributedString(string: viewModel?.status.text ?? "", font: contentLabel.font)
-            contentLabel.handleURLTap { (url) in
+            contentLabel.handleURLTap { url in
                 if let tempDelegate = self.delegate {
-                    tempDelegate.statusCellDidShowWebViewWithURL(cell: self, url: url)
+                    let urlString = url.absoluteString
+                    tempDelegate.statusCellDidShowWebViewWithURLString(cell: self, urlString: urlString)
                 }
             }
             
@@ -68,21 +69,21 @@ class RetweetStatusCell: BaseStatusCell {
             }
             
             retweetLabel.attributedText = EmoticonManager.emoticonMutableAttributedString(string: viewModel?.retweetText ?? "", font: contentLabel.font)
-            retweetLabel.handleURLTap { (url) in
+            retweetLabel.handleURLTap { url in
                 if let tempDelegate = self.delegate {
-                    tempDelegate.statusCellDidShowWebViewWithURL(cell: self, url: url)
+                    let urlString = url.absoluteString
+                    tempDelegate.statusCellDidShowWebViewWithURLString(cell: self, urlString: urlString)
                 }
             }
             
-            retweetLabel.handleMentionTap { (mention) in
+            retweetLabel.handleMentionTap { mention in
                 guard let id = self.viewModel?.status.retweetedStatus?.user?.userID else {
                     return
                 }
                 
                 let urlString = "http://weibo.com/u/\(id)"
-                let url = URL(string: urlString)!
                 if let tempDelegate = self.delegate {
-                    tempDelegate.statusCellDidShowWebViewWithURL(cell: self, url: url)
+                    tempDelegate.statusCellDidShowWebViewWithURLString(cell: self, urlString: urlString)
                 }
             }
             

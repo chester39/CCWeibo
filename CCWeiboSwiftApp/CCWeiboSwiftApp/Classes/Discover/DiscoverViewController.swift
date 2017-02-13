@@ -246,9 +246,9 @@ extension DiscoverViewController: UITableViewDelegate {
             let dict = resultArray![indexPath.row]
             let id = dict[kUID] as! Int
             let urlString = "http://weibo.com/u/\(id)"
-            let url = URL(string: urlString)!
             
-            let webVC = WebViewController(url: url)
+            let webVC = WebViewController()
+            webVC.loadWithURLString(urlString: urlString)
             navigationController?.pushViewController(webVC, animated: false)
         }
     }
@@ -320,9 +320,10 @@ extension DiscoverViewController: BaseStatusCellDelegate {
     /**
      由URL显示网页视图方法
      */
-    func statusCellDidShowWebViewWithURL(cell: BaseStatusCell, url: URL) {
+    func statusCellDidShowWebViewWithURLString(cell: BaseStatusCell, urlString: String) {
         
-        let webVC = WebViewController(url: url)
+        let webVC = WebViewController()
+        webVC.loadWithURLString(urlString: urlString)
         navigationController?.pushViewController(webVC, animated: true)
     }
     

@@ -31,9 +31,10 @@ class WeiboStatusCell: BaseStatusCell {
             sourceLabel.text = viewModel?.sourceText
             
             contentLabel.attributedText = EmoticonManager.emoticonMutableAttributedString(string: viewModel?.status.text ?? "", font: contentLabel.font)
-            contentLabel.handleURLTap { (url) in
+            contentLabel.handleURLTap { url in
                 if let tempDelegate = self.delegate {
-                    tempDelegate.statusCellDidShowWebViewWithURL(cell: self, url: url)
+                    let urlString = url.absoluteString
+                    tempDelegate.statusCellDidShowWebViewWithURLString(cell: self, urlString: urlString)
                 }
             }
             

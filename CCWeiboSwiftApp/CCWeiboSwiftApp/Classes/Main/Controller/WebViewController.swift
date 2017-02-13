@@ -11,9 +11,6 @@ import Cartography
 
 class WebViewController: UIViewController {
     
-    /// 网页URL
-    private var url: URL?
-    
     /// 网页视图
     private lazy var webView: WKWebView = {
         let configuration = WKWebViewConfiguration()
@@ -42,16 +39,44 @@ class WebViewController: UIViewController {
         return progress
     }()
     
+    /// 后退按钮
+    private lazy var backItem: UIBarButtonItem = {
+        let item = UIBarButtonItem()
+        let button = UIButton(type: .custom)
+        button.contentHorizontalAlignment = .left
+        button.setImage(UIImage(named: "backIcon"), for: .normal)
+        button.setTitle("返回", for: .normal)
+        button.setTitleColor(MainColor, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 17)
+        
+        button.addTarget(self, action: #selector(backItemDidClick), for: .touchUpInside)
+        button.sizeToFit()
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -3, bottom: 0, right: 0)
+        button.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
+        item.customView = button
+        
+        return item
+    }()
+    
+    /// 关闭按钮
+    private lazy var closeItem: UIBarButtonItem = {
+        let item = UIBarButtonItem()
+        item.title = "关闭"
+        item.style = .done
+        item.target = self
+        item.action = #selector(closeItemDidClick)
+        
+        return item
+    }()
+    
     // MARK: - 初始化方法
     
     /**
      网页URL初始化方法
      */
-    init(url: URL?) {
+    init() {
         
         super.init(nibName: nil, bundle: nil)
-        
-        self.url = url
     }
     
     /**
@@ -80,9 +105,6 @@ class WebViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        
-        let request = URLRequest(url: url!)
-        webView.load(request)
     }
     
     /**
@@ -93,8 +115,11 @@ class WebViewController: UIViewController {
         if object as? NSObject == webView && keyPath! == "estimatedProgress" {
             let new: Float = change![.newKey] as! Float
             if new == 1.0 {
-                webProgressView.isHidden = true
-                webProgressView.setProgress(0.0, animated: false)
+                webProgressView.setProgress(1.0, animated: false)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                    self.webProgressView.isHidden = true
+                    self.webProgressView.setProgress(0.0, animated: false)
+                })
                 
             } else {
                 webProgressView.isHidden = false
@@ -112,28 +137,61 @@ class WebViewController: UIViewController {
         
         navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 20), NSForegroundColorAttributeName: MainColor]
         navigationItem.title = ""
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(closeButtonDidClick))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "刷新", style: .plain, target: self, action: #selector(refreshButtonDidClick))
+        navigationItem.leftBarButtonItem = backItem
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "刷新", style: .plain, target: self, action: #selector(refreshItemDidClick))
         
         view.backgroundColor = CommonLightColor
         view.addSubview(webView)
         view.addSubview(webProgressView)
     }
     
+    /**
+     读取URL方法
+     */
+    func loadWithURLString(urlString: String) {
+        
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        webView.load(request)
+    }
+    
     // MARK: - 按钮方法
+    
+    /**
+     后退按钮点击方法
+     */
+    @objc private func backItemDidClick() {
+        
+        if webView.canGoBack {
+            webView.goBack()
+            closeItem.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 17)], for: .normal)
+            navigationItem.leftBarButtonItems = [backItem, closeItem]
+            
+        } else {
+            closeItemDidClick()
+        }
+    }
     
     /**
      关闭按钮点击方法
      */
-    @objc private func closeButtonDidClick() {
+    @objc private func closeItemDidClick() {
         
-        _ = navigationController?.popViewController(animated: true)
+//        if ((navigationController?.viewControllers)!.first is AdViewController) || ((navigationController?.viewControllers)!.first is WebViewController) {
+//
+//            
+//        } else {
+            _ = navigationController?.popViewController(animated: true)
+//        }
     }
     
     /**
      刷新按钮点击方法
      */
-    @objc private func refreshButtonDidClick() {
+    @objc private func refreshItemDidClick() {
         
         webView.reload()
     }
