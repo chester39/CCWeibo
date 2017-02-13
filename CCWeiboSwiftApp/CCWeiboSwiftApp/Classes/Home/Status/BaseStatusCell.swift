@@ -71,7 +71,7 @@ class BaseStatusCell: UITableViewCell {
      初始化基本界面方法
      */
     func setupBaseUI() {
-        
+                
         iconView.layer.cornerRadius = kViewBorder
         iconView.clipsToBounds = true
         iconView.isUserInteractionEnabled = true

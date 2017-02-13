@@ -29,7 +29,7 @@ class PictureCollectionView: UICollectionView {
         
         super.init(frame: frame, collectionViewLayout: layout)
         
-        register(StatausPictureCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        register(StatusPictureCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         dataSource = self
         delegate = self
         
@@ -115,7 +115,7 @@ extension PictureCollectionView: UICollectionViewDataSource {
      */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! StatausPictureCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! StatusPictureCell
         cell.url = viewModel!.thumbnailPictureArray![indexPath.item]
         
         return cell
@@ -131,7 +131,7 @@ extension PictureCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let url = viewModel!.middlePictureArray![indexPath.item]
-        let cell = collectionView.cellForItem(at: indexPath) as! StatausPictureCell
+        let cell = collectionView.cellForItem(at: indexPath) as! StatusPictureCell
         SDWebImageManager.shared().downloadImage(with: url, options: .retryFailed, progress: { (current, total) in
             cell.imageView.progress = CGFloat(current) / CGFloat(total)
         }) { (_, _, _, _, _) in
@@ -150,7 +150,7 @@ extension PictureCollectionView: BrowserPresentationDelegate {
     func browerPresentationWillShowImageView(browserPresentationController: BrowserPresentationController, indexPath: IndexPath) -> UIImageView {
         
         let imageView = UIImageView()
-        let cell = cellForItem(at: indexPath) as! StatausPictureCell
+        let cell = cellForItem(at: indexPath) as! StatusPictureCell
         imageView.image = cell.imageView.image
         imageView.sizeToFit()
         
@@ -162,7 +162,7 @@ extension PictureCollectionView: BrowserPresentationDelegate {
      */
     func browerPresentationWillFromFrame(browserPresentationController: BrowserPresentationController, indexPath: IndexPath) -> CGRect {
         
-        let cell = cellForItem(at: indexPath) as! StatausPictureCell
+        let cell = cellForItem(at: indexPath) as! StatusPictureCell
         let frame = convert(cell.frame, to: UIApplication.shared.keyWindow!)
         
         return frame
@@ -173,7 +173,7 @@ extension PictureCollectionView: BrowserPresentationDelegate {
      */
     func browerPresentationWillToFrame(browserPresentationController: BrowserPresentationController, indexPath: IndexPath) -> CGRect {
         
-        let cell = cellForItem(at: indexPath) as! StatausPictureCell
+        let cell = cellForItem(at: indexPath) as! StatusPictureCell
         let image = cell.imageView.image!
         let scale = image.size.width / image.size.height
         let imageHeight = kScreenHeight / scale

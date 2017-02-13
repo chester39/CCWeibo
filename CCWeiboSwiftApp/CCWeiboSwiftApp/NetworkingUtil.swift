@@ -31,7 +31,7 @@ class NetworkingUtil {
         
         let path = "oauth2/authorize"
         let parameters = ["client_id": kWeiboAppKey, "redirect_uri": kWeiboRedirectUri]
-        Alamofire.request(kWeiboBaseURL + path, method: .get, parameters: parameters).responseJSON { response in
+        Alamofire.request(kWeiboBaseURL + path, method: .get, parameters: parameters).validate(statusCode: 200..<300).responseJSON { response in
             guard let request = response.request else {
                 return
             }
@@ -52,7 +52,7 @@ class NetworkingUtil {
         
         let path = "oauth2/access_token"
         let parameters = ["client_id": kWeiboAppKey, "client_secret": kWeiboAppSecret, "grant_type": "authorization_code", "code": code, "redirect_uri": kWeiboRedirectUri]
-        Alamofire.request(kWeiboBaseURL + path, method: .post, parameters: parameters).responseJSON { respose in
+        Alamofire.request(kWeiboBaseURL + path, method: .post, parameters: parameters).validate(statusCode: 200..<300).responseJSON { respose in
             guard let data = respose.data else {
                 return
             }
@@ -82,7 +82,7 @@ class NetworkingUtil {
         let path = "2/statuses/home_timeline.json"
         let temp = (maxID != 0) ? maxID - 1 : maxID
         let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!, "since_id": String(sinceID), "max_id": String(temp)]
-        Alamofire.request(kWeiboBaseURL + path, method: .get, parameters: parameters).responseJSON { response in
+        Alamofire.request(kWeiboBaseURL + path, method: .get, parameters: parameters).validate(statusCode: 200..<300).responseJSON { response in
             guard let data = response.data else {
                 finished(nil, NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
                 return
@@ -112,7 +112,7 @@ class NetworkingUtil {
         
         let path = "2/statuses/public_timeline.json"
         let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!]
-        Alamofire.request(kWeiboBaseURL + path, method: .get, parameters: parameters).responseJSON { response in
+        Alamofire.request(kWeiboBaseURL + path, method: .get, parameters: parameters).validate(statusCode: 200..<300).responseJSON { response in
             guard let data = response.data else {
                 finished(nil, NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
                 return
@@ -142,7 +142,7 @@ class NetworkingUtil {
         let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!, "status": status]
         if image == nil {
             path += "update.json"
-            Alamofire.request(kWeiboBaseURL + path, method: .post, parameters: parameters).responseJSON { response in
+            Alamofire.request(kWeiboBaseURL + path, method: .post, parameters: parameters).validate(statusCode: 200..<300).responseJSON { response in
                 guard let data = response.data else {
                     finished(nil, NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "发送微博失败"]))
                     return
@@ -188,7 +188,7 @@ class NetworkingUtil {
         
         let path = "2/search/suggestions/users.json"
         let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!, "q": search ?? "", "count": String(50)]
-        Alamofire.request(kWeiboBaseURL + path, method: .get, parameters: parameters).responseJSON { response in
+        Alamofire.request(kWeiboBaseURL + path, method: .get, parameters: parameters).validate(statusCode: 200..<300).responseJSON { response in
             guard let data = response.data else {
                 finished(nil, NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "搜索数据失败"]))
                 return
@@ -218,7 +218,7 @@ class NetworkingUtil {
         
         let path = "2/comments/show.json"
         let parameters = [kAccessToken: UserAccount.loadUserAccount()!.accessToken!, kWeiboID: String(id)]
-        Alamofire.request(kWeiboBaseURL + path, method: .get, parameters: parameters).responseJSON { response in
+        Alamofire.request(kWeiboBaseURL + path, method: .get, parameters: parameters).validate(statusCode: 200..<300).responseJSON { response in
             guard let data = response.data else {
                 finished(nil, NSError(domain: "com.github.chester39", code: 1000, userInfo: ["message": "获取数据失败"]))
                 return

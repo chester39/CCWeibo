@@ -1,5 +1,5 @@
 //
-//  StatausPictureCell.swift
+//  StatusPictureCell.swift
 //      CCWeiboSwiftApp
 //		Chen Chen @ November 23rd, 2016
 //
@@ -9,7 +9,7 @@ import UIKit
 import Cartography
 import SDWebImage
 
-class StatausPictureCell: UICollectionViewCell {
+class StatusPictureCell: UICollectionViewCell {
 
     /// 图片视图
     var imageView = ProgressImageView()
@@ -34,7 +34,7 @@ class StatausPictureCell: UICollectionViewCell {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-        
+                
         contentView.addSubview(imageView)
         
         gifView.image = UIImage(named: "GIF")
