@@ -18,7 +18,7 @@ extension Date {
 
         let formatter = DateFormatter()
         formatter.dateFormat = formatterString
-        formatter.locale = Locale(identifier: "en")
+        formatter.timeZone = TimeZone(secondsFromGMT: 8)
 
         return formatter.date(from: timeString)!
     }
@@ -85,6 +85,17 @@ extension Date {
         let daysAgoString = formatter.string(from: daysAgo)
 
         return daysAgoString
+    }
+    
+    /**
+     获取今天星期几方法
+     */
+    func acquireTodayOfWeek() -> Int {
+        
+        let calender = Calendar(identifier: .gregorian)
+        let component = calender.component(.weekday, from: self)
+        
+        return component
     }
 
 }
@@ -370,9 +381,9 @@ extension UIView {
             }
         }
         
-        let mb: Float = Float(size) / 1024 / 1024
+        let cacheSize: Float = Float(size) / 1024 / 1024
         
-        return mb
+        return cacheSize
     }
     
     /**

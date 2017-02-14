@@ -44,7 +44,7 @@ class WebViewController: UIViewController {
         let item = UIBarButtonItem()
         let button = UIButton(type: .custom)
         button.contentHorizontalAlignment = .left
-        button.setImage(UIImage(named: "backIcon"), for: .normal)
+        button.setImage(UIImage(named: "backIcon")!.withRenderingMode(.alwaysTemplate), for: .normal)
         button.setTitle("返回", for: .normal)
         button.setTitleColor(MainColor, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17)
