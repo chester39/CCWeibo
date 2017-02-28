@@ -18,7 +18,7 @@ extension Date {
 
         let formatter = DateFormatter()
         formatter.dateFormat = formatterString
-        formatter.timeZone = TimeZone(secondsFromGMT: 8)
+        formatter.locale = Locale(identifier: "en")
 
         return formatter.date(from: timeString)!
     }
@@ -404,6 +404,26 @@ extension UIView {
                 }
             }
         }
+    }
+    
+    /**
+     当前view绘制imageView方法
+     */
+    func screenshotOfView()-> UIImageView {
+        
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: frame.size.width, height: frame.size.height - 1), false, 0)
+        layer.render(in: UIGraphicsGetCurrentContext()!)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        let outputImageView = UIImageView(image: image)
+        
+        outputImageView.layer.masksToBounds = false
+        outputImageView.layer.cornerRadius = 0.0
+        outputImageView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        outputImageView.layer.shadowRadius = 5.0
+        outputImageView.layer.shadowOpacity = 0.4
+        
+        return outputImageView
     }
     
 }

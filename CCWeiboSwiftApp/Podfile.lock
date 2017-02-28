@@ -9,6 +9,9 @@ PODS:
   - SDWebImage/Core (3.8.2)
   - SwiftyJSON (3.1.4)
   - TZImagePickerController (1.7.8)
+  - XCGLogger (4.0.0):
+    - XCGLogger/Core (= 4.0.0)
+  - XCGLogger/Core (4.0.0)
 
 DEPENDENCIES:
   - ActiveLabel (~> 0.7.1)
@@ -19,6 +22,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.8.2)
   - SwiftyJSON (~> 3.1.4)
   - TZImagePickerController (~> 1.7.8)
+  - XCGLogger (~> 4.0.0)
 
 SPEC CHECKSUMS:
   ActiveLabel: 68625f22775f51c31bb691ca8de20f1e5a3bc825
@@ -29,7 +33,8 @@ SPEC CHECKSUMS:
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TZImagePickerController: 87a138ae5d585225aaa6c8abe2cface0f0ad19dd
+  XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
 
-PODFILE CHECKSUM: 9531bce6c908fbbc7df5d2ce874af27631d9f158
+PODFILE CHECKSUM: 75e87b9ebd29b458093868f87bc1a04c593eba86
 
 COCOAPODS: 1.2.0
