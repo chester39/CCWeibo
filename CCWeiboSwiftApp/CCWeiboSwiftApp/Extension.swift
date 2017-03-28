@@ -19,8 +19,9 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateFormat = formatterString
         formatter.locale = Locale(identifier: "en")
+        let date = formatter.date(from: timeString)!
 
-        return formatter.date(from: timeString)!
+        return date
     }
 
     /**
@@ -28,7 +29,7 @@ extension Date {
      */
     static func formatDateToString(date: Date) -> String {
 
-        let dateFormatter = DateFormatter()
+        let formatter = DateFormatter()
         let nowDate = Date()
         let time = nowDate.timeIntervalSince(date)
         var dateString = ""
@@ -42,30 +43,30 @@ extension Date {
             dateString = "\(minute)分钟前"
 
         case (60 * 60)...(60 * 60 * 24):
-            dateFormatter.dateFormat = "yyyy/MM/dd"
-            let dateDayString = dateFormatter.string(from: date)
-            let nowDayString = dateFormatter.string(from: nowDate)
+            formatter.dateFormat = "yyyy/MM/dd"
+            let dateDayString = formatter.string(from: date)
+            let nowDayString = formatter.string(from: nowDate)
 
-            dateFormatter.dateFormat = "HH:mm"
+            formatter.dateFormat = "HH:mm"
             if dateDayString == nowDayString {
-                dateString = "今天\(dateFormatter.string(from: date))"
+                dateString = "今天\(formatter.string(from: date))"
 
             } else {
-                dateString = "昨天\(dateFormatter.string(from: date))"
+                dateString = "昨天\(formatter.string(from: date))"
             }
 
         default:
-            dateFormatter.dateFormat = "yyyy"
-            let dateYearString = dateFormatter.string(from: date)
-            let nowYearString = dateFormatter.string(from: nowDate)
+            formatter.dateFormat = "yyyy"
+            let dateYearString = formatter.string(from: date)
+            let nowYearString = formatter.string(from: nowDate)
 
             if dateYearString == nowYearString {
-                dateFormatter.dateFormat = "MM-dd"
-                dateString = dateFormatter.string(from: date)
+                formatter.dateFormat = "MM-dd"
+                dateString = formatter.string(from: date)
 
             } else {
-                dateFormatter.dateFormat = "yyyy/MM/dd"
-                dateString = dateFormatter.string(from: date)
+                formatter.dateFormat = "yyyy/MM/dd"
+                dateString = formatter.string(from: date)
             }
         }
 
@@ -147,7 +148,7 @@ extension String {
      */
     func acquireTemporaryDirectory() -> String {
 
-        let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).last!
+        let path = NSTemporaryDirectory()
         let name = (self as NSString).lastPathComponent
         let filePath = (path as NSString).appendingPathComponent(name)
 
