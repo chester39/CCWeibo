@@ -106,7 +106,7 @@ extension NSMutableAttributedString {
     /**
      改变部分文字颜色方法
      */
-    class func changeColorWithString(color: UIColor, totalString: String, subString: String) -> NSMutableAttributedString {
+    static func changeColorWithString(color: UIColor, totalString: String, subString: String) -> NSMutableAttributedString {
         
         let attributedString = NSMutableAttributedString(string: totalString)
         let range = (totalString as NSString).range(of: subString, options: .backwards)
@@ -174,6 +174,24 @@ extension String {
 
 }
 
+extension UIBarButtonItem {
+    
+    /**
+     指定图片和目标便利初始化方法
+     */
+    convenience init(imageName: String, target: AnyObject?, action: Selector) {
+        
+        let button = UIButton()
+        button.setImage(UIImage(named: imageName), for: .normal)
+        button.setImage(UIImage(named: imageName + "_highlighted"), for: .highlighted)
+        button.sizeToFit()
+        button.addTarget(target, action: action, for: .touchUpInside)
+        
+        self.init(customView: button)
+    }
+    
+}
+
 extension UIButton {
 
     /**
@@ -194,24 +212,6 @@ extension UIButton {
         }
 
         sizeToFit()
-    }
-
-}
-
-extension UIBarButtonItem {
-
-    /**
-     指定图片和目标便利初始化方法
-     */
-    convenience init(imageName: String, target: AnyObject?, action: Selector) {
-
-        let button = UIButton()
-        button.setImage(UIImage(named: imageName), for: .normal)
-        button.setImage(UIImage(named: imageName + "_highlighted"), for: .highlighted)
-        button.sizeToFit()
-        button.addTarget(target, action: action, for: .touchUpInside)
-
-        self.init(customView: button)
     }
 
 }
@@ -372,6 +372,7 @@ extension UIView {
         let cachePath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).last!
         let fileAttributes = FileManager.default.subpaths(atPath: cachePath)!
         var size = 0
+        
         for fileName in fileAttributes {
             let path = cachePath + "/\(fileName)"
             let attributes = try! FileManager.default.attributesOfItem(atPath: path)
@@ -383,7 +384,6 @@ extension UIView {
         }
         
         let cacheSize: Float = Float(size) / 1024 / 1024
-        
         return cacheSize
     }
     
@@ -408,23 +408,23 @@ extension UIView {
     }
     
     /**
-     当前view绘制imageView方法
+     当前视图绘制图片视图方法
      */
-    func screenshotOfView()-> UIImageView {
+    func snapshotWithView() -> UIImageView {
         
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: frame.size.width, height: frame.size.height - 1), false, 0)
+        let size = CGSize(width: frame.size.width, height: frame.size.height - 1);
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
         layer.render(in: UIGraphicsGetCurrentContext()!)
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
-        let outputImageView = UIImageView(image: image)
+        let newImageView = UIImageView(image: image)
+        newImageView.layer.masksToBounds = false
+        newImageView.layer.cornerRadius = 0
+        newImageView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        newImageView.layer.shadowRadius = 5.0
+        newImageView.layer.shadowOpacity = 0.4
         
-        outputImageView.layer.masksToBounds = false
-        outputImageView.layer.cornerRadius = 0.0
-        outputImageView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        outputImageView.layer.shadowRadius = 5.0
-        outputImageView.layer.shadowOpacity = 0.4
-        
-        return outputImageView
+        return newImageView
     }
     
 }
@@ -434,7 +434,7 @@ extension UIWindow {
     /**
      判断是否浅色方法
      */
-    class func isLightColor(string: String) -> Bool {
+    static func isLightColor(string: String) -> Bool {
 
         let redString = (string as NSString).substring(with: NSRange(location: 1, length: 2))
         let greenString = (string as NSString).substring(with: NSRange(location: 3, length: 2))
@@ -444,6 +444,7 @@ extension UIWindow {
         var red: UInt32 = 0
         var green: UInt32 = 0
         var blue: UInt32 = 0
+        
         scanner.scanHexInt32(&red)
         scanner = Scanner(string: greenString)
         scanner.scanHexInt32(&green)
@@ -465,7 +466,7 @@ extension MBProgressHUD {
     /**
      显示消息和持续时间方法
      */
-    class func showMessage(text: String, delay: TimeInterval) {
+    static func showMessage(text: String, delay: TimeInterval) {
         
         let mainWindow = UIApplication.shared.keyWindow ?? UIApplication.shared.windows.first!
         let hud = MBProgressHUD.showAdded(to: mainWindow, animated: true)
