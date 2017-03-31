@@ -79,7 +79,7 @@ class ProfileViewController: BaseViewController {
             return
         }
         
-        personView.backgroundColor = CommonLightColor
+        personView.backgroundColor = kCommonLightColor
         personView.iconView.sd_setImage(with: URL(string: user.avatarLarge!))
         personView.nameLabel.text = user.screenName!
         personView.statusesView.titleLabel.text = String(user.statusesCount)

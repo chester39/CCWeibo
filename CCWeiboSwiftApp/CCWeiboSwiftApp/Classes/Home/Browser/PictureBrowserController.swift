@@ -32,9 +32,9 @@ class PictureBrowserController: UIViewController {
         button.layer.cornerRadius = kViewEdge
         button.layer.masksToBounds = true
         button.layer.borderWidth = 1.0
-        button.layer.borderColor = CommonLightColor.cgColor
+        button.layer.borderColor = kCommonLightColor.cgColor
         button.setTitle("关闭", for: .normal)
-        button.setTitleColor(CommonLightColor, for: .normal)
+        button.setTitleColor(kCommonLightColor, for: .normal)
         button.addTarget(self, action: #selector(closeButtonDidClick), for: .touchUpInside)
         
         return button
@@ -47,8 +47,8 @@ class PictureBrowserController: UIViewController {
         button.layer.cornerRadius = kViewEdge
         button.layer.masksToBounds = true
         button.layer.borderWidth = 1.0
-        button.layer.borderColor = CommonLightColor.cgColor
-        button.setTitleColor(CommonLightColor, for: .normal)
+        button.layer.borderColor = kCommonLightColor.cgColor
+        button.setTitleColor(kCommonLightColor, for: .normal)
         button.addTarget(self, action: #selector(saveButtonDidClick), for: .touchUpInside)
         
         return button

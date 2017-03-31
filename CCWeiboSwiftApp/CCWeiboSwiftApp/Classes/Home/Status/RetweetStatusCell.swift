@@ -26,8 +26,8 @@ class RetweetStatusCell: BaseStatusCell {
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 14)
         label.enabledTypes = [.mention, .hashtag, .url]
-        label.mentionColor = RetweetUserTextColor
-        label.hashtagColor = MainColor
+        label.mentionColor = kRetweetUserTextColor
+        label.hashtagColor = kMainColor
         
         return label
     }()
@@ -42,7 +42,7 @@ class RetweetStatusCell: BaseStatusCell {
             vipView.image = nil
             if let image = viewModel?.memberRankImage {
                 vipView.image = image
-                nameLabel.textColor = MainColor
+                nameLabel.textColor = kMainColor
             }
             
             timeLabel.text = viewModel?.creatTimeText
@@ -136,8 +136,8 @@ class RetweetStatusCell: BaseStatusCell {
         retweetView.clipsToBounds = true
         retweetView.layer.cornerRadius = kViewEdge
         retweetView.layer.borderWidth = 1.0
-        retweetView.layer.borderColor = RetweetStatusBackgroundColor.cgColor
-        retweetView.backgroundColor = RetweetStatusBackgroundColor
+        retweetView.layer.borderColor = kRetweetStatusBackgroundColor.cgColor
+        retweetView.backgroundColor = kRetweetStatusBackgroundColor
         contentView.addSubview(retweetView)
         
         retweetLabel.preferredMaxLayoutWidth = kScreenWidth - kViewBorder

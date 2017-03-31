@@ -90,37 +90,37 @@ class BaseStatusCell: UITableViewCell {
         vipView.image = UIImage(named: "common_icon_membership")
         contentView.addSubview(vipView)
         
-        timeLabel.textColor = AuxiliaryTextColor
+        timeLabel.textColor = kAuxiliaryTextColor
         contentView.addSubview(timeLabel)
         
-        sourceLabel.textColor = AuxiliaryTextColor
+        sourceLabel.textColor = kAuxiliaryTextColor
         contentView.addSubview(sourceLabel)
         
         contentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewBorder
         contentLabel.numberOfLines = 0
         contentLabel.font = UIFont.systemFont(ofSize: 15)
         contentLabel.enabledTypes = [.mention, .hashtag, .url]
-        contentLabel.mentionColor = RetweetUserTextColor
-        contentLabel.hashtagColor = MainColor
+        contentLabel.mentionColor = kRetweetUserTextColor
+        contentLabel.hashtagColor = kMainColor
         contentView.addSubview(contentLabel)
         
         contentView.addSubview(footerView)
         
         retweetButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
         retweetButton.setTitle("转发", for: .normal)
-        retweetButton.setTitleColor(StatusTabBarTextColor, for: .normal)
+        retweetButton.setTitleColor(kStatusTabBarTextColor, for: .normal)
         retweetButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         footerView.addSubview(retweetButton)
         
         commentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
         commentButton.setTitle("评论", for: .normal)
-        commentButton.setTitleColor(StatusTabBarTextColor, for: .normal)
+        commentButton.setTitleColor(kStatusTabBarTextColor, for: .normal)
         commentButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         footerView.addSubview(commentButton)
         
         likeButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
         likeButton.setTitle("赞", for: .normal)
-        likeButton.setTitleColor(StatusTabBarTextColor, for: .normal)
+        likeButton.setTitleColor(kStatusTabBarTextColor, for: .normal)
         likeButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         footerView.addSubview(likeButton)
     }

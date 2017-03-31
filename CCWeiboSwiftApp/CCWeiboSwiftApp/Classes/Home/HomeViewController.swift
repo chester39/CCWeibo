@@ -28,8 +28,8 @@ class HomeViewController: BaseViewController {
     /// 刷新提醒标签
     private var tipLabel: UILabel = {
         let label = UILabel(text: "没有更多微博", fontSize: 15, lines: 1)
-        label.backgroundColor = MainColor
-        label.textColor = CommonLightColor
+        label.backgroundColor = kMainColor
+        label.textColor = kCommonLightColor
         label.textAlignment = .center
         label.frame = CGRect(x: 0, y: kTopHeight - kNavigationBarHeight, width: kScreenWidth, height: kNavigationBarHeight)
         label.isHidden = true

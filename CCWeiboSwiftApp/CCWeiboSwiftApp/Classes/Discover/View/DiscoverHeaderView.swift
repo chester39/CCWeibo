@@ -41,7 +41,7 @@ class DiscoverHeaderView: UIView {
     /// 主题集合视图
     fileprivate lazy var themeView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: ThemeLayout())
-        collectionView.backgroundColor = CommonLightColor
+        collectionView.backgroundColor = kCommonLightColor
         collectionView.dataSource = self
         
         return collectionView
@@ -70,7 +70,7 @@ class DiscoverHeaderView: UIView {
     /// 话题集合视图
     fileprivate lazy var topicView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: TopicLayout())
-        collectionView.backgroundColor = CommonLightColor
+        collectionView.backgroundColor = kCommonLightColor
         collectionView.dataSource = self
         
         return collectionView
@@ -107,7 +107,7 @@ class DiscoverHeaderView: UIView {
         themeView.register(ThemeCell.self, forCellWithReuseIdentifier: themeReuseIdentifier)
         addSubview(themeView)
         
-        divideLine.backgroundColor = DivideLineColor
+        divideLine.backgroundColor = kDivideLineColor
         addSubview(divideLine)
         
         topicView.register(TopicCell.self, forCellWithReuseIdentifier: topicReuseIdentifier)

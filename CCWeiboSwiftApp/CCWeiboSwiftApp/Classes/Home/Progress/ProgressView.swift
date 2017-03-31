@@ -34,7 +34,7 @@ class ProgressView: UIView {
         let path = UIBezierPath(arcCenter: center, radius: radius, startAngle: start, endAngle: end, clockwise: true)
         path.addLine(to: center)
         path.close()
-        ProgressBackgroundColor.setFill()
+        kProgressBackgroundColor.setFill()
         path.fill()
     }
 

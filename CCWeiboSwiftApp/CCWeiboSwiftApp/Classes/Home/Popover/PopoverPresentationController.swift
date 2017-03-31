@@ -15,7 +15,7 @@ class PopoverPresentationController: UIPresentationController {
     private lazy var coverButton: UIButton = {
         let button = UIButton(type: .system)
         button.frame = kScreenFrame
-        button.backgroundColor = ClearColor
+        button.backgroundColor = kClearColor
         
         return button
     }()

@@ -33,7 +33,7 @@ class PictureCollectionView: UICollectionView {
         dataSource = self
         delegate = self
         
-        backgroundColor = ClearColor
+        backgroundColor = kClearColor
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
     }

@@ -24,7 +24,7 @@ class PhotoPickerController: UIViewController {
     /// 照片集合视图
     fileprivate lazy var photoView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: PhotoPickerLayout())
-        collectionView.backgroundColor = RetweetStatusBackgroundColor
+        collectionView.backgroundColor = kRetweetStatusBackgroundColor
         collectionView.contentInset = UIEdgeInsets(top: kViewEdge, left: kViewEdge, bottom: kViewEdge, right: kViewEdge)
         collectionView.dataSource = self
         

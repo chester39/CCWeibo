@@ -21,12 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: kScreenFrame)
-        window?.backgroundColor = CommonLightColor
+        window?.backgroundColor = kCommonLightColor
         window?.rootViewController = defaultViewController()
         window?.makeKeyAndVisible()
         
-        UINavigationBar.appearance().tintColor = MainColor
-        UITabBar.appearance().tintColor = MainColor
+        UINavigationBar.appearance().tintColor = kMainColor
+        UITabBar.appearance().tintColor = kMainColor
         
         if let options = launchOptions {
             launchWithNotification(options: options)

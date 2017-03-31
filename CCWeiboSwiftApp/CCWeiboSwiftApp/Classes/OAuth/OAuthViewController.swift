@@ -33,8 +33,8 @@ class OAuthViewController: UIViewController {
     fileprivate lazy var oauthProgressView: UIProgressView = {
         let progress = UIProgressView(progressViewStyle: .default)
         progress.frame = CGRect(x: 0, y: kTopHeight, width: kScreenWidth, height: 2)
-        progress.trackTintColor = ClearColor
-        progress.progressTintColor = MainColor
+        progress.trackTintColor = kClearColor
+        progress.progressTintColor = kMainColor
         
         return progress
     }()
@@ -80,12 +80,12 @@ class OAuthViewController: UIViewController {
      */
     private func setupUI() {
         
-        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 20), NSForegroundColorAttributeName: MainColor]
+        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 20), NSForegroundColorAttributeName: kMainColor]
         navigationItem.title = ""
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(closeButtonDidClick))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "填充", style: .plain, target: self, action: #selector(fillButtonDidClick))
         
-        view.backgroundColor = CommonLightColor
+        view.backgroundColor = kCommonLightColor
         view.addSubview(oauthView)
         view.addSubview(oauthProgressView)
     }

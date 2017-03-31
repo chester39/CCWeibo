@@ -34,7 +34,7 @@ class ComposeViewController: UIViewController {
         view.titleLabel.text = "发送微博"
         if let userName = UserAccount.loadUserAccount()!.screenName {
             view.subtitleLabel.text = userName
-            view.subtitleLabel.textColor = MainColor
+            view.subtitleLabel.textColor = kMainColor
         }
         
         return view
@@ -196,9 +196,9 @@ class ComposeViewController: UIViewController {
         
         for button in keyboardBar.items! {
             if button == item {
-                item.tintColor = (item.tintColor == MainColor) ? AuxiliaryTextColor : MainColor
+                item.tintColor = (item.tintColor == kMainColor) ? kAuxiliaryTextColor : kMainColor
             } else {
-                button.tintColor = AuxiliaryTextColor
+                button.tintColor = kAuxiliaryTextColor
                 photoPickerVC.view.removeFromSuperview()
             }
         }
@@ -206,11 +206,11 @@ class ComposeViewController: UIViewController {
         statusView.resignFirstResponder()
         switch item {
         case keyboardBar.emoticonButton:
-            statusView.inputView = (item.tintColor == MainColor) ? emoticonKeyboardVC.view : nil
+            statusView.inputView = (item.tintColor == kMainColor) ? emoticonKeyboardVC.view : nil
             statusView.becomeFirstResponder()
             
         case keyboardBar.pictureButton:
-            if item.tintColor == MainColor {
+            if item.tintColor == kMainColor {
                 photoView.addSubview(photoPickerVC.view)
                 constrain(photoView, replace: photoGroup) { (photoView) in
                     photoView.height == kScreenHeight * 0.7
@@ -271,11 +271,11 @@ extension ComposeViewController: UITextViewDelegate {
             numberLabel.isHidden = false
             if leftCount < 0 {
                 navigationItem.rightBarButtonItem?.isEnabled = false
-                numberLabel.textColor = MainColor
+                numberLabel.textColor = kMainColor
                 
             } else {
                 navigationItem.rightBarButtonItem?.isEnabled = true
-                numberLabel.textColor = CommonDarkColor
+                numberLabel.textColor = kCommonDarkColor
             }
         }
     }

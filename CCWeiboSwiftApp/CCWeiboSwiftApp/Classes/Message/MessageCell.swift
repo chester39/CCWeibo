@@ -80,16 +80,16 @@ class MessageCell: UITableViewCell {
         
         contentView.addSubview(nameLabel)
         
-        timeLabel.textColor = AuxiliaryTextColor
+        timeLabel.textColor = kAuxiliaryTextColor
         contentView.addSubview(timeLabel)
         
-        messageLabel.textColor = CommonLightColor
+        messageLabel.textColor = kCommonLightColor
         messageLabel.layer.cornerRadius = kViewEdge
         messageLabel.clipsToBounds = true
-        messageLabel.backgroundColor = MainColor
+        messageLabel.backgroundColor = kMainColor
         contentView.addSubview(messageLabel)
         
-        contentLabel.textColor = AuxiliaryTextColor
+        contentLabel.textColor = kAuxiliaryTextColor
         contentView.addSubview(contentLabel)
     }
     

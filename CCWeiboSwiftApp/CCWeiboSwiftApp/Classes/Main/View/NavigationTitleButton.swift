@@ -59,7 +59,7 @@ class NavigationTitleButton: UIButton {
         setImage(UIImage(named: "navigationbar_arrow_down"), for: .normal)
         setImage(UIImage(named: "navigationbar_arrow_up"), for: .selected)
         
-        setTitleColor(StatusTabBarTextColor, for: .normal)
+        setTitleColor(kStatusTabBarTextColor, for: .normal)
         sizeToFit()
     }
     

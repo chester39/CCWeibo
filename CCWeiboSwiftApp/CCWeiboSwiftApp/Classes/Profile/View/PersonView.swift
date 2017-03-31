@@ -61,29 +61,29 @@ class PersonView: UIView {
         
         addSubview(nameLabel)
         
-        introLabel.textColor = AuxiliaryTextColor
+        introLabel.textColor = kAuxiliaryTextColor
         addSubview(introLabel)
         
         vipButton.setImage(UIImage(named: "common_icon_membership"), for: .normal)
         vipButton.setTitle("会员", for: .normal)
-        vipButton.setTitleColor(MainColor, for: .normal)
+        vipButton.setTitleColor(kMainColor, for: .normal)
         vipButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         vipButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: kViewPadding)
         addSubview(vipButton)
         
-        divideLine.backgroundColor = DivideLineColor
+        divideLine.backgroundColor = kDivideLineColor
         addSubview(divideLine)
         
         statusesView.subtitleLabel.text = "微博"
-        statusesView.subtitleLabel.textColor = AuxiliaryTextColor
+        statusesView.subtitleLabel.textColor = kAuxiliaryTextColor
         addSubview(statusesView)
         
         friendsView.subtitleLabel.text = "关注"
-        friendsView.subtitleLabel.textColor = AuxiliaryTextColor
+        friendsView.subtitleLabel.textColor = kAuxiliaryTextColor
         addSubview(friendsView)
         
         followersView.subtitleLabel.text = "微博"
-        followersView.subtitleLabel.textColor = AuxiliaryTextColor
+        followersView.subtitleLabel.textColor = kAuxiliaryTextColor
         addSubview(followersView)
     }
     

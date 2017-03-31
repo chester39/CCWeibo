@@ -53,7 +53,7 @@ class SettingViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         navigationController?.navigationBar.barTintColor = nil
-        navigationController?.navigationBar.tintColor = MainColor
+        navigationController?.navigationBar.tintColor = kMainColor
         navigationController?.navigationBar.shadowImage = nil
         barView.alpha = 1.0
     }
@@ -66,12 +66,12 @@ class SettingViewController: UIViewController {
     private func setupUI() {
         
         automaticallyAdjustsScrollViewInsets = false
-        navigationController?.navigationBar.barTintColor = MainColor
-        navigationController?.navigationBar.tintColor = CommonDarkColor
+        navigationController?.navigationBar.barTintColor = kMainColor
+        navigationController?.navigationBar.tintColor = kCommonDarkColor
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(closeButtonDidClick))
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kViewDistance))
-        headerView.backgroundColor = ClearColor
+        headerView.backgroundColor = kClearColor
         
         tableView.showsVerticalScrollIndicator = false
         tableView.alwaysBounceVertical = true
@@ -181,7 +181,7 @@ extension SettingViewController: UITableViewDataSource {
             
         case 3:
             cell.textLabel?.text = "退出当前账号"
-            cell.textLabel?.textColor = MainColor
+            cell.textLabel?.textColor = kMainColor
             
         default:
             break

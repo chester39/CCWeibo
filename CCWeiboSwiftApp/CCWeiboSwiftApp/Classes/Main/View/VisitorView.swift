@@ -49,7 +49,7 @@ class VisitorView: UIView {
      */
     private func setupUI() {
         
-        backgroundColor = VistorBackgroundColor
+        backgroundColor = kVistorBackgroundColor
         
         rotationView.image = UIImage(named: "visitordiscover_feed_image_smallicon")
         addSubview(rotationView)
@@ -63,13 +63,13 @@ class VisitorView: UIView {
         let buttonImage = UIImage(named: "common_button_white_disable")?.resizableImage(withCapInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), resizingMode: .stretch)
         
         registerButton.setTitle("注册", for: .normal)
-        registerButton.setTitleColor(MainColor, for: .normal)
+        registerButton.setTitleColor(kMainColor, for: .normal)
         registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         registerButton.setBackgroundImage(buttonImage, for: .normal)
         addSubview(registerButton)
         
         loginButton.setTitle("登录", for: .normal)
-        loginButton.setTitleColor(CommonDarkColor, for: .normal)
+        loginButton.setTitleColor(kCommonDarkColor, for: .normal)
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         loginButton.setBackgroundImage(buttonImage, for: .normal)
         addSubview(loginButton)

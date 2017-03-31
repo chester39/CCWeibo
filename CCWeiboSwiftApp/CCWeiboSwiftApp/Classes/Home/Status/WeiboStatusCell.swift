@@ -24,7 +24,7 @@ class WeiboStatusCell: BaseStatusCell {
             vipView.image = nil
             if let image = viewModel?.memberRankImage {
                 vipView.image = image
-                nameLabel.textColor = MainColor
+                nameLabel.textColor = kMainColor
             }
             
             timeLabel.text = viewModel?.creatTimeText

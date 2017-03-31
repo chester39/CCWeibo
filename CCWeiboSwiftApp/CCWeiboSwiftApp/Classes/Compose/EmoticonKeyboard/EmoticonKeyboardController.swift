@@ -26,7 +26,7 @@ class EmoticonKeyboardController: UIViewController {
     /// 表情组工具栏
     fileprivate lazy var emoticonBar: UIToolbar = {
         let toolbar = UIToolbar()
-        toolbar.tintColor = StatusTabBarTextColor
+        toolbar.tintColor = kStatusTabBarTextColor
         
         var itemArray = [UIBarButtonItem]()
         var index = self.baseTag
@@ -34,8 +34,8 @@ class EmoticonKeyboardController: UIViewController {
             let title = manager.groupNameCn
             let button = UIButton()
             button.setTitle(title, for: .normal)
-            button.setTitleColor(CommonDarkColor, for: .normal)
-            button.setTitleColor(AuxiliaryTextColor, for: .selected)
+            button.setTitleColor(kCommonDarkColor, for: .normal)
+            button.setTitleColor(kAuxiliaryTextColor, for: .selected)
             button.sizeToFit()
             button.addTarget(self, action: #selector(itemButtonDidClick(button:)), for: .touchUpInside)
             button.tag = index
@@ -60,7 +60,7 @@ class EmoticonKeyboardController: UIViewController {
     /// 表情键盘视图
     fileprivate lazy var emoticonView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: EmoticonKeyboardLayout())
-        collectionView.backgroundColor = ClearColor
+        collectionView.backgroundColor = kClearColor
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -70,8 +70,8 @@ class EmoticonKeyboardController: UIViewController {
     /// 页码指示器
     fileprivate lazy var pageControl: UIPageControl = {
         let page = UIPageControl()
-        page.pageIndicatorTintColor = CommonLightColor
-        page.currentPageIndicatorTintColor = AuxiliaryTextColor
+        page.pageIndicatorTintColor = kCommonLightColor
+        page.currentPageIndicatorTintColor = kAuxiliaryTextColor
         
         return page
     }()
@@ -175,10 +175,10 @@ class EmoticonKeyboardController: UIViewController {
     fileprivate func changeSelectedButton(button: UIButton) {
         
         selectedButton.isSelected = false
-        selectedButton.backgroundColor = ClearColor
+        selectedButton.backgroundColor = kClearColor
         
         button.isSelected = true
-        button.backgroundColor = MainColor
+        button.backgroundColor = kMainColor
         selectedButton = button
     }
     

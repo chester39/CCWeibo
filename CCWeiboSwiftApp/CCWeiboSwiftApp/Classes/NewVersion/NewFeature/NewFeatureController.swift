@@ -27,8 +27,8 @@ class NewFeatureController: UIViewController {
     /// 页码指示器
     fileprivate lazy var pageControl: UIPageControl = {
         let page = UIPageControl()
-        page.pageIndicatorTintColor = CommonLightColor
-        page.currentPageIndicatorTintColor = AuxiliaryTextColor
+        page.pageIndicatorTintColor = kCommonLightColor
+        page.currentPageIndicatorTintColor = kAuxiliaryTextColor
         
         return page
     }()

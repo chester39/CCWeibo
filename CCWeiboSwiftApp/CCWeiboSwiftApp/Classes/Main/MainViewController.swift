@@ -27,7 +27,7 @@ class MainViewController: UITabBarController {
         
         super.viewDidLoad()
         
-        tabBar.tintColor = MainColor
+        tabBar.tintColor = kMainColor
         addChildControllerArray()
     }
     

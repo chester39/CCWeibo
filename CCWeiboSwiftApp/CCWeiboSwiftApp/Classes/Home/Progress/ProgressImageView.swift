@@ -64,7 +64,7 @@ class ProgressImageView: UIImageView {
     private func setupUI() {
         
         addSubview(progressView)
-        progressView.backgroundColor = ClearColor
+        progressView.backgroundColor = kClearColor
     }
 
 }

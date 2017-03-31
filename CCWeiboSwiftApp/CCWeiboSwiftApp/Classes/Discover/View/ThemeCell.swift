@@ -41,7 +41,7 @@ class ThemeCell: UICollectionViewCell {
      */
     private func setupUI() {
         
-        button.setTitleColor(CommonDarkColor, for: .normal)
+        button.setTitleColor(kCommonDarkColor, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         contentView.addSubview(button)
     }

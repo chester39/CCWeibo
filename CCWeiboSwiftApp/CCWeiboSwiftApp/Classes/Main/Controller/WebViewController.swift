@@ -7,8 +7,6 @@
 import UIKit
 import WebKit
 
-import Cartography
-
 class WebViewController: UIViewController {
     
     /// 网页视图
@@ -33,28 +31,27 @@ class WebViewController: UIViewController {
     fileprivate lazy var webProgressView: UIProgressView = {
         let progress = UIProgressView(progressViewStyle: .default)
         progress.frame = CGRect(x: 0, y: kTopHeight, width: kScreenWidth, height: 2)
-        progress.trackTintColor = ClearColor
-        progress.progressTintColor = MainColor
+        progress.trackTintColor = kClearColor
+        progress.progressTintColor = kMainColor
         
         return progress
     }()
     
     /// 后退按钮
     private lazy var backItem: UIBarButtonItem = {
-        let item = UIBarButtonItem()
         let button = UIButton(type: .custom)
         button.contentHorizontalAlignment = .left
         button.setImage(UIImage(named: "backIcon")!.withRenderingMode(.alwaysTemplate), for: .normal)
         button.setTitle("返回", for: .normal)
-        button.setTitleColor(MainColor, for: .normal)
+        button.setTitleColor(kMainColor, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17)
         
         button.addTarget(self, action: #selector(backItemDidClick), for: .touchUpInside)
         button.sizeToFit()
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -3, bottom: 0, right: 0)
         button.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
-        item.customView = button
         
+        let item = UIBarButtonItem(customView: button);
         return item
     }()
     
@@ -72,7 +69,7 @@ class WebViewController: UIViewController {
     // MARK: - 初始化方法
     
     /**
-     网页URL初始化方法
+     空初始化方法
      */
     init() {
         
@@ -108,6 +105,18 @@ class WebViewController: UIViewController {
     }
     
     /**
+     视图将要显示方法
+     */
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated);
+        
+        if webView.title == nil {
+            webView.reload()
+        }
+    }
+    
+    /**
      KVO观察者方法
      */
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -135,12 +144,12 @@ class WebViewController: UIViewController {
      */
     private func setupUI() {
         
-        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 20), NSForegroundColorAttributeName: MainColor]
+        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 20), NSForegroundColorAttributeName: kMainColor]
         navigationItem.title = ""
         navigationItem.leftBarButtonItem = backItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "刷新", style: .plain, target: self, action: #selector(refreshItemDidClick))
         
-        view.backgroundColor = CommonLightColor
+        view.backgroundColor = kCommonLightColor
         view.addSubview(webView)
         view.addSubview(webProgressView)
     }
@@ -180,12 +189,7 @@ class WebViewController: UIViewController {
      */
     @objc private func closeItemDidClick() {
         
-//        if ((navigationController?.viewControllers)!.first is AdViewController) || ((navigationController?.viewControllers)!.first is WebViewController) {
-//
-//            
-//        } else {
-            _ = navigationController?.popViewController(animated: true)
-//        }
+        _ = navigationController?.popViewController(animated: true)
     }
     
     /**

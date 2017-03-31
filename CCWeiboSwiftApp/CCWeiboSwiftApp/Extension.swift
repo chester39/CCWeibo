@@ -177,7 +177,7 @@ extension String {
 extension UIBarButtonItem {
     
     /**
-     指定图片和目标便利初始化方法
+     图片和目标和选择器便利初始化方法
      */
     convenience init(imageName: String, target: AnyObject?, action: Selector) {
         
@@ -219,19 +219,54 @@ extension UIButton {
 extension UIColor {
 
     /**
-     十六进制颜色便利初始化方法
+     十六进制颜色方法
      */
-    convenience init(hex: Int) {
-
-        self.init(hex: hex, alpha: 1.0)
+    static func colorWithHexString(hex: String) -> UIColor {
+        
+        return UIColor.colorWithHexString(hex: hex, alpha: 1.0)
     }
-
+    
     /**
-     十六进制透明度颜色便利初始化方法
+     十六进制透明度和颜色方法
      */
-    convenience init(hex: Int, alpha: CGFloat) {
-
-        self.init(red: (CGFloat)((hex & 0xFF0000) >> 16) / 255.0, green: (CGFloat)((hex & 0x00FF00) >> 8) / 255.0, blue: (CGFloat)((hex & 0x0000FF) >> 0) / 255.0, alpha: alpha)
+    static func colorWithHexString(hex: String, alpha: CGFloat) -> UIColor {
+        
+        var colorString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        if colorString.characters.count < 6 {
+            return UIColor.clear
+        }
+        
+        if colorString.hasPrefix("#") {
+            colorString = (colorString as NSString).substring(from: 1)
+            
+        } else if colorString.hasPrefix("0x") {
+            colorString = (colorString as NSString).substring(from: 2)
+        }
+        
+        if colorString.characters.count != 6 {
+            return UIColor.clear
+        }
+        
+        var range = NSRange(location: 0, length: 2)
+        let redString = (colorString as NSString).substring(with: range)
+        range.location = 2
+        let greenString = (colorString as NSString).substring(with: range)
+        range.location = 4
+        let blueString = (colorString as NSString).substring(with: range)
+        
+        var scanner = Scanner(string: redString)
+        var red: UInt32 = 0
+        var green: UInt32 = 0
+        var blue: UInt32 = 0
+        
+        scanner.scanHexInt32(&red)
+        scanner = Scanner(string: greenString)
+        scanner.scanHexInt32(&green)
+        scanner = Scanner(string: blueString)
+        scanner.scanHexInt32(&blue)
+        
+        let color = UIColor(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: alpha)
+        return color
     }
 
 }

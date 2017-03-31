@@ -55,10 +55,10 @@ class QRCodeView: UIView {
         let barcodeItem = UITabBarItem(title: "条形码", image: UIImage(named: "qrcode_tabbar_icon_barcode"), selectedImage: UIImage(named: "qrcode_tabbar_icon_barcode_highlighted"))
         tabBar.items = [qrCodeItem, barcodeItem]
         tabBar.selectedItem = qrCodeItem
-        tabBar.barTintColor = CommonDarkColor
+        tabBar.barTintColor = kCommonDarkColor
         addSubview(tabBar)
         
-        containerView.backgroundColor = ClearColor
+        containerView.backgroundColor = kClearColor
         addSubview(containerView)
         
         edgeView.image = UIImage(named: "qrcode_border")?.resizableImage(withCapInsets: UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 25), resizingMode: .tile)
@@ -71,8 +71,8 @@ class QRCodeView: UIView {
         addSubview(textLabel)
         
         cardButton.setTitle("我的名片", for: .normal)
-        cardButton.setTitleColor(CommonLightColor, for: .normal)
-        cardButton.backgroundColor = MainColor
+        cardButton.setTitleColor(kCommonLightColor, for: .normal)
+        cardButton.backgroundColor = kMainColor
         addSubview(cardButton)
     }
     

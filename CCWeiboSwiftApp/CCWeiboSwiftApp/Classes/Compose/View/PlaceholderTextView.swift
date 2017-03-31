@@ -14,7 +14,7 @@ class PlaceholderTextView: UITextView {
     lazy var placeholderLabel: UILabel = {
         let label = UILabel()
         label.text = "分享新鲜事..."
-        label.textColor = AuxiliaryTextColor
+        label.textColor = kAuxiliaryTextColor
         label.font = UIFont.systemFont(ofSize: 18)
         
         return label

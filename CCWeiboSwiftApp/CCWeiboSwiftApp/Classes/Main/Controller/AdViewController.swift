@@ -50,10 +50,10 @@ class AdViewController: UIViewController {
         passButton.layer.cornerRadius = kViewEdge
         passButton.layer.masksToBounds = true
         passButton.layer.borderWidth = 1.0
-        passButton.layer.borderColor = RetweetStatusBackgroundColor.cgColor
-        passButton.layer.backgroundColor = RetweetStatusBackgroundColor.cgColor
+        passButton.layer.borderColor = kRetweetStatusBackgroundColor.cgColor
+        passButton.layer.backgroundColor = kRetweetStatusBackgroundColor.cgColor
         passButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        passButton.setTitleColor(CommonDarkColor, for: .normal)
+        passButton.setTitleColor(kCommonDarkColor, for: .normal)
         passButton.addTarget(self, action: #selector(passAdvertisement), for: .touchUpInside)
         view.addSubview(passButton)
         

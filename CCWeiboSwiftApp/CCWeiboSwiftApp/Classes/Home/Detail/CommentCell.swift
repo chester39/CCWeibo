@@ -98,7 +98,7 @@ class CommentCell: UITableViewCell {
         
         contentView.addSubview(nameLabel)
         
-        timeLabel.textColor = AuxiliaryTextColor
+        timeLabel.textColor = kAuxiliaryTextColor
         contentView.addSubview(timeLabel)
         
         commentLabel.preferredMaxLayoutWidth = kScreenWidth - kViewStandard

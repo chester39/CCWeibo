@@ -89,7 +89,7 @@ class KeyboardToolbar: UIToolbar {
         
         itemArray.removeLast()
         items = itemArray
-        tintColor = AuxiliaryTextColor
+        tintColor = kAuxiliaryTextColor
     }
 
 }

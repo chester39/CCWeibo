@@ -77,7 +77,7 @@ class PictureBrowserCell: UICollectionViewCell {
     private func setupUI() {
         
         baseView.frame = kScreenFrame
-        baseView.backgroundColor = CommonDarkColor
+        baseView.backgroundColor = kCommonDarkColor
         contentView.addSubview(baseView)
         
         baseView.addSubview(imageView)

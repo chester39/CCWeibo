@@ -53,8 +53,8 @@ class QRCodeViewController: UIViewController {
         
         view = qrCodeView
         
-        navigationController?.navigationBar.barTintColor = CommonDarkColor
-        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 20), NSForegroundColorAttributeName: CommonLightColor]
+        navigationController?.navigationBar.barTintColor = kCommonDarkColor
+        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 20), NSForegroundColorAttributeName: kCommonLightColor]
         navigationItem.title = "扫一扫"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(closeButtonDidClick))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "相册", style: .plain, target: self, action: #selector(albumButtonDidClick))
@@ -212,8 +212,8 @@ extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         
         let layer = CAShapeLayer()
         layer.lineWidth = 2
-        layer.strokeColor = QRCodeBorderColor.cgColor
-        layer.fillColor = ClearColor.cgColor
+        layer.strokeColor = kQRCodeBorderColor.cgColor
+        layer.fillColor = kClearColor.cgColor
         
         let path = UIBezierPath()
         var index = 0
