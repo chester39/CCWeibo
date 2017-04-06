@@ -171,6 +171,17 @@ extension String {
             return self
         }
     }
+    
+    /**
+     自定义文本尺寸方法
+     */
+    func textSizeWithFont(font: UIFont, maxSize: CGSize) -> CGSize {
+        
+        let dict = [NSFontAttributeName: font];
+        let textSize = (self as NSString).boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: dict, context: nil).size
+        
+        return textSize
+    }
 
 }
 
@@ -301,7 +312,6 @@ extension UIImage {
     func overlapImageWithColor(color: UIColor) -> UIImage {
 
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         color.setFill()
         UIRectFill(rect)
@@ -317,7 +327,113 @@ extension UIImage {
 
         return newImage!
     }
+    
+    /**
+     比例切割图片方法
+     */
+    func resizableImage(name: String, scale: CGFloat) -> UIImage {
+        
+        let image = UIImage(named: name)!
+        let width = image.size.width
+        let height = image.size.height
+        
+        let newImage = image.resizableImage(withCapInsets: UIEdgeInsets(top: height, left: width, bottom: height, right: width))
+        return newImage
+    }
+    
+    /**
+     图片水印添加方法
+     */
+    func watermarkWithImage(name: String, watermark: String, scale: CGFloat) -> UIImage {
+     
+        let backgroundImage = UIImage(named: name)!
+        UIGraphicsBeginImageContextWithOptions(backgroundImage.size, false, 0)
+        backgroundImage.draw(in: CGRect(x: 0, y: 0, width: backgroundImage.size.width, height: backgroundImage.size.height))
+        
+        let watermarkImage = UIImage(named: watermark)!
+        let margin: CGFloat = 5
+        let watermarkWidth = watermarkImage.size.width * scale
+        let watermarkHeight = watermarkImage.size.height * scale
+        let watermarkX = watermarkImage.size.width - watermarkWidth - margin
+        let watermarkY = watermarkImage.size.height - watermarkHeight - margin
+        watermarkImage.draw(in: CGRect(x: watermarkX, y: watermarkY, width: watermarkWidth, height: watermarkHeight))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
 
+    /**
+     圆形裁剪图片方法
+     */
+    func clipCircleWithImage(name: String, borderWidth: CGFloat, borderColor: UIColor) -> UIImage {
+        
+        let originImage = UIImage(named: name)!
+        let originWidth = originImage.size.width + borderWidth * 2
+        let originHeight = originImage.size.height + borderWidth * 2
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: originWidth, height: originHeight), false, 0)
+        let context = UIGraphicsGetCurrentContext()
+        borderColor.set()
+        
+        let bigRadius = originWidth * 0.5
+        let centerX = bigRadius
+        let centerY = bigRadius
+        context?.addArc(center: CGPoint(x: centerX, y: centerY), radius: bigRadius, startAngle: 0, endAngle: M_PI * 2, clockwise: false)
+        context?.fillPath()
+        
+        let smallRadius = bigRadius - borderWidth
+        context?.addArc(center: CGPoint(x: centerX, y: centerY), radius: smallRadius, startAngle: 0, endAngle: M_PI * 2, clockwise: false)
+        context?.clip()
+        originImage.draw(in: CGRect(x: borderWidth, y: borderWidth, width: originImage.size.width, height: originImage.size.height))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
+    /**
+     全屏截图方法
+     */
+    func captureWithView(view: UIView) -> UIImage {
+        
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 0)
+        view.layer.render(in: UIGraphicsGetCurrentContext())
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
+    /**
+     设置条纹背景方法
+     */
+    func stripeBackgroundWithView(view: UIView, rowHeight: CGFloat, rowColor: UIColor, lineWidth: CGFloat, lineColor: UIColor) -> UIImage {
+        
+        let rowWidth = view.frame.size.width
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: rowWidth, height: rowHeight), false, 0)
+        let context = UIGraphicsGetCurrentContext()
+        rowColor.set()
+        
+        context?.addRect(CGRect(x: 0, y: 0, width: rowWidth, height: rowHeight))
+        context?.fillPath()
+        lineColor.set()
+        context?.setLineWidth(lineWidth)
+        
+        let dividerX: CGFloat = 0
+        let dividerY = rowHeight - lineWidth
+        context?.move(to: CGPoint(x: dividerX, y: dividerY))
+        context?.addLine(to: CGPoint(x: rowWidth - dividerX, y: dividerY))
+        context?.strokePath()
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
 }
 
 extension UILabel {

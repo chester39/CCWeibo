@@ -15,6 +15,7 @@ class WebViewController: UIViewController {
         configuration.allowsAirPlayForMediaPlayback = true
         configuration.allowsInlineMediaPlayback = true
         configuration.suppressesIncrementalRendering = true
+        configuration.mediaTypesRequiringUserActionForPlayback = .audio
         
         let webView = WKWebView(frame: kScreenFrame, configuration: configuration)
         webView.isOpaque = false
@@ -51,7 +52,7 @@ class WebViewController: UIViewController {
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -3, bottom: 0, right: 0)
         button.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
         
-        let item = UIBarButtonItem(customView: button);
+        let item = UIBarButtonItem(customView: button)
         return item
     }()
     

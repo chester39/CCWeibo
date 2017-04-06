@@ -1,6 +1,6 @@
 # CCWeibo iOS App
 ## By Chester Chen
-## July 18th, 2016 - March 31st, 2017
+## July 18th, 2016 - April 6th, 2017
 
 There are 2 versions of this Weibo App.
 
