@@ -15,7 +15,6 @@ class WebViewController: UIViewController {
         configuration.allowsAirPlayForMediaPlayback = true
         configuration.allowsInlineMediaPlayback = true
         configuration.suppressesIncrementalRendering = true
-        configuration.mediaTypesRequiringUserActionForPlayback = .audio
         
         let webView = WKWebView(frame: kScreenFrame, configuration: configuration)
         webView.isOpaque = false

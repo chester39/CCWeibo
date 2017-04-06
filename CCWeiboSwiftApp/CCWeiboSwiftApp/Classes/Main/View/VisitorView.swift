@@ -113,7 +113,7 @@ class VisitorView: UIView {
     private func startAnimation() {
         
         let animation = CABasicAnimation(keyPath: "transform.rotation")
-        animation.toValue = M_PI * 2
+        animation.toValue = Double.pi * 2
         animation.duration = 5.0
         animation.repeatCount = MAXFLOAT
         animation.isRemovedOnCompletion = false

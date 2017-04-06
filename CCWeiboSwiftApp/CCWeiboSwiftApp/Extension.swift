@@ -379,11 +379,11 @@ extension UIImage {
         let bigRadius = originWidth * 0.5
         let centerX = bigRadius
         let centerY = bigRadius
-        context?.addArc(center: CGPoint(x: centerX, y: centerY), radius: bigRadius, startAngle: 0, endAngle: M_PI * 2, clockwise: false)
+        context?.addArc(center: CGPoint(x: centerX, y: centerY), radius: bigRadius, startAngle: 0, endAngle: CGFloat(Double.pi * 2), clockwise: false)
         context?.fillPath()
         
         let smallRadius = bigRadius - borderWidth
-        context?.addArc(center: CGPoint(x: centerX, y: centerY), radius: smallRadius, startAngle: 0, endAngle: M_PI * 2, clockwise: false)
+        context?.addArc(center: CGPoint(x: centerX, y: centerY), radius: smallRadius, startAngle: 0, endAngle: CGFloat(Double.pi * 2), clockwise: false)
         context?.clip()
         originImage.draw(in: CGRect(x: borderWidth, y: borderWidth, width: originImage.size.width, height: originImage.size.height))
         
@@ -399,7 +399,7 @@ extension UIImage {
     func captureWithView(view: UIView) -> UIImage {
         
         UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 0)
-        view.layer.render(in: UIGraphicsGetCurrentContext())
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
