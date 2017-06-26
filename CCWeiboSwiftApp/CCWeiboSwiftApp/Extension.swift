@@ -14,7 +14,7 @@ extension Date {
     /**
      字符串创建日期方法
      */
-    static func convertStringToDate(timeString: String, formatterString: String) -> Date  {
+    func convertToDate(timeString: String, formatterString: String) -> Date  {
 
         let formatter = DateFormatter()
         formatter.dateFormat = formatterString
@@ -27,7 +27,7 @@ extension Date {
     /**
      格式化字符串方法
      */
-    static func formatDateToString(date: Date) -> String {
+    func formatToString(date: Date) -> String {
 
         let formatter = DateFormatter()
         let nowDate = Date()
@@ -76,7 +76,7 @@ extension Date {
     /**
      获取指定天前字符串方法
      */
-    static func acquireAssignedDaysAgo(number: TimeInterval, formatterString: String) -> String {
+    func assignedDaysAgo(number: TimeInterval, formatterString: String) -> String {
         
         let formatter = DateFormatter()
         formatter.dateFormat = formatterString
@@ -106,11 +106,26 @@ extension NSMutableAttributedString {
     /**
      改变部分文字颜色方法
      */
-    static func changeColorWithString(color: UIColor, totalString: String, subString: String) -> NSMutableAttributedString {
+    func changeColor(color: UIColor, totalString: String, subString: String) -> NSMutableAttributedString {
         
         let attributedString = NSMutableAttributedString(string: totalString)
         let range = (totalString as NSString).range(of: subString, options: .backwards)
         attributedString.addAttribute(NSForegroundColorAttributeName, value: color, range: range)
+        
+        return attributedString
+    }
+    
+    /**
+     改变部分文字行间距方法
+     */
+    func changeLineSpacing(spacing: CGFloat, totalString: String, subString: String) -> NSMutableAttributedString {
+        
+        let attributedString = NSMutableAttributedString(string: totalString)
+        let range = (totalString as NSString).range(of: subString, options: .backwards)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = spacing
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: range)
         
         return attributedString
     }
@@ -122,7 +137,7 @@ extension String {
     /**
      获取缓存目录方法
      */
-    func acquireCachesDirectory() -> String {
+    func cachesDirectory() -> String {
 
         let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).last!
         let name = (self as NSString).lastPathComponent
@@ -134,7 +149,7 @@ extension String {
     /**
      获取文档目录方法
      */
-    func acquireDocumentDirectory() -> String {
+    func documentDirectory() -> String {
 
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
         let name = (self as NSString).lastPathComponent
@@ -146,7 +161,7 @@ extension String {
     /**
      获取临时目录方法
      */
-    func acquireTemporaryDirectory() -> String {
+    func temporaryDirectory() -> String {
 
         let path = NSTemporaryDirectory()
         let name = (self as NSString).lastPathComponent
@@ -158,29 +173,101 @@ extension String {
     /**
      调整数字表示方法
      */
-    func adjustDigitalRepresentation() -> String {
+    func digitalRepresentation(number: Int) -> String {
         
-        let length = characters.count
-        if length > 5 {
-            let oldNumber = Float(self)! / 1000
-            let newNumber = lroundf(oldNumber)
-            let newString = String(newNumber)
-            return newString + "k"
+        var number = number
+        number = number > 0 ? number : 0
+        var string = ""
+        
+        if number > 10000 {
+            string = "\(number)"
             
         } else {
-            return self
+            var postfix = "kw"
+            var representation: Float = 10000000
+            if number < 10000000 {
+                postfix = "w"
+                representation = 10000
+            }
+            
+            let transferNumber = Float(number) / representation
+            let roundNumber = roundf(transferNumber * 10) / 10
+            
+            let decimal = Int((roundNumber * 10)) % 10
+            if decimal == 0 {
+                string = "\(Int(roundNumber))" + postfix
+                
+            } else {
+                string = String(format: "%.1f", roundNumber) + postfix
+            }
         }
+        
+        return string
     }
     
     /**
-     自定义文本尺寸方法
+     获取单行文本尺寸方法
      */
-    func textSizeWithFont(font: UIFont, maxSize: CGSize) -> CGSize {
+    func singleTextSize(font: UIFont) -> CGSize {
+        
+        let dict = [NSFontAttributeName: font]
+        let textSize = (self as NSString).size(attributes: dict)
+        
+        return textSize
+    }
+    
+    /**
+     获取多行文本尺寸方法
+     */
+    func multiTextSize(font: UIFont, maxSize: CGSize) -> CGSize {
         
         let dict = [NSFontAttributeName: font];
         let textSize = (self as NSString).boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: dict, context: nil).size
         
         return textSize
+    }
+    
+    /**
+     获取Unicode长度方法
+     */
+    func unicodeLength() -> Int {
+        
+        var asciiLength = 0
+        for index in 0..<(self as NSString).length {
+            let uniChar = (self as NSString).character(at: index)
+            asciiLength += (isascii(Int32(uniChar)) == 1) ? 1 : 2
+        }
+        
+        var unicodeLength = asciiLength / 2
+        if (asciiLength % 2) == 1 {
+            unicodeLength += 1
+        }
+        
+        return unicodeLength
+    }
+    
+    /**
+     获取当前日期字符串方法
+     */
+    func nowDateString() -> String {
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMddHHmmss"
+        let nowDate = Date()
+        let dateString = formatter.string(from: nowDate)
+        
+        return dateString
+    }
+    
+    /**
+     获取UUID字符串方法
+     */
+    func uuidString() -> String {
+        
+        let uuid = UIDevice.current.identifierForVendor?.uuidString
+        let uuidString = uuid?.replacingOccurrences(of: "-", with: "")
+        
+        return uuidString!
     }
 
 }
@@ -232,15 +319,15 @@ extension UIColor {
     /**
      十六进制颜色方法
      */
-    static func colorWithHexString(hex: String) -> UIColor {
+    static func color(hex: String) -> UIColor {
         
-        return UIColor.colorWithHexString(hex: hex, alpha: 1.0)
+        return UIColor.color(hex: hex, alpha: 1.0)
     }
     
     /**
      十六进制透明度和颜色方法
      */
-    static func colorWithHexString(hex: String, alpha: CGFloat) -> UIColor {
+    static func color(hex: String, alpha: CGFloat) -> UIColor {
         
         var colorString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         if colorString.characters.count < 6 {
@@ -287,7 +374,7 @@ extension UIImage {
     /**
      图片染色方法
      */
-    func tintImageWithColor(color: UIColor, alpha: CGFloat) -> UIImage {
+    func tintImage(color: UIColor, alpha: CGFloat) -> UIImage {
 
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(rect.size, true, scale)
@@ -309,7 +396,7 @@ extension UIImage {
     /**
      重叠图片方法
      */
-    func overlapImageWithColor(color: UIColor) -> UIImage {
+    func overlapImage(color: UIColor) -> UIImage {
 
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
@@ -344,7 +431,7 @@ extension UIImage {
     /**
      图片水印添加方法
      */
-    func watermarkWithImage(name: String, watermark: String, scale: CGFloat) -> UIImage {
+    func watermark(name: String, watermark: String, scale: CGFloat) -> UIImage {
      
         let backgroundImage = UIImage(named: name)!
         UIGraphicsBeginImageContextWithOptions(backgroundImage.size, false, 0)
@@ -367,7 +454,7 @@ extension UIImage {
     /**
      圆形裁剪图片方法
      */
-    func clipCircleWithImage(name: String, borderWidth: CGFloat, borderColor: UIColor) -> UIImage {
+    func clipCircle(name: String, borderWidth: CGFloat, borderColor: UIColor) -> UIImage {
         
         let originImage = UIImage(named: name)!
         let originWidth = originImage.size.width + borderWidth * 2
@@ -396,7 +483,7 @@ extension UIImage {
     /**
      全屏截图方法
      */
-    func captureWithView(view: UIView) -> UIImage {
+    func capture(view: UIView) -> UIImage {
         
         UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 0)
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
@@ -410,7 +497,7 @@ extension UIImage {
     /**
      设置条纹背景方法
      */
-    func stripeBackgroundWithView(view: UIView, rowHeight: CGFloat, rowColor: UIColor, lineWidth: CGFloat, lineColor: UIColor) -> UIImage {
+    func stripeBackground(view: UIView, rowHeight: CGFloat, rowColor: UIColor, lineWidth: CGFloat, lineColor: UIColor) -> UIImage {
         
         let rowWidth = view.frame.size.width
         UIGraphicsBeginImageContextWithOptions(CGSize(width: rowWidth, height: rowHeight), false, 0)
@@ -518,7 +605,7 @@ extension UIView {
     /**
      获取缓存大小方法
      */
-    func acquireCachesSize() -> Float {
+    func cachesSize() -> Float {
         
         let cachePath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).last!
         let fileAttributes = FileManager.default.subpaths(atPath: cachePath)!
@@ -559,9 +646,9 @@ extension UIView {
     }
     
     /**
-     当前视图绘制图片视图方法
+     绘制图片视图方法
      */
-    func snapshotWithView() -> UIImageView {
+    func snapshot() -> UIImageView {
         
         let size = CGSize(width: frame.size.width, height: frame.size.height - 1);
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
@@ -578,6 +665,37 @@ extension UIView {
         return newImageView
     }
     
+    /**
+     添加渐变色背景方法
+     */
+    func gradient(colorArray: [Any], start: CGPoint, end: CGPoint) {
+        
+        let layer = CAGradientLayer()
+        layer.colors = colorArray
+        layer.startPoint = start
+        layer.endPoint = end
+        layer.frame = self.bounds
+        
+        self.layer.addSublayer(layer)
+    }
+    
+    /**
+     添加弹性动画方法
+     */
+    func springAnimation(start: Float, end: Float) {
+        
+        let spring = CASpringAnimation(keyPath: "position.x")
+        spring.stiffness = 100
+        spring.damping = 10
+        spring.mass = 1
+        spring.initialVelocity = 0
+        spring.fromValue = start
+        spring.toValue = end
+        spring.duration = spring.settlingDuration
+        
+        self.layer.add(spring, forKey: spring.keyPath)
+    }
+
 }
 
 extension UIWindow {

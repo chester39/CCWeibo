@@ -200,7 +200,7 @@ extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 2 && indexPath.row == 0 {
-            let cachesSize = view.acquireCachesSize()
+            let cachesSize = view.cachesSize()
             let format = String(format: "%.2f", cachesSize)
             let message = "当前缓存为\(format) MB，是否需要清除？"
             let alertVC = UIAlertController(title: "清理缓存", message: message, preferredStyle: .alert)

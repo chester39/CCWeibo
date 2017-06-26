@@ -55,8 +55,8 @@ class StatusViewModel: NSObject {
         }
         
         if let timeString = status.createdAt, timeString != "" {
-            let date = Date.convertStringToDate(timeString: timeString, formatterString: "EE MM dd HH:mm:ss Z yyyy")
-            creatTimeText = Date.formatDateToString(date: date)
+            let date = Date().convertToDate(timeString: timeString, formatterString: "EE MM dd HH:mm:ss Z yyyy")
+            creatTimeText = Date().formatToString(date: date)
         }
         
         if let sourceString: NSString = status.source as NSString?, sourceString != "" {

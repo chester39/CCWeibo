@@ -16,7 +16,7 @@ class VisitorView: UIView {
     var loginButton = UIButton(type: .system)
     /// 旋转视图
     private var rotationView = UIImageView()
-    /// 图标按钮
+    /// 图标视图
     private var iconView = UIImageView()
     /// 文字标签
     private var textLabel = UILabel(text: "", fontSize: 18, lines: 0)

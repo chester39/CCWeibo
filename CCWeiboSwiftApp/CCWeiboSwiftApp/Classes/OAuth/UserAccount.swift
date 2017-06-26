@@ -24,7 +24,7 @@ class UserAccount: NSObject, NSCoding {
     /// 用户授权模型
     static var userAccount: UserAccount?
     /// 归档文件路径
-    static let filePath: String = kUserAccountFileName.acquireDocumentDirectory()
+    static let filePath: String = kUserAccountFileName.documentDirectory()
     /// 用户简介
     var descriptionIntro: String?
     /// 用户粉丝数

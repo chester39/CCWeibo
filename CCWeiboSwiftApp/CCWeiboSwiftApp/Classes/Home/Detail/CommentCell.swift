@@ -50,8 +50,8 @@ class CommentCell: UITableViewCell {
             
             var time: String = ""
             if let timeString = comment!.createdAt, timeString != "" {
-                let date = Date.convertStringToDate(timeString: timeString, formatterString: "EE MM dd HH:mm:ss Z yyyy")
-                time = Date.formatDateToString(date: date)
+                let date = Date().convertToDate(timeString: timeString, formatterString: "EE MM dd HH:mm:ss Z yyyy")
+                time = Date().formatToString(date: date)
             }
             
             timeLabel.text = time

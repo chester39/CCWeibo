@@ -19,7 +19,7 @@ class WebViewController: UIViewController {
         let webView = WKWebView(frame: kScreenFrame, configuration: configuration)
         webView.isOpaque = false
         webView.allowsBackForwardNavigationGestures = true
-        webView.scrollView.showsVerticalScrollIndicator = false
+        webView.scrollView.showsVerticalScrollIndicator = true
         webView.navigationDelegate = self
         webView.sizeToFit()
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
@@ -109,7 +109,7 @@ class WebViewController: UIViewController {
      */
     override func viewWillAppear(_ animated: Bool) {
         
-        super.viewWillAppear(animated);
+        super.viewWillAppear(animated)
         
         if webView.title == nil {
             webView.reload()
