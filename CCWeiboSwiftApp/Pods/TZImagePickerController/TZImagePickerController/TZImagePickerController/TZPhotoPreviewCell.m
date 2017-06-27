@@ -79,7 +79,7 @@
         _scrollView.delegate = self;
         _scrollView.scrollsToTop = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
-        _scrollView.showsVerticalScrollIndicator = NO;
+        _scrollView.showsVerticalScrollIndicator = YES;
         _scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _scrollView.delaysContentTouches = NO;
         _scrollView.canCancelContentTouches = YES;
@@ -123,33 +123,53 @@
     _model = model;
     [_scrollView setZoomScale:1.0 animated:NO];
     if (model.type == TZAssetModelMediaTypePhotoGif) {
-        [[TZImageManager manager] getOriginalPhotoDataWithAsset:model.asset completion:^(NSData *data, NSDictionary *info, BOOL isDegraded) {
-            if (!isDegraded) {
-                self.imageView.image = [UIImage sd_tz_animatedGIFWithData:data];
-                [self resizeSubviews];
-            }
-        }];
+        // 先显示缩略图
+        [[TZImageManager manager] getPhotoWithAsset:model.asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
+            self.imageView.image = photo;
+            [self resizeSubviews];
+            // 再显示gif动图
+            [[TZImageManager manager] getOriginalPhotoDataWithAsset:model.asset completion:^(NSData *data, NSDictionary *info, BOOL isDegraded) {
+                if (!isDegraded) {
+                    self.imageView.image = [UIImage sd_tz_animatedGIFWithData:data];
+                    [self resizeSubviews];
+                }
+            }];
+        } progressHandler:nil networkAccessAllowed:NO];
     } else {
         self.asset = model.asset;
     }
 }
 
 - (void)setAsset:(id)asset {
+    if (_asset && self.imageRequestID) {
+        [[PHImageManager defaultManager] cancelImageRequest:self.imageRequestID];
+    }
+    
     _asset = asset;
-    [[TZImageManager manager] getPhotoWithAsset:asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
+    self.imageRequestID = [[TZImageManager manager] getPhotoWithAsset:asset completion:^(UIImage *photo, NSDictionary *info, BOOL isDegraded) {
+        if (![asset isEqual:_asset]) return;
         self.imageView.image = photo;
         [self resizeSubviews];
         _progressView.hidden = YES;
         if (self.imageProgressUpdateBlock) {
             self.imageProgressUpdateBlock(1);
         }
+        if (!isDegraded) {
+            self.imageRequestID = 0;
+        }
     } progressHandler:^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
+        if (![asset isEqual:_asset]) return;
         _progressView.hidden = NO;
         [self bringSubviewToFront:_progressView];
-        progress = progress > 0.02 ? progress : 0.02;;
+        progress = progress > 0.02 ? progress : 0.02;
         _progressView.progress = progress;
         if (self.imageProgressUpdateBlock) {
             self.imageProgressUpdateBlock(progress);
+        }
+        
+        if (progress >= 1) {
+            _progressView.hidden = YES;
+            self.imageRequestID = 0;
         }
     } networkAccessAllowed:YES];
 }
@@ -188,6 +208,15 @@
 - (void)setAllowCrop:(BOOL)allowCrop {
     _allowCrop = allowCrop;
     _scrollView.maximumZoomScale = allowCrop ? 4.0 : 2.5;
+    
+    if ([self.asset isKindOfClass:[PHAsset class]]) {
+        PHAsset *phAsset = (PHAsset *)self.asset;
+        CGFloat aspectRatio = phAsset.pixelWidth / (CGFloat)phAsset.pixelHeight;
+        // 优化超宽图片的显示
+        if (aspectRatio > 1.5) {
+            self.scrollView.maximumZoomScale *= aspectRatio / 1.5;
+        }
+    }
 }
 
 - (void)refreshScrollViewContentSize {

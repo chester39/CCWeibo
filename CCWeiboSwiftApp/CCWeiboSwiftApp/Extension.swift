@@ -269,6 +269,20 @@ extension String {
         
         return uuidString!
     }
+    
+    
+    /**
+     判断字符串有效方法
+     */
+    func checkString() -> Bool {
+        
+        if self != nil && self.characters.count > 0 {
+            return true;
+            
+        } else {
+            return false;
+        }
+    }
 
 }
 

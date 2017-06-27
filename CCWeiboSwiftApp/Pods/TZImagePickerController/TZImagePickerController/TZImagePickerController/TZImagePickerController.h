@@ -4,7 +4,7 @@
 //
 //  Created by 谭真 on 15/12/24.
 //  Copyright © 2015年 谭真. All rights reserved.
-//  version 1.7.9 - 2017.04.01
+//  version 1.8.0 - 2017.06.03
 
 /*
  经过测试，比起xib的方式，把TZAssetCell改用纯代码的方式来写，滑动帧数明显提高了（约提高10帧左右）
@@ -101,7 +101,8 @@
 /// Hide the photo what can not be selected, Default is NO
 /// 隐藏不可以选中的图片，默认是NO，不推荐将其设置为YES
 @property (nonatomic, assign) BOOL hideWhenCanNotSelect;
-
+/// 顶部statusBar 是否为系统默认的黑色，默认为NO
+@property (nonatomic, assign) BOOL isStatusBarDefault;
 /// Single selection mode, valid when maxImagesCount = 1
 /// 单选模式,maxImagesCount为1时才生效
 @property (nonatomic, assign) BOOL showSelectBtn;   ///< 在单选模式下，照片列表页中，显示选择按钮,默认为NO
@@ -111,7 +112,8 @@
 @property (nonatomic, assign) NSInteger circleCropRadius;  ///< 圆形裁剪框半径大小
 @property (nonatomic, copy) void (^cropViewSettingBlock)(UIView *cropView);     ///< 自定义裁剪框的其他属性
 
-- (void)showAlertWithTitle:(NSString *)title;
+- (id)showAlertWithTitle:(NSString *)title;
+- (void)hideAlertView:(id)alertView;
 - (void)showProgressHUD;
 - (void)hideProgressHUD;
 @property (nonatomic, assign) BOOL isSelectOriginalPhoto;
@@ -198,11 +200,20 @@
 // If user picking a gif image, this callback will be called.
 // 如果用户选择了一个gif图片，下面的handle会被执行
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingGifImage:(UIImage *)animatedImage sourceAssets:(id)asset;
+
+// Decide album show or not't
+// 决定相册显示与否 albumName:相册名字 result:相册原始数据
+- (BOOL)isAlbumCanSelect:(NSString *)albumName result:(id)result;
+
+// Decide asset show or not't
+// 决定照片显示与否
+- (BOOL)isAssetCanSelect:(id)asset;
 @end
 
 
 @interface TZAlbumPickerController : UIViewController
 @property (nonatomic, assign) NSInteger columnNumber;
+- (void)configTableView;
 @end
 
 

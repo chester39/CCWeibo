@@ -6,63 +6,58 @@
 	<dict>
 		<key>ActiveLabel.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Cartography.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
-		<key>ObjcExceptionBridging.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-CCWeiboSwiftApp.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>7</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>8</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>9</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>TZImagePickerController.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>10</integer>
-		</dict>
-		<key>XCGLogger.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>11</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>305E0A6A7A3099F1201923A8BBECB4E4</key>
+		<key>203165EDBB237C0E5BE6171BB05DEA91</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>229915B0CE789DC2935C3F9C633DB012</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,12 +72,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5B0B5B8A1476F8AA333AA7B53F47E96B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6E41758764B9CC1ECF89652CB677F606</key>
+		<key>77C9EDDE60A9F555F21863817D314AE0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,22 +82,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9E9A18772CB7F93F0661903BFE6EB12F</key>
+		<key>903CAD7FBD9E21678B85A41E6BB0A3E3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>A1EBDD3BC77EFE921F5EFB115E0E3B3D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B731F95B1D4129956236EFC89D2B2FD3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BFBE8CC82390F035AC2C1CA00C85409F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
